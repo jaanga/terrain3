@@ -8,16 +8,17 @@
 
 	var homePages = 'https://' + home + '/';
 
-	var homeSource = 'https://github.com/jaanga/jaanga.github.io/tree/master/';
+	var homeSource = 'https://github.com/jaanga/terrain3/tree/gh-pages/';
 
-	var urlAPIContents = 'https://api.github.com/repos/' + org + '/' + org + '.github.io/git/trees/master?recursive=1';
+	var urlAPIContents = 'https://api.github.com/repos/' + org + '/' + 'terrain3/git/trees/gh-pages?recursive=1';
+
 	var item;
 
 	var indexHome = location.href.indexOf( '.io/' ) + 4;
 
-	var baseURL = location.href.slice( 0, indexHome);
+	var baseURL = location.href.slice( 0, indexHome );
 
-//console.log( 'baseURL',baseURL );
+console.log( 'baseURL',baseURL );
 
 	var dirs = location.href.slice( indexHome ).split( '/' );
 
@@ -25,13 +26,13 @@
 
 //console.log( 'fileName', fileName );
 
-	index = dirs.indexOf( home.toLowerCase() ) + 1;
+	index = dirs.indexOf( home.toLowerCase() );
 
 	var foldersArray = [ dirs[ 0 ] ];
 
 	var folders = dirs[ 0 ];
 
-//console.log( 'folder', folders );
+console.log( 'folder', folders );
 
 	var searchForFile = baseURL + folders + '/readme.md';
 	var searchInFolder = folders;
@@ -147,7 +148,7 @@
 
 		for ( var i = 0; i < foldersArray.length - 1; i++ ) {
 
-			txt += '<a href=JavaScript:getFiles(' + i + '); >' + foldersArray[ i ].replace( /-/g, ' ' ) + '</a> &raquo ';
+			txt += '<a href=JavaScript:getFiles(' + ( i + 1 ) + '); >' + foldersArray[ i ].replace( /-/g, ' ' ) + '</a> &raquo ';
 
 		}
 
@@ -170,7 +171,9 @@
 
 			response = JSON.parse( xhr.response );
 
-			getFiles( 1 );
+//			getFiles( 2 );
+
+createFolderNameTableOfContents( folder, files )
 
 		}
 
@@ -178,11 +181,13 @@
 
 	function getFiles( index ) {
 
-		foldersArray = foldersArray.slice( 0, index + 1);
+		foldersArray = foldersArray.slice( 0, index );
 
-		folder = foldersArray.join( '/' );
+console.log( 'foldersArray:', foldersArray );
 
-// console.log( 'folder:', folder );
+		folder = foldersArray.slice( 1 ).join( '/' );
+
+console.log( 'folder:', folder );
 
 		files = [];
 
@@ -192,7 +197,7 @@
 
 			if ( !file.match( folder ) || file === folder ) { continue; }
 
-			if ( file.split( '/' ).length > foldersArray.length + 1 ) { continue; }
+			if ( file.split( '/' ).length > foldersArray.length + 0 ) { continue; }
 
 			if ( file.match( 'archive' ) ) { continue; }
 
@@ -211,6 +216,28 @@
 		createTableOfContents();
 
 	}
+
+	function createFolderNameTableOfContents( folder, files ) {
+
+		var txt, file,
+
+		txt =  '';
+
+		for ( var i = 0; i < files.length; i++ ) {
+
+			file = files[ i ].split( '/' ).slice( 1, -1 );
+
+			txt += '<h3><a href=' + urlBase + file + ' >' + file + '</a></h3>';
+
+		}
+
+		menuFolderIndices.innerHTML = txt + '';
+
+		setBreadCrumbs( folder.split( '/' ) );
+
+	}
+
+
 
 	function createTableOfContents( ) {
 
