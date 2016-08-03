@@ -1,6 +1,6 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
 ( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html#readme.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/master/terrain3/globes/earth-globe-displacement/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/earth-globe-displacement/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [jaanga.github.io]( https://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
 [globes]( https://jaanga.github.io/terrain3/globes/ ) &raquo;
@@ -56,11 +56,11 @@ Wow! This script came as a surprise.
 <iframe src='https://jaanga.github.io/cookbook-html/examples/libraries/ace-editor/ace-view-r1.html#
 	https://jaanga.github.io/terrain3/globes/earth-globe-displacement/earth-globe-displacement-r2.js' width=100% height=600 ></iframe>
 
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/jaanga.github.io/tree/master/globes/earth-globe-displacement/earth-globe-displacement-r2.js';
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/jaanga.github.io/tree/gh-pages/globes/earth-globe-displacement/earth-globe-displacement-r2.js';
 value='Source code listing' >
 
 
-* Open this file: https://github.com/jaanga/jaanga.github.io/tree/master/terrain3/globes/earth-globe-displacement/earth-globe-displacement-r2.js
+* Open this file: https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/earth-globe-displacement/earth-globe-displacement-r2.js
 * Click the 'Raw' icon and save the raw file to your computer
 * Once you've downloaded the file, you can click it to run it.
 * Open the file with a text editor

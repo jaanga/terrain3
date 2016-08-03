@@ -1,6 +1,6 @@
 ﻿<span style=display:none; >[You are now in a GitHub source code view - click this link to view Read Me file as a web page]
 ( https://jaanga.github.io/terrain3/globes/earth-globe-normal/#readme.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/blob/master/terrain3/globes/earth-globe-normal/readme.md'; 
+<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/blob/gh-pages/terrain3/globes/earth-globe-normal/readme.md'; 
 value='You are now in a GitHub web page view - Click this button to view this read me file as source code' >
 
 [jaanga.github.io]( https://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
@@ -60,11 +60,11 @@ A basic template for drawing 3D globes
 <iframe src='https://jaanga.github.io/cookbook-html/examples/libraries/ace-editor/ace-view-r1.html#
 	https://jaanga.github.io/terrain3/globes/earth-globe-normal/earth-globe-normal-r1.js' width=100% height=600 ></iframe>
 
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/master/terrain3/globes/earth-globe-normal/earth-globe-normal-r1.js';
+<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/earth-globe-normal/earth-globe-normal-r1.js';
 value='Source code listing' >
 
 
-* Open this file: https://github.com/jaanga/jaanga.github.io/tree/master/terrain3/globes/earth-globe-normal/earth-globe-normal-r1.js
+* Open this file: https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/earth-globe-normal/earth-globe-normal-r1.js
 * Click the 'Raw' icon and save the raw file to your computer
 * Once you've downloaded the file, you can click it to run it.
 * Open the file with a text editor

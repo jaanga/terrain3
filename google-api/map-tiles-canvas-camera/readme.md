@@ -1,6 +1,6 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
 ( http://jaanga.github.io/terrain3/google-api/map-tiles-canvas/index.html#readme.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/master/terrain3/google-api/map-tiles-canvas/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/google-api/map-tiles-canvas/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [Cookbook Three.js]( http://jaanga.github.io/cookbook-threejs/  ) &raquo;
 [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
