@@ -1,30 +1,25 @@
 
-/*
-	var user = 'jaanga';
-	var repo = 'jaanga.github.io';
-	var branch = 'master';
-	var folder = 'cookbook-threejs\/examples\/';
-
-	var tree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
-
-	var urlBase = 'http://' + user + '.github.io/';
-*/
 
 	var user = 'jaanga';
 	var tagLine ='your 3D happy place';
 	var logo = '&#x2766';
 
+/*
+	var repo = 'jaanga.github.io';
+	var branch = 'master';
+//	var folder = 'cookbook-threejs/examples/';
+	var folder = 'cookbook-html/examples/github-api-rss/';
+*/
+
+
 	var repo = 'terrain3';
 	var branch = 'gh-pages';
 	var folder = '';
 
-	var githubTree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
+	var urlGitHubTree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
+	var urlGHPages = 'https://' + user + '.github.io/' + repo + '/';
+	var urlSource = 'https://github.com/' + user + '/' + repo + '/tree/' + branch + '/';
 
-	var urlBase = 'https://' + user + '.github.io/' + repo + '/' + folder;
-
-	var homeSource = 'https://github.com/jaanga/terrain3/tree/gh-pages/';
-
-	var response;
 	var filesAll, filesSelected;
 
 	var b = '<br>';
@@ -48,7 +43,7 @@
 			'h2 a { color: crimson; }' +
 			'iframe { border: 1px solid red; height: 100%; overflow: hidden; width: 100%; }' +
 
-			'summary h2, summary h3 { display: inline; }' +
+			'summary h2, summary h3, #menuBreadCrumbs h3 { display: inline; }' +
 			'summary { outline: none; }' +
 
 			'#menu { box-sizing: border-box; background-color: #ccc; height: 100%; padding: 0 0 0 10px; overflow: auto; position: fixed; width: 300px; }' +
@@ -62,11 +57,7 @@
 
 			'<div id=menuBreadCrumbs ></div>' +
 
-			'<hr>' +
-
 			'<div id=menuFolderIndices ></div>' +
-
-			'<hr>' +
 
 			'<div id=menuTestHash ></div>' +
 
@@ -76,8 +67,10 @@
 
 			'<hr>' +
 
-			'<center><a href=javascript:window.scrollTo(0,0); style=text-decoration:none; title="' + user + ' - ' + tagLine + '" >' +
-				'<h1>' + logo + '<h1></a></center>' +
+			'<center>' +
+				'<a href=javascript:window.scrollTo(0,0); style=text-decoration:none; title="' + user + ' - ' + tagLine + '" >' +
+				'<h1>' + logo + '<h1>' +
+			'</a></center>' +
 
 		'';
 
@@ -104,15 +97,10 @@
 			'<hr>' +
 
 			'<button onclick=location.hash="elevations"; >elevations</button>' + b + b +
-
 			'- <button onclick=location.hash="elevations/elevations-get"; >elevations get</button>' + b + b +
-
 			'- <button onclick=location.hash="elevations/elevations-view"; >elevations view</button>' + b + b +
-
 			'<button onclick=location.hash="globes"; >globes</button>' + b + b +
-
 			'<button onclick=location.hash="google-api"; >google api</button>' + b + b +
-
 			'- <button onclick=location.hash="google-api/path-viewers"; >google api / path viewers</button>' + b +
 
 		'';
@@ -123,16 +111,17 @@
 
 		menuDetailsPageActions.innerHTML =
 
+			'<hr>' +
+
 			'<details open>' +
+
 				'<summary><h3>page actions</h3></summary>' +
 
-				'<p><a href=JavaScript:window.location.href=homeSource+item; >Open page in GitHub</a></p>' +
-//				'<p>Edit page in GitHub</p>' +
-//				'<p>Search page in GitHub</p>' +
-				'<p><a href=JavaScript:window.location.href=homePages+item; target="_blank" >Open page in new tab</a></p>' +
-				'<p><s><input type=checkbox > View all files</s></p>' +
+				'<p><a href=JavaScript:location.href=urlSource+location.hash.slice(1); >View source on GitHub</a></p>' +
+				'<p><a href=JavaScript:window.open(urlGHPages+location.hash.slice(1),"_blank"); >Open page in new tab</a></p>' +
+				'<p><s><input type=checkbox > View all files in folder</s></p>' +
 
-				'<p id=menuMessages ></p>' +
+				'<p id=menuActionMessages ></p>' +
 
 			'</details>' +
 
@@ -148,8 +137,9 @@
 
 				'<summary><h3>about</h3></summary>' +
 				'<p>Copyright &copy; 2016 ' + user + ' authors. <a href=https://' + user + '.github.io/license.md >MIT license</a>.</p>' +
+
 //				'<p>Click the \'i in a circle\' icon for more <a href=index.html#readme.md title="Click here for help and information" >help</a>.</p>' +
-				'<p></p>' +
+//				'<p></p>' +
 
 			'</details>' +
 
@@ -165,7 +155,7 @@
 
 		xhr = new XMLHttpRequest();
 		xhr.crossOrigin = 'anonymous';
-		xhr.open( 'GET', githubTree, true );
+		xhr.open( 'GET', urlGitHubTree, true );
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -181,7 +171,8 @@
 
 	}
 
-	function getFilesFromFolder( folder ) {
+
+	function getFilesFromFolder( dir ) {
 
 		var file, fileArray;
 
@@ -192,13 +183,13 @@
 			file = filesAll[ i ];
 			fileArray = file.split( '/' );
 
-			if ( folder === '' ) {
+			if ( dir === '' ) {
 
 				if ( fileArray.length > 2 ) { continue; }
 
 			} else {
 
-				if ( !file.startsWith( folder ) ) { continue; }
+				if ( !file.startsWith( dir ) ) { continue; }
 				if ( file.match( 'archive' ) ) { continue; }
 
 			}
@@ -209,29 +200,28 @@
 
 		}
 
-		createFolderNameTableOfContents( folder );
+		createFolderNameTableOfContents( dir );
 
-		menuMessages.innerHTML = 'Files in repo: ' + filesAll.length;
+		menuActionMessages.innerHTML = 'Files in repo: ' + filesAll.length;
 
 	}
 
-	function createFolderNameTableOfContents( folder ) {
 
-//		var toc, file, fName,
+	function createFolderNameTableOfContents( dir ) {
 
-		toc = '<p>files:</p>';
+		var toc, file, fName, ffolder,
+
+		toc = '<hr>' + '<p>files:</p>';
 
 		for ( var i = 0; i < filesSelected.length; i++ ) {
 
 			file = filesSelected[ i ];
 
-console.log( 'cFNToC', file, '\n' + folder + 'readme.md' );
+			if ( dir && dir.slice( -1 ) !== '/' ) { dir += '/'; }
 
-			if ( folder && folder.slice( -1 ) !== '/' ) { folder += '/'; }
+			if ( file === dir + 'readme.md' ) {
 
-			if ( file === folder + 'readme.md' ) {
-
-				getMarkdown( urlBase + file, contents );
+				getMarkdown( urlGHPages + file, contents );
 
 			} else {
 
@@ -247,16 +237,16 @@ console.log( 'cFNToC', file, '\n' + folder + 'readme.md' );
 
 		menuFolderIndices.innerHTML = toc;
 
-		setBreadCrumbs( folder );
+		setBreadCrumbs( dir );
 
 	}
 
 
-	function setBreadCrumbs( folder ) {
+	function setBreadCrumbs( dir ) {
 
-		var breadCrumbs, folderArray;
+		var breadCrumbs, dirArray;
 
-		folderArray = folder.split( '/' );
+		dirArray = dir.split( '/' );
 
 		breadCrumbs =
 
@@ -264,17 +254,19 @@ console.log( 'cFNToC', file, '\n' + folder + 'readme.md' );
 
 			'<a href=http://' + user + '.github.io title="' + user + ' - ' + tagLine + '" >' + logo + ' ' + user + '</a> &raquo; ' +
 
-			'<a href=# >' + repo + ' </a> &raquo; ' +
+			'<a href=# >' + repo + ' </a> &raquo; </h2>' +
 
 		'';
 
-		for ( var i = 0; i < folderArray.length - 1; i++ ) {
+		for ( var i = 0; i < dirArray.length - 1; i++ ) {
 
-			breadCrumbs += '<a href=#' + folderArray[ i ] + ' >' + folderArray[ i ].replace( /-/g, ' ' ) + '</a> &raquo ';
+			dirString = dirArray.slice( 0, i + 1 ).join( '/' );
+
+			breadCrumbs += '<h3><a href=#' + dirString + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a> &raquo </h3>';
 
 		}
 
-		breadCrumbs += '</h2> <h3><a href=#' + folder + ' >' + folderArray[ i ].replace( /-/g, ' ' ) + '</a></h3>';
+		breadCrumbs += '<h4><a href=#' + dir + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a></h4>';
 
 		menuBreadCrumbs.innerHTML = breadCrumbs;
 
@@ -283,11 +275,11 @@ console.log( 'cFNToC', file, '\n' + folder + 'readme.md' );
 
 	function onHashChange() {
 
-		folder = location.hash ? location.hash.slice( 1 ) : '';
+		dir = location.hash ? location.hash.slice( 1 ) : folder;
 
-		setBreadCrumbs( folder );
+		setBreadCrumbs( dir );
 
-		getFilesFromFolder( folder );
+		getFilesFromFolder( dir );
 
 	}
 
@@ -296,6 +288,7 @@ console.log( 'cFNToC', file, '\n' + folder + 'readme.md' );
 		var xhr;
 
 		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', fName, true );
 		xhr.onload = function() {
 
