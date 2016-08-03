@@ -70,8 +70,6 @@
 
 			'<div id=menuTestHash ></div>' +
 
-			'<hr>' +
-
 			'<div id=menuDetailsPageActions ></div>' +
 
 			'<div id=menuDetailsAbout ></div>' +
@@ -102,6 +100,8 @@
 	function setMenuTestHash() {
 
 		menuTestHash.innerHTML =
+
+			'<hr>' +
 
 			'<button onclick=location.hash="elevations"; >elevations</button>' + b + b +
 
