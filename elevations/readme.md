@@ -8,12 +8,12 @@
 [Elevations Read Me]( https://jaanga.github.io/terrain3/elevations/index.html#readme.md )
 ===
 
-## Full Screen: [Elevations ]( https://jaanga.github.io/terrain3/elevations/index.html )
+## Full Screen: [Elevations Read Me]( https://jaanga.github.io/terrain3/elevations/index.html )
 
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt" width=100% height=600px ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#https://jaanga.github.io/terrain3/elevations/elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt" width=100% height=600px ></iframe>
 
 _Elevations_
 
