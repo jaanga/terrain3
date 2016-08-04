@@ -22,7 +22,7 @@ _Elevations View_
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get/index.html" width=800px height=600px ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations Get_
 

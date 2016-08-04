@@ -447,6 +447,7 @@
 
 		if ( window.self !== window.top && parent.frame ) { 
 
+			controls.enableZoom = false;
 			parent.ifr = parent.frame.contentWindow; 
 			parent.outVertical.value = parent.inpVertical.value = inpVertical.value;
 			parent.inpVertical.max = inpVertical.max;
