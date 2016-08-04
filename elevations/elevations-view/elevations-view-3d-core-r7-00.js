@@ -1,6 +1,5 @@
-// 2016-08-04
+// 2016-07-24 ~ 16: 49
 
-// R7.1
 
 //	var defaultFile = '../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt';
 	var defaultFile = 'elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_510_680_.txt';
@@ -446,7 +445,6 @@
 
 		outVertical.value = inpVertical.valueAsNumber.toFixed( 6 );
 
-/*
 		if ( window.self !== window.top && parent.frame ) { 
 
 			controls.enableZoom = false;
@@ -455,7 +453,6 @@
 			parent.inpVertical.max = inpVertical.max;
 
 		}
-*/
 
 	}
 

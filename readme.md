@@ -11,11 +11,12 @@
 ## Concept
 
 
-There are many apps for creating 2D maps. There are a few quite sophisticated apps for creating 3D maps. See Links of Interest below.
+There are a great many apps for creating 2D maps. There are a few quite sophisticated apps for creating 3D maps. See Links of Interest below.
 
-There, are, however few ways to get going with mapping if you are an entry level coder
+There are, however, few ways to get going with 3D mapping if you are an entry level coder.
 
-There are many ways of linking and embedding maps from remote servers in your web page, but few ways of doing so with all sceripts and data on a static server.
+There are a great many ways of linking and embedding maps from remote servers into web pages.
+There are, however, few ways to get going with all scripts and data on a static server.
 
 
 
@@ -31,7 +32,7 @@ _Elevations View ~ a script for displaying 3D data with 2D overlays_
 
 <iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Earth Globe Displacement Map_
+_Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 
 
 ### Mission
