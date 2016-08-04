@@ -114,7 +114,7 @@ console.timeEnd( 'timer 0' );
 
 		}
 
-		selOverlay.selectedIndex = 1;
+		selOverlay.selectedIndex = 0;
 
 		inpOpacity.onchange = function() {
 
@@ -123,10 +123,6 @@ console.timeEnd( 'timer 0' );
 
 		};
 
-
-
-
 		if ( window.innerWidth < 800 ) { selVertices.selectedIndex = 0; }
-
 
 	}

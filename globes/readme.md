@@ -25,8 +25,11 @@ _Earth Globe Displacement Map_
 
 ## Concept
 
+Most '3D' globes are smooth spheres overlaid with 2D bitmaps.
+
 The earth is covered in oceans and mountains, some places are bumpy and others are smooth.
-We need to be able to see and feel this lumpiness
+
+We need to be able to see and feel this lumpiness in 3D.
 
 ### Mission
 

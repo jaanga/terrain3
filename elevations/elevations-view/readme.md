@@ -11,7 +11,7 @@
 ## Full Screen: [Elevations View ]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
 
 
-<img src="" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
@@ -105,8 +105,8 @@ Intended for generating flightpaths
 * New scene with each load helps a lot
 * Metadata added to all files
 * Folder renamed to 'elevations view'
-* Continued with variable and proceddure renaming
-	* Begining to feel organized
+* Continued with variable and procedure renaming
+	* Beginning to feel organized
 * Cleaned up overlaying and zooming
 
 

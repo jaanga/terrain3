@@ -1,17 +1,17 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html#readme.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/earth-globe-displacement/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+( https://jaanga.github.io/terrain3/#globes/earth-globe-displacement "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/globes/earth-globe-displacement/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [jaanga.github.io]( https://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
 [globes]( https://jaanga.github.io/terrain3/globes/ ) &raquo;
 
-[Earth Globe Displacement Map Read Me]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html#readme.md )
+[Earth Globe Displacement Map Read Me]( https://jaanga.github.io/terrain3/#globes/earth-globe-displacement/ )
 ===
 
 ## Full Screen: [ Earth Globe Displacement Map ]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
 
 
-<img src="" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
 
 <iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=600px ></iframe>
 
@@ -19,13 +19,19 @@ _Earth Globe Displacement Map_
 
 ***
 
-Wow! This script came as a surprise.
 
 ## Concept
 
+
+
 ### Mission
 
-* TBD
+* Good looking, well detailed 3D globe
+* Fast loading
+* Very reusable, embeddable
+* Works across a variety of browsers
+* Works well in iframe
+* Simple code that gets you going fast
 
 ### Vision
 
@@ -66,16 +72,21 @@ value='Source code listing' >
 * Open the file with a text editor
 
 
+## Goals / Wish list
+
+* Keep increasing the resolution
+* Easy links to unFltland maps
+* Alitude at mouseover
 ## Issues
 
 * maintain opacity after other settings change
 
+<!--
 ## Users
 
 Intended for xxx
+-->
 
-
-## Goals
 
 
 ## Links of Interest
@@ -89,12 +100,17 @@ Intended for xxx
 
 ## Change Log
 
+### 2016-08-04
+
+* Fixing readme links
 
 ### 2016-07-24 ~ R2
 
 * Add all the bells and whistles
 
 ### 2016-07-23 ~ R1
+
+Wow! This script came as a surprise.
 
 * First commit
 * Add Read Me
