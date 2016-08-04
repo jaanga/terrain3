@@ -10,10 +10,11 @@
 
 ## Concept
 
-Images or bitmap files used as heightmaps and/or overlays by the various Terrain scripts
+Images or bitmap files used as heightmaps and/or overlays by the various Terrain scripts.
 
 
-<img src=https://jaanga.github.io/terrain3/bitmaps/Elevation.jpg width=500 >
+<img src="https://jaanga.github.io/terrain3/bitmaps/Elevation.jpg" width="500px" >
+
 
 _Elevations.jpg - 2048x1024 pixels - a typical file_
 
