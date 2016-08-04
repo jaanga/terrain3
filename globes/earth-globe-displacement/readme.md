@@ -13,7 +13,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
 
-<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=600px ></iframe>
+<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Earth Globe Displacement Map_
 
