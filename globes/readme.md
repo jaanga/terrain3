@@ -1,17 +1,24 @@
 <span style=display:none; >
 [You are now in a GitHub source code view - click this link to view this read me file as a web page]
 ( http://jaanga.github.io/terrain3/globes/ "View file as a web page." ) </span>
-<input onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/globes/'; type=button  value='You are now in a GitHub web page view - Click this button to view this read me file as source code' />
+<input onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/globes'; type=button  value='You are now in a GitHub web page view - Click this button to view this read me file as source code' />
 
 [Jaanga]( http://jaanga.github.io ) » [Terrain 3]( http://jaanga.github.io/terrain3/  ) »
 
 
-[Earth Globes Read Me]( https://jaanga.github.io/terrain3/globes/index.html#readme.md )
+[Earth Globes Read Me]( https://jaanga.github.io/terrain3/globes/index.html )
 ===
+
+## Full Screen: [ Earth Globe Altitude  ]( https://jaanga.github.io/terrain3/globes/earth-globe-altitude/index.html )
+
+## Full Screen: [ Earth Globe Displacement Map ]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
+
+## Full Screen: [ Earth Globe Normal ]( https://jaanga.github.io/terrain3/globes/earth-globe-normal/index.html )
+
 
 <img src="" style=display:none; width=800 >
 
-<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=640px height=480px ></iframe>
+<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=640px height=480pxonload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Earth Globe Displacement Map_
 
