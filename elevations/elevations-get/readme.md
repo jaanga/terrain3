@@ -1,8 +1,9 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
 ( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html#readme.md "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/elevations/elevations-get/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
-[Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; [Google Maps API]( https://jaanga.github.io/terrain3/elevations/ ) &raquo;
+[Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
+[elevations]( https://jaanga.github.io/terrain3/elevations/ ) &raquo;
 
 [Elevations Get Read Me]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html#readme.md )
 ===

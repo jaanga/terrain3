@@ -2,20 +2,20 @@
 ( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#readme.md "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/elevations/elevations-view/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
-[Jaanga]( http://jaanga.github.io ) &raquo; [Cookbook Three.js]( http://jaanga.github.io/cookbook-threejs/  ) &raquo;
-[terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; [elevations]( https://jaanga.github.io/terrain3/elevations/ ) &raquo;
+[Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
+[elevations]( https://jaanga.github.io/terrain3/elevations/ ) &raquo;
 
-[Elevations View 3D Core Read Me]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#readme.md )
+[Elevations View Read Me]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#readme.md )
 ===
 
-## Full Screen: [Elevations View 3D Core ]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
+## Full Screen: [Elevations View ]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
 
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt" width=100% height=600px ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View 3D Core_
+_Elevations View_
 
 ***
 
