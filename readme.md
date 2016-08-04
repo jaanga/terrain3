@@ -1,16 +1,23 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/index.html#readme.md "View file as a web page." ) </span>
+( https://jaanga.github.io/terrain3/index.html "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo;
 
-[Terrain 3 Read Me]( https://jaanga.github.io/terrain3/index.html#readme.md )
+[Terrain 3 Read Me]( https://jaanga.github.io/terrain3/index.html )
 ===
 
 
 ## Concept
 
 This is part of an investigation into writing very simple code that can access the [Google Maps API]( https://developers.google.com/maps/documentation/javascript/tutorial )
+
+
+<img src="" style=display:none; width=800 >
+
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+
+_Elevations View_
 
 
 ### Mission

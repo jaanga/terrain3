@@ -13,12 +13,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >
 
-
 <iframe sandbox='allow-same-origin allow-scripts' src=https://jaanga.github.io/terrain3/elevations/elevations-get/index.html width=800px height=600px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false}); ></iframe>
-
-<!--
-<iframe sandbox='allow-same-origin allow-scripts' src=index.html width=100% height=600px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false}); ></iframe>
--->
 
 _Elevations Get_
 
