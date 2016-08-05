@@ -67,6 +67,7 @@ _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D
 ## Links of Interest
 
 * [Google Maps API]( https://developers.google.com/maps/documentation/javascript/tutorial )
+* [Verne: The Himalayas[( https://play.google.com/store/apps/details?id=com.withgoogle.verne )
 
 ### Online 3D Map Making
 
