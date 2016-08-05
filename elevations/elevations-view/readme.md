@@ -1,19 +1,22 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#readme.md "View file as a web page." ) </span>
+( https://jaanga.github.io/terrain3/#elevations/elevations-view/ "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/jaanga.github.io/tree/gh-pages/terrain3/elevations/elevations-view/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
-[elevations]( https://jaanga.github.io/terrain3/elevations/ ) &raquo;
+[elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
-[Elevations View Read Me]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html#readme.md )
+[Elevations View Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-view/ )
 ===
 
 ## Full Screen: [Elevations View ]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
-
+<!--
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+-->
+
+<iframe src="./index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations View_
 
