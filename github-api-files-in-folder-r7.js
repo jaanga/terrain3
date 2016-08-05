@@ -118,7 +118,7 @@
 
 				'<summary><h3>about</h3></summary>' +
 
-				'<p>This menu/cms created with:' + b +
+				'<p>This menu/<a href=https://en.wikipedia.org/wiki/Content_management_system >cms</a> is created on-the-fly by:' + b + b +
 					'<a href=http://jaanga.github.io/cookbook-html/examples/github-api-rss/github-api-files-in-folder/#readme.md >' + document.title + '</a></p>' +
 				'<p>Copyright &copy; 2016 ' + user + ' authors. <a href=https://' + user + '.github.io/license.md >MIT license</a>.</p>' +
 
@@ -192,7 +192,7 @@
 
 		var toc, file, fName, ffolder,
 
-		toc = '<hr>' + '<p>folders and files:</p>';
+		toc = '<hr>' + '<p>subFolders:</p>';
 
 		for ( var i = 0; i < filesSelected.length; i++ ) {
 
@@ -256,11 +256,23 @@
 
 	function onHashChange() {
 
-		dir = location.hash ? location.hash.slice( 1 ) : folder;
+		var item;
 
-		setBreadCrumbs( dir );
+		item = location.hash ? location.hash.slice( 1 ) : folder;
 
-		getFilesFromFolder( dir );
+		if ( item.endsWith( '.md' ) === true ) {
+
+			getMarkdown( item, contents );
+
+			setBreadCrumbs( folder )
+
+		} else {
+
+			setBreadCrumbs( item );
+
+			getFilesFromFolder( item );
+
+		}
 
 	}
 

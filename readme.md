@@ -16,9 +16,9 @@ There are a great many apps for creating 2D maps. There are a few quite sophisti
 There are, however, few ways to get going with 3D mapping if you are an entry level coder.
 
 There are a great many ways of linking and embedding maps from remote servers into web pages.
-There are, however, few ways to get going with all scripts and data on a static server.
+There are, however, few ways to get going with all the data and scripts on a static server - such as with [GitHub Pages]( https://pages.github.com/ ).
 
-
+So, let's get going!
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
@@ -37,9 +37,9 @@ _Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 
 ### Mission
 
-* TBD
+* To supply numerous FOSS cookbook samples so as to make mapping as easy as baking a pie
+* To demo how to access online data sources and mash-up new displays and visualizations from that data
 * An investigation into writing very simple code that can access the [Google Maps API]( https://developers.google.com/maps/documentation/javascript/tutorial )
-
 
 
 ### Vision
@@ -49,35 +49,38 @@ _Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 
 ## Features
 
-* TBD
+* The [Coding Style]( #coding-style.md ) used here could be of interest
+* And the menu system as well
+
 
 
 ## Issues
 
 
-## Users
-
-Intended for general use
-
 
 ## Goals
+
+* To anything Three.js can do - with a map
+* To do anything a map can so - with added Three.js goodness
+
 
 
 ## Links of Interest
 
-
 * [Google Maps API]( https://developers.google.com/maps/documentation/javascript/tutorial )
-
 
 ### Online 3D Map Making
 
 * [Google Earth]( https://www.google.com/earth/ )
+	* Note that home page shows static 2D images
 * [Cesium]( https://cesiumjs.org/ )
+	* 2016-08-04 ~ Note that home page demo appears to be broken
 * [Web World Wind]( https://webworldwind.org/ )
+	* Note that home page shows static 2D images
 
 ## Change Log
 
-### 
+### 2016-08-02
 
 * First commit
 * Add Read Me
