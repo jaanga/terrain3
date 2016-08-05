@@ -2,7 +2,7 @@
 ( https://jaanga.github.io/terrain3/index.html "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
-[Jaanga]( http://jaanga.github.io ) &raquo;
+[Jaanga]( https://jaanga.github.io ) &raquo;
 
 [Terrain 3 Read Me]( https://jaanga.github.io/terrain3/index.html )
 ===
