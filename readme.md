@@ -8,7 +8,7 @@
 ===
 
 
-## Concept
+## Concept: 3D maps on your home page
 
 
 There are a great many apps for creating 2D maps. There are a few quite sophisticated apps for creating 3D maps. See Links of Interest below.
@@ -20,19 +20,23 @@ There are, however, few ways to get going with all the data and scripts on a sta
 
 So, let's get going!
 
+
+### full screen: [Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
+
 <img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View ~ a script for displaying 3D data with 2D overlays_
+_Sample 1: Elevations View ~ a script for displaying 3D data with 2D overlays_
 
 
+### full screen: [Earth Globe Displacement Map]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
 
 <iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
+_Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 
 
 ### Mission
@@ -50,11 +54,7 @@ _Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 ## Features
 
 * The [Coding Style]( #coding-style.md ) used here could be of interest
-* And the menu system as well
-
-
-
-## Issues
+* And the on-the-fly menu system as well
 
 
 
@@ -62,7 +62,6 @@ _Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 
 * To anything Three.js can do - with a map
 * To do anything a map can so - with added Three.js goodness
-
 
 
 ## Links of Interest
@@ -79,6 +78,10 @@ _Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
 	* Note that home page shows static 2D images
 
 ## Change Log
+
+### 2016-08-04
+
+* Many updates to all the readme files ans scripts
 
 ### 2016-08-02
 

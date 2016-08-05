@@ -100,7 +100,7 @@
 
 				'<p><a href=JavaScript:location.href=urlSource+location.hash.slice(1); >View source on GitHub</a></p>' +
 				'<p><a href=JavaScript:window.open(urlGHPages+location.hash.slice(1),"_blank"); >Open page in new tab</a></p>' +
-				'<p><s><input type=checkbox > View all files in folder</s></p>' +
+//				'<p><s><input type=checkbox > View all files in folder</s></p>' +
 
 				'<p id=menuActionMessages ></p>' +
 
