@@ -5,7 +5,6 @@
 
 [Jaanga]( http://jaanga.github.io ) » [Terrain 3]( http://jaanga.github.io/terrain3/  ) »
 
-
 [Earth Globes Read Me]( https://jaanga.github.io/terrain3/#globes/ )
 ===
 

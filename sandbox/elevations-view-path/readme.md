@@ -2,6 +2,10 @@ Elevations View Path Read Me
 ===
 
 
-Load a path into the map and diaplay it.
+## full screen: [Elevations View Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
 
-Have an object - soon tp be an aircraft - moving along the path and have the camera follow the object.
+Load a path into the map and display it.
+
+Have an object - soon to be an aircraft - moving along the path and have the camera follow the object.
+
+While the camera is moving you control the direction where it's looking.
