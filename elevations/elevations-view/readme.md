@@ -69,10 +69,12 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
+* 2016-08-05 ~ Save changes to data file
+* 2016-08-05 ~ JSON data file that takes all kinds of data
+* 2016-08-05 ~ add paths
+* 2016-08-05 ~ Add skybox, background
 * Add pokemons?
 * Add placards
-
-
 * Info about metres per side of map
 * Accurate elevation measurement
 * Link to escape iframe
@@ -98,6 +100,11 @@ Intended for generating flightpaths
 
 ## Change Log
 
+
+### 2016-08-05 ~ R7.3
+
+* Minor cleanup
+* Dump processFile functions. Can do everything from parent
 
 ### 2016-08-01 ~ R7.2
 

@@ -54,7 +54,18 @@ The code herein is:
 	* Just about every script here has been tested in an iframe
 	* 3Dcripts in iframes are happy having ongoing dialogs with their 2D parents
 
+## Design and develop for the future / Build production for the past
 
+* We are here to teach peeps how to code
+* We start with the easiest and simplest methods
+* Newer versions of JavaScript are usually simpler than previous version
+	* Example: doctype
+	* script tag
+* Because code our uses the latest, it often hases issues with legacy apps
+	* Safari and iOS we are looking at you
+
+
+ 
 ## Links of interest
 
 Examples of coding styles similar to the one used here:

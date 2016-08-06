@@ -168,6 +168,11 @@ Intended for general use
 ## Change Log
 
 
+### 2016-08-05 ~ R8
+
+* Move variable declrations functions into a separate JavaScript file
+
+
 ### 2016-07-29 ~ R7
 
 * Streamline menu

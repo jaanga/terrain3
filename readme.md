@@ -80,9 +80,13 @@ _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D
 
 ## Change Log
 
+### 2016-08-05
+
+* New document.title
+
 ### 2016-08-04
 
-* Many updates to all the readme files ans scripts
+* Many updates to all the readme files and scripts
 
 ### 2016-08-02
 
