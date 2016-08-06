@@ -58,7 +58,7 @@ console.time( 'timer0' );
 
 	function initMapViewMenu() {
 
-		setMenuDetailsAPIKey();
+//		setMenuDetailsAPIKey();
 
 		setMenuDetailsSelectFile();
 
@@ -199,7 +199,7 @@ console.time( 'timer0' );
 
 		}
 
-		selMapZoom.selectedIndex = 1;
+		selMapZoom.selectedIndex = 3;
 
 	}
 
@@ -265,11 +265,11 @@ console.time( 'timer0' );
 
 //			toggleFog();
 
-		geometry = new THREE.BoxGeometry( 0.005, 0.005, 0.005 );
-		material = new THREE.MeshNormalMaterial();
-		lure = new THREE.Mesh( geometry, material );
-		lure.name = 'lure'
-		scene.add( lure );
+			geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
+			material = new THREE.MeshNormalMaterial();
+			lure = new THREE.Mesh( geometry, material );
+			lure.name = 'lure'
+			scene.add( lure );
 
 			getFilePathCSV( flightPath );
 
@@ -657,7 +657,6 @@ console.timeEnd( 'timer0' );
 
 //		toggleFog();
 
-
 		updateSettings();
 
 		initMapGeometry();
@@ -674,16 +673,18 @@ console.timeEnd( 'timer0' );
 
 		map.radius = map.boxHelper.geometry.boundingSphere.radius;
 
-		cameraPosition = 0.7 * map.radius;
+//		cameraPosition = 0.7 * map.radius;
 
-		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
+//		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
 //		controls.target.copy( center );
 
 
 		controls.maxDistance = 300 * map.radius;
 
-		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
+//		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
 
+		camera.position.set( 0, 0, 0.03 );
+		lure.add( camera );
 
 	}
 

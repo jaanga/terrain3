@@ -21,9 +21,12 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 <script src=elevations-view-path-r1.js ></script>
 <script src=flight-path-r3.js ></script>
-<script src=camera-along-spline-r1.js ></script>
+
 
 <script>
+
+
+	index = 5000;
 
 	var stats, renderer, scene, camera, controls;
 
@@ -78,25 +81,29 @@ Display in 3D. Add TMS overlay;
 
 				'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
 
-				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
-// make into a js function...y
-				'<div id=menuDetailsAPIKey ></div>' +
 
-				'<div id=menuDetailsCameraActions ></div>' +
+				'<p>A preview of what will be available for all maps.</p>' +
 
-				'<div id=menuDetailsSelectFile ></div>' +
+				'<p>Use your fingers or pointing device to look around</p>' +
+//				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-				'<div id=menuDetailsFlightPath ></div>' +
+//				'<div id=menuDetailsAPIKey ></div>' +
 
-				'<div id=menuDetailsOverlay ></div>' +
+//				'<div id=menuDetailsCameraActions ></div>' +
 
-				'<div id=menuDetailsTerrain ></div>' +
+				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
 
-				'<div id=menuDetailsElevations ></div>' +
+				'<div id=menuDetailsFlightPath style=display:none; ></div>' +
 
-				'<div id=menuBackgroundSettings ></div>' +
+				'<div id=menuDetailsOverlay style=display:none; ></div>' +
 
-				'<div id=menuDetailsOverlay2 ></div>' +
+				'<div id=menuDetailsTerrain style=display:none; ></div>' +
+
+				'<div id=menuDetailsElevations style=display:none; ></div>' +
+
+				'<div id=menuBackgroundSettings style=display:none; ></div>' +
+
+				'<div id=menuDetailsOverlay2 style=display:none; ></div>' +
 //
 
 				'<details >' +
@@ -159,9 +166,10 @@ Display in 3D. Add TMS overlay;
 
 		initMapViewMenu();
 
-		setMenuDetailsCameraActions();
+//		setMenuDetailsCameraActions();
 
-		cameraWorld();
+//		camera.position.set( 0, 20, -10 );
+//		lure.add( camera );
 
 	}
 
@@ -182,7 +190,9 @@ Display in 3D. Add TMS overlay;
 		controls.update();
 		stats.update();
 
-		cameraInside();
+		index = ++index === flightPath.points.length ? 5000 : index;
+
+		lure.position.copy( flightPath.points[ index ] );
 
 		renderer.render( scene, camera );
 
