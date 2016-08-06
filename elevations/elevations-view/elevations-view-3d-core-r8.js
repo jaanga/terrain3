@@ -34,12 +34,12 @@ console.time( 'timer0' );
 
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	var urlBase = 'https://jaanga.github.io/terrain3/google-api/elevations-data-02/';
-	var urlBase = '../elevations-data-02/';
+	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-02/';
+//	var urlBase = '../elevations-data-02/';
 
 	var searchInFolder = 'elevations-data-02/';
 
-	var core = '../elevations-view-3d-core/index.html#';
+	var core = '../elevations-view/index.html#';
 
 	var map = {};
 
@@ -725,6 +725,8 @@ console.timeEnd( 'timer0' );
 				file = response.tree[ i ].path;
 
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
+
+				if ( file.match( 'archive' ) ) { continue; }
 
 				file = file.split( '\/' ).pop();
 
