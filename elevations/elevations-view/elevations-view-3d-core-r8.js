@@ -315,7 +315,25 @@ console.time( 'timer0' );
 
 			data = reader.result;
 
-			map.elevations = data.split( ',' ).map( parseFloat );
+			if ( data.match( '{' ) ) {
+
+				values = window;
+
+				itemsString = data.slice( 0, data.indexOf( '}' ) + 1 );
+
+				map.items = JSON.parse( itemsString );
+
+				updateSettings();
+
+				data = data.replace( itemsString, '' );
+
+				elevations = data.split( ',' ).slice( 1 );
+
+			} else {
+
+				map.elevations = data.split( ',' ).map( parseFloat );
+
+			}
 
 			fileName = files.files[ 0 ].name;
 
