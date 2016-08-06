@@ -10,7 +10,7 @@
 ## Full Screen: [Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
 
 
-<img src="" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 

@@ -45,7 +45,7 @@
 			'summary h2, summary h3, #menuBreadCrumbs h3 { display: inline; }' +
 			'summary { outline: none; }' +
 
-			'#menu { box-sizing: border-box; background-color: #ccc; height: 100%; padding: 0 0 0 10px; overflow: auto; position: fixed; width: 300px; }' +
+			'#menu { box-sizing: border-box; background-color: #ccc; height: 100%; padding: 0 0 0 10px; overflow: auto; position: absolute; width: 300px; }' +
 //			'#contents { border: 0px red solid; height: 100%; left: 350px; overflow: hidden; position: absolute; top: 0; width: ' + ( window.innerWidth - 370 ) + 'px; }' +
 			'#contents { border: 0px red solid; left: 350px; position: absolute; top: 0; max-width: 800px; }' +
 
