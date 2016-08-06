@@ -165,15 +165,13 @@ console.log( 'key', inpAPI.value );
 		script = document.body.appendChild( document.createElement('script') );
 		script.onload = initMap;
 
-		if ( inpAPI.value ) {
+		if ( inpAPI.value !== '' ) {
 
 			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
 
 		} else {
 
-			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=place';
-
-			
+			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
 
 		}
 
@@ -181,7 +179,7 @@ console.log( 'key', inpAPI.value );
 
 	function initMap() {
 
-		var origin_autocomplete, marker;
+
 
 		place.latitude = parseFloat( inpLatitude.value );
 		place.longitude = parseFloat( inpLongitude.value );
@@ -206,6 +204,8 @@ console.log( 'key', inpAPI.value );
 
 
 	function initGeocoder() {
+
+//		var origin_autocomplete, marker;
 
 		geocoder = new google.maps.Geocoder();
 		elevator = new google.maps.ElevationService();

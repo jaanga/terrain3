@@ -20,7 +20,7 @@ _Elevations View_
 
 ## Full Screen: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html )
 
-<img src="" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get/index.html" width=800px height=500px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false});></iframe>
 

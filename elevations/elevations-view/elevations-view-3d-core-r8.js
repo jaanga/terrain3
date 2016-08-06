@@ -32,7 +32,7 @@ console.time( 'timer0' );
 
 	];
 
-	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/jaanga.github.io/git/trees/master?recursive=1';
+	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 //	var urlBase = 'https://jaanga.github.io/terrain3/google-api/elevations-data-02/';
 	var urlBase = '../elevations-data-02/';
@@ -556,7 +556,7 @@ console.log( 'parent', parent.frame );
 //		selMapZoom.selectedIndex = map.parameters.zoom ;
 
 		delta = selMapZoom ? selMapZoom.selectedIndex: 1;
-console.log( 'delta', delta );
+
 		map.parameters.zoomOverlay = delta + map.parameters.zoom;
 		map.parameters.ULtileXOverlay = Math.pow( 2, delta ) * map.parameters.ULtileX;
 		map.parameters.ULtileYOverlay = Math.pow( 2, delta ) * map.parameters.ULtileY;
