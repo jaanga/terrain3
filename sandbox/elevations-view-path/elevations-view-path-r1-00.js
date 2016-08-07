@@ -4,8 +4,9 @@
 
 console.time( 'timer0' );
 
+/*
 //	var defaultFile = '../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt';
-	var defaultFile = 'elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_510_680_.txt';
+//	var defaultFile = 'elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_510_680_.txt';
 
 	var defaultFiles = [
 
@@ -16,6 +17,7 @@ console.time( 'timer0' );
 		'http://fgx.github.io/sandbox/flightpaths/ygil/elevations_Gilgandra_12_3738_2427_3_3_150_150_.txt'
 
 	];
+*/
 
 	var mapTypes = [
 
@@ -32,14 +34,14 @@ console.time( 'timer0' );
 
 	];
 
-	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/jaanga.github.io/git/trees/master?recursive=1';
+	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	var urlBase = 'https://jaanga.github.io/terrain3/google-api/elevations-data-02/';
-	var urlBase = '../../elevations/elevations-data-02/';
+	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-02/';
+//	var urlBase = '../../elevations/elevations-data-02/';
 
 	var searchInFolder = 'elevations-data-02/';
 
-	var core = '../elevations-view-3d-core/index.html#';
+	var core = '../elevations-view/index.html#';
 
 	var map = {};
 
@@ -804,3 +806,4 @@ console.timeEnd( 'timer0' );
 		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
 
 	}
+

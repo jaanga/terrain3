@@ -327,7 +327,7 @@ console.time( 'timer0' );
 
 				data = data.replace( itemsString, '' );
 
-				elevations = data.split( ',' ).slice( 1 );
+				map.elevations = data.split( ',' ).slice( 1 ).map( parseFloat );
 
 			} else {
 

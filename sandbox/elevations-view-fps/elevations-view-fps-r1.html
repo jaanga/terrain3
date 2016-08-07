@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path R1</title>
+<title>Elevations View FPS R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -19,21 +19,15 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=elevations-view-path-r1.js  ></script>
-<script src=flight-path-r3.js ></script>
-
-
+<script src=../../elevations/elevations-view/elevations-view-3d-core-r8.js ></script>
+<script src=first-person-controls-theo.js ></script>
+<script src=controls-switch-orbit-fps-r1.js  ></script>
 <script>
-// 
-// ../../elevations/elevations-view/elevations-view-3d-core-r8.js
-
-
-	index = 5000;
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
-//	animate();
+	animate();
 
 	function init() {
 
@@ -83,25 +77,17 @@ Display in 3D. Add TMS overlay;
 
 				'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
 
-
-				'<p>A preview of what will be available for all maps.</p>' +
-
-				'<p>Use your fingers or pointing device to look and zoom around.</p>' +
-
-				'<p>On a computer, a mouse or controller really helps with 3D.</p>' +
-
-				'<p>On a phone - not really working yet - it would be cool to look around just be moving and turning the phone.</p>' +
-
-
 //				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-//				'<div id=menuDetailsAPIKey ></div>' +
+				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
 
-//				'<div id=menuDetailsCameraActions ></div>' +
+				'<div id=menuDetailsControllers ></div>' +
+
+				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
 
 				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
 
-				'<div id=menuDetailsFlightPath style=display:none; ></div>' +
+//				'<div id=menuDetailsSelectPath style=display:none; ></div>' +
 
 				'<div id=menuDetailsOverlay style=display:none; ></div>' +
 
@@ -109,6 +95,7 @@ Display in 3D. Add TMS overlay;
 
 				'<div id=menuDetailsElevations style=display:none; ></div>' +
 
+				'<div id=menuBackgroundSettings style=display:none; ></div>' +
 
 				'<div id=menuDetailsOverlay2 style=display:none; ></div>' +
 //
@@ -153,14 +140,14 @@ Display in 3D. Add TMS overlay;
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 1000;
+		controls.maxDistance = 1;
 
-//		controls.autoRotate = true;
+
 
 		scene = new THREE.Scene();
 
 		window.addEventListener( 'resize', onWindowResize, false );
-		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+//		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
 
@@ -171,13 +158,13 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
-
 		initMapViewMenu();
 
-//selMapZoom.selectedIndex = 3;
+		setMenuDetailsControllers();
+//		setupControls();
+//		setControlsOrbit();
 
-//selFiles.selectedIndex = 9;
-
+		controls.autoRotate = false;
 	}
 
 	function onWindowResize() {
@@ -194,13 +181,8 @@ Display in 3D. Add TMS overlay;
 	function animate() {
 
 		requestAnimationFrame( animate );
-		controls.update();
+		controls.update( clock.getDelta() );
 		stats.update();
-
-		index = ++index === flightPath.points.length ? 5000 : index;
-
-		lure.position.copy( flightPath.points[ index ] );
-
 		renderer.render( scene, camera );
 
 	}
