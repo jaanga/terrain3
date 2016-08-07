@@ -20,15 +20,23 @@ There are, however, few ways to get going with all the data and scripts on a sta
 
 So, let's get going!
 
+<br>
+
+## Two samples of what's here
+
 
 ### full screen: [Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )
+
+_Each time you load this page a random location appears_
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Sample 1: Elevations View ~ a script for displaying 3D data with 2D overlays_
+_Sample 1: **[Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )** ~ a script for displaying 3D data with 2D overlays._
+_It's one of our favorite projects and a good place to start exploring._
 
+<br>
 
 ### full screen: [Earth Globe Displacement Map]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
 
@@ -36,7 +44,8 @@ _Sample 1: Elevations View ~ a script for displaying 3D data with 2D overlays_
 
 <iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth_
+_Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth._
+_128 lines of code to create over two millions data points. The power to create new worlds is in your hands!_ 
 
 
 ### Mission
@@ -55,19 +64,30 @@ _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D
 
 * The [Coding Style]( #coding-style.md ) used here could be of interest
 * And the on-the-fly menu system as well
-
-
+* This is R3 of an effort several years old. The best aspects of previous work will be rebuilt, tested and carried forward here.
+* We eat our own 3D dogfood here. If you see something move here, then it's a 3D script you can interact with. Bitmaps are for flatland peeps.
+* We don't try to be realistic. We do try to be artistic, gametistic - and fantastic. We highlight the [diffs]( https://en.wikipedia.org/wiki/Data_comparison ). We give evidence to eruption and erosion. We are [entropy]( https://en.wikipedia.org/wiki/Introduction_to_entropy )-neurs.
 
 ## Goals
 
 * To anything Three.js can do - with a map
 * To do anything a map can so - with added Three.js goodness
+* Google Maps is a truly great app, but so often it let's you think that the Earth is flat. Guess what? Earth has bumps and dips. Each more beautiful than the next. We need help exploring them.
 
 
 ## Links of Interest
 
+### Closely related projects
+
+* [Analemma 3D]( https://ladybug-analysis-tools.github.io/ladybug-web/analemma-3d/ ), [Shadow Range Gallery]( https://ladybug-analysis-tools.github.io/ladybug-web/shadow-range-obj-gallery/ ) and [Ladybug Web]( https://ladybug-analysis-tools.github.io/ladybug-web/ )
+* [FGx Globe]( http://fgx.github.io/fgx-globe/fgx-globe-r7/fgx-globe-r7.html ), [FGx Plane Spotter]( http://jaanga.github.io/fgx-plane-spotter/r4/fgx-plane-spotter-r4.html ) and [FGx Sandbox]( http://fgx.github.io/sandbox/ )
+
+
+
+### Nice Stuff
+
 * [Google Maps API]( https://developers.google.com/maps/documentation/javascript/tutorial )
-* [Verne: The Himalayas[( https://play.google.com/store/apps/details?id=com.withgoogle.verne )
+* [Verne: The Himalayas]( https://play.google.com/store/apps/details?id=com.withgoogle.verne )
 
 ### Online 3D Map Making
 
@@ -79,6 +99,12 @@ _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D
 	* Note that home page shows static 2D images
 
 ## Change Log
+
+
+### 2016-08-06
+
+* Many readme updates throughout
+* Sandbox folder with two new examples added
 
 ### 2016-08-05
 

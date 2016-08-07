@@ -12,10 +12,19 @@
 
 Images or bitmap files used as heightmaps and/or overlays by the various Terrain scripts.
 
+There's nothing much to play with here.
+
+
+## Two samples
 
 <img src="https://jaanga.github.io/terrain3/bitmaps/Elevation.jpg" width="500px" >
 
 
 _Elevations.jpg - 2048x1024 pixels - a typical file_
+
+
+<img src="bathymetry_bw_composite_2k.png" width="500px" >
+
+_bathymetry_bw_composite_2k.png_
 
 Credits still to be added!

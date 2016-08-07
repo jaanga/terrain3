@@ -119,7 +119,7 @@
 				'<summary><h3>about</h3></summary>' +
 
 				'<p>This menu/<a href=https://en.wikipedia.org/wiki/Content_management_system >cms</a> is created on-the-fly by:' + b + b +
-					'<a href=http://jaanga.github.io/cookbook-html/examples/github-api-rss/github-api-files-in-folder/#readme.md >' + document.title + '</a></p>' +
+					'<a href=http://jaanga.github.io/cookbook-html/examples/github-api-rss/github-api-files-in-folder/#readme.md >GitHub API Filis-in-Folders</a></p>' +
 				'<p>Copyright &copy; 2016 ' + user + ' authors. <a href=https://' + user + '.github.io/license.md >MIT license</a>.</p>' +
 
 			'</details>' +
