@@ -112,6 +112,10 @@ The fun bits of cartography are the ones that map what can't be seen.
 
 ## Change Log
 
+### 2016-08-07
+
+* Fixed bug that prevented 'Elevation View First Person' from working
+
 ### 2016-08-06
 
 * Many readme updates throughout
