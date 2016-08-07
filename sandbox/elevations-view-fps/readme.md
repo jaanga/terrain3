@@ -3,6 +3,7 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-fps/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
+[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo;
 
 [Elevations View First Person Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-fps/ )
 ===
@@ -46,7 +47,7 @@ _Elevations View First Person View_
 
 ## Change Log
 
-### 2016-08-03
+### 2016-08-06
 
 * First commit this read me
 

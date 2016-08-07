@@ -81,6 +81,12 @@ Display in 3D. Add TMS overlay;
 
 				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
 
+				'<p>Press First Person Controls to start and to reset.</p>' +
+
+				'<p>Press down one finger or left mouse to go foward. Two finger or right mouse to reverse.</p>' +
+
+				'<p>Full instrunctions: TBD. Reduction of squireliness: TBD.</p>' +
+
 				'<div id=menuDetailsControllers ></div>' +
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
@@ -142,8 +148,6 @@ Display in 3D. Add TMS overlay;
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 1;
 
-
-
 		scene = new THREE.Scene();
 
 		window.addEventListener( 'resize', onWindowResize, false );
@@ -158,14 +162,19 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
+		map.deltaDefault = 3;
+
 		initMapViewMenu();
 
 		setMenuDetailsControllers();
+
 //		setupControls();
 //		setControlsOrbit();
 
 		controls.autoRotate = false;
+
 	}
+
 
 	function onWindowResize() {
 

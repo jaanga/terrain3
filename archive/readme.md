@@ -39,13 +39,12 @@ _XXXXX View_
 
 
 
-
 ## Links of Interest
 
 
 ## Change Log
 
-### 2016-08-03
+### 
 
 * First commit this read me
 

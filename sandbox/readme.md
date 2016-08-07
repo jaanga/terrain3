@@ -5,7 +5,7 @@
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
 
-[Sandbox Read Me]( https://jaanga.github.io/terrain3/sandbox/ )
+[Sandbox Read Me]( https://jaanga.github.io/terrain3/#sandbox/ )
 ===
 
 

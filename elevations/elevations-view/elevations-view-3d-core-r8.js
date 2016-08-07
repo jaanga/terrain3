@@ -49,6 +49,7 @@ console.time( 'timer0' );
 
 	map.verticalScaleDefault = 0.1;
 	map.plainOpacityDefault = 1;
+	map.deltaDefault = 1;
 
 	var b = '<br>';
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -70,12 +71,12 @@ console.time( 'timer0' );
 
 // default action here
 
-		getGitHubAPITreeContents( onLoad );
+		getGitHubAPITreeContents( onGitHubTreeLoad );
 
 		toggleFog();
 
 
-		function onLoad() {
+		function onGitHubTreeLoad() {
 
 			if ( map.elevations === undefined ) {
 
@@ -199,7 +200,7 @@ console.time( 'timer0' );
 
 		}
 
-		selMapZoom.selectedIndex = 1;
+		selMapZoom.selectedIndex = map.deltaDefault;
 
 	}
 
@@ -573,7 +574,7 @@ console.log( 'parent', parent.frame );
 
 //		selMapZoom.selectedIndex = map.parameters.zoom ;
 
-		delta = selMapZoom ? selMapZoom.selectedIndex: 1;
+		delta = selMapZoom ? selMapZoom.selectedIndex: map.deltaDefault;;
 
 		map.parameters.zoomOverlay = delta + map.parameters.zoom;
 		map.parameters.ULtileXOverlay = Math.pow( 2, delta ) * map.parameters.ULtileX;
