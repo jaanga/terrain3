@@ -9,12 +9,18 @@
 ===
 
 
-Previews of what coming up
+Previews of what coming up in the next few days or weeks.
 
 
 
 ## full screen: [Elevations View Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
 
+The goal is to replay a journey in 3D. Take data recorded of a aircraft flight, a mountain hike or a bicycle adventure and replay the motion in space and time.
+
+You can be an ommiscient observer looking down from on high. You could be seeing things from the eyes of the traveller. The camera itself becomes something to design.
 
 ## full screen: [Elevations View First Person Controller]( https://jaanga.github.io/terrain3/sandbox/elevations-view-fps/ )
 
+You are Superwoman or Superman! You can fly like a bird. Or would you simply like to practice flying a drone?
+
+This demo is very early stage - movements are flaky. But do enjoy it because things will never be as insane as this later on. 
