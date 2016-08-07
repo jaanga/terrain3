@@ -16,3 +16,5 @@ Previews of what coming up
 ## full screen: [Elevations View Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
 
 
+## full screen: [Elevations View First Person Controller]( https://jaanga.github.io/terrain3/sandbox/elevations-view-fps/ )
+
