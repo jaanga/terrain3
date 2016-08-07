@@ -98,8 +98,19 @@ _128 lines of code to create over two millions data points. The power to create 
 * [Web World Wind]( https://webworldwind.org/ )
 	* Note that home page shows static 2D images
 
-## Change Log
+### The map is not the territory
 
+When you show a 3D map to many peeps, they say they want it to look 'realistic'. 'Realism' is but one of many aspects of cartography. 
+Of couse, it's one of the most difficult aspects. And one of the most boring. Hello, if you want realism, just go out the door.
+The fun bits of cartography are the ones that map what can't be seen. 
+
+* [On Exactitude in Science]( https://www.sccs.swarthmore.edu/users/08/bblonder/phys120/docs/borges.pdf )
+* [Map–territory relation]( https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation )
+* [Simulacra and Simulation]( https://en.wikipedia.org/wiki/Simulacra_and_Simulation )
+
+
+
+## Change Log
 
 ### 2016-08-06
 

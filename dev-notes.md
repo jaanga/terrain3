@@ -2,19 +2,60 @@ Dev Notes
 ===
 
 
+
+
 ## 2016-08-04
 
-
-### Links of Interest
-
-* [On Exactitude in Science]( https://www.sccs.swarthmore.edu/users/08/bblonder/phys120/docs/borges.pdf )
-* [Map–territory relation]( https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation )
-* [Simulacra and Simulation]( https://en.wikipedia.org/wiki/Simulacra_and_Simulation )
 
 
 
 ## Templates
 
+###
+
+Family
+
+Hi Everybody
+
+
+My mission, as always, is to give peeps the tools to design their own fishing gear so they can catch their own fish so they have enough to eat. Replace fish with whatever.
+
+Now I know you are not likely to design fishing gear, but you do eat fish.
+
+If we are good fisherpeeps, then peeps like you have to able to command, savor and digest the results of our recipes.
+
+This time its about the fishing maps.
+
+Here is a link to one of the best maps - actually there's nothing fishy about it. Please do try to go to several of the locations.
+
+[Elevations View]
+
+And here is a link to lots more of the links. Please see if you can naviagate around.
+
+[]
+
+There's no need to report bugs yet. There's a ton of fishy things I already know about. 
+
+If, however, there's a serious crash or freeze on your device then please do let me know.
+
+And, there's no real need for wish list ideas yet either, as I have a ton of new ideas to fish for.
+
+But what would be fun is thinking about the lure we put at the end of the fishing line.
+
+So can you fish around your brain for a quote we could but on the web site that would be alluring?
+
+
+
+
+ 
+
+
+ 
+
+
+ 
+
+## New peeps
 Welcome message
 
 Subject: Where would you like to go to?

@@ -14,7 +14,9 @@
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View_
+_Elevations View ~ the app for vieweing 3D data_
+
+Needs documentation. Menu may be simplified or edited for custom use.
 
 ***
 
@@ -24,8 +26,9 @@ _Elevations View_
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get/index.html" width=800px height=500px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false});></iframe>
 
-_Elevations Get_
+_Elevations Get ~ the app for capturing 3D data_
 
+A generation or two behind View. Needs simplifying. Needs much documentation and a video or two,
 
 ## Concept
 
@@ -40,15 +43,6 @@ _Elevations Get_
 
 * TBD
 
-
-## Features
-
-* TBD
-
-
-
-
-## Links of Interest
 
 
 ## Change Log
