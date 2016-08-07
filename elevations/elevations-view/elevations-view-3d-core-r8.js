@@ -725,9 +725,10 @@ console.timeEnd( 'timer0' );
 
 				file = response.tree[ i ].path;
 
+				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
 
-				if ( file.match( 'archive' ) ) { continue; }
+
 
 				file = file.split( '\/' ).pop();
 
