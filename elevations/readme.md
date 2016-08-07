@@ -32,6 +32,17 @@ A generation or two behind View. Needs simplifying. Needs much documentation and
 
 ## Concept
 
+Most map apps diaply geography in flat 2D. Yes, some apps indicate building height and shadows. Some show contour lines.
+
+The earth is covered in oceans and mountains, some places are bumpy and others are smooth.
+
+We need to be able to see and feel this lumpiness.
+
+Very few apps show this in 3D. Even fewer are FOSS. And almost nome let you create, and edit your own terrain data.
+
+This project is an attempt to remedy the situation.
+
+
 ### Mission
 
 * Create and read elevation data files and display in 3D

@@ -1,36 +1,29 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/#sandbox/elevations-view-fpc/ "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-fpc/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+( https://jaanga.github.io/terrain3/#sandbox/elevations-view-get-altitude/ "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-get-altitude/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
-[Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
+[Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
 [sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo;
 
-[Elevations View First Person Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-fpc/ )
+[Elevations View Get Altitude Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-get-altitude/ )
 ===
 
-## Full Screen: [Elevations View First Person]( https://jaanga.github.io/terrain3/sandbox/elevations-view-fpc/index.html )
+## Full Screen: [Elevations View Get Altitude ]( https://jaanga.github.io/terrain3/sandbox/elevations-view-get-altitude/index.html )
 
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-fpc/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-get-altitude/index.html" width=800px height=600px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View First Person_
+_Elevations View Get Altitude _
 
 ***
 
-
 ## Concept
-
-You are Superwoman or Superman! You can fly like a bird. Or would you simply like to practice flying a drone?
-
-This demo is very early stage - movements are flaky. But do enjoy it because things will never be as insane as this later on. 
 
 ### Mission
 
-* Create and read elevation data files and display in 3D
-* Get data via iframe parent, file open dialog or location.hash
-* Work well in an iframe
+* Click on the map to see latitude, longitude and altitude
 
 
 ### Vision
@@ -43,16 +36,27 @@ This demo is very early stage - movements are flaky. But do enjoy it because thi
 * TBD
 
 
+## Issues
+
+* Hit are not always close to the intended point
+
+## Users
+
+
+
+## Goals
+
 
 ## Links of Interest
 
 
 ## Change Log
 
-### 2016-08-06
 
-* First commit this read me
+### 2016-08-07 ~ R1
 
+* First commit
+* Add Read Me
 
 
 ***
