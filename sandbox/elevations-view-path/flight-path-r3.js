@@ -3,48 +3,48 @@
 // flight-path-r3.js
 
 	var defaultFile = '../../elevations/elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
-	var index = 5000;
-	var lure;
+	var index = 0;
+	var indexDefault = 0;;
+
+
 	map.deltaDefault = 3;
 
-	var flightPath = {};
+	var flightPath = new THREE.Object3D();
+	var lure = new THREE.Object3D();
+	var aircraft = new THREE.Object3D();
 
 	flightPath.url = '6-25-2016-1-cooked.csv';
 	flightPath.color = 0xff0000;
 
-	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
-	var d2r = pi / 180, r2d = 180 / pi;
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	flightPath.points = [ v( 0, 0, 0 ) ];
+	flightPath.rotations = [ v( 0, 0, 0 ) ];
+
+	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
+	var d2r = pi / 180, r2d = 180 / pi;
+
 
 	function otherInits() {
 
-
-		geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
-		material = new THREE.MeshNormalMaterial();
-		lure = new THREE.Mesh( geometry, material );
-		lure.name = 'lure'
-		scene.add( lure );
-
-/*
+	lure.name = 'lure'
+	scene.add( lure );
 
 		var loader = new THREE.JSONLoader();
+		loader.crossOrigin = 'anonymous';
+		loader.load( '21.js', function ( geometry ) {
 
-		loader.load( '21.js', function( geometry ) {
-
-			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( pi ) );
-			geometry.applyMatrix( new THREE.Matrix4().multiplyScalar( 3 ) );
-
-			lure = new THREE.Mesh( geometry, material );
-			lure.name = 'lure'
-
- 			scene.add( lure );
-
-			lure.add( camera );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.0001, 0.0001, 0.0001 ) );
+			material = new THREE.MeshNormalMaterial( { side: 2 } );
+			aircraft = new THREE.Mesh( geometry, material );
+			lure.add( aircraft );
 
 		} );
-*/
+
 		getFilePathCSV( flightPath );
+
+controls.autoRotate = false;
 
 	}
 
@@ -66,8 +66,6 @@
 			path.waypoints = waypoints.slice( 1, -1 );
 
 			drawPath( path );
-
-			animate();
 
 		}
 
@@ -92,7 +90,7 @@
 		path.box = new THREE.BoxHelper( path.path );
 //		path.box.geometry.computeBoundingBox();
 		scene.add( path.path, path.box );
-
+		index = indexDefault = 5000;
 
 		geometry.computeBoundingSphere();
 		center = geometry.boundingSphere.center;
@@ -135,9 +133,14 @@
 
 		controls.maxDistance = 3 * map.radius;
 
-		camera.position.set( 0, 0.005, 0.001 );
+//		camera.position.set( 0, 0.005, 0.001 );
 
+		camera.position.set( 0, 0.005, 0.001 );
 		lure.add( camera );
+
+//		lure.position.copy( flightPath.points[ 5000 ] );
+//		camera.position.copy( lure.position );
+//		camera.position.z += 0.02;
 
 	}
 
@@ -147,9 +150,10 @@
 		controls.update();
 		stats.update();
 
-		index = ++index === flightPath.points.length ? 5000 : index;
-
+		index = index++ >= flightPath.points.length ? indexDefault : index;
+		aircraft.rotation.z = flightPath.rotations[ index ].x ;
 		lure.position.copy( flightPath.points[ index ] );
+
 
 		renderer.render( scene, camera );
 
