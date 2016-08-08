@@ -11,10 +11,12 @@ Dev Notes
 
 ## Templates
 
-###
+
+
+
+###2016-08-07
 
 Family
-
 
 ace-it. tania, allion, kyle, kevin, allison, juliette
 Hi Everybody
@@ -45,14 +47,6 @@ And, there's no real need for wish list ideas yet either, as I have a ton of new
 But what would be fun is thinking about the lure we put at the end of the fishing line.
 
 So can you fish around your brain for a quote we could but on the web site that would be alluring?
-
-
-
-
- 
-
-
- 
 
 
  

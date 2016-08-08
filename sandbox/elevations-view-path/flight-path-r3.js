@@ -44,7 +44,7 @@
 
 		getFilePathCSV( flightPath );
 
-controls.autoRotate = false;
+//controls.autoRotate = false;
 
 	}
 
@@ -150,7 +150,7 @@ controls.autoRotate = false;
 		controls.update();
 		stats.update();
 
-		index = index++ >= flightPath.points.length ? indexDefault : index;
+		index = ++index >= flightPath.points.length ? indexDefault : index;
 		aircraft.rotation.z = flightPath.rotations[ index ].x ;
 		lure.position.copy( flightPath.points[ index ] );
 
