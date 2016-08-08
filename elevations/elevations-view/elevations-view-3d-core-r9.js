@@ -230,6 +230,8 @@ console.time( 'timer0' );
 
 // process extra data
 
+			toggleFog();
+
 			if ( response.match( '{' ) ) {
 
 				values = window;
@@ -256,8 +258,6 @@ console.time( 'timer0' );
 
 			getFileNameParameters( fName );
 
-			toggleFog();
-
 			initElevations();
 
 			otherInits();
@@ -279,6 +279,8 @@ console.time( 'timer0' );
 		reader.onloadend = function( event ) {
 
 			data = reader.result;
+
+			toggleFog();
 
 			if ( data.match( '{' ) ) {
 

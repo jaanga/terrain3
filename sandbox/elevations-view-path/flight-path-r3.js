@@ -18,6 +18,12 @@
 
 	function otherInits() {
 
+		geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
+		material = new THREE.MeshNormalMaterial();
+		lure = new THREE.Mesh( geometry, material );
+		lure.name = 'lure'
+		scene.add( lure );
+
 		getFilePathCSV( flightPath );
 
 	}

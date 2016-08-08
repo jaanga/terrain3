@@ -160,12 +160,6 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
-		geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
-		material = new THREE.MeshNormalMaterial();
-		lure = new THREE.Mesh( geometry, material );
-		lure.name = 'lure'
-		scene.add( lure );
-
 		initMapViewMenu();
 
 	}
@@ -181,8 +175,16 @@ Display in 3D. Add TMS overlay;
 
 	}
 
+/*
+	function animate() {
 
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+		renderer.render( scene, camera );
 
+	}
+*/
 </script>
 </body>
 </html>
