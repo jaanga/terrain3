@@ -1,5 +1,5 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/#sandbox/elevations-view-fps/ "View file as a web page." ) </span>
+( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ "View file as a web page." ) </span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-fps/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
@@ -22,9 +22,9 @@ While the camera is moving you control the direction where it's looking.
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-fps/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-path/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View First Person View_
+_Elevations View Path_
 
 ***
 

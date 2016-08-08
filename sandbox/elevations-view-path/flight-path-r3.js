@@ -1,10 +1,9 @@
 // 2016-07-21 13:55
 
-// flight-path-r2.js
+// flight-path-r3.js
 
 
 	var flightPath = {};
-
 
 	flightPath.url = '6-25-2016-1-cooked.csv';
 	flightPath.color = 0xff0000;
@@ -33,7 +32,6 @@
 
 			drawPath( path );
 
-
 		}
 
 	}
@@ -43,7 +41,6 @@
 		var scale, geometry, material;
 
 		scene.remove( path.path, path.box );
-
 
 		path.points = path.waypoints.map( function( p ) { return v( p[ 0 ], p[ 1 ], inpVertical.valueAsNumber * p[ 2 ]  * 0.3048  ); } );
 		path.rotations = path.waypoints.map( function( p ) { return v( p[ 3 ] * d2r, p[ 4 ] * d2r, p[ 5 ] * d2r ); } );
@@ -71,11 +68,11 @@
 		lonMin = geometry.boundingBox.min.x;
 		lonMax = geometry.boundingBox.max.x;
 
-		menuDetailsFlightPath.innerHTML =
+		menuPlugins.innerHTML =
 
 		'<details open >' +
 
-			'<summary><h3>flightpath details</h3></summary>' +
+			'<summary><h3>Flightpath details</h3></summary>' +
 
 			'UL Lat: ' + latMax.toFixed( 4 ) + '&deg;' + b +
 			'LR Lat: ' + latMin.toFixed( 4 ) + '&deg;' + b + b +
@@ -88,6 +85,19 @@
 
 		'</details>';
 
-			animate();
+		animate();
+
 	}
 
+	function setCamera() {
+
+		var cameraPosition;
+
+		map.radius = map.boxHelper.geometry.boundingSphere.radius;
+
+		controls.maxDistance = 3 * map.radius;
+
+		camera.position.set( 0, 0.005, 0.005 );
+		lure.add( camera );
+
+	}

@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View 3D Core R9</title>
+<title>Elevations View Path R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -19,14 +19,18 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=elevations-view-3d-core-r9.js ></script>
-
+<script src=../../elevations/elevations-view/elevations-view-3d-core-r9.js ></script>
+<script src=flight-path-r3.js ></script>
 <script>
+
+	var defaultFile = '../../elevations/elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
+	var index = 5000;
+	var lure;
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
-	animate();
+//	animate();
 
 	function init() {
 
@@ -84,7 +88,7 @@ Display in 3D. Add TMS overlay;
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
 
-				'<div id=menuDetailsSelectFile ></div>' +
+				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
 
 				'<div id=menuDetailsOverlay ></div>' +
 
@@ -159,7 +163,19 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
+		geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
+		material = new THREE.MeshNormalMaterial();
+		lure = new THREE.Mesh( geometry, material );
+		lure.name = 'lure'
+		scene.add( lure );
+
 		initMapViewMenu();
+
+	}
+
+	function otherInits() {
+
+		getFilePathCSV( flightPath );
 
 	}
 
@@ -179,6 +195,11 @@ Display in 3D. Add TMS overlay;
 		requestAnimationFrame( animate );
 		controls.update();
 		stats.update();
+
+		index = ++index === flightPath.points.length ? 5000 : index;
+
+		lure.position.copy( flightPath.points[ index ] );
+
 		renderer.render( scene, camera );
 
 	}

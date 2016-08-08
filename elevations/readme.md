@@ -14,7 +14,7 @@
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View ~ the app for vieweing 3D data_
+_Elevations View ~ the app for viewing terrain data in 3D_
 
 Needs documentation. Menu may be simplified or edited for custom use.
 

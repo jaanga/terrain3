@@ -4,18 +4,8 @@
 
 console.time( 'timer0' );
 
-//	var defaultFile = '../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt';
-	var defaultFile = 'elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_510_680_.txt';
-
-	var defaultFiles = [
-
-		'http://fgx.github.io/sandbox/flightpaths/vnlk/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt',
-		'http://fgx.github.io/sandbox/flightpaths/kgcn/elevations_Tusayan_12_770_1605_4_5_120_150_.txt',
-		'http://fgx.github.io/sandbox/flightpaths/leig/elevations_Igualada_12_2065_1525_3_3_60_60_.txt',
-		'http://fgx.github.io/sandbox/flightpaths/vhsk/elevations_Hong%20Kong_14_13381_7141_5_4_150_120_.txt',
-		'http://fgx.github.io/sandbox/flightpaths/ygil/elevations_Gilgandra_12_3738_2427_3_3_150_150_.txt'
-
-	];
+//	var defaultFile = '../elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
+	var defaultFile;
 
 	var mapTypes = [
 
@@ -39,7 +29,7 @@ console.time( 'timer0' );
 
 	var searchInFolder = 'elevations-data-02/';
 
-	var core = '../elevations-view/index.html#';
+//	var core = '../elevations-view/index.html#';
 
 	var map = {};
 
@@ -63,8 +53,6 @@ console.time( 'timer0' );
 
 		setMenuDetailsSelectFile();
 
-//		setMenuDetailsSelectPath();
-
 		setMenuDetailsOverlay();
 
 		setMenuDetailsTerrain();
@@ -73,14 +61,14 @@ console.time( 'timer0' );
 
 		getGitHubAPITreeContents( onGitHubTreeLoad );
 
-		toggleFog();
-
-
 		function onGitHubTreeLoad() {
 
 			if ( map.elevations === undefined ) {
 
-				file = urlBase + selFiles.value;
+// add location.hash
+// add selFiles update
+
+				file = defaultFile ? defaultFile : urlBase + selFiles.value;
 
 				getElevationsFileXHR( file );
 
@@ -129,30 +117,6 @@ console.time( 'timer0' );
 				'<summary><h4>file name parameters</h4></summary>' +
 
 				'<div id=menuDetailsFileNameParameters >cccc</div>' +
-
-			'</details>' + b +
-
-		'</details>';
-
-	}
-
-	function setMenuDetailsSelectPath() {
-
-		menuDetailsSelectPath.innerHTML = 
-
-		'<details open >' +
-			'<summary><h3>Select path to view</h3></summary>' +
-			'<small>Select or open a path file to view in 3D</small>' +
-//			'<p>' +
-//				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%;  ></select>' +
-//			'</p>' +
-			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +
-
-			'<details>' +
-
-				'<summary><h4>path file parameters</h4></summary>' +
-
-				'<div id=menuDetailsPathParameters >cccc</div>' +
 
 			'</details>' + b +
 
@@ -262,10 +226,6 @@ console.time( 'timer0' );
 
 		function callback() {
 
-//			scene = new THREE.Scene();
-
-//			toggleFog();
-
 			response = xhr.responseText;
 
 // process extra data
@@ -295,6 +255,8 @@ console.time( 'timer0' );
 			map.elevations = elevations.map( function( item ) { return parseFloat( item ); } );
 
 			getFileNameParameters( fName );
+
+			toggleFog();
 
 			initElevations();
 
@@ -341,6 +303,8 @@ console.time( 'timer0' );
 			fileName = files.files[ 0 ].name;
 
 			getFileNameParameters( fileName );
+
+			toggleFog();
 
 			initElevations();
 
