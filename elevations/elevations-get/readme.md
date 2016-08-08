@@ -46,7 +46,7 @@ This is part of an investigation into writing very simple code that can access t
 * Displays elevations in 3D in window
 * Save data to a local file
 * Reports on many aspects of the of the data 
-
+* Save partial file and restart - much faster
 
 ## Things you can do using this script
 
@@ -65,13 +65,13 @@ This is part of an investigation into writing very simple code that can access t
 ## Things you can do by editing the code
 
 <iframe src='https://jaanga.github.io/cookbook-html/examples/libraries/ace-editor/ace-view-r1.html#
-	https://jaanga.github.io/terrain3/elevations/elevations-get/elevations-get-r7.html' width=800px height=600 ></iframe>
+	https://jaanga.github.io/terrain3/elevations/elevations-get/elevations-get-r9.js' width=800px height=600 ></iframe>
 
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/elevations-get-r7.html';
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/elevations-get-r9.js';
 value='Source code listing' >
 
 
-* Open this file: https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/elevations-get-r7.html
+* Open this file: https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/elevations-get-r9.js
 * Click the 'Raw' icon and save the raw file to your computer
 * Once you've downloaded the file, you can click it to run it.
 * Open the file with a text editor
@@ -79,19 +79,20 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
-* Add ability to enter Google API key
+
 * Add input tag to edit place name
 * Add better height scaling system
 * Drag map updates location
 * Update 3D Display while drawing 
 * Able to do 1000x1000 maps reliably and quickly
 * Add ability to send directly to View Elevations 3D Display script in new tab
-* Save partial file and restart - much faster
+
 
 
 ## Interesting sites
 
-* French Polynesia
+Fun possibilities for making new maps
+
 * Island Fernando de Noronha, brazil
 * http://forums.simviation.com/
 * Pythagoreio, Samos Prefecture, Greece
@@ -99,13 +100,14 @@ value='Source code listing' >
 ## Issues
 
 * When you load elevations, there must be a way to go there
-	* Otherwise wrong elecations requested
-* Cleanup samples x and y variables
-* Cannot see error messages such as rate limit exceeded
+	* Otherwise wrong elevations requested
+* Cannot see some error messages such as rate limit exceeded
 
-<!--
-### Rate limits
-The Google Maps API has strict rate limits for downloading elevations.
+
+### Usage limits
+
+The Google Maps Elevations API has strict [usage limits]( https://developers.google.com/maps/documentation/elevation/usage-limits ) for downloading elevations.
+
 Figuring out how stay stay under the rate limits and yet be as fast as possible is an amusing challenge.
 There seem to be a variety of speed bumps
 
@@ -113,43 +115,7 @@ There seem to be a variety of speed bumps
 * No more than 1000 elevations in under a second
 * No more than ?? elevations in under a minute?
 * No more than ?? elevations in under x minutes>
- -->
-
-## File Names
-
-Uswsfile names to convey essential meta data. Is this a good thing?
-
-
-<!--
-###
-
-Example:
-
-* elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3032_1717_5_3_50_30_.txt
-
-place, zoom, upper left tile x, upper left tile y, tiles X, tiles Y, samples X, samples Y
-
-
-#### Updated 2016-07-14
--->
-
-Example:
-
-* elevations_Paris_12_2073_1408_2076_1411_30_30_.txt
-
-Gives place, zoom level, upper left tile x, upper left tile y, lower right tile x, lower right tile y, samples for x, samples for y
-
-This format provides an industry standard TMS accuracy to many places and yet keeps the file name fairly short
-
-
-<!--
-Example
-elevations_-31.7300_148.6392_z12_t4_500x500_.txt
-
-This gives: latitude, longitude, zoom, tiles and samples.
-Tile numbers could be given instead. This would save some calculating and might avoid an error or two.
-But nobody knows tile number and lat/lon is familiar to all
--->
+ 
 
 ## Users
 
@@ -166,6 +132,12 @@ Intended for general use
 
 
 ## Change Log
+
+### 2016-08-08 ~ R9
+
+* Continued objectification
+* Save to JSON file
+* Better handling of origin and file namr text
 
 
 ### 2016-08-05 ~ R8

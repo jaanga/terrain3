@@ -11,7 +11,33 @@ Dev Notes
 
 ## Templates
 
+### 2016-08-07
 
+Art, Cindy, AKA
+
+Hello Sun-lovers
+
+As you know, I've been working on a simulation of a sunlight receiving system that's called 'Earth'.
+
+These sims are often called 'maps'.
+
+Here is a link to one of the best maps. Please do try to visit several of the locations. You might like the views of Diamond Head.
+
+Elevations View   https://jaanga.github.io/terrain3/elevations/elevations-view/
+
+Here's a link to lots more links - the home page. Please see if you can navigate around the site.
+
+jaanga terrain3 https://jaanga.github.io/terrain3/
+
+There are many possible useful scenarios. For example today I made a bunch of - incomplete - fixes to a flight simulator:
+
+Elevations View Path  https://jaanga.github.io/terrain3/sandbox/elevations-view-path/
+
+Coming up will be blending in the Ladybug Web Solar Calculator and Analemma 3D.
+
+So can we start coming up with some locations where a 3D solar 'sim' is useful? Villages in Ghana or Ecuador possibly?
+
+May your ship come in on the sunny side of Easy Street,
 
 
 ###2016-08-07
@@ -32,11 +58,11 @@ This time its about the fishing maps.
 
 Here is a link to one of the best maps - actually there's nothing fishy about it. Please do try to go to several of the locations.
 
-[Elevations View]
+[Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/ )
 
 And here is a link to lots more of the links. Please see if you can naviagate around.
 
-[]
+[jaanga terrain3]( https://jaanga.github.io/terrain3/ (
 
 There's no need to report bugs yet. There's a ton of fishy things I already know about. 
 
