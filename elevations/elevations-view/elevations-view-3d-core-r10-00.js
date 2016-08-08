@@ -203,6 +203,151 @@ console.time( 'timer0' );
 
 	}
 
+
+
+// Gather data when using the default
+
+	function getElevationsFileXHR( fName ) {
+
+		var xhr, response;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', fName, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback() {
+
+			onLoadElevations( xhr.responseText );
+
+/*
+			response = xhr.responseText;
+
+			toggleFog();
+
+			map = JSON.parse( response );
+
+			map.verticalScale = verticalScaleDefault;
+			map.plainOpacity = plainOpacityDefault;
+			map.pixelsPerTile = pixelsPerTile;
+			map.deltaDefault = deltaDefault;
+
+			setMenuDetailsFileNameParameters();
+
+			initElevations();
+
+			otherInits();
+*/
+		}
+
+	}
+
+// gather the data using file open dialog
+
+	function getElevationsFileReader( files ) { 
+
+		var reader, data, fileName;
+
+		map.verticalScale = map.verticalScaleDefault;
+		map.plainOpacity = map.plainOpacityDefault;
+
+		reader = new FileReader();
+		reader.onloadend = function( event ) {
+
+			onLoadElevations( reader.result );
+
+//			response = xhr.responseText;
+
+
+
+/*
+			toggleFog();
+
+
+
+			if ( data.match( '{' ) ) {
+
+				values = window;
+
+				itemsString = data.slice( 0, data.indexOf( '}' ) + 1 );
+
+				map.items = JSON.parse( itemsString );
+
+				updateSettings();
+
+				data = data.replace( itemsString, '' );
+
+				map.elevations = data.split( ',' ).slice( 1 ).map( parseFloat );
+
+			} else {
+
+				map.elevations = data.split( ',' ).map( parseFloat );
+
+			}
+
+			fileName = files.files[ 0 ].name;
+
+			getFileNameParameters( fileName );
+
+			initElevations();
+
+			otherInits();
+*/
+
+		};
+
+		reader.readAsText( files.files[ 0 ] );
+
+	}
+
+	function onLoadElevations( data ) {
+
+			toggleFog();
+
+			map = JSON.parse( data );
+
+			map.verticalScale = verticalScaleDefault;
+			map.plainOpacity = plainOpacityDefault;
+			map.pixelsPerTile = pixelsPerTile;
+			map.deltaDefault = deltaDefault;
+
+			setMenuDetailsFileNameParameters();
+
+			initElevations();
+
+			otherInits();
+
+	}
+
+	function otherInits() {};
+
+// utilities to help while gathering data
+/*
+	function getFileNameParameters( fName ) {
+
+		var parametersArray;
+
+		parametersArray = fName.split( '_' );
+
+		map.parameters = {
+
+			origin: parametersArray[ 1 ],
+			zoom: parseInt( parametersArray[ 2 ], 10 ),
+			ULtileX: parseInt( parametersArray[ 3 ], 10 ),
+			ULtileY: parseInt( parametersArray[ 4 ], 10 ),
+			tilesX: parseInt( parametersArray[ 5 ], 10 ),
+			tilesY: parseInt( parametersArray[ 6 ], 10 ),
+			segmentsX: parseInt( parametersArray[ 7 ], 10 ),
+			segmentsY: parseInt( parametersArray[ 8 ], 10 ),
+			fileName: fName
+
+		};
+
+		setMenuDetailsFileNameParameters();
+
+	}
+*/
+
 	function setMenuDetailsFileNameParameters() {
 
 		menuDetailsFileNameParameters.innerHTML =
@@ -223,63 +368,6 @@ console.time( 'timer0' );
 		b;
 
 	}
-
-
-// Gather data when using the default
-
-	function getElevationsFileXHR( fName ) {
-
-		var xhr;
-
-		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', fName, true );
-		xhr.onload = function callback() {
-
-			onLoadElevations( JSON.parse( xhr.responseText ) );
-
-		}
-
-		xhr.send( null );
-
-	}
-
-// gather the data using file open dialog
-
-	function getElevationsFileReader( files ) { 
-
-		var reader;
-
-		reader = new FileReader();
-		reader.onloadend = function( event ) {
-
-			onLoadElevations( JSON.parse( reader.result ) );
-
-		};
-
-		reader.readAsText( files.files[ 0 ] );
-
-	}
-
-	function onLoadElevations() {
-
-			toggleFog();
-
-			map.verticalScale = verticalScaleDefault;
-			map.plainOpacity = plainOpacityDefault;
-			map.pixelsPerTile = pixelsPerTile;
-			map.deltaDefault = deltaDefault;
-
-			setMenuDetailsFileNameParameters();
-
-			initElevations();
-
-			otherInits();
-
-	}
-
-
-
-	function otherInits() {};
 
 
 // start second stage of processing
@@ -436,6 +524,8 @@ console.time( 'timer0' );
 
 		var delta;
 
+//		selMapZoom.selectedIndex = map.zoom ;
+
 		delta = selMapZoom ? selMapZoom.selectedIndex: map.deltaDefault;;
 
 		map.zoomOverlay = delta + map.zoom;
@@ -495,6 +585,33 @@ console.timeEnd( 'timer0' );
 
 	}
 
+
+	function updateSettings() {
+
+		if ( !map.items ) { return; }
+
+		keys = Object.keys( map.items ); 
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			items = keys[ i ].split( '.' );
+
+			values = window;
+
+			for ( j = 0; j < items.length - 1; j++ ) {
+
+				values = values[ items[ j ] ];
+
+			}
+
+//console.log( 'params ', j, values[ items[ j ] ], keys[ i ] );
+
+			values[ items[ j ] ] = map.items[ keys[ i ] ];
+
+		}
+
+
+	}
 
 	function updateTerrain() {
 
@@ -564,6 +681,7 @@ console.timeEnd( 'timer0' );
 
 				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
+
 
 
 				file = file.split( '\/' ).pop();
@@ -645,3 +763,4 @@ console.timeEnd( 'timer0' );
 		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
 
 	}
+

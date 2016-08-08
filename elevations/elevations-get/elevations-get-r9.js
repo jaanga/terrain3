@@ -3,7 +3,7 @@
 // https://developers.google.com/maps/documentation/javascript/elevation
 // https://developers.google.com/maps/documentation/elevation/start
 
-	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r7.html';
+	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r10.html';
 
 	var place = {};
 	var path = {};
@@ -34,6 +34,7 @@
 
 //	place.elevations = [];
 //	place.resolution = [];
+
 
 	var startTime;
 	var count = 0;
@@ -841,7 +842,7 @@ console.log( 'complete count', count, elevations.length );
 		ifrThreejs.onload = function() {
 
 			var icw = ifrThreejs.contentWindow;
-
+/*
 			parameters = {
 
 				origin: place.origin,
@@ -854,14 +855,16 @@ console.log( 'complete count', count, elevations.length );
 				segmentsY: place.samplesY
 
 			};
+*/
 
-			icw.map.verticalScale = icw.map.verticalScaleDefault;
-			icw.map.plainOpacity = icw.map.plainOpacityDefault;
+//			icw.map.verticalScale = icw.map.verticalScaleDefault;
+//			icw.map.plainOpacity = icw.map.plainOpacityDefault;
 
-			icw.map.elevations = place.elevations.slice( 0, place.samplesX * place.samplesY );
-			icw.map.parameters = parameters;
+//			icw.map.elevations = place.elevations.slice( 0, place.samplesX * place.samplesY );
+//			icw.map.parameters = parameters;
 
-			icw.initElevations();
+			icw.map = place;
+			icw.onLoadElevations();
 			icw.controls.autoRotate = true;
 
 		};
@@ -886,6 +889,7 @@ console.log( 'complete count', count, elevations.length );
 			'delay: ' + delay + b +
 			'results length: ' + results.length.toLocaleString() + b +
 			'resolution(s): ' + resolution + b +
+
 		'</details>' + b;
 
 	}
