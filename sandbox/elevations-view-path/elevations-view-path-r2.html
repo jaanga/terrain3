@@ -23,9 +23,6 @@ Display in 3D. Add TMS overlay;
 <script src=flight-path-r3.js ></script>
 <script>
 
-	var defaultFile = '../../elevations/elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
-	var index = 5000;
-	var lure;
 
 	var stats, renderer, scene, camera, controls;
 
@@ -173,12 +170,6 @@ Display in 3D. Add TMS overlay;
 
 	}
 
-	function otherInits() {
-
-		getFilePathCSV( flightPath );
-
-	}
-
 	function onWindowResize() {
 
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -190,19 +181,7 @@ Display in 3D. Add TMS overlay;
 
 	}
 
-	function animate() {
 
-		requestAnimationFrame( animate );
-		controls.update();
-		stats.update();
-
-		index = ++index === flightPath.points.length ? 5000 : index;
-
-		lure.position.copy( flightPath.points[ index ] );
-
-		renderer.render( scene, camera );
-
-	}
 
 </script>
 </body>

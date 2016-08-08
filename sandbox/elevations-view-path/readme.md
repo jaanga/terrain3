@@ -31,7 +31,7 @@ _Elevations View Path_
 
 ## Concept
 
-* DBe Superwoman or Superman!
+* Be Superwoman or Superman!
 
 ### Mission
 
@@ -50,13 +50,18 @@ _Elevations View Path_
 * TBD
 
 
-
 ## Links of Interest
 
 
 ## Change Log
 
-### 2016-08-06
+### 2016-08-07 ~ R2
+
+* Big rewrite. much simpler
+* Uses elevations view defaults for almost everything
+
+
+### 2016-08-06 ~ R1
 
 * First commit this read me
 

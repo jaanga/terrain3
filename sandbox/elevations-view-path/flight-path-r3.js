@@ -2,6 +2,9 @@
 
 // flight-path-r3.js
 
+	var defaultFile = '../../elevations/elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
+	var index = 5000;
+	var lure;
 
 	var flightPath = {};
 
@@ -12,6 +15,12 @@
 	var d2r = pi / 180, r2d = 180 / pi;
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	flightPath.points = [ v( 0, 0, 0 ) ];
+
+	function otherInits() {
+
+		getFilePathCSV( flightPath );
+
+	}
 
 	function getFilePathCSV( path ) {
 
@@ -89,6 +98,7 @@
 
 	}
 
+
 	function setCamera() {
 
 		var cameraPosition;
@@ -99,5 +109,19 @@
 
 		camera.position.set( 0, 0.005, 0.005 );
 		lure.add( camera );
+
+	}
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+		controls.update();
+		stats.update();
+
+		index = ++index === flightPath.points.length ? 5000 : index;
+
+		lure.position.copy( flightPath.points[ index ] );
+
+		renderer.render( scene, camera );
 
 	}
