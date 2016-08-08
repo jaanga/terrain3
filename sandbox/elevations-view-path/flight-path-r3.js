@@ -5,6 +5,7 @@
 	var defaultFile = '../../elevations/elevations-data-02/elevations_tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
 	var index = 5000;
 	var lure;
+	map.deltaDefault = 3;
 
 	var flightPath = {};
 
@@ -18,12 +19,31 @@
 
 	function otherInits() {
 
+
 		geometry = new THREE.TorusKnotBufferGeometry( 0.0005, 0.0001 );
 		material = new THREE.MeshNormalMaterial();
 		lure = new THREE.Mesh( geometry, material );
 		lure.name = 'lure'
 		scene.add( lure );
 
+/*
+
+		var loader = new THREE.JSONLoader();
+
+		loader.load( '21.js', function( geometry ) {
+
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( pi ) );
+			geometry.applyMatrix( new THREE.Matrix4().multiplyScalar( 3 ) );
+
+			lure = new THREE.Mesh( geometry, material );
+			lure.name = 'lure'
+
+ 			scene.add( lure );
+
+			lure.add( camera );
+
+		} );
+*/
 		getFilePathCSV( flightPath );
 
 	}
@@ -46,6 +66,8 @@
 			path.waypoints = waypoints.slice( 1, -1 );
 
 			drawPath( path );
+
+			animate();
 
 		}
 
@@ -113,7 +135,8 @@
 
 		controls.maxDistance = 3 * map.radius;
 
-		camera.position.set( 0, 0.005, 0.005 );
+		camera.position.set( 0, 0.005, 0.001 );
+
 		lure.add( camera );
 
 	}

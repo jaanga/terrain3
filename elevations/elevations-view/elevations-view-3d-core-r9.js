@@ -306,8 +306,6 @@ console.time( 'timer0' );
 
 			getFileNameParameters( fileName );
 
-			toggleFog();
-
 			initElevations();
 
 			otherInits();
