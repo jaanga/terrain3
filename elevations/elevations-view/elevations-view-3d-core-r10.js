@@ -4,8 +4,8 @@
 
 console.time( 'timer0' );
 
-	var defaultFile = '../elevations-data-03/elevations_tenzing-hillary-airport-lukla-eastern-region-nepal_12_3033_1718_3_3_30_30_.txt';
-//	var defaultFile;
+//	var defaultFile = '../elevations-data-03/elevations_tenzing-hillary-airport-lukla-eastern-region-nepal_12_3033_1718_3_3_30_30_.txt';
+	var defaultFile;
 
 	var mapTypes = [
 
@@ -235,7 +235,8 @@ console.time( 'timer0' );
 		xhr.open( 'GET', fName, true );
 		xhr.onload = function callback() {
 
-			onLoadElevations( JSON.parse( xhr.responseText ) );
+			map = JSON.parse( xhr.responseText );
+			onLoadElevations();
 
 		}
 
@@ -252,7 +253,8 @@ console.time( 'timer0' );
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
 
-			onLoadElevations( JSON.parse( reader.result ) );
+			map = JSON.parse( reader.result );
+			onLoadElevations();
 
 		};
 
@@ -276,7 +278,6 @@ console.time( 'timer0' );
 			otherInits();
 
 	}
-
 
 
 	function otherInits() {};
