@@ -19,7 +19,8 @@ The goal is to replay a journey in 3D. Take data recorded of a aircraft flight, 
 
 You can be an ommiscient observer looking down from on high. You could be seeing things from the eyes of the traveller. The camera itself becomes something to design.
 
-## full screen: [Elevations View First Person Controller]( https://jaanga.github.io/terrain3/sandbox/elevations-view-fpc/ )
+
+## full screen: [Elevations View Fly]( https://jaanga.github.io/terrain3/sandbox/elevations-view-fly/ )
 
 You are Superwoman or Superman! You can fly like a bird. Or would you simply like to practice flying a drone?
 
