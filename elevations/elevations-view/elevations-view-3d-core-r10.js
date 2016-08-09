@@ -4,7 +4,7 @@
 
 console.time( 'timer0' );
 
-//	var defaultFile = '../elevations-data-03/elevations_tenzing-hillary-airport-lukla-eastern-region-nepal_12_3033_1718_3_3_30_30_.txt';
+//	var defaultFile = '../elevations-data-03/tenzing-hillary-airport-lukla-eastern-region-nepal_12_3033_1718_3_3_30_30_.txt';
 	var defaultFile;
 
 	var mapTypes = [
@@ -24,8 +24,8 @@ console.time( 'timer0' );
 
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/';
-//	var urlBase = '../elevations-data-03/';
+//	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/';
+	var urlBase = '../elevations-data-03/';
 
 	var searchInFolder = 'elevations-data-03/';
 
@@ -33,8 +33,10 @@ console.time( 'timer0' );
 
 	var updateCamera = true; // is this needed?
 	var pixelsPerTile = 256;
+
 	var verticalScaleDefault = 0.1;
 	var plainOpacityDefault = 1;
+
 	var deltaDefault = 1;
 	var backgroundColor = 0x7ec0ee ;
 
@@ -266,8 +268,10 @@ console.time( 'timer0' );
 
 			toggleFog();
 
-			map.verticalScale = verticalScaleDefault;
-			map.plainOpacity = plainOpacityDefault;
+console.log( 'map.verticalScale', map );
+//			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScaleDefault;
+//			map.plainOpacity = map.plainOpacity ? map.plainOpacity : plainOpacityDefault;
+
 			map.pixelsPerTile = pixelsPerTile;
 			map.deltaDefault = deltaDefault;
 

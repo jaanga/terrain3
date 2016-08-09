@@ -1,5 +1,5 @@
 {
-	"vicinity": "grand-canyon",
+	"origin": "grand-canyon",
 	"zoom": 11,
 	"tilesX": 3,
 	"tilesY": 3,
@@ -7,8 +7,8 @@
 	"samplesY": 510,
 	"ULtileX": 385,
 	"ULtileY": 802,
-	"map.plainOpacity" : 0.5,
-	"map.verticalScale" : 0.02,
+	"plainOpacity" : 0.5,
+	"verticalScale" : 0.02,
 	"scene.fog.near" : 0.5,
 	"camera.position.x" : -112.256,
 	"camera.position.y" : 36.225, 
