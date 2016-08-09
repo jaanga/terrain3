@@ -23,7 +23,8 @@ Display in 3D. Add TMS overlay;
 <script src=FlyControls-theo.js ></script>
 <script>
 
-	var urlBase = '../../elevations/elevations-data-03/';
+	urlBase = '../../elevations/elevations-data-03/';
+	deltaDefault = 3;
 
 	var clock = new THREE.Clock();
 
@@ -82,13 +83,6 @@ Display in 3D. Add TMS overlay;
 
 //				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-//				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
-
-				'<p>Press First Person Controls to start and to reset.</p>' +
-
-				'<p>Press One finger or left mouse: go foward. Two fingers or right mouse: reverse.</p>' +
-
-				'<p>Full instructions: TBD. Reduction of squirreliness: TBD.</p>' +
 
 				'<div id=menuDetailsControllers ></div>' +
 
@@ -176,10 +170,54 @@ Display in 3D. Add TMS overlay;
 
 		initMapViewMenu();
 
+setMenuDetailsControllers();
 //		controls.autoRotate = false;
 
 	}
 
+
+	function setMenuDetailsControllers() {
+
+		menuDetailsControllers.innerHTML =
+
+				'<details open>' +
+					'<summary><h3>Fly controls</h3></summary>' +
+					'<p><button onclick=setCamera(); >Reset view</button></p>' +
+//				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
+
+				'<p>Press First Person Controls to start and to reset.</p>' +
+
+				'<p>Press One finger or left mouse: go foward. Two fingers or right mouse: reverse.</p>' +
+
+				'<p>Full instructions: TBD. Reduction of squirreliness: TBD.</p>' +
+
+
+					'shift: movementSpeedMultiplier' + b +
+
+					'spacebar: freeze' + b +
+
+					'W: forward' + b +
+					'S: back' + b +
+
+					'A: left' + b +
+					'D: right' + b +
+
+					'R: up' + b +
+					'F: down' + b +
+
+					'Up: pitch Up' + b +
+					'Down: pitch Down' + b +
+
+					'Left: yaw Left' + b +
+					'Right: yaw Right' + b +
+
+					'Q: roll Left' + b +
+					'E: roll Right' + b +
+
+				'</details>' +
+			b;
+
+	}
 	function setCamera() {
 
 		var cameraPosition;
