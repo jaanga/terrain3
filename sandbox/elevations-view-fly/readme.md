@@ -49,9 +49,10 @@ This demo is very early stage - movements are flaky. But do enjoy it because thi
 
 ## Change Log
 
-### 2016-08-06
+### 2016-08-09
 
-* First commit this read me
+* Fly controls seems to work fairly well
+* First commit and this read me
 
 
 
