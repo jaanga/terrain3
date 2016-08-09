@@ -266,11 +266,16 @@ console.time( 'timer0' );
 
 	function onLoadElevations() {
 
+			scene = new THREE.Scene();
+
 			toggleFog();
 
 console.log( 'map.verticalScale', map );
-//			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScaleDefault;
-//			map.plainOpacity = map.plainOpacity ? map.plainOpacity : plainOpacityDefault;
+			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScaleDefault;
+			map.plainOpacity = map.plainOpacity ? map.plainOpacity : plainOpacityDefault;
+
+			map.fogNear = map.fogNear ? map.fogNear : 0.5;
+			map.fogFar = map.fogFar ? map.fogFar : 1;
 
 			map.pixelsPerTile = pixelsPerTile;
 			map.deltaDefault = deltaDefault;
@@ -536,7 +541,7 @@ console.timeEnd( 'timer0' );
 
 		if ( chkFog.checked === true ) {
 
-			scene.fog = new THREE.Fog( 0x7ec0ee, 0.05, 1 );
+			scene.fog = new THREE.Fog( 0x7ec0ee, map.fogNear, map.fogFar );
 
 		} else {
 

@@ -8,7 +8,7 @@
 	"ULtileX": 3036,
 	"ULtileY": 1715,
 	"plainOpacity" : 0.5,
-	"verticalScale" : 0.02,
+	"verticalScale" : 0.1,
 	"camera.position.x" : 87.1111,
 	"camera.position.y" : 27.9711, 
 	"camera.position.z": 0.2,
