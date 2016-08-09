@@ -19,15 +19,11 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=elevations-view-3d-core-r10.js ></script>
+<script src=../../elevations/elevations-view/elevations-view-3d-core-r10.js ></script>
 <script src=FlyControls-theo.js ></script>
 <script>
 
-	THREE.FlyControls.prototype.print = function () {
-
-		console.log( "Move", this.movementSpeed, "\nRoll", this.rollSpeed );
-
-	}
+	var urlBase = '../../elevations/elevations-data-03/';
 
 	var clock = new THREE.Clock();
 
@@ -86,19 +82,19 @@ Display in 3D. Add TMS overlay;
 
 //				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
+//				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
 
 				'<p>Press First Person Controls to start and to reset.</p>' +
 
-				'<p>Press down one finger or left mouse to go foward. Two finger or right mouse to reverse.</p>' +
+				'<p>Press One finger or left mouse: go foward. Two fingers or right mouse: reverse.</p>' +
 
-				'<p>Full instrunctions: TBD. Reduction of squirreliness: TBD.</p>' +
+				'<p>Full instructions: TBD. Reduction of squirreliness: TBD.</p>' +
 
 				'<div id=menuDetailsControllers ></div>' +
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
 
-				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
+				'<div id=menuDetailsSelectFile ></div>' +
 
 //				'<div id=menuDetailsSelectPath style=display:none; ></div>' +
 
@@ -184,6 +180,21 @@ Display in 3D. Add TMS overlay;
 
 	}
 
+	function setCamera() {
+
+		var cameraPosition;
+
+		map.radius = map.boxHelper.geometry.boundingSphere.radius;
+
+		cameraPosition = 0.2 * map.radius;
+		camera.up.set( 0, 0, 1 );
+
+//		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
+//		controls.maxDistance = 3 * map.radius;
+
+		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
+
+	}
 
 	function onWindowResize() {
 
