@@ -33,7 +33,7 @@
 	var ULlat, ULlon, LRlat, LRlon;
 	var LRtileX, LRtileY;
 
-//	place.elevations = [];
+	place.elevations = [];
 //	place.resolution = [];
 
 	var startTime;
@@ -733,9 +733,9 @@ console.log( 'key', inpAPI.value );
 
 						tempArr.push( elevation );
 
-						resolution = results[ i ].resolution.toFixed( 1 );
+						resolution = results[ i ].resolution;
 
-						if ( !place.resolutions.includes( resolution ) ) { place.resolutions.push( resolution ); }
+						if ( resolution && !place.resolutions.includes( resolution ) ) { place.resolutions.push( resolution.toFixed( 1 ) ); }
 
 					}
 
@@ -857,7 +857,10 @@ console.log( 'complete count', count, elevations.length );
 //			icw.map.elevations = place.elevations.slice( 0, place.samplesX * place.samplesY );
 //			icw.map.parameters = parameters;
 
-			icw.map = place;
+// http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-an-object-in-javascript
+//			icw.map = JSON.parse(JSON.stringify( place ));
+
+			icw.map = Object.create( place );
 			icw.onLoadElevations();
 			icw.controls.autoRotate = true;
 
@@ -1122,13 +1125,14 @@ console.log( 'complete count', count, elevations.length );
 
 		var blob, fileName, a;
 
-		if ( !place.elevations.length ) { alert( 'There is no elevation data to save.\n\n Press \'Get Elevations\' to request some data.' ); return; }
+		if ( !place.elevations || place.elevations.length === 0 ) { alert( 'There is no elevation data to save.\n\n Press \'Get Elevations\' to request some data.' ); return; }
 
 //		elevationsString = place.elevations.join( ',' );
 //		blob = new Blob( [ elevationsString ] );
 //		blob = new Blob( [ elevations ] );
 
 		origin = place.origin.toLowerCase().replace( /,/g, '').replace( / /g, '-' );
+
 
 		pl = JSON.stringify( place, null, '\t' );
 		blob = new Blob( [ pl ] );
