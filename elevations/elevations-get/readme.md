@@ -98,6 +98,10 @@ Fun possibilities for making new maps
 * Island Fernando de Noronha, brazil
 * http://forums.simviation.com/
 * Pythagoreio, Samos Prefecture, Greece
+* BGBW Narsarsuaq Airport
+* EGNS / isle of Man
+* PHOG hawaii
+
 
 ## Issues
 

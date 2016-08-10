@@ -2,13 +2,13 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Fly R1</title>
+<title>Elevations View Path R3</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
 ' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-05' >
+<meta name=date content='2016-08-08' >
 </head>
 <body>
 <!--
@@ -16,22 +16,18 @@ Display in 3D. Add TMS overlay;
 <script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
 <script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 -->
+
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=../../elevations/elevations-view/elevations-view-3d-core-r11.js ></script>
-<script src=FlyControls-theo.js ></script>
+
+<script src=../../../elevations/elevations-view/elevations-view-3d-core-r10.js ></script>
+<script src=../flight-path-script/flight-path-r4.js ></script>
 <script>
-
-	urlBase = '../../elevations/elevations-data-03/';
-	deltaOverlay = 3;
-
-	var clock = new THREE.Clock();
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
-	animate();
 
 	function init() {
 
@@ -74,48 +70,51 @@ Display in 3D. Add TMS overlay;
 			'<div id=menu >' +
 
 				'<h2>' +
-					'<a href=http://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
+					'<a href=https://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
 					'<a href="" title="Click here to refresh this page" >' + document.title + '</a>' +
 					' ~ <a href=index.html#readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
 				'</h2>' +
 
 				'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
 
-//				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
+				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
+// make into a js function.
 
-				'<div id=menuDetailsControllers ></div>' +
+				'<div id=menuPlugins ></div>' +
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
 
-				'<div id=menuDetailsSelectFile ></div>' +
+				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
 
-//				'<div id=menuDetailsSelectPath style=display:none; ></div>' +
+				'<div id=menuDetailsOverlay ></div>' +
 
-				'<div id=menuDetailsOverlay style=display:none; ></div>' +
+				'<div id=menuDetailsTerrain ></div>' +
 
-				'<div id=menuDetailsTerrain style=display:none; ></div>' +
+				'<div id=menuDetailsElevations ></div>' +
 
-				'<div id=menuDetailsElevations style=display:none; ></div>' +
+				'<div id=menuBackgroundSettings ></div>' +
 
-				'<div id=menuBackgroundSettings style=display:none; ></div>' +
-
-				'<div id=menuDetailsOverlay2 style=display:none; ></div>' +
+				'<div id=menuDetailsOverlay2 ></div>' +
 //
 
 				'<details >' +
 					'<summary><h3>about</h3></summary>' +
-					'<p>Copyright &copy; 2016 Jaanga authors. <a href=http://jaanga.github.io/home/r4/index.html#http://jaanga.github.io/jaanga-copyright-and-mit-license.md >MIT license</a>.</p>' +
+					'<p>Copyright &copy; 2016 Jaanga authors. <a href=https://jaanga.github.io/home/r4/index.html#http://jaanga.github.io/jaanga-copyright-and-mit-license.md >MIT license</a>.</p>' +
 					'<p>Click the \'i in a circle\' icon for more <a href=index.html#readme.md title="Click here for help and information" >help</a>.</p>' +
-					'<p>\'We stand on the shoulders of giants.\' In this case the giant is ' +
-						'<a href="https://developers.google.com/maps/documentation/javascript/" target="_blank">Google Maps JavaScript API</a></p>' +
+					'<p>' +
+						'\'We stand on the shoulders of giants.\' In this case the giant is ' +
+						'<a href="https://developers.google.com/maps/documentation/javascript/" target="_blank">Google Maps JavaScript API</a>' +
+					'</p>' +
 				'</details>' +
 
 				'<hr>' +
 
-				'<center><a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a></center>' +
-				'<div class=popUp id=pop2 style=display:none;bottom:10px; >Jaanga - your 3D happy place.<br>Click here to return to the top of the page</div>' +
+				'<center>' +
 
+					'<a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a></center>' +
+					'<div class=popUp id=pop2 style=display:none;bottom:10px; >Jaanga - your 3D happy place.<br>Click here to return to the top of the page</div>' +
+				'</center>' +
 			'</div>' +
 
 			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
@@ -142,20 +141,15 @@ Display in 3D. Add TMS overlay;
 		camera.position.set( 1, 1, 1 );
 		camera.up.set( 0, 0, 1 );
 
-//		controls = new THREE.OrbitControls( camera, renderer.domElement );
-//		controls.maxDistance = 1;
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 1;
 
-		controls = new THREE.FlyControls( camera, renderer.domElement );
-
-//		controls.movementSpeed = 450.0;
-//		controls.rollSpeed = 0.005;
-		controls.dragToLook = false;
-		controls.autoForward = false;
+//		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
 		window.addEventListener( 'resize', onWindowResize, false );
-//		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
 
@@ -166,70 +160,7 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
-//		map.deltaDefault = 3;
-
 		initMapViewMenu();
-
-setMenuDetailsControllers();
-//		controls.autoRotate = false;
-
-	}
-
-
-	function setMenuDetailsControllers() {
-
-		menuDetailsControllers.innerHTML =
-
-				'<details open>' +
-					'<summary><h3>Fly controls</h3></summary>' +
-					'<p><button onclick=setCamera(); >Reset view</button></p>' +
-//				'<p>Very unstable, crude demo. But the idea is that you can fly over the landscape.</p>' +
-
-//				'<p>Press First Person Controls to start and to reset.</p>' +
-
-				'<p>Forward: One finger or left mouse<br> Reverse: Two fingers or right mouse</p>' +
-
-				'<p>Reduction of squirreliness: TBD.</p>' +
-
-					'shift: movementSpeedMultiplier' + b +
-
-					'spacebar: freeze' + b +
-
-					'W: forward' + b +
-					'S: back' + b +
-
-					'A: left' + b +
-					'D: right' + b +
-
-					'R: up' + b +
-					'F: down' + b +
-
-					'Up: pitch Up' + b +
-					'Down: pitch Down' + b +
-
-					'Left: yaw Left' + b +
-					'Right: yaw Right' + b +
-
-					'Q: roll Left' + b +
-					'E: roll Right' + b +
-
-				'</details>' +
-			b;
-
-	}
-	function setCamera() {
-
-		var cameraPosition;
-
-		map.radius = map.boxHelper.geometry.boundingSphere.radius;
-
-		cameraPosition = 0.2 * map.radius;
-		camera.up.set( 0, 0, 1 );
-
-//		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
-//		controls.maxDistance = 3 * map.radius;
-
-		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
 
 	}
 
@@ -244,15 +175,16 @@ setMenuDetailsControllers();
 
 	}
 
+/*
 	function animate() {
 
 		requestAnimationFrame( animate );
-		controls.update( 20 * clock.getDelta() );
+		controls.update();
 		stats.update();
 		renderer.render( scene, camera );
 
 	}
-
+*/
 </script>
 </body>
 </html>

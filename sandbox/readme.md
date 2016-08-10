@@ -13,7 +13,7 @@ Previews of what coming up in the next few days or weeks.
 
 
 
-## full screen: [Elevations View Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
+## [Elevations View Path]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ )
 
 The goal is to replay a journey in 3D. Take data recorded of a aircraft flight, a mountain hike or a bicycle adventure and replay the motion in space and time.
 

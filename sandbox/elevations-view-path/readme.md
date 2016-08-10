@@ -6,54 +6,40 @@
 [sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo;
 
 
-Elevations View Path Read Me
+[Elevations View Path Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ )
 ===
 
+_Select a path to view from the menu on the left._
 
-## full screen: [Elevations View Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
 
-Load a path into the map and display it.
+## Concept
 
-Have an object - soon to be an aircraft - moving along the path and have the camera follow the object.
+Load and replay a path into the map and display it in 3D.
 
-While the camera is moving you control the direction where it's looking.
+View an aircraft - moving along the path. The camera follow the aircraft.
 
+While the camera is moving you may control the direction where it's looking.
 
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-path/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-path/vnlk/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations View Path_
 
 ***
 
+## Issues
 
-## Concept
-
-* Be Superwoman or Superman!
-
-### Mission
-
-* Create and read elevation data files and display in 3D
-* Get data via iframe parent, file open dialog or location.hash
-* Work well in an iframe
-
-
-### Vision
-
-* TBD
-
-
-## Features
-
-* TBD
-
-
-## Links of Interest
+* All the flight paths have heading issues
 
 
 ## Change Log
+
+### 2016-08-10
+
+* Major rewrite in progress
+* Now select from four paths
 
 ### 2016-08-07 ~ R2
 
