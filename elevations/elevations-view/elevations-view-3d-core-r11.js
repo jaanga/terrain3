@@ -5,7 +5,7 @@
 //	var defaultFile = '../elevations-data-03/tenzing-hillary-airport-lukla-eastern-region-nepal_12_3033_1718_3_3_30_30_.txt';
 	var defaultFile; // if no default, select a random file
 
-	var verticalScale = 0.1;
+	var verticalScale = 0.00002;
 	var plainOpacity = 0.5;
 
 	var fogNear = 0.5;

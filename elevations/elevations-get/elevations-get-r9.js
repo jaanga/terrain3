@@ -4,7 +4,7 @@
 // https://developers.google.com/maps/documentation/javascript/elevation
 // https://developers.google.com/maps/documentation/elevation/start
 
-	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r10.html';
+	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r11.html';
 
 	var place = {};
 	var path = {};
@@ -818,6 +818,8 @@ console.log( 'complete count', count, elevations.length );
 
 	function setIframe() {
 
+//		var icw;
+
 		threejs.style.display = '';
 
 		threejs.innerHTML =
@@ -835,7 +837,7 @@ console.log( 'complete count', count, elevations.length );
 
 		ifrThreejs.onload = function() {
 
-			var icw = ifrThreejs.contentWindow;
+			icw = ifrThreejs.contentWindow;
 /*
 			parameters = {
 

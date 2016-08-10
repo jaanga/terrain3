@@ -105,6 +105,11 @@ Intended for generating flightpaths
 
 ## Change Log
 
+### 2016-08-10 ~ R11
+
+* Many changes
+* Vertical scale slide no OK
+
 
 ### 2016-08-05 ~ R7.3
 
