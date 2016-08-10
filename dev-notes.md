@@ -2,14 +2,33 @@ Dev Notes
 ===
 
 
+## Peeps to Contact
 
+* Ronan et Quentin
+* Tim Child
+* Jim Michler
+* Caltopo dude
+* Mostapha
 
-## 2016-08-04
+## Coding to Do
 
+* KML lat/lon intersect with mesh altitude
+* Smooth Fly controls parameters
+* Build more path demos
 
 
 
 ## Templates
+
+
+### 2016-08-09
+
+* Message t Abantech
+* Message to Art Scott
+
+#### testing
+
+*Test on various devices in browserstack
 
 ### 2016-08-07
 

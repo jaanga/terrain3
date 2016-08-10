@@ -1,3 +1,4 @@
+// 2016-08-09 ~ R9.1
 
 // https://developers.google.com/maps/documentation/javascript/tutorial
 // https://developers.google.com/maps/documentation/javascript/elevation
@@ -8,7 +9,7 @@
 	var place = {};
 	var path = {};
 
-	var placeholder = 'Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal';
+	var placeholder = 'Tenzing-Hillary Airport, Lukla, Nepal';
 
 	place.vicinity = placeholder;
 
@@ -35,7 +36,6 @@
 //	place.elevations = [];
 //	place.resolution = [];
 
-
 	var startTime;
 	var count = 0;
 	var delay = 50;
@@ -51,7 +51,6 @@
 
 
 	function initMapGetMenu() {
-
 
 		threejs.style.display = 'none';
 
@@ -106,14 +105,6 @@
 		}
 
 		selSamples.selectedIndex = 0;
-
-		place.tilesX = selTilesX.selectedIndex + 1;
-		place.tilesY = selTilesY.selectedIndex + 1;
-
-		place.samplesX = parseInt( selSamples.value, 10 ) * place.tilesX;
-		place.samplesY = parseInt( selSamples.value, 10 ) * place.tilesY;
-
-
 
 	}
 
@@ -181,16 +172,19 @@ console.log( 'key', inpAPI.value );
 
 	function initMap() {
 
-
-
 		place.latitude = parseFloat( inpLatitude.value );
 		place.longitude = parseFloat( inpLongitude.value );
 
 		place.zoom = selZoom.selectedIndex + 1;
 
+
+		place.tilesX = selTilesX.selectedIndex + 1;
+		place.tilesY = selTilesY.selectedIndex + 1;
+
+		place.samplesX = parseInt( selSamples.value, 10 ) * place.tilesX;
+		place.samplesY = parseInt( selSamples.value, 10 ) * place.tilesY;
+
 		initGeocoder();
-
-
 
 		getTiles();
 

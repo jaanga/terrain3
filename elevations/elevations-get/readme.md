@@ -87,7 +87,9 @@ value='Source code listing' >
 * Able to do 1000x1000 maps reliably and quickly
 * Add ability to send directly to View Elevations 3D Display script in new tab
 
+### Code
 
+* 2016-08-09 ~ All menus into functions
 
 ## Interesting sites
 
