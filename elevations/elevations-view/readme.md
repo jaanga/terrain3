@@ -74,17 +74,19 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
+* 2016-08-11 ~ Add overal name space
+* 2016-08-11 ~ Add separate init file
+* 2016-08-11 ~ Add fog controls
+* 2016-08-11 ~ Add physics
+* 2016-08-11 ~ Add easy to make animated GIF
 * 2016-08-05 ~ Save changes to data file
-* 2016-08-05 ~ JSON data file that takes all kinds of data
-* 2016-08-05 ~ add paths
+* 2016-08-11 ~ Add read KML 
 * 2016-08-05 ~ Add skybox, background
 * Add pokemons?
 * Add placards
-* Info about metres per side of map
 * Accurate elevation measurement
 * Link to escape iframe
-* More overlays?
-
+* Add More overlays?
 
 
 ## Issues
@@ -105,13 +107,21 @@ Intended for generating flightpaths
 
 ## Change Log
 
+### 2016-08-11 ~ R1
+
+* Rename to simply 'elevations view rxx'
+* 2016-08-11 ~ Fix half tile off error
+* 2016-08-11 ~ Add location.hash
+
 ### 2016-08-10 ~ R11
 
 * Many changes
 * Vertical scale slide no OK
 * Update mapZoomLevel
 * Save file: no tabs and line feeds
-
+* 2016-08-05 ~ JSON data file that takes all kinds of data
+* Info about metres per side of map
+* 2016-08-05 ~ add paths
 
 ### 2016-08-05 ~ R7.3
 

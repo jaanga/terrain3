@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KGCN R1.1</title>
+<title>Elevations View R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -16,31 +16,17 @@ Display in 3D. Add TMS overlay;
 <script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
 <script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 -->
-
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src=elevations-view-r1.js ></script>
 
-<script src=../../../elevations/elevations-view/elevations-view-r1.js ></script>
-<script src=../flight-path-script/flight-path-r5.js ></script>
 <script>
-
-	var defaultFile = '../../../elevations/elevations-data-03/grand-canyon_11_385_802_3_3_510_510_.txt';
-
-//	aircraft.file = '../aircraft/21.js';
-	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
-
-	path.url = 'KGCN-03-GC-cooked.csv';
-	path.color = 0xff00ff;
-
-	var index = 0;
-	var indexDefault = 2500;
-
-	deltaOverlay = 3;
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
+	animate();
 
 	function init() {
 
@@ -83,7 +69,7 @@ Display in 3D. Add TMS overlay;
 			'<div id=menu >' +
 
 				'<h2>' +
-					'<a href=https://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
+					'<a href=http://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
 					'<a href="" title="Click here to refresh this page" >' + document.title + '</a>' +
 					' ~ <a href=index.html#readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
 				'</h2>' +
@@ -98,7 +84,7 @@ Display in 3D. Add TMS overlay;
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
 
-				'<div id=menuDetailsSelectFile style=display:none; ></div>' +
+				'<div id=menuDetailsSelectFile ></div>' +
 
 				'<div id=menuDetailsOverlay ></div>' +
 
@@ -113,7 +99,7 @@ Display in 3D. Add TMS overlay;
 
 				'<details >' +
 					'<summary><h3>about</h3></summary>' +
-					'<p>Copyright &copy; 2016 Jaanga authors. <a href=https://jaanga.github.io/home/r4/index.html#http://jaanga.github.io/jaanga-copyright-and-mit-license.md >MIT license</a>.</p>' +
+					'<p>Copyright &copy; 2016 Jaanga authors. <a href=http://jaanga.github.io/home/r4/index.html#http://jaanga.github.io/jaanga-copyright-and-mit-license.md >MIT license</a>.</p>' +
 					'<p>Click the \'i in a circle\' icon for more <a href=index.html#readme.md title="Click here for help and information" >help</a>.</p>' +
 					'<p>' +
 						'\'We stand on the shoulders of giants.\' In this case the giant is ' +
@@ -151,13 +137,13 @@ Display in 3D. Add TMS overlay;
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-//		camera.position.set( 1, 1, 1 );
+		camera.position.set( 1, 1, 1 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 1;
 
-//		controls.autoRotate = true;
+		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
@@ -188,7 +174,6 @@ Display in 3D. Add TMS overlay;
 
 	}
 
-/*
 	function animate() {
 
 		requestAnimationFrame( animate );
@@ -197,7 +182,6 @@ Display in 3D. Add TMS overlay;
 		renderer.render( scene, camera );
 
 	}
-*/
 
 </script>
 </body>
