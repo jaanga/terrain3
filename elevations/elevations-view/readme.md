@@ -109,6 +109,8 @@ Intended for generating flightpaths
 
 * Many changes
 * Vertical scale slide no OK
+* Update mapZoomLevel
+* Save file: no tabs and line feeds
 
 
 ### 2016-08-05 ~ R7.3

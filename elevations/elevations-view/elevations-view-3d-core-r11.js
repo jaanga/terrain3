@@ -131,7 +131,7 @@
 				'<summary><h3>Overlay settings</h3></summary>' +
 				'<small>Adjust 2D bitmaps</small>' +
 
-				'<p>Map overlay<br><select id=selMap onchange=drawMapOverlay(); size=5 /></select></p>' +
+				'<p>Map overlay provider<br><select id=selMap onchange=drawMapOverlay(); size=5 /></select></p>' +
 
 				'<p>' +
 					'Map overlay quality' + b +
