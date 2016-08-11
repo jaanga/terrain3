@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Template Three.js Basic R3</title>
+<title>Elevations View Animated GIF R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='' >
 <meta name=keywords content='WebGL,Three.js,Tween.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -30,7 +30,7 @@
 	var gridHelper, axisHelper;
 
 	init();
-	animate();
+//	animate();
 
 	function init() {
 
@@ -43,6 +43,7 @@
 			'a {text-decoration: none; }' +
 			'button { background-color: #eee; border: 2px #eee solid; color: #888; }' +
 			'h2 { margin: 0 }' +
+			'iframe { filter: grayscale( 1 ); }' +
 
 		'';
 
@@ -58,13 +59,14 @@
 			'<button onClick=generateGIF(); >Generate GIF</button>' +
 			'powered by <a href="https://github.com/deanm/omggif">omggif</a><br />' +
 			'<progress id="progress" value="0" max="1"></progress><br />' +
-
+/*
 			'<p><input type=checkbox onchange=mesh.material.wireframe=!mesh.material.wireframe; > Wireframe</p>' +
 			'<p><input type=checkbox onchange=axisHelper.visible=!axisHelper.visible; checked > Axes</p>' +
 			'<p><input type=checkbox onchange=gridHelper.visible=!gridHelper.visible; checked > Grid</p>' +
 			'<p><input type=checkbox onchange=controls.autoRotate=!controls.autoRotate; > Auto-Rotate</p>' +
 
 			'<p><button onclick=toggleBackgroundGradient(); >toggleBackgroundGradient</button></p>' +
+*/
 
 			'<div id=info ></div>' +
 
@@ -72,7 +74,7 @@
 
 		'';
 
-
+/*
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0;' ;
 		document.body.appendChild( stats.domElement );
@@ -110,6 +112,7 @@
 
 // assets
 
+*/
 
 	}
 
@@ -122,32 +125,12 @@
 
 	}
 
-	function animate() {
-
-		if ( generating === false ) {
-
-			requestAnimationFrame( animate );
-
-		}
-
-		time = ( time + 0.002 ) % 1;
-
-		render( time );
-
-	}
-
-	function render( float ) {
-
-		mesh.rotation.x = float * 360 * ( Math.PI / 180 );
-		mesh.rotation.y = - float * 360 * ( Math.PI / 180 );
-
-		renderer.render( scene, camera );
-
-	}
 
 
 
 			function generateGIF() {
+
+//				var palette;
 
 				generating = true;
 
@@ -155,8 +138,8 @@
 				var total = 100;
 
 				var canvas = document.createElement( 'canvas' );
-				canvas.width = renderer.domElement.width;
-				canvas.height = renderer.domElement.height;
+				canvas.width = ifr.width;
+				canvas.height = ifr.height;
 
 				var context = canvas.getContext( '2d' );
 
@@ -167,19 +150,26 @@
 
 				var addFrame = function () {
 
-					render( current / total );
+//					render( current / total );
 
 					context.drawImage( ifr.contentWindow.renderer.domElement, 0, 0 );
 
-					var data = context.getImageData( 0, 0, canvas.width, canvas.height ).data;
+					data = context.getImageData( 0, 0, canvas.width, canvas.height ).data;
 
-					var palette = [];
+					palette = [];
 
 					for ( var j = 0, k = 0, jl = data.length; j < jl; j += 4, k ++ ) {
 
-						var r = Math.floor( data[ j + 0 ] * 0.1 ) * 10;
-						var g = Math.floor( data[ j + 1 ] * 0.1 ) * 10;
-						var b = Math.floor( data[ j + 2 ] * 0.1 ) * 10;
+						avg = ( data[ j ] + data[ j + 1 ] + data[ j + 2 ] ) / 3;
+
+//						var r = Math.floor( data[ j + 0 ] * 0.1 ) * 10;
+//						var g = Math.floor( data[ j + 1 ] * 0.1 ) * 10;
+//						var b = Math.floor( data[ j + 2 ] * 0.1 ) * 10;
+
+						r = Math.floor( avg * 0.1 ) * 10;
+						g = Math.floor( avg * 0.1 ) * 10;
+						b = Math.floor( avg * 0.1 ) * 10;
+
 						var color = r << 16 | g << 8 | b << 0;
 
 						var index = palette.indexOf( color );
@@ -195,13 +185,14 @@
 
 						}
 
+
 					}
 
 					// force palette to be power of 2
 
-					var powof2 = 1;
-					while ( powof2 < palette.length ) powof2 <<= 1;
-					palette.length = powof2;
+//					var powof2 = 1;
+//					while ( powof2 < palette.length ) powof2 <<= 1;
+//					palette.length = powof2;
 
 					gif.addFrame( 0, 0, canvas.width, canvas.height, pixels, { palette: new Uint32Array( palette ), delay: 5 } );
 

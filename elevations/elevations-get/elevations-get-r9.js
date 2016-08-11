@@ -1136,7 +1136,7 @@ console.log( 'complete count', count, elevations.length );
 		origin = place.origin.toLowerCase().replace( /,/g, '').replace( / /g, '-' );
 
 
-		pl = JSON.stringify( place, null, '\t' );
+		pl = JSON.stringify( place );
 		blob = new Blob( [ pl ] );
 
 		fileName = 'elevations_' +
