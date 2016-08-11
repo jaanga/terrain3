@@ -14,7 +14,6 @@
 
 	var deltaOverlay= 1;
 
-
 	var map;
 
 	var mapTypes = [
@@ -134,7 +133,9 @@
 
 				'<p>Map overlay<br><select id=selMap onchange=drawMapOverlay(); size=5 /></select></p>' +
 
-				'<p>Map overlay zoom level<br><select id=selMapZoom onchange=drawMapOverlay(); size=1 /></select></p>' +
+				'<p>' +
+					'Map overlay quality' + b +
+					'<select id=selMapZoom onchange=drawMapOverlay(); ></select> + zoom level</p>' +
 
 				'<details>' +
 
@@ -160,7 +161,7 @@
 		for ( var i = 0; i < 4; i++ ) {
 
 			selMapZoom.appendChild( document.createElement( 'option' ) );
-			selMapZoom.children[ i ].text = i;
+			selMapZoom.children[ i ].text = + i;
 
 		}
 
@@ -385,6 +386,8 @@ console.log( 'map.verticalScale', map );
 
 		var baseURL, count;
 		var texture, tilesTotal;
+
+		map.deltaOverlay = selMapZoom.selectedIndex;
 
 		if ( selMap.selectedIndex > 8 ) {
 
