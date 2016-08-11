@@ -19,6 +19,12 @@ Display results in 3D. Display useful info.
 <script src=elevations-get-r10.js ></script>
 <script>
 
+	var kmlLeig = 'https://jaanga.github.io/terrain3/google-api/data-kml/LEIG-L1500-01.kml';
+	var kmlVhsk = 'https://jaanga.github.io/terrain3/google-api/data-kml/VHSK-22-01.kml';
+
+	var kmlSnowMountainActual = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
+	var kmlSnowMountainWilderness = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
+
 	var b = '<br>';
 
 	init();
@@ -136,10 +142,14 @@ Display results in 3D. Display useful info.
 
 			'<hr>' +
 
-			'<p><button onclick=openKML(); >Open KML</button></p>' +
-
 			'<details open >' +
 				'<summary><h3>path data</h3></summary>' +
+
+				'<p><a href=# onclick=openKML(kmlLeig); >Open LEIG KML</a></p>' +
+				'<p><a href=# onclick=openKML(kmlVhsk); >VHSK KML</a></p>' +
+				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
+				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
+
 				'<small>Open path file and draw it on map</small>' +
 				'<p><input type=file id=inpFile onchange=openFile(this,"path"); ></p>' +
 				'<div>' +
@@ -191,17 +201,11 @@ Display results in 3D. Display useful info.
 
 	}
 
-	function openKML() {
-
-		var kmlLeig = 'http://jaanga.github.io/terrain3/google-api/data-kml/LEIG-L1500-01.kml';
-		var kmlVhsk = 'http://jaanga.github.io/terrain3/google-api/data-kml/VHSK-22-01.kml';
-
-		var kmlSnowMountainActual = 'http://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
-		var kmlSnowMountainWilderness = 'http://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
+	function openKML( url ) {
 
 		layer = new google.maps.KmlLayer({
 
-			url: kmlSnowMountainActual,
+			url: url,
 			map: googleMap
 
 		});
