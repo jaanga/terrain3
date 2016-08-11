@@ -3,14 +3,14 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-path/vhsk'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
-[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [sandbox]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ ) &raquo;
+[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [view path]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ ) &raquo;
 
 
 [Elevations View Path VHSK Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/vhsk )
 ===
 
 
-## full screen: [Elevations View VHSK Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
+## full screen: [Elevations View VHSK Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/vhsk/ )
 
 
 <img src="" style=display:none; width=800 >

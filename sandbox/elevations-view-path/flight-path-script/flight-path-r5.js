@@ -14,7 +14,7 @@
 	var aircraft = {};
 	aircraft.mesh = new THREE.Object3D();
 //	aircraft.file = '../aircraft/21.js';
-	aircraft.file = 'http://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
+	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
 
 	path.url = '6-25-2016-1-cooked.csv';
 	path.color = 0xff0000;

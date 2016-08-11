@@ -3,21 +3,21 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-path/kgcn'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
-[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [sandbox]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ ) &raquo;
+[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [view path]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ ) &raquo;
 
 
 [Elevations View Path KGCN Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/kgcn )
 ===
 
 
-## full screen: [Elevations View KGCN Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/ )
+## full screen: [Elevations View KGCN Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/kcgn/ )
 
 
 <img src="" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-path/kgcn/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Elevations View Path KGCN
+_Elevations View Path KGCN_
 
 ***
 
