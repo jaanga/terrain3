@@ -33,8 +33,8 @@
 
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/';
-	var urlBase = '../elevations-data-03/';
+	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/';
+//	var urlBase = '../elevations-data-03/';
 
 	var searchInFolder = 'elevations-data-03/';
 

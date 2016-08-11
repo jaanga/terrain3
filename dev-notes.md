@@ -10,16 +10,30 @@ Dev Notes
 * Caltopo dude
 * Mostapha
 
+
+
 ## Coding to Do
 
 * KML lat/lon intersect with mesh altitude
+	* Pick up on prior work
 * Smooth Fly controls parameters
+* Headings, pitch and roll
+* Placards
+* Pokemonsters
+* Physics
+* Voice
+* Editing splines
+* CodePen Maps
+* Maps of Armenia & Beiruit & China
+
+
+## Change Log
+
+
+### 2016-08-11
+
+* Build Threee.js to Animated GIF
 * Build more path demos
-
-
-
-## Templates
-
 
 ### 2016-08-09
 
@@ -31,6 +45,8 @@ Dev Notes
 *Test on various devices in browserstack
 
 ### 2016-08-07
+## Templates
+
 
 Art, Cindy, AKA
 
