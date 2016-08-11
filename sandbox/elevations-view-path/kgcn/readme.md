@@ -10,7 +10,7 @@
 ===
 
 
-## full screen: [Elevations View KGCN Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/kcgn/ )
+## full screen: [Elevations View KGCN Path]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path/kgcn/ )
 
 
 <img src="" style=display:none; width=800 >
