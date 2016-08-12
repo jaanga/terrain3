@@ -12,7 +12,6 @@
 	var plainOpacity = 0.5;
 	var deltaOverlay= 1;
 
-
 	var fogNear = 0.5;
 	var fogFar = 1;
 	var backgroundColor = 0x7ec0ee ;
