@@ -12,7 +12,9 @@
 			elevations: '../../elevations/elevations-data-kml/snow-mountain-actual-ca-usa_12_650_1558_3_3_510_510_.txt' },
 		{ name: 'SnowMountainWilderness', 
 			path: '../../data-path-kml/snow-mountain-wilderness.kml', 
-			elevations: '../../elevations/elevations-data-kml/snow-mouuntain-wilderness-ca-usa_13_1301_3119_3_3_510_510_.txt' }
+//			elevations: '../../elevations/elevations-data-kml/snow-mouuntain-wilderness-ca-usa_13_1301_3119_3_3_510_510_.txt' 
+			elevations: '../../elevations/elevations-data-kml/smw-ca-usa_12_650_1558_3_3_60_60_.txt' 
+			}
 
 	];
 

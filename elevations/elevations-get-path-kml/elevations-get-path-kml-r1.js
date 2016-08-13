@@ -37,8 +37,8 @@
 				'<p><input type=file id=inpFile onchange=openFile(this,"path"); ></p>' +
 				'<div>' +
 					'<textarea id=txtPath >' +
-						'Open a flight path data CSV file to view its path on the map. ' +
-						'If location is remote, press \'go there\' when it appears. ' +
+						'Open a KML file to view its path on the map. ' +
+						'If location is remote, press \'Set location as map center\' when it appears. ' +
 						'You may load multiple paths.' +
 					'</textarea>' +
 				'</div>' +

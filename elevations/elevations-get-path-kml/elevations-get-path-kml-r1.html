@@ -16,6 +16,8 @@ Display results in 3D. Display useful info.
 <script src=elevations-get-path-kml-r1.js ></script>
 <script>
 
+	defaultFile = 'https://dl.dropboxusercontent.com/u/4732486/git-repos/jaanga.github.io/terrain3/data-path-kml/_7mile_ski_trail.kml';
+
 
 	init();
 
@@ -129,6 +131,14 @@ Display results in 3D. Display useful info.
 		setMenuDetailsPathKMLOpen();
 
 		onHashChange();
+
+	}
+
+	function otherInits() {
+
+		fileName = location.hash ? location.hash.slice( 1 ) ? defaultFile ;
+
+		openKML( fileName );
 
 	}
 

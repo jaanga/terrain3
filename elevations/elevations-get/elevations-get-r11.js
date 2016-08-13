@@ -313,7 +313,11 @@ console.log( 'key', inpAPI.value );
 
 		googleMap.addListener( 'click', onClick );
 
+		otherInits();
+
 	}
+
+	function otherInits() {}
 
 	function setMenuDetailsGeocoder() {
 

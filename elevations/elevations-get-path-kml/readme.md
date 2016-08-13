@@ -23,6 +23,10 @@ _Elevations Get Path KML View_
 
 ### Mission
 
+* Read a KML file
+* Open Google API Map at location and display KML path
+* Obtain elevation data from Google  
+* Display and save the data
 * Create and read elevation data files and display in 3D
 * Get data via iframe parent, file open dialog or location.hash
 * Work well in an iframe
@@ -30,12 +34,12 @@ _Elevations Get Path KML View_
 
 ### Vision
 
-* TBD
+* To wread a wide variety of KML file types
 
 
 ## Features
 
-* TBD
+* https://caltopo.com/map.html
 
 
 
@@ -44,9 +48,9 @@ _Elevations Get Path KML View_
 
 ## Change Log
 
-### 
+### 2016-08-13 ~ R1
 
-* First commit this read me
+* First commit of script and this read me
 
 
 
