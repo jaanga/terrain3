@@ -31,7 +31,7 @@ _Each time you load this page a random location appears_
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Sample 1: **[Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )** ~ a script for displaying 3D data with 2D overlays._
 _It's one of our favorite projects and a good place to start exploring._
@@ -42,7 +42,7 @@ _It's one of our favorite projects and a good place to start exploring._
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
 
-<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth._
 _128 lines of code to create over two millions data points. The power to create new worlds is in your hands!_ 

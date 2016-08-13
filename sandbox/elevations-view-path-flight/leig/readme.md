@@ -3,7 +3,7 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-path-flight/leig'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
-[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [sandbox]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path-flight/ ) &raquo;
+[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo; [view path]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path-flight/ ) &raquo;
 
 
 [Elevations View Path LEIG Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path-flight/leig )
