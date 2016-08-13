@@ -4,12 +4,6 @@
 // https://developers.google.com/maps/documentation/javascript/elevation
 // https://developers.google.com/maps/documentation/elevation/start
 
-	var kmlLeig = 'https://jaanga.github.io/terrain3/google-api/data-kml/LEIG-L1500-01.kml';
-	var kmlVhsk = 'https://jaanga.github.io/terrain3/google-api/data-kml/VHSK-22-01.kml';
-
-	var kmlSnowMountainActual = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
-	var kmlSnowMountainWilderness = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
-
 
 	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r11.html';
 
@@ -63,8 +57,10 @@
 
 		setMenuDetailsAPIKey();
 		setMenuDetailsGeocoder();
+		setMenuDetailsMapParameters();
+		setMenuDetailsMapClick();
 		setMenuDetailsElevations();
-		setMenuDetailsPathData();
+//		setMenuDetailsPathData();
 		setMenuDetailsAbout();
 
 		for ( var i = 0; i < 20; i++ ) {
@@ -219,58 +215,6 @@ console.log( 'key', inpAPI.value );
 	}
 
 
-
-
-
-	function setMenuDetailsPathData() {
-
-		menuDetailsPathData.innerHTML =
-
-			'<details open >' +
-				'<summary><h3>path data</h3></summary>' +
-
-				'<p><a href=# onclick=openKML(kmlLeig); >Open LEIG KML</a></p>' +
-				'<p><a href=# onclick=openKML(kmlVhsk); >VHSK KML</a></p>' +
-				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
-				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
-
-				'<small>Open path file and draw it on map</small>' +
-				'<p><input type=file id=inpFile onchange=openFile(this,"path"); ></p>' +
-				'<div>' +
-					'<textarea id=txtPath >' +
-						'Open a flight path data CSV file to view its path on the map. ' +
-						'If location is remote, press \'go there\' when it appears. ' +
-						'You may load multiple paths.' +
-					'</textarea>' +
-				'</div>' +
-
-				'<div id=menuOpenFile ></div>' +
-
-				'<div id=menuPathBoundaries >' +
-					'<details>' +
-					'<summary><h4>path boundaries</h4></summary>' +
-					'<small>When you open a path file, its boundary details appear here</small>' +
-				'</div>' +
-
-			'</details>' +
-
-		'';
-
-	}
-
-	function openKML( url ) {
-
-		layer = new google.maps.KmlLayer({
-
-			url: url,
-			map: googleMap
-
-		});
-
-
-	}
-
-
 	function setMenuDetailsAbout() {
 
 		menuDetailsAbout.innerHTML =
@@ -391,6 +335,19 @@ console.log( 'key', inpAPI.value );
 				'<p>Latitude : <input id=inpLatitude size=12 value=' + place.latitude + ' onclick=this.select(); onchange=updateLocation(inpLatitude.value,inpLongitude.value); ></p>' +
 				'<p>Longitude: <input id=inpLongitude size=12 value=' + place.longitude + ' onclick=this.select(); onchange=updateLocation(inpLatitude.value,inpLongitude.value);  ></p>' +
 
+			'</details>' +
+
+		'';
+
+	}
+
+	function setMenuDetailsMapParameters() {
+
+		menuDetailsMapParameters.innerHTML =
+
+			'<details open>' +
+				'<summary><h3>map parameters</p></summary>' +
+
 				'<p>Zoom: <select id=selZoom onchange=initMap(); title="Select the zoom" size=1 ></select></p>' +
 
 				'<p>Map overlay: <select id=selMap onchange=initMap() size=1 />' +
@@ -402,10 +359,17 @@ console.log( 'key', inpAPI.value );
 				'<p>Tiles height: <select id=selTilesY onchange=initMap(); type=number size=1 ></select></p>' +
 
 				'<p>Samples per tile: <select id=selSamples onchange=initMap(); title="Select the number of samples per tile" size=1 ></select></p>' +
-	//			'<p>Samples height: <select id=selSamplesY onchange=initMap(); title="Select the number of samples for Y" size=1 ></select></p>' +
-
 
 			'</details>' +
+
+		'';
+
+	}
+
+
+	function setMenuDetailsMapClick() {
+
+		menuDetailsMapClick.innerHTML =
 
 			'<div >' +
 				'<details open >' +
@@ -573,7 +537,7 @@ console.log( 'key', inpAPI.value );
 		menuDetailsCenterTileData.innerHTML =
 
 		'<details>' +
-			'<summary><h3>center tile data</h3></summary>' +
+			'<summary><h4>center tile data</h4></summary>' +
 
 			'Location latitude : ' + place.latitude.toFixed( 4 ) + '&deg;' + b +
 			'Location longitude: ' + place.longitude.toFixed( 4 ) + '&deg;' + b + b +
@@ -611,7 +575,7 @@ console.log( 'key', inpAPI.value );
 			'Meters/sample (' + selSamples.value + '/tile) lat: ' + Math.round( ( meridionalCircumference / Math.pow( 2, zoom ) ) * tilesY / place.samplesY ).toLocaleString() + b +
 			'Meters/sample (' + selSamples.value + '/tile) lon: ' + Math.round( ( equatoriaCircumferenceLocal / Math.pow( 2, zoom ) ) * tilesX / place.samplesX ).toLocaleString() + b +
 
-		'</details>' + b;
+		'</details>';
 
 		source = 'http://c.tile.opencyclemap.org/cycle/' + zoom + '/' + tileX + '/' + tileY + '.png';
 
@@ -619,7 +583,7 @@ console.log( 'key', inpAPI.value );
 
 		'<details>' +
 
-			'<summary><h3>sample tile</h3></summary>' +
+			'<summary><h4>sample tile</h4></summary>' +
 			'<img src=' + source + ' >' + b +
 			'<a href=' + source + ' >' + source.slice( 7 ) + '</a>' +
 
@@ -671,14 +635,14 @@ console.log( 'key', inpAPI.value );
 
 		'<details>' +
 
-			'<summary><h3>tiles data</h3></summary>' +
+			'<summary><h4>tiles data</h4></summary>' +
 			'UL TileY: ' + place.ULtileY + ' Lat: ' + ULlat.toFixed( 4 ) + '&deg;' + b +
 			'LR TileY: ' + LRtileY + ' Lat: ' + LRlat.toFixed( 4 ) + '&deg;' + b +
 
 			'UL TileX: ' + place.ULtileX + ' Lon: ' + ULlon.toFixed( 4 ) + '&deg;' + b +
 			'LR TileX: ' + LRtileX + ' Lon: ' + LRlon.toFixed( 4 ) + '&deg;' + b +
 
-		'</details>' + b;
+		'</details>';
 
 		var marker = new google.maps.Marker({
 
