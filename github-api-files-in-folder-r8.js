@@ -46,8 +46,8 @@
 			'summary { outline: none; }' +
 
 			'#menu { box-sizing: border-box; background-color: #ccc; padding: 0 0 0 10px; position: absolute; max-width: 20%; }' +
-			'#contents { border: 0px red solid; left: 20%; position: absolute; top: 0; max-width: 55%; }' +
-			'#updates { background-color: #eee; float: right; max-width: 20%; padding: 0 20px; }' +
+			'#contents { border: 0px red solid; left: 22%; position: absolute; top: 0; max-width: 55%; }' +
+			'#updates { box-sizing: border-box; background-color: #eee; float: right; max-width: 20%; padding: 0 20px; }' +
 
 		'';
 
