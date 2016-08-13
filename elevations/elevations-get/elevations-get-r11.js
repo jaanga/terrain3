@@ -155,8 +155,6 @@ console.log( 'key', inpAPI.value );
 				'<p><button onclick=setAPIkey(); >Set API key</button></p>' +
 			'</details>' + b;
 
-
-
 	}
 
 	function setAPIkey() {
@@ -329,7 +327,6 @@ console.log( 'key', inpAPI.value );
 
 				'<p id=menuPlaceMessage ></p>' +
 
-
 //				'<p>Longitude: <input id=inpLongitude size=12 value=' + place.longitude + ' onclick=this.select(); onchange=setCenter(); ></p>' +
 
 				'<p>Latitude : <input id=inpLatitude size=12 value=' + place.latitude + ' onclick=this.select(); onchange=updateLocation(inpLatitude.value,inpLongitude.value); ></p>' +
@@ -430,7 +427,7 @@ console.log( 'key', inpAPI.value );
 
 			}
 
-		});
+		} );
 
 	}
 
@@ -455,7 +452,7 @@ console.log( 'key', inpAPI.value );
 
 			}
 
-		});
+		} );
 
 	}
 
