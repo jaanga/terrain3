@@ -11,6 +11,7 @@
 	var folder = 'cookbook-html/examples/github-api-rss/';
 */
 
+	var org = 'jaanga';
 	var repo = 'terrain3';
 	var branch = 'gh-pages';
 	var folder = '';
@@ -18,6 +19,7 @@
 	var urlGitHubTree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
 	var urlGHPages = 'https://' + user + '.github.io/' + repo + '/';
 	var urlSource = 'https://github.com/' + user + '/' + repo + '/tree/' + branch + '/';
+	var urlIssues = 'https://api.github.com/repos/' + org + '/' + repo + '/issues?labels=Status%20Update';
 
 	var filesAll, filesSelected;
 
@@ -33,21 +35,19 @@
 		css = document.body.appendChild( document.createElement( 'style' ) );
 		css.innerHTML =
 
-			'html, body { font: 12pt monospace; height: 100%; margin: 0; }' +
-
+			'body { font: 12pt monospace; margin: 0; }' +
 			'a { text-decoration: none; }' +
-
 			'button, input[type=button] { background-color: #eee; border: 2px #eee solid; color: #888; }' +
 
 			'h2 a { color: crimson; }' +
-//			'iframe { border: 1px solid red; height: 100%; overflow: hidden; width: 100%; }' +
-
+			'img { max-width: 100%; }' +
+			'iframe { width: 100%; }' +
 			'summary h2, summary h3, #menuBreadCrumbs h3 { display: inline; }' +
 			'summary { outline: none; }' +
 
-			'#menu { box-sizing: border-box; background-color: #ccc; padding: 0 0 0 10px; position: absolute; width: 300px; }' +
-//			'#contents { border: 0px red solid; height: 100%; left: 350px; overflow: hidden; position: absolute; top: 0; width: ' + ( window.innerWidth - 370 ) + 'px; }' +
-			'#contents { border: 0px red solid; left: 350px; position: absolute; top: 0; max-width: 800px; }' +
+			'#menu { box-sizing: border-box; background-color: #ccc; padding: 0 0 0 10px; position: absolute; max-width: 20%; }' +
+			'#contents { border: 0px red solid; left: 20%; position: absolute; top: 0; max-width: 55%; }' +
+			'#updates { background-color: #eee; float: right; max-width: 20%; padding: 0 20px; }' +
 
 		'';
 
@@ -76,6 +76,10 @@
 
 		contents = document.body.appendChild( document.createElement( 'div' ) );
 		contents.id = 'contents';
+
+
+		updates = document.body.appendChild( document.createElement( 'div' ) );
+		updates.id = 'updates';
 
 		window.addEventListener ( 'hashchange', onHashChange, false );
 
@@ -116,7 +120,6 @@
 
 				'<p><a href=JavaScript:location.href=urlSource+location.hash.slice(1); >View source on GitHub</a></p>' +
 				'<p><a href=JavaScript:window.open(urlGHPages+location.hash.slice(1),"_blank"); >Open page in new tab</a></p>' +
-//				'<p><s><input type=checkbox > View all files in folder</s></p>' +
 
 				'<p id=menuActionMessages ></p>' +
 
@@ -169,7 +172,7 @@
 
 		}
 
-		menuActionMessages.innerHTML = 
+		menuActionMessages.innerHTML =
 
 			'<h3>repository statistics</h3>' +
 			'Items in repo: ' + itemsAll.length.toLocaleString() + b +
@@ -182,6 +185,7 @@
 
 	}
 
+
 //
 
 	function onHashChange() {
@@ -192,15 +196,52 @@
 
 		if ( item.endsWith( '.md' ) === true ) {
 
-			getMarkdown( item, contents );
-
 			setBreadCrumbs( folder );
+
+			requestFile( urlGHPages + item, function callbackMD( xhr ) {
+
+				contents.innerHTML = converter.makeHtml( xhr.target.responseText );
+				contents.style.overflow = 'auto';
+
+			} );
 
 		} else {
 
 			setBreadCrumbs( item );
 
 			getFilesFromFolder( item );
+
+			requestFile( urlGHPages + item + '/readme.md', function callbackMD( xhr ) {
+
+				contents.innerHTML = converter.makeHtml( xhr.target.responseText );
+				contents.style.overflow = 'auto';
+
+			} );
+
+		}
+
+
+		if ( folder === '' ) {
+
+			requestFile( urlIssues, function ( xhr ) {
+
+				issues = JSON.parse( xhr.target.responseText );
+
+				txt = '<h1><a href="" >' + repo + ' status updates</a> <a href=index.html#readme.md > &#x24D8; </a></h1>';
+
+				for ( var i = 0; i < issues.length; i++ ) {
+
+					issue = issues[ i ];
+
+					txt += '<h2>' + issue.title + '</h2>' +
+						'<div class=issue >' + converter.makeHtml( issue.body ) + '</div>';
+
+				}
+
+				updates.innerHTML = txt;
+
+			} );
+
 
 		}
 
@@ -288,13 +329,6 @@
 		}
 
 		menuFolderIndices.innerHTML = toc;
-
-		requestFile( urlGHPages + dir + '/readme.md', function callbackMD( xhr ) {
-
-			contents.innerHTML = converter.makeHtml( xhr.target.responseText );
-			contents.style.overflow = 'auto';
-
-		} );
 
 	}
 
