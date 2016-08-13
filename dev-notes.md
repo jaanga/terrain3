@@ -14,8 +14,7 @@ Dev Notes
 
 ## Coding to Do
 
-* KML lat/lon intersect with mesh altitude
-	* Pick up on prior work
+* 2016-08-13 ~ Google nearby places
 * Smooth Fly controls parameters
 * Headings, pitch and roll
 * Placards
@@ -29,6 +28,10 @@ Dev Notes
 
 ## Change Log
 
+### 2016-08-12
+
+* KML lat/lon intersect with mesh altitude
+	* Pick up on prior work
 
 ### 2016-08-11
 
