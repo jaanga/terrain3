@@ -103,15 +103,9 @@
 
 			}
 
-
-//			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( Math.PI ) );
-//			geometry.center();
-//			geometry.applyMatrix( new THREE.Matrix4().makeScale( 1500, 1500, 1500 ) );
-
-
 			raycaster = new THREE.Raycaster();
 			up = v( 0, 0, 1 );
-			arr = [ map.mesh ];
+
 			map.mesh.updateMatrixWorld();
 
 console.time( 't1' );
@@ -126,7 +120,6 @@ console.time( 't1' );
 
 console.timeEnd( 't1' );
 
-
 			var geometry = new THREE.Geometry();
 			geometry.vertices = gpxPath;
 			material = new THREE.LineBasicMaterial( { color: 0x00ff00 } );
@@ -138,55 +131,6 @@ console.timeEnd( 't1' );
 
 //			camPath = new THREE.Geometry();
 //			camPath.vertices = curve.getPoints( 2000 );
-
-/*
-			latMax = Math.max.apply( Math, latitudes );
-			latMin = Math.min.apply( Math, latitudes );
-
-			lonMax = Math.max.apply( Math, longitudes );
-			lonMin = Math.min.apply( Math, longitudes );
-
-			deltaX = 0.5 * ( lonMax - lonMin );
-			deltaZ = 0.5 * ( latMax - latMin );
-
-			centerLat = latMin + deltaZ;
-			centerLon = lonMin + deltaX;
-
-			info.innerHTML = 'latMin ' + latMin + ' latMax ' + latMax + '<br>' +
-				'lonMin ' + lonMin + ' lonMax ' + lonMax + '<br>';
-
-//			path = latMin + ',' + lonMin + '|' + latMax + ',' + lonMin + '|' + latMax + ',' + lonMax + '|' + latMin + ',' + lonMax + '|' + latMin + ',' + lonMin;
-
-			path = '';
-
-			for ( var i = 0; i < gpxPath.length; i += 5 ) {
-
-				path += '|' + latitudes[ i ].toFixed( 5 ) + ',' + longitudes[ i ].toFixed( 5 );
-
-			}
-
-
-			source = 'https://maps.googleapis.com/maps/api/staticmap?center=' + centerLat  + ',' + centerLon + '&size=512x512&scale=2&maptype=hybrid&zoom=13&path=color:0xff000066|weight:5' + path;
-
-			var loader = new THREE.TextureLoader();
-			loader.crossOrigin = 'anonymous';
-			loader.load(
-
-				source,
-				function ( texture ) {
-
-					texture.minFilter = texture.magFilter = THREE.NearestFilter;
-					texture.needsUpdate = true;
-					material = new THREE.MeshPhongMaterial( { color: 0xffffff, map: texture, side: 2 } );
-					ground.material = material;
-					ground.material.needsUpdate = true;
-
-				}
-
-			);
-
-			cameraWorld = camera;
-*/
 
 		}
 

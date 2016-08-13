@@ -17,9 +17,6 @@
 
 Load and replay a path into the map and display it in 3D.
 
-View an aircraft - moving along the path. The camera follow the aircraft.
-
-While the camera is moving you may control the direction where it's looking.
 
 
 <img src="" style=display:none; width=800 >
@@ -32,25 +29,13 @@ _Elevations View Path KML_
 
 ## Issues
 
-* All the flight paths have heading issues
-
 
 ## Change Log
 
-### 2016-08-10
+### 2016-08-12 ~ R1
 
-* Major rewrite in progress
-* Now select from four paths
-
-### 2016-08-07 ~ R2
-
-* Big rewrite. much simpler
-* Uses elevations view defaults for almost everything
-
-
-### 2016-08-06 ~ R1
-
-* First commit this read me
+* First commit script and read me
+* Add ability to acquire altitude for each 2D way point and turn into 3D
 
 
 
