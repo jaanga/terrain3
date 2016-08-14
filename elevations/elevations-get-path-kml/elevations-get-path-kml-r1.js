@@ -27,11 +27,11 @@
 //				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
 //				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
 
-			'<small>Select or open a file to view in 3D</small>' +
-			'<p>' +
-				'<select id=selFiles onchange=file=openKML(urlBase+this.value); size=12 style=width:100%; >' +
-					'<option>Select a file</option></select>' +
-			'</p>' +
+				'<small>Select or open a file to view in 3D</small>' +
+				'<p>' +
+					'<select id=selFiles onchange=openKML(urlBase+this.value); size=12 style=width:100%; >' +
+						'<option>Select a file</option></select>' +
+				'</p>' +
 
 
 			'</details>' +
@@ -42,6 +42,7 @@
 
 	function openKML( url ) {
 
+console.log( '', url );
 		layer = new google.maps.KmlLayer({
 
 			url: url,
