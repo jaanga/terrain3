@@ -12,7 +12,7 @@
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800 height=500 onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations Get Path KML View_
 

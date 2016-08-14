@@ -65,7 +65,7 @@ _128 lines of code to create over two millions data points. The power to create 
 * The [Coding Style]( #coding-style.md ) used here could be of interest
 * And the on-the-fly menu system as well
 * This is R3 of an effort several years old. The best aspects of previous work will be rebuilt, tested and carried forward here.
-* We eat our own 3D dogfood here. If you see something move here, then it's a 3D script you can interact with. Bitmaps are for flatland peeps.
+* We eat our own 3D dog food here. If you see something move here, then it's a 3D script you can interact with. Bitmaps are for flatland peeps.
 * We don't try to be realistic. We do try to be artistic, gametistic - and fantastic. We highlight the [diffs]( https://en.wikipedia.org/wiki/Data_comparison ). We give evidence to eruption and erosion. We are [entropy]( https://en.wikipedia.org/wiki/Introduction_to_entropy )-neurs.
 
 ## Goals
@@ -116,7 +116,7 @@ The fun bits of cartography are the ones that map what can't be seen.
 ### 2016-08-12
 
 * Added elevations view path kml + post
-* Added 3 column fome page + post
+* Added 3 column home page + post
 
 
 ### 2016-08-07

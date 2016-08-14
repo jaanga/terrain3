@@ -63,6 +63,7 @@
 //		setMenuDetailsPathData();
 		setMenuDetailsAbout();
 
+/*
 		for ( var i = 0; i < 20; i++ ) {
 
 			selZoom[ selZoom.length ] = new Option( i + 1 );
@@ -111,6 +112,7 @@
 		}
 
 		selSamples.selectedIndex = 0;
+*/
 
 	}
 
@@ -212,7 +214,6 @@ console.log( 'key', inpAPI.value );
 
 	}
 
-
 	function setMenuDetailsAbout() {
 
 		menuDetailsAbout.innerHTML =
@@ -238,7 +239,7 @@ console.log( 'key', inpAPI.value );
 	}
 
 
-		function initMap() {
+	function initMap() {
 
 		place.latitude = parseFloat( inpLatitude.value );
 		place.longitude = parseFloat( inpLongitude.value );
@@ -311,7 +312,7 @@ console.log( 'key', inpAPI.value );
 
 		} );
 
-		googleMap.addListener( 'click', onClick );
+		googleMap.addListener( 'click', onGoogleMapClick );
 
 		otherInits();
 
@@ -365,6 +366,56 @@ console.log( 'key', inpAPI.value );
 
 		'';
 
+
+		for ( var i = 0; i < 20; i++ ) {
+
+			selZoom[ selZoom.length ] = new Option( i + 1 );
+
+		}
+
+		selZoom.selectedIndex = place.zoom - 1;
+
+		for ( i = 0; i < 12; i++ ) {
+
+			selTilesX[ selTilesX.length ] = new Option( i + 1 );
+
+		}
+
+		selTilesX.selectedIndex = place.tilesX - 1;
+
+
+		for ( i = 0; i < 12; i++ ) {
+
+			selTilesY[ selTilesY.length ] = new Option( i + 1 );
+
+		}
+
+		selTilesY.selectedIndex = place.tilesY - 1;
+
+		samps = [
+			[ 10, 'Takes about a second' ],
+			[ 20, 'takes about ?? seconds' ],
+			[ 30, 'takes about ?? seconds' ],
+			[ 40, 'takes about ?? seconds' ],
+			[ 50, 'takes about 75 seconds' ],
+			[ 60, 'takes about ?? seconds' ],
+			[ 70, 'takes about ?? seconds' ],
+			[ 80, 'takes about ?? seconds' ],
+			[ 90, 'takes about ?? seconds' ],
+			[ 100, 'takes about ?? seconds' ],
+			[ 128, 'takes about ?? seconds' ],
+			[ 150, 'takes about ?? seconds' ],
+			[ 170, 'takes about 2,500 seconds' ],
+			[ 200, 'takes 5 to 6 minutes' ], [ 250, 'takes 8 to 9 minutes' ], [ 500, 'takes about an hour' ] ];
+
+		for ( i = 0; i < samps.length; i++ ) {
+
+			selSamples.options[ i ] = new Option( samps[ i ][ 0 ] );
+			selSamples.options[ i ].title = samps[ i ][ 1 ];
+		}
+
+		selSamples.selectedIndex = 0;
+
 	}
 
 
@@ -394,7 +445,7 @@ console.log( 'key', inpAPI.value );
 		inpLatitude.value = lat || place.latitude;
 
 		inpLongitude.value = lon || place.longitude;
-
+console.log( '', lat, lon );
 		googleMapCenter = { lat: parseFloat( lat ), lng: parseFloat( lon ) };
 
 		googleMap.setCenter( googleMapCenter );
@@ -995,9 +1046,7 @@ console.log( 'complete count', count, elevations.length );
 
 //
 
-	function onClick( event ) {
-
-		menuClickMessage.innerHTML = 'ccccccccccccccccc';
+	function onGoogleMapClick( event ) {
 
 		var latLng, lat, lon;
 
@@ -1026,6 +1075,7 @@ console.log( 'complete count', count, elevations.length );
 
 //			'Pixel X: ' + event.pixel.x + 'px' + b +
 //			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
+
 
 //			'<p><button onclick=inpLatitude.value=' + lat + ';inpLongitude.value=' + lon + ';initMap(); >Set click location as map center</button></p>' +
 			'<p><button onclick=setCenter(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
