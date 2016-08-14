@@ -1,11 +1,11 @@
 <span style=display:none; >[You are now in a GitHub source code view - click this link to view the home page]
-( http://jaanga.github.io/terrain3/#coding-style.md "View file as a web page." )</span>
+( httpa://jaanga.github.io/terrain3/#coding-style.md "View file as a web page." )</span>
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/blob/gh-pages/coding-style.md'; 
 value='You are now in the home page view - Click this button to view the read me file and the source code' >
 
-[jaanga]( https://jaanga.github.io ) &raquo; [terrain3]( http://fgx.github.io/terrain3/  ) &raquo;
+[jaanga]( https://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/  ) &raquo;
 
-[Terrain3 Coding Style]( http://jaanga.github.io/terrain3/#coding-style.md )
+[Terrain3 Coding Style]( https://jaanga.github.io/terrain3/#coding-style.md )
 ===
 
 
