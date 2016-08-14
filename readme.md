@@ -22,6 +22,7 @@ So, let's get going!
 
 <br>
 
+
 ## Two samples of what's here
 
 
@@ -38,6 +39,7 @@ _It's one of our favorite projects and a good place to start exploring._
 
 <br>
 
+
 ### full screen: [Earth Globe Displacement Map]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
@@ -46,6 +48,7 @@ _It's one of our favorite projects and a good place to start exploring._
 
 _Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth._
 _128 lines of code to create over two millions data points. The power to create new worlds is in your hands!_ 
+
 
 
 ### Mission
@@ -82,7 +85,10 @@ _128 lines of code to create over two millions data points. The power to create 
 * [Analemma 3D]( https://ladybug-analysis-tools.github.io/ladybug-web/analemma-3d/ ), [Shadow Range Gallery]( https://ladybug-analysis-tools.github.io/ladybug-web/shadow-range-obj-gallery/ ) and [Ladybug Web]( https://ladybug-analysis-tools.github.io/ladybug-web/ )
 * [FGx Globe]( http://fgx.github.io/fgx-globe/fgx-globe-r7/fgx-globe-r7.html ), [FGx Plane Spotter]( http://jaanga.github.io/fgx-plane-spotter/r4/fgx-plane-spotter-r4.html ) and [FGx Sandbox]( http://fgx.github.io/sandbox/ )
 
+## Background material
 
+* [Dev Notes]( https://jaanga.github.io/terrain3/index.html#dev-notes.md )
+* [Coding Style ]( https://jaanga.github.io/terrain3/index.html#coding-style.md )
 
 ### Nice Stuff
 
