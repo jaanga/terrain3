@@ -22,6 +22,9 @@
 	place.tilesX = 3;
 	place.tilesY = 3;
 
+//	place.samplesX; // 512 appears to be the max for a single call
+//	place.samplesY;
+
 	var googleMap, googleMapCenter, geocoder, infoWindow;
 	var googleElevator;
 
@@ -53,6 +56,7 @@
 		threejs.style.display = 'none';
 
 		setMenuDetailsAPIKey();
+//		setMenuDetailsGeocoder();
 		setMenuDetailsMapParameters();
 		setMenuDetailsMapClick();
 		setMenuDetailsElevations();
@@ -73,6 +77,27 @@
 
 	}
 
+	function setMenuDetailsGeocoder() {
+
+		menuDetailsGeocoder.innerHTML =
+
+			'<details open>' +
+
+				'<summary><h3>set place</p></summary>' +
+				'<p>Enter a location to go there:</p>' +
+				'<p><input id=inpAddress class=controls placeholder="' + placeholder + '" onclick=this.select(); onchange=geocodeAddress(geocoder,googleMap); title="Thank you Google!" > ' +
+				'<button onclick=geocodeAddress(geocoder,googleMap); > geocode </button></p>' +
+
+				'<p id=menuPlaceMessage ></p>' +
+
+				'<p>Latitude : <input id=inpLatitude size=12 value=' + place.latitude + ' onclick=this.select(); onchange=setGoogleMapLocation(inpLatitude.value,inpLongitude.value); ></p>' +
+				'<p>Longitude: <input id=inpLongitude size=12 value=' + place.longitude + ' onclick=this.select(); onchange=setGoogleMapLocation(inpLatitude.value,inpLongitude.value);  ></p>' +
+
+			'</details>' +
+
+		'';
+
+	}
 
 	function setMenuDetailsMapParameters() {
 
@@ -290,30 +315,36 @@ console.log( 'key', inpAPI.value );
 
 	}
 
-	function setAPIkey() {
-
-		script = document.body.appendChild( document.createElement('script') );
-		script.onload = initMap;
-
-		if ( inpAPI.value !== '' ) {
-
-			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
-
-		} else {
-
-			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
-
-		}
-
-	}
-
 	function initMap() {
+
+/*
+//		place.latitude = parseFloat( inpLatitude.value );
+//		place.longitude = parseFloat( inpLongitude.value );
+
+		place.zoom = selZoom.selectedIndex + 1;
+
+		place.tilesX = selTilesX.selectedIndex + 1;
+		place.tilesY = selTilesY.selectedIndex + 1;
+
+		place.samplesX = parseInt( selSamples.value, 10 ) * place.tilesX;
+		place.samplesY = parseInt( selSamples.value, 10 ) * place.tilesY;
+
+		place.mapTypeId = selMap.value.toLowerCase();
+*/
 
 		onChangeMapParameter();
 
 		initGeocoder();
 
 		getTiles();
+
+		if ( path.vertices ) {
+
+			drawPline( path.vertices, googleMap, '#ffff00', 3 );
+
+			drawTitleBoundary( path.latMax, path.lonMin, path.latMin, path.lonMax, '#ff00ff' );
+
+		}
 
 	}
 
@@ -350,6 +381,19 @@ console.log( 'key', inpAPI.value );
 
 		});
 
+/*
+//		origin_autocomplete = new google.maps.places.Autocomplete( inpAddress );
+		origin_autocomplete.bindTo( 'bounds', googleMap );
+
+		origin_autocomplete.addListener( 'place_changed', function() {
+
+			place.origin_autocomplete = origin_autocomplete.getPlace();
+
+			expandViewportToFitPlace( googleMap, place.origin_autocomplete );
+
+		} );
+*/
+
 		googleMap.addListener( 'click', onGoogleMapClick );
 
 		otherInits();
@@ -363,6 +407,14 @@ console.log( 'key', inpAPI.value );
 
 	function setCenter( lat, lon ) {
 
+//		menuPlaceMessage.innerHTML = '<span style=color:red; >Click in the input box & select a location from the drop-down list</span>';
+
+//		inpLatitude.value = lat || place.latitude;
+
+//		inpLongitude.value = lon || place.longitude;
+
+//console.log( '', lat, lon );
+
 		place.latitude = lat ? parseFloat( lat ) : place.latitude;
 
 		place.longitude = lon ? parseFloat( lon ) : place.longitude;
@@ -371,9 +423,13 @@ console.log( 'key', inpAPI.value );
 
 		googleMap.setCenter( googleMapCenter );
 
+//		place.zoom = selZoom.selectedIndex + 1;
+
 		googleMap.setZoom( place.zoom );
 
 		geocodeLatLng();
+
+//		initMap();
 
 		getTiles();
 
@@ -404,6 +460,69 @@ console.log( 'key', inpAPI.value );
 		} );
 
 	}
+
+	function geocodeAddress( geocoder, resultsMap ) {
+
+		var address;
+
+		address = inpAddress.value;
+
+		geocoder.geocode( { 'address': address }, function( results, status ) {
+
+			if ( status === google.maps.GeocoderStatus.OK ) {
+
+				resultsMap.setCenter( results[ 0 ].geometry.location );
+				resultsMap.setZoom( place.zoom );
+
+				var marker = new google.maps.Marker( { map: resultsMap, position: results[ 0 ].geometry.location } );
+
+			} else {
+
+				menuPlaceMessage.innerHTML = 'Geocode was not successful for the following reason: ' + status;
+
+			}
+
+		} );
+
+	}
+
+
+	function expandViewportToFitPlace( map, origin ) {
+
+		if ( !origin ) {
+
+			menuPlaceMessage.innerHTML = 'Autocomplete\'s returned place contains no geometry';
+
+			return;
+
+		} else {
+
+			if ( origin.geometry.viewport ) {
+
+				map.fitBounds( origin.geometry.viewport );
+
+			} else {
+
+				map.setCenter( origin.geometry.location );
+				map.setZoom( 17 );
+
+			}
+
+			inpLatitude.value = origin.geometry.location.lat();
+			inpLongitude.value = origin.geometry.location.lng();
+
+			initMap();
+
+			menuPlaceMessage.innerHTML +=
+
+				b + ( origin.vicinity ? 'Vicinity:\n' + origin.vicinity : '' ) +
+
+			'';
+
+		}
+
+	}
+
 
 //
 
@@ -725,7 +844,7 @@ console.log( 'key', inpAPI.value );
 			'samples': place.samplesX
 
 		}, function( results, status ) {
-
+//debugger;
 			if ( status === google.maps.ElevationStatus.OK ) {
 
 				if ( results ) {
@@ -882,6 +1001,23 @@ console.log( 'complete count', count, elevations.length );
 
 //
 
+	function setAPIkey() {
+
+		script = document.body.appendChild( document.createElement('script') );
+		script.onload = initMap;
+
+		if ( inpAPI.value !== '' ) {
+
+			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
+
+		} else {
+
+			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
+
+		}
+
+	}
+
 
 	function onGoogleMapClick( event ) {
 
@@ -939,6 +1075,39 @@ console.log( 'complete count', count, elevations.length );
 		reader = new FileReader();
 		reader.onload = function( event ) {
 
+			if ( type === 'path' ) {
+
+
+				polyline = {
+
+					data: reader.result,
+					name: files.files[0].name,
+					size: files.files[0].size,
+					type: files.files[0].type || 'not specified',
+					modified: files.files[0].lastModifiedDate
+
+				};
+
+				txtPath.innerHTML = polyline.data;
+
+				menuOpenFile.innerHTML =
+					'<p>' +
+					'name: ' + polyline.name + '<br>' +
+					'size: ' + polyline.size.toLocaleString() + ' bytes<br>' +
+					'type: ' + polyline.type + '<br>' +
+					'modified: ' + polyline.modified.toLocaleDateString() +
+					'</p>' +
+					'<p>' +
+						'<button onclick=goThere(); >Go There</button> ' +
+						'<button onclick=parseDataGetMap(polyline.data); >Draw Path</button>' +
+					'</p>' +
+				'';
+
+				parseDataGetMap( polyline.data );
+
+			} else if ( type === 'elevations' ) {
+
+
 //				var parametersArray, delta;
 
 				parametersArray = files.files[0].name.split( '_' );
@@ -976,12 +1145,23 @@ console.log( 'complete count', count, elevations.length );
 
 //console.log( 'elevations', place.elevations );
 
+			}
+
 
 //console.log( '', files.files[0].lastModifiedDate );
 
 		};
 
 		reader.readAsText( files.files[0] );
+
+	}
+
+	function goThere() {
+
+		inpLatitude.value = path.latCen;
+		inpLongitude.value = path.lonCen;
+
+		setCenter( path.latCen, path.lonCen );
 
 	}
 
