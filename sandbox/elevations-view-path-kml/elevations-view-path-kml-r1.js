@@ -1,4 +1,6 @@
 
+	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-kml/';
+//	var urlBase = '../elevations-data-03/';
 	var pathDataKML = [
 
 //		{ name: 'LEIG - Igualada', 
@@ -18,7 +20,7 @@
 
 	];
 
-	function getGitHubAPITreeContents(){};
+	function getGitHubAPITreeContents( callback ) {};
 
 	function setMenuDetailsSelectFile() {
 
@@ -64,7 +66,7 @@
 
 	function otherInits() {
 
-		requestGPXPath( path.path );
+		requestGPXPath( map.kmlFile );
 
 	}
 
@@ -89,7 +91,7 @@
 			xmlParse = ( new window.DOMParser() ).parseFromString( response, "text/xml");
 
 			text = xmlParse.getElementsByTagName( "coordinates" )[0];
-			text = text.textContent;v
+			text = text.textContent;
 
 			trekPoints = text.split( '\n' ).map( function( line ) { return line.split( ',' ); } );
 

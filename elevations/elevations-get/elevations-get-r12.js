@@ -25,14 +25,8 @@
 	var googleMap, googleMapCenter, geocoder, infoWindow;
 	var googleElevator;
 
-//	place.ULtileX;
-//	place.ULtileY;
-
 	var ULlat, ULlon, LRlat, LRlon;
 	var LRtileX, LRtileY;
-
-	place.elevations = [];
-//	place.resolution = [];
 
 	var startTime;
 	var count = 0;
@@ -581,6 +575,7 @@ console.log( 'key', inpAPI.value );
 		var tileX, tileY, tileOffset;
 		var ULlat, ULlon, LRlat, LRlon;
 		var tileCoordinates, tilePath;
+
 		var zoom = place.zoom;
 		var tilesX = place.tilesX;
 		var tilesY = place.tilesY;
@@ -646,16 +641,6 @@ console.log( 'key', inpAPI.value );
 		place.elevations = [];
 		place.resolutions = [];
 		count = 0;
-
-/*
-		delay = place.samplesX <= 500 ? 2000 : delay;
-		delay = place.samplesX <= 250 ? 1200 : delay; // 1800
-		delay = place.samplesX <= 200 ? 200 : delay;
-		delay = place.samplesX <= 100 ? 100 : delay;
-		delay = place.samplesX <= 66 ? 50 : delay;
-		delay = place.samplesX <= 50 ? 50 : delay;
-		delay = place.samplesX <= 33 ? 5 : delay;
-*/
 
 		nextElevations();
 
@@ -785,13 +770,6 @@ console.log( 'count', count, 'index', index, 'status', status, 'delay', delay );
 				} else if ( place.samplesX < 181 ) { delay = 2000;
 				} else { delay = 4000; }
 
-/*				if ( place.samplesX < 31 ) { delay = 5;
-				} else if ( place.samplesX < 61 ) { delay = 330;
-				} else if ( place.samplesX < 121 ) { delay = 1000;
-				} else { delay = 2000; }
-*/
-
-
 				setTimeout( nextElevations, delay );
 
 			} else {
@@ -799,22 +777,6 @@ console.log( 'count', count, 'index', index, 'status', status, 'delay', delay );
 console.log( 'complete count', count, elevations.length );
 
 //			txtElevations.innerText = 'complete count: ' + ( count + 1 ) + b;
-
-/*
-				if ( inpAddress && inpAddress.value ) {
-
-					place.origin = inpAddress.value;
-
-				} else if ( place.origin_autocomplete && place.origin_autocomplete.vicinity ) {
-
-					place.origin = place.origin_autocomplete.vicinity;
-
-				} else {
-
-					place.origin = inpAddress.placeholder;
-
-				}
-*/
 
 				setIframe();
 
@@ -878,7 +840,6 @@ console.log( 'complete count', count, elevations.length );
 		};
 
 	}
-
 
 //
 
@@ -1070,24 +1031,16 @@ console.log( 'complete count', count, elevations.length );
 
 // http://ausdemmaschinenraum.wordpress.com/2012/12/06/how-to-save-a-file-from-a-url-with-javascript/
 
-		var blob, fileName, a;
+		var pl, blob, fileName, a;
 
 		if ( !place.elevations || place.elevations.length === 0 ) { alert( 'There is no elevation data to save.\n\n Press \'Get Elevations\' to request some data.' ); return; }
-
-//		elevationsString = place.elevations.join( ',' );
-//		blob = new Blob( [ elevationsString ] );
-//		blob = new Blob( [ elevations ] );
-
-		origin = place.origin.toLowerCase().replace( /,/g, '').replace( / /g, '-' );
-
 
 		pl = JSON.stringify( place );
 		blob = new Blob( [ pl ] );
 
-		fileName = 'elevations_' +
+		fileName = '' +
 
-//			( place.vicinity ? place.vicinity : 'place' ) + '_' +
-			origin + '_'  +
+			place.origin.toLowerCase() + '_'  +
 			place.zoom + '_' +
 			place.ULtileX + '_' +
 			place.ULtileY + '_' +

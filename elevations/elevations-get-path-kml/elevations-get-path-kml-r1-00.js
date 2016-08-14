@@ -1,26 +1,21 @@
 
+	var kmlLeig = 'https://jaanga.github.io/terrain3/google-api/data-kml/LEIG-L1500-01.kml';
+	var kmlVhsk = 'https://jaanga.github.io/terrain3/google-api/data-kml/VHSK-22-01.kml';
+
+	var kmlSnowMountainActual = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
+	var kmlSnowMountainWilderness = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
 
 	var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
 
 
-	function openMap() {
-
-		defaultFile = defaultFile ? defaultFile : urlBase + selFiles.value;
+	function otherInits() {
 
 		fileName = location.hash ? location.hash.slice( 1 ) : defaultFile ;
-
-		place.kmlFile = fileName;
-		place.vicinity = place.origin = fileName.split( '/' ).pop().slice( 0, -4 );
 
 		openKML( fileName );
 
 	}
 
-	function otherInits() {
-
-console.log( 'lat', place );
-
-	}
 
 	function setMenuDetailsPathKMLExamples() {
 
@@ -29,11 +24,15 @@ console.log( 'lat', place );
 			'<details open >' +
 				'<summary><h3>path kml examples</h3></summary>' +
 
+//				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
+//				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
+
 				'<small>Select or open a file to view in 3D</small>' +
 				'<p>' +
 					'<select id=selFiles onchange=openKML(urlBase+this.value); size=12 style=width:100%; >' +
 						'<option>Select a file</option></select>' +
 				'</p>' +
+
 
 			'</details>' +
 
@@ -43,17 +42,13 @@ console.log( 'lat', place );
 
 	function openKML( url ) {
 
-		place.kmlFile = url;
-		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, -4 );
-
-
+console.log( '', url );
 		layer = new google.maps.KmlLayer({
 
 			url: url,
 			map: googleMap
 
 		});
-
 
 	}
 
@@ -63,9 +58,10 @@ console.log( 'lat', place );
 
 		var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
+
 		var searchInFolder = 'data-path-kml/';
 
-		var xhr, response, files, file;
+	//	var xhr, response, files, file;
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', urlAPITreeContents, true );
@@ -95,7 +91,7 @@ console.log( 'lat', place );
 
 			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
 
-			callback();
+//			callback();
 
 		}
 

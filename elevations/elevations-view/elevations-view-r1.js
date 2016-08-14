@@ -3,8 +3,8 @@
 // R10.1
 
 //	var defaultFile = '../elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
-//	var defaultFile = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
-	var defaultFile; // if no default, select a random file
+	var defaultFile = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
+//	var defaultFile; // if no default, select a random file
 
 //	location.hash = 'file=https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
 
@@ -73,7 +73,7 @@
 
 		function onGitHubTreeLoad() {
 
-// map could have beec created by iframe parent
+// map could have been created by iframe parent
 
 			if ( map === undefined ) {
 
