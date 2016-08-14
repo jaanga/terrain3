@@ -61,7 +61,9 @@ This project is an attempt to remedy the situation.
 
 ### 2016-08-13 
 
-# Add Elevations Get Path KML R1
+* Add Elevations Get Path KML R1
+* Big cleanup to Elevations Get
+
 
 ### 2016-08-03
 

@@ -274,7 +274,7 @@ console.time( 'timer0' );
 
 			toggleFog();
 
-console.log( 'map.verticalScale', map );
+//console.log( 'map.verticalScale', map );
 
 			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScale;
 

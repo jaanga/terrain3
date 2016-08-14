@@ -139,6 +139,11 @@ Intended for general use
 
 ## Change Log
 
+
+### 2016-08-13 ~ R11
+
+* * Big code cleanup
+
 ### 2016-08-08 ~ R9
 
 * Continued objectification

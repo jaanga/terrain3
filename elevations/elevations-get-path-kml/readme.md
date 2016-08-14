@@ -3,6 +3,7 @@
 <input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get-path-kml/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
+[elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
 [Elevations Get Path KML Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-get-path-kml/ )
 ===
@@ -12,7 +13,7 @@
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800 height=500 onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe sandbox='allow-same-origin allow-scripts' src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800 height=500 onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations Get Path KML View_
 
