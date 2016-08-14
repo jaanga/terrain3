@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations Get Path KML R1</title>
+<title>Elevations Get R12</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
 Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
@@ -12,11 +12,8 @@ Display results in 3D. Display useful info.
 <meta name=date content='2016-08-13' >
 </head>
 <body>
-<script src=../elevations-get/elevations-get-r12.js ></script>
-<script src=elevations-get-path-kml-r1.js ></script>
+<script src=elevations-get-r12.js ></script>
 <script>
-
-	defaultFile = 'https://dl.dropboxusercontent.com/u/4732486/git-repos/jaanga.github.io/terrain3/data-path-kml/_7mile_ski_trail.kml';
 
 
 	init();
@@ -38,7 +35,7 @@ Display results in 3D. Display useful info.
 			'input[type=range] { -webkit-appearance: none; -moz-appearance: none; background-color: #ddd; width: 160px; }' +
 			'input[type=range]::-moz-range-thumb { background-color: #888; border-radius: 0; width: 10px; }' +
 			'input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }' +
-//			'p { margin: 0 0 5px 0; }' +
+			'p { margin: 0 0 5px 0; }' +
 			'summary h3, summary h4 { display:inline; }' +
 			'summary { outline: none; }' +
 
@@ -47,6 +44,7 @@ Display results in 3D. Display useful info.
 			'#mapDiv { height: 100%; text-align: center; }' +
 			'#menu { background-color: #eee; border: 1px #ccc solid; left: -325px; max-height: ' + ( window.innerHeight - 10 ) + 'px; ' +
 				'opacity: 0.85; overflow: auto; padding: 0 10px; position: absolute; top: -20px; transition: left 1s; width: 300px; }' +
+
 			'#threejs { background-color: #ccc; border: 2px solid #888; height: 80%; min-width: 70%;' +
 				'overflow: hidden; left: 350px; position: absolute; resize: none; top: 100px; }' +
 			'#threejsHeader { text-align: right; }' +
@@ -70,13 +68,9 @@ Display results in 3D. Display useful info.
 		menu.id = 'menu';
 		menu.innerHTML =
 
-			'<h3>' +
-				'<a href=https://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo ' +
-				'<a href=https://jaanga.github.io/terrain3/ title="" > terrain3 </a> &raquo ' +
-				'<a href=https://jaanga.github.io/terrain3/#elevations/ title="" > elevations </a> &raquo ' + b +
-			'</h3>' +
 			'<h2>' +
-				'<a href="" title="Click here to refresh this page" >Get Path KML R1</a> ~ ' +
+				'<a href=https://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a>' + b +
+				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
 				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
 			'</h2>' +
 
@@ -84,17 +78,11 @@ Display results in 3D. Display useful info.
 
 			'<div id=menuDetailsAPIKey ></div>' +
 
-			'<hr>' +
-
-			'<div id=menuDetailsPathKMLExamples ></div>' +
+			'<div id=menuDetailsGeocoder ></div>' +
 
 			'<div id=menuDetailsMapParameters ></div>' +
 
 			'<div id=menuDetailsMapClick ></div>' +
-
-			'<div id=menuDetailsPathKMLOpen ></div>' +
-
-			'<div id=menuDetailsGeocoder style=display:none; ></div>' +
 
 			'<hr>' +
 
@@ -119,10 +107,6 @@ Display results in 3D. Display useful info.
 		'';
 
 		initMapGetMenu();
-
-		setMenuDetailsPathKMLExamples();
-
-		getGitHubAPITreeContents();
 
 		onHashChange();
 

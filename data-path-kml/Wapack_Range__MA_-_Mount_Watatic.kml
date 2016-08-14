@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>CalTopo Export</name>
+    <description>Export from CalTopo</description>
+    <Folder>
+      <open>1</open>
+      <name>Lines and Polygons</name>
+      <Placemark>
+        <Style>
+          <LineStyle>
+            <color>ff0000FF</color>
+            <width>2.0</width>
+          </LineStyle>
+          <PolyStyle>
+            <fill>1</fill>
+            <outline>1</outline>
+            <width>2.0</width>
+            <color>440000FF</color>
+          </PolyStyle>
+        </Style>
+        <name>Ascent</name>
+        <description/>
+        <LineString>
+          <altitudeMode>clampToGround</altitudeMode>
+          <tessellate>1</tessellate>
+          <coordinates>-71.88616275787354,42.703482257414954,0
+-71.88669919967651,42.703072270589736,0
+-71.88762187957764,42.7012115271247,0
+-71.88850164413452,42.70047825272939,0
+-71.88911318778992,42.70004459175374,0
+-71.88930094242096,42.69965823669694,0
+-71.8904784321785,42.699307361143966,0
+-71.89298763871193,42.699029418989575,0
+-71.8935126811266,42.6988115982047,0
+-71.89317438751459,42.698308439126656,0
+-71.89354168251157,42.69785184707129,0
+-71.89362877048552,42.69743430757666,0
+-71.89360794145614,42.69706783396578,0
+-71.89297525445,42.69720000250092,0
+-71.89266963978298,42.69711626910015,0
+-71.89244985580444,42.69687483228561,0
+</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
