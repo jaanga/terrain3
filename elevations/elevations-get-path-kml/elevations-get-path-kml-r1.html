@@ -76,7 +76,7 @@ Display results in 3D. Display useful info.
 				'<a href=https://jaanga.github.io/terrain3/#elevations/ title="" > elevations </a> &raquo ' + b +
 			'</h3>' +
 			'<h2>' +
-				'<a href="" title="Click here to refresh this page" >Get Path KML</a> ~ ' +
+				'<a href="" title="Click here to refresh this page" >Get Path KML R1</a> ~ ' +
 				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
 			'</h2>' +
 
@@ -84,19 +84,17 @@ Display results in 3D. Display useful info.
 
 			'<div id=menuDetailsAPIKey ></div>' +
 
-			'<div id=menuDetailsGeocoder style=display:none; ></div>' +
+			'<hr>' +
+
+			'<div id=menuDetailsPathKMLExamples ></div>' +
 
 			'<div id=menuDetailsMapParameters ></div>' +
 
 			'<div id=menuDetailsMapClick ></div>' +
 
-			'<hr>' +
-
-			'<div id=menuDetailsPathKMLExamples ></div>' +
-
 			'<div id=menuDetailsPathKMLOpen ></div>' +
 
-
+			'<div id=menuDetailsGeocoder style=display:none; ></div>' +
 
 			'<hr>' +
 
@@ -122,23 +120,11 @@ Display results in 3D. Display useful info.
 
 		initMapGetMenu();
 
-//		setMenuDetailsMapParameters();
-
-//		setMenuDetailsMapClick();
-
 		setMenuDetailsPathKMLExamples();
 
-		setMenuDetailsPathKMLOpen();
+		getGitHubAPITreeContents();
 
 		onHashChange();
-
-	}
-
-	function otherInits() {
-
-		fileName = location.hash ? location.hash.slice( 1 ) ? defaultFile ;
-
-		openKML( fileName );
 
 	}
 

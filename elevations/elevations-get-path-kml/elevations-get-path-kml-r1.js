@@ -5,6 +5,16 @@
 	var kmlSnowMountainActual = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
 	var kmlSnowMountainWilderness = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
 
+		var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
+
+
+	function otherInits() {
+
+		fileName = location.hash ? location.hash.slice( 1 ) : defaultFile ;
+
+		openKML( fileName );
+
+	}
 
 
 	function setMenuDetailsPathKMLExamples() {
@@ -14,42 +24,15 @@
 			'<details open >' +
 				'<summary><h3>path kml examples</h3></summary>' +
 
-//				'<p><a href=# onclick=openKML(kmlLeig); >Open LEIG KML</a></p>' +
-//				'<p><a href=# onclick=openKML(kmlVhsk); >VHSK KML</a></p>' +
-				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
-				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
+//				'<p><a href=# onclick=openKML(kmlSnowMountainActual); >Snow Mountain Actual KML</a></p>' +
+//				'<p><a href=# onclick=openKML(kmlSnowMountainWilderness); >Sbow Mountain Wilderness KML</a></p>' +
 
-			'</details>' +
+			'<small>Select or open a file to view in 3D</small>' +
+			'<p>' +
+				'<select id=selFiles onchange=file=openKML(urlBase+this.value); size=12 style=width:100%; >' +
+					'<option>Select a file</option></select>' +
+			'</p>' +
 
-		'';
-
-	}
-
-
-	function setMenuDetailsPathKMLOpen() {
-
-		menuDetailsPathKMLOpen.innerHTML =
-
-			'<details open >' +
-				'<summary><h3>path kml open</h3></summary>' +
-
-				'<small>Open path file and draw it on map</small>' +
-				'<p><input type=file id=inpFile onchange=openFile(this,"path"); ></p>' +
-				'<div>' +
-					'<textarea id=txtPath >' +
-						'Open a KML file to view its path on the map. ' +
-						'If location is remote, press \'Set location as map center\' when it appears. ' +
-						'You may load multiple paths.' +
-					'</textarea>' +
-				'</div>' +
-
-				'<div id=menuOpenFile ></div>' +
-
-				'<div id=menuPathBoundaries >' +
-					'<details>' +
-					'<summary><h4>path boundaries</h4></summary>' +
-					'<small>When you open a path file, its boundary details appear here</small>' +
-				'</div>' +
 
 			'</details>' +
 
@@ -65,5 +48,50 @@
 			map: googleMap
 
 		});
+
+	}
+
+// GitHub API
+
+	function getGitHubAPITreeContents( callback ) {
+
+		var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+
+		var searchInFolder = 'data-path-kml/';
+
+	//	var xhr, response, files, file;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', urlAPITreeContents, true );
+		xhr.onload = onLoadGitHubTreeContents;
+		xhr.send( null );
+
+		function onLoadGitHubTreeContents() {
+
+			response = JSON.parse( xhr.response );
+			files = [];
+
+			for ( var i = 0; i < response.tree.length; i++ ) {
+
+				file = response.tree[ i ].path;
+
+				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
+				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.kml' ) { continue; }
+
+
+				file = file.split( '\/' ).pop();
+
+				files.push( file );
+
+				selFiles[ selFiles.length ] = new Option( file, file );
+
+			}
+
+			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
+
+//			callback();
+
+		}
 
 	}
