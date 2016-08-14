@@ -22,9 +22,9 @@ console.log( 'lat', place );
 
 	}
 
-	function setMenuDetailsPathKMLExamples() {
+	function setMenuDetailsSelectPathKMLExample() {
 
-		menuDetailsPathKMLExamples.innerHTML =
+		menuDetailsSelectPathKMLExample.innerHTML =
 
 			'<details open >' +
 				'<summary><h3>path kml examples</h3></summary>' +

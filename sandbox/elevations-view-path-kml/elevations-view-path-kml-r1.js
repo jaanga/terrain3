@@ -1,7 +1,7 @@
 
 	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-kml/';
 
-	var urlBase = '../elevations-data-kml/';
+	var urlBase = '../../elevations/elevations-data-kml/';
 	var pathDataKML = [
 
 //		{ name: 'LEIG - Igualada', 
@@ -21,9 +21,11 @@
 
 	];
 
+// prevent it from running
+
 	function getGitHubAPITreeContents( callback ) {};
 
-	function setMenuDetailsSelectFile() {
+	function menuDetailsSelectKMLDataExample() {
 
 		menuPlugins.innerHTML += 
 
@@ -31,8 +33,9 @@
 			'<summary><h3>Select KML file to view</h3></summary>' +
 			'<small>Select or open a file to view in 3D</small>' +
 			'<p>' +
-				'<select id=selPath size=5 style=width:100%; >' +
+				'<select id=selFiles size=5 style=width:100%; >' +
 			'</p>' +
+
 			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +
 
 			'<details>' +
@@ -47,19 +50,19 @@
 
 		'</details>';
 
+/*
 		for ( var i = 0; i < pathDataKML.length; i++ ) {
 
 			selPath[ selPath.length ] = new Option( pathDataKML[ i ].name );
 
 		}
+*/
+		selFiles.onchange = function() {
 
-		selPath.onchange = function() {
+//			path = pathDataKML[ selFiles.selectedIndex - 1];
 
-			path = pathDataKML[ selPath.selectedIndex ];
+			getElevationsFileXHR( urlBase + selFiles.value ); 
 
-			getElevationsFileXHR( path.elevations ); 
-
-			
 
 		}
 
@@ -141,3 +144,43 @@ console.timeEnd( 't1' );
 
 	}
 
+	function getGitHubAPITreeContentsKML( callback ) {
+
+		var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+		var searchInFolder = 'elevations/elevations-data-kml/';
+
+		var xhr, response, files, file;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', urlAPITreeContents, true );
+		xhr.onload = onLoadGitHubTreeContents;
+		xhr.send( null );
+
+		function onLoadGitHubTreeContents() {
+
+			response = JSON.parse( xhr.response );
+			files = [];
+
+			for ( var i = 0; i < response.tree.length; i++ ) {
+
+				file = response.tree[ i ].path;
+
+				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
+				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
+
+				file = file.split( '\/' ).pop();
+
+				files.push( file );
+
+				selFiles[ selFiles.length ] = new Option( file, file );
+
+			}
+
+			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
+
+//			callback();
+
+		}
+
+	}
