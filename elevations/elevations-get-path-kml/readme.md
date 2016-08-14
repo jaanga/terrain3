@@ -13,7 +13,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17637554/30450756-6099-11e6-9c75-8facc3c37bd8.png" style=display:none; width=800 >
 
-<iframe sandbox='allow-same-origin allow-scripts' src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800 height=500 onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe sandbox='allow-same-origin allow-scripts' src="https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html" width=800 height=500 onload=this.contentWindow.googleMap.setOptions({scrollwheel:false});  ></iframe>
 
 _Elevations Get Path KML View_
 
