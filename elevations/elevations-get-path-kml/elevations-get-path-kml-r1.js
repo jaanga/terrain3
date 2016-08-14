@@ -5,7 +5,7 @@
 	var kmlSnowMountainActual = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Actual.kml';
 	var kmlSnowMountainWilderness = 'https://jaanga.github.io/terrain3/google-api/data-kml/Snow_Mountain_Wilderness.kml';
 
-		var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
+	var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
 
 
 	function otherInits() {
