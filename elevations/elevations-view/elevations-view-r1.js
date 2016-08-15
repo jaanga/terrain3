@@ -36,8 +36,8 @@
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 
-//	var searchInFolder = 'elevations-data-03/';
-	var searchInFolder = 'elevations-data-family+friends/';
+	var searchInFolder = 'elevations-data-03/';
+//	var searchInFolder = 'elevations-data-family+friends/';
 
 	var urlBase = 'https://jaanga.github.io/terrain3/elevations/' + searchInFolder;
 
@@ -302,7 +302,7 @@ console.time( 'timer0' );
 
 			toggleFog();
 
-// console.log( 'map.verticalScale', map );
+//console.log( 'map.verticalScale', map );
 
 			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScale;
 
@@ -623,7 +623,6 @@ console.timeEnd( 'timer0' );
 
 				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
-
 
 				file = file.split( '\/' ).pop();
 
