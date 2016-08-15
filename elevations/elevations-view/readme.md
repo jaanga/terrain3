@@ -74,13 +74,14 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
-* 2016-08-11 ~ Add overal name space
+* 2016-08-15 ~ Add resolution details
+* 2016-08-15 ~ Add autoRotate checkbox
+* 2016-08-11 ~ Add overall name space
 * 2016-08-11 ~ Add separate init file
 * 2016-08-11 ~ Add fog controls
 * 2016-08-11 ~ Add physics
 * 2016-08-11 ~ Add easy to make animated GIF
 * 2016-08-05 ~ Save changes to data file
-* 2016-08-11 ~ Add read KML 
 * 2016-08-05 ~ Add skybox, background
 * Add pokemons?
 * Add placards
@@ -106,6 +107,12 @@ Intended for generating flightpaths
 
 
 ## Change Log
+
+
+### 2016-08-15 ~ R1.1
+
+* 2016-08-11 ~ Add read KML < see: elevations view path kml
+* Add select searchInFolder by location.hash
 
 ### 2016-08-11 ~ R1
 

@@ -35,10 +35,13 @@
 
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/';
-//	var urlBase = '../elevations-data-03/';
 
-	var searchInFolder = 'elevations-data-03/';
+//	var searchInFolder = 'elevations-data-03/';
+	var searchInFolder = 'elevations-data-family+friends/';
+
+	var urlBase = 'https://jaanga.github.io/terrain3/elevations/' + searchInFolder;
+
+//	var urlBase = '../elevations-data-03/' + searchInFolder;
 
 
 	var updateCamera = true; // is this needed?
@@ -56,6 +59,15 @@
 			end = location.hash.indexOf( '.txt' ) + 4;
 
 			defaultFile = location.hash.slice( start, end );
+
+		}
+
+		if ( location.hash && location.hash.match( 'cat=' ) ) {
+
+			start = location.hash.indexOf( 'cat=' ) + 5;
+			end = location.hash.slice( start ).indexOf( '/' ) + 4;
+
+			searchInFolder = location.hash.slice( start, end );
 
 		}
 
@@ -565,11 +577,11 @@ console.timeEnd( 'timer0' );
 
 		map.radius = map.boxHelper.geometry.boundingSphere.radius;
 
-		cameraPosition = 0.7 * map.radius;
-
 		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
 		controls.maxDistance = 3 * map.radius;
+		controls.autoRotate = true;
 
+		cameraPosition = 0.7 * map.radius;
 		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
 
 	}

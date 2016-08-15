@@ -223,7 +223,7 @@
 			'time: ' + ( ( Date.now() - startTime ) / 1000 ).toFixed( 1 ) + b +
 			'delay: ' + delay + b +
 			'results length: ' + results.length.toLocaleString() + b +
-			'resolution(s): ' + resolution.toFixed() + b +
+			'resolution(s): ' + place.resolutions + b +
 
 		b;
 
@@ -729,7 +729,11 @@ console.log( 'key', inpAPI.value );
 
 						resolution = results[ i ].resolution;
 
-						if ( resolution && !place.resolutions.includes( resolution ) ) { place.resolutions.push( resolution.toFixed( 1 ) ); }
+						if ( resolution && !place.resolutions.includes( resolution.toFixed() ) ) {
+
+							place.resolutions.push( resolution.toFixed() ); 
+
+						}
 
 					}
 
