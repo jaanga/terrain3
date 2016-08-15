@@ -1,7 +1,9 @@
 
 	var urlBase = 'https://jaanga.github.io/terrain3/elevations/elevations-data-kml/';
 
-	var urlBase = '../../elevations/elevations-data-kml/';
+	var urlBase = '../elevations-data-kml/';
+
+/*
 	var pathDataKML = [
 
 //		{ name: 'LEIG - Igualada', 
@@ -20,6 +22,7 @@
 			}
 
 	];
+*/
 
 // prevent it from running
 

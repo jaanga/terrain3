@@ -24,7 +24,7 @@ _Elevations Get Path KML View_
 
 ### Mission
 
-* Read a KML file
+* Read any KML file from Caltopo 
 * Open Google API Map at location and display KML path
 * Obtain elevation data from Google  
 * Display and save the data
@@ -35,19 +35,27 @@ _Elevations Get Path KML View_
 
 ### Vision
 
-* To wread a wide variety of KML file types
+* To read a wide variety of KML file types
 
 
 ## Features
 
-* https://caltopo.com/map.html
 
+
+## Wish list / To Do
+
+* Simplify the startup procedures
+* View path in pop-pm 3D iframe display
+	* Let view calculate 3D Path
+	( Save 3D path to 3D data file along with elevations etc
 
 
 ## Links of Interest
 
-
+* https://caltopo.com/map.html
 ## Change Log
+
+
 
 ### 2016-08-13 ~ R1
 

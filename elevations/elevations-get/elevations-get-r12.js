@@ -52,6 +52,8 @@
 		setMenuDetailsElevations();
 		setMenuDetailsAbout();
 
+		onHashChange();
+
 	}
 
 	function setMenuDetailsAPIKey() {

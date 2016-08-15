@@ -1,7 +1,7 @@
 
 
 	var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
-
+	var urlViewElevations3D = '../..//sandbox/elevations-view-path-kml/elevations-view-path-kml-r1.html';
 
 	function openMap() {
 
