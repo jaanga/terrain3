@@ -1,16 +1,16 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path-kml/ "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/sandbox/elevations-view-path-kml/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+( https://jaanga.github.io/terrain3/#elevations/elevations-view-path-kml/ "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-view-path-kml/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
-[sandbox]( https://jaanga.github.io/terrain3/#sandbox/ ) &raquo;
+[elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
 
-[Elevations View Path KML Read Me]( https://jaanga.github.io/terrain3/#sandbox/elevations-view-path/ )
+[Elevations View Path KML Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-view-path/ )
 ===
 
 
-## full screen: [Elevations View Path KML]( https://jaanga.github.io/terrain3/sandbox/elevations-view-path-kml/index.html )
+## full screen: [Elevations View Path KML]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-kml/index.html )
 
 
 ## Concept
@@ -21,7 +21,7 @@ Load and replay a path into the map and display it in 3D.
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/sandbox/elevations-view-path-kml/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-kml/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations View Path KML_
 
