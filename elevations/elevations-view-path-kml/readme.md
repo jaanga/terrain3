@@ -6,7 +6,7 @@
 [elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
 
-[Elevations View Path KML Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-view-path/ )
+[Elevations View Path KML Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-view-path-kml/ )
 ===
 
 
@@ -16,7 +16,6 @@
 ## Concept
 
 Load and replay a path into the map and display it in 3D.
-
 
 
 <img src="" style=display:none; width=800 >
