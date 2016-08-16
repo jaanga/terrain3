@@ -34,7 +34,7 @@ _Each time you load this page a random location appears_
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view/index.html" width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
-_Sample 1: **[Elevations View]( https://jaanga.github.io/terrain3/elevations/elevations-view/index.html )** ~ a script for displaying 3D data with 2D overlays._
+_Sample 1: **[Elevations View Path CSV]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html )** ~ a script for displaying 3D data with 2D overlays._
 _It's one of our favorite projects and a good place to start exploring._
 
 <br>

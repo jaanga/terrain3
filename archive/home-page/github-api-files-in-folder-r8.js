@@ -18,6 +18,8 @@
 
 	var urlGitHubTree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
 	var urlGHPages = 'https://' + user + '.github.io/' + repo + '/';
+//	var urlGHPages = './';
+
 	var urlSource = 'https://github.com/' + user + '/' + repo + '/tree/' + branch + '/';
 	var urlIssues = 'https://api.github.com/repos/' + org + '/' + repo + '/issues?labels=Status%20Update';
 
