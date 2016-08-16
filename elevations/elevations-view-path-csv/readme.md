@@ -14,7 +14,7 @@
 
 ## Concept
 
-Load and replay a CSV file containing a data path into the map and display it in 3D.
+Load and replay a [CSV file]( https://en.wikipedia.org/wiki/Comma-separated_values ) containing a data path into the map and display it in 3D.
 
 View an aircraft - moving along the path. 
 

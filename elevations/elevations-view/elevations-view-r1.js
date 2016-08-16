@@ -43,13 +43,13 @@
 
 //	var urlBase = '../elevations-data-03/' + searchInFolder;
 
-
 	var updateCamera = true; // is this needed?
 	var pixelsPerTile = 256;
 
 	var b = '<br>';
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
+//	var menuDetailsAbout;
 
 	function initMapViewMenu() {
 
@@ -78,6 +78,8 @@
 		setMenuDetailsOverlay();
 
 		setMenuDetailsTerrain();
+
+		setMenuDetailsAbout();
 
 // default action here
 
@@ -251,6 +253,35 @@
 			'Tiles Y: ' + map.tilesY + b +
 
 		b;
+
+	}
+
+
+	function setMenuDetailsAbout() {
+
+//		if ( menuDetailsAbout. ) { return; }
+
+		menuDetailsAbout.innerHTML =
+
+			'<details>' +
+
+				'<summary><h3>About</h3></summary>' +
+
+				'<p>' +
+					'Copyright &copy; 2016 <a href=https://github.com/orgs/jaanga/people target="_blank">Jaanga authors</a>.' + b +
+					'<jaanga.github.io/license.md >MIT license</a>' +
+				'</p>' +
+
+				'<p>' +
+					'Thank you <a href=http://threejs.org target="_blank">Mr.doob</a> and ' +
+					'<a href=https://developers.google.com/maps/documentation/javascript/elevation > Google Maps </a>.' +
+				'</p>' +
+
+//				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
+				'<p>Click the \'i in a circle\' info icon for help</p>' +
+			'</details>' +
+
+		'';
 
 	}
 

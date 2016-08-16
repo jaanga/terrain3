@@ -54,9 +54,17 @@ This project is an attempt to remedy the situation.
 
 * TBD
 
+## Issues
 
+* Elevations view needs a cleanup
+	* Move init code from html file js file
 
 ## Change Log
+
+### 2016-08-16 ~ 
+
+* Add Elevations Get Path CSV R2
+	* Moved from sandbox
 
 
 ### 2016-08-13 
