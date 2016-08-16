@@ -6,18 +6,20 @@
 	var searchInFolder = 'elevations-airports-01/';
 	var urlBase = '../../elevations/' + searchInFolder;
 
-	var defaultFile = urlBase + 'vnlkl_12_3033_1718_3_4_510_680_.txt';
+//	var defaultFile = urlBase + 'vnlkl_12_3033_1718_3_4_510_680_.txt';
 
 	var index = 0;
-	var indexDefault = 5000;
+	var indexDefault;
 
 	var deltaDefault = 2;
 
 	var path = new THREE.Object3D();
-	var lure = new THREE.Object3D();
+	var target;
 
 	var aircraft = {};
+	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
 
+	var pointer;
 
 	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
 	path.color = 0xff0000;
@@ -33,31 +35,28 @@
 
 	function otherInits() {
 
-//	aircraft.mesh = new THREE.Object3D();
-//	aircraft.file = '../aircraft/21.js';
-	
-aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
+		if ( !target ) {
 
+			target = new THREE.Object3D();
+			target.name = 'target'
+			scene.add( target );
 
-	lure.name = 'lure'
-	scene.add( lure );
+			var loader = new THREE.JSONLoader();
+			loader.crossOrigin = 'anonymous';
+			loader.load( aircraft.file, function ( geometry ) {
 
-		var loader = new THREE.JSONLoader();
-		loader.crossOrigin = 'anonymous';
-		loader.load( aircraft.file, function ( geometry ) {
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
+				geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
+				geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.0001, 0.0001, 0.0001 ) );
+				material = new THREE.MeshNormalMaterial( { side: 2 } );
+				aircraft.mesh = new THREE.Mesh( geometry, material );
+				target.add( aircraft.mesh );
 
-			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
-			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
-			geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.001, 0.001, 0.001 ) );
-			material = new THREE.MeshNormalMaterial( { side: 2 } );
-			aircraft.mesh = new THREE.Mesh( geometry, material );
-			lure.add( aircraft.mesh );
+			} );
 
-		} );
+		}
 
 		getFilePathCSV();
-
-		setMenu();
 
 controls.autoRotate = false;
 
@@ -67,6 +66,12 @@ controls.autoRotate = false;
 	function setMenu() {
 
 		menuPlugins.innerHTML +=
+
+		'<details open >' +
+			'<summary><h3>Flight</h3></summary>' +
+			'<p><input id=inpFly type=checkbox > Flying</p>' +
+			'<p><button onclick=setCameraWorld(); >Camera World</button> <button onclick=setCameraChase() >Camera Chase</button></p>' +
+		'</details>' +
 
 		'<details open >' +
 			'<summary><h3>Flight details</h3></summary>' +
@@ -98,6 +103,8 @@ controls.autoRotate = false;
 
 			path.waypoints = waypoints.slice( 1, -1 );
 
+			indexDefault = map.indexDefault[ 0 ];
+
 			drawPath( path );
 
 		}
@@ -112,7 +119,7 @@ controls.autoRotate = false;
 		scene.remove( path.path, path.box );
 
 		path.points = path.waypoints.map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
-		path.rotations = path.waypoints.map( function( p ) { return v( p[ 3 ] * d2r, p[ 4 ] * d2r, p[ 5 ] * d2r ); } );
+		path.rotations = path.waypoints.map( function( p ) { return v( p[ 3 ] * - d2r, p[ 4 ], p[ 5 ] ); } );
 
 		geometry = new THREE.Geometry();
 		geometry.vertices = path.points;
@@ -145,45 +152,94 @@ controls.autoRotate = false;
 			'LR Lon: ' + lonMax.toFixed( 4 ) + '&deg;' + b + b +
 
 			'Center Latitude : ' + center.y.toFixed( 4 ) + '&deg;' + b +
-			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b + b +
-		'';
+			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b +
+		b;
+
+		setCameraFP();
+
+		inpFly.checked = true;
+	}
+
+// prevent default from happening
+
+	function setCamera(){};
+
+	function setCameraFP() {
+
+//		geometry = new THREE.BoxGeometry( 0.0003, 0.0003, 0.0003 );
+		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.5, side: 2, transparent: true } );
+		pointer = new THREE.Mesh( geometry, material );
+		pointer.position.set( 0.002, 0.0012, -0.005 );
+		camera.add( pointer );
+
+		map.radius = map.boxHelper.geometry.boundingSphere.radius;
+		controls.maxDistance = 3 * map.radius;
+
+		camera.position.set( 0, -0.005, 0.002 );
+		target.add( camera );
 
 	}
 
-/*
-	function setCamera() {
+	function setCameraChase() {
+
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
+		camera.position.set( 0.01, 0.01, 0.01 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 1;
+
+		setCameraFP();
+
+		aircraft.mesh.scale.set( 1, 1, 1 );
+
+	}
+
+	function setCameraWorld() {
 
 		var cameraPosition;
 
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
+		camera.position.set( 0.01, 0.01, 0.01 );
+		camera.up.set( 0, 0, 1 );
+
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.maxDistance = 1;
+
 		map.radius = map.boxHelper.geometry.boundingSphere.radius;
 
+		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
 		controls.maxDistance = 3 * map.radius;
+		controls.autoRotate = true;
 
-//		camera.position.set( 0, 0.005, 0.001 );
+		cameraPosition = 0.7 * map.radius;
+		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
 
-		camera.position.set( 0, 0.005, 0.001 );
-		lure.add( camera );
+		aircraft.mesh.scale.set( 10, 10, 10 );
 
-//		lure.position.copy( flightPath.points[ 5000 ] );
-//		camera.position.copy( lure.position );
-//		camera.position.z += 0.02;
+		camera.add( northPoint );
 
 	}
-*/
-
 
 	function animate() {
 
 		requestAnimationFrame( animate );
-		controls.update();
+
 		stats.update();
 
-		if ( !aircraft.mesh || path.rotations.length < 1 ) { return; }
+		renderer.render( scene, camera );
+
+		controls.update();
+
+
+		if ( !aircraft.mesh || !inpFly.checked ) { return; }
 
 		index = index++ >= path.points.length ? indexDefault : index;
 
-		aircraft.mesh.rotation.z = path.rotations[ index ].x ;
-		lure.position.copy( path.points[ index ] );
+		aircraft.mesh.rotation.z = path.rotations[ index ].x;
+		pointer.rotation.z = path.rotations[ index ].x;
+		target.position.copy( path.points[ index ] );
 
 		menuFlightData.innerHTML =
 
@@ -193,7 +249,5 @@ controls.autoRotate = false;
 			'heading Deg: ' + ( aircraft.mesh.rotation.z * r2d ).toFixed() + b +
 
 		b;
-
-		renderer.render( scene, camera );
 
 	}

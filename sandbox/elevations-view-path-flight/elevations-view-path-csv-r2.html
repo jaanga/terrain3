@@ -143,8 +143,8 @@ Display in 3D. Add TMS overlay;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-		camera.position.set( 1, 1, 1 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.000001, 2000 );
+		camera.position.set( 0.01, 0.01, 0.01 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -166,8 +166,8 @@ Display in 3D. Add TMS overlay;
 
 // assets
 
-
 		initMapViewMenu();
+		setMenu();
 
 	}
 
