@@ -8,7 +8,7 @@
 	"ULtileX": 3738,
 	"ULtileY": 2427,
 	"plainOpacity" : 0.5,
-	"verticalScale" : 0.00002,
+	"verticalScale" : 0.0002,
 	"fogNear" : 0.5,
 	"fogFar" : 1,
 	"csvFiles": [ "https://jaanga.github.io/terrain3/data-path-csv/YGIL-01-cooked.csv" ],

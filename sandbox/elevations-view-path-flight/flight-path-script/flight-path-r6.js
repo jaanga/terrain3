@@ -158,6 +158,7 @@ controls.autoRotate = false;
 		setCameraFP();
 
 		inpFly.checked = true;
+
 	}
 
 // prevent default from happening
@@ -218,7 +219,6 @@ controls.autoRotate = false;
 
 		aircraft.mesh.scale.set( 10, 10, 10 );
 
-		camera.add( northPoint );
 
 	}
 
