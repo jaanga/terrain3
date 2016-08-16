@@ -14,14 +14,16 @@
 
 ## Concept
 
-Load and replay a path into the map and display it in 3D.
+Load and replay a CSV file containing a data path into the map and display it in 3D.
 
-View an aircraft - moving along the path. The camera follow the aircraft.
+View an aircraft - moving along the path. 
+
+Buttons toggle world camera or chase camera - camera follows the aircraft.
 
 While the camera is moving you may control the direction where it's looking.
 
 
-<img src="" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17692279/de8381ec-634d-11e6-876f-6aa0f071b4c6.png" style=display:none; width=800 >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html" width=800 height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
@@ -41,7 +43,8 @@ _Elevations View Path CSV_
 
 * All back into a single file
 * All the flight paths have heading issues < fixed
-
+* Check box to stop the motion
+* Buttons to toggle world or chase camera
 
 ### 2016-08-10
 
