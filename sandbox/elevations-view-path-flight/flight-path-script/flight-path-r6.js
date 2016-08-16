@@ -35,30 +35,33 @@
 
 	function otherInits() {
 
-		if ( !target ) {
+		inpFly.checked = false;
 
-			target = new THREE.Object3D();
-			target.name = 'target'
-			scene.add( target );
+		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );
+		material = new THREE.MeshNormalMaterial( { opacity: 0.5, side: 2, transparent: true } );
+		pointer = new THREE.Mesh( geometry, material );
+		pointer.position.set( 0.002, 0.0012, -0.005 );
 
-			var loader = new THREE.JSONLoader();
-			loader.crossOrigin = 'anonymous';
-			loader.load( aircraft.file, function ( geometry ) {
+		target = new THREE.Object3D();
+		target.name = 'target'
+		scene.add( target );
 
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
-				geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
-				geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.0001, 0.0001, 0.0001 ) );
-				material = new THREE.MeshNormalMaterial( { side: 2 } );
-				aircraft.mesh = new THREE.Mesh( geometry, material );
-				target.add( aircraft.mesh );
+		var loader = new THREE.JSONLoader();
+		loader.crossOrigin = 'anonymous';
+		loader.load( aircraft.file, function ( geometry ) {
 
-			} );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.0001, 0.0001, 0.0001 ) );
+			material = new THREE.MeshNormalMaterial( { side: 2 } );
+			aircraft.mesh = new THREE.Mesh( geometry, material );
+			target.add( aircraft.mesh );
 
-		}
+		} );
 
 		getFilePathCSV();
 
-controls.autoRotate = false;
+//controls.autoRotate = false;
 
 	}
 
@@ -155,43 +158,27 @@ controls.autoRotate = false;
 			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b +
 		b;
 
-		setCameraFP();
-
 		inpFly.checked = true;
+
+//		setCameraWorld();
+		setCameraChase();
+
+		camera.add( pointer );
 
 	}
 
 // prevent default from happening
-
 	function setCamera(){};
-
-	function setCameraFP() {
-
-//		geometry = new THREE.BoxGeometry( 0.0003, 0.0003, 0.0003 );
-		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );
-		material = new THREE.MeshNormalMaterial( { opacity: 0.5, side: 2, transparent: true } );
-		pointer = new THREE.Mesh( geometry, material );
-		pointer.position.set( 0.002, 0.0012, -0.005 );
-		camera.add( pointer );
-
-		map.radius = map.boxHelper.geometry.boundingSphere.radius;
-		controls.maxDistance = 3 * map.radius;
-
-		camera.position.set( 0, -0.005, 0.002 );
-		target.add( camera );
-
-	}
 
 	function setCameraChase() {
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-		camera.position.set( 0.01, 0.01, 0.01 );
+		camera.position.set( 0, 0.005, 0.005 );
 		camera.up.set( 0, 0, 1 );
+		target.add( camera );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 1;
-
-		setCameraFP();
 
 		aircraft.mesh.scale.set( 1, 1, 1 );
 
@@ -200,25 +187,20 @@ controls.autoRotate = false;
 	function setCameraWorld() {
 
 		var cameraPosition;
+		map.radius = 2 * path.box.geometry.boundingSphere.radius;
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
 		camera.position.set( 0.01, 0.01, 0.01 );
 		camera.up.set( 0, 0, 1 );
+		cameraPosition = 0.7 * map.radius;
+		camera.position.copy( path.box.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 1;
-
-		map.radius = map.boxHelper.geometry.boundingSphere.radius;
-
-		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
-		controls.maxDistance = 3 * map.radius;
+		controls.target.copy( path.box.geometry.boundingSphere.center );
+		controls.maxDistance = 5 * map.radius;
 		controls.autoRotate = true;
 
-		cameraPosition = 0.7 * map.radius;
-		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
-
 		aircraft.mesh.scale.set( 10, 10, 10 );
-
 
 	}
 
@@ -232,10 +214,9 @@ controls.autoRotate = false;
 
 		controls.update();
 
-
 		if ( !aircraft.mesh || !inpFly.checked ) { return; }
 
-		index = index++ >= path.points.length ? indexDefault : index;
+		index = index++ >= path.points.length - 1 ? indexDefault : index;
 
 		aircraft.mesh.rotation.z = path.rotations[ index ].x;
 		pointer.rotation.z = path.rotations[ index ].x;

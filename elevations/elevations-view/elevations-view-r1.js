@@ -567,7 +567,9 @@ console.timeEnd( 'timer0' );
 
 		setCamera();
 
-		otherInits();
+//		otherInits();
+
+
 
 	}
 
