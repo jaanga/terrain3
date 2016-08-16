@@ -9,7 +9,7 @@
 [Elevations View Path CSV Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-view-path-csv/ )
 ===
 
-## full screen: [Elevations View Path CSV]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-kml/index.html )
+## full screen: [Elevations View Path CSV]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html )
 
 
 ## Concept
@@ -23,7 +23,7 @@ While the camera is moving you may control the direction where it's looking.
 
 <img src="" style=display:none; width=800 >
 
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html" width=800px height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
+<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html" width=800 height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
 _Elevations View Path CSV_
 
