@@ -49,8 +49,6 @@
 	var b = '<br>';
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
-//	var menuDetailsAbout;
-
 	function initMapViewMenu() {
 
 		if ( location.hash && location.hash.match( 'file=' ) ) {
@@ -110,6 +108,8 @@
 
 	function setMenuDetailsAPIKey() {
 
+		if ( typeof menuDetailsAPIKey === 'undefined' ) { return; }
+
 		menuDetailsAPIKey.innerHTML =
 
 			'<details>' +
@@ -139,6 +139,7 @@
 				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%; >' +
 //					'<option>Select a file</option></select>' +
 			'</p>' +
+
 			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +
 
 			'<details>' +
@@ -259,7 +260,7 @@
 
 	function setMenuDetailsAbout() {
 
-//		if ( menuDetailsAbout. ) { return; }
+		if ( typeof menuDetailsAbout === 'undefined' ) { return; }
 
 		menuDetailsAbout.innerHTML =
 

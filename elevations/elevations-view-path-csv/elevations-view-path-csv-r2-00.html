@@ -2,13 +2,13 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path CSV R2.1</title>
+<title>Elevations View Path CSV R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
 ' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-16' >
+<meta name=date content='2016-08-15' >
 </head>
 <body>
 <!--
@@ -83,6 +83,8 @@ Display in 3D. Add TMS overlay;
 
 				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
+// make into a js function.
+
 				'<div id=menuPlugins ></div>' +
 
 				'<div id=menuDetailsAPIKey style=display:none; ></div>' +
@@ -93,7 +95,26 @@ Display in 3D. Add TMS overlay;
 
 				'<div id=menuDetailsTerrain ></div>' +
 
+//				'<div id=menuDetailsElevations ></div>' +
+
+//				'<div id=menuBackgroundSettings ></div>' +
+
+//				'<div id=menuDetailsOverlay2 ></div>' +
+
 				'<div id=menuDetailsAbout ></div>' +
+
+//
+/*
+				'<details >' +
+					'<summary><h3>about</h3></summary>' +
+					'<p>Copyright &copy; 2016 Jaanga authors. <a href=https://jaanga.github.io/home/r4/index.html#http://jaanga.github.io/jaanga-copyright-and-mit-license.md >MIT license</a>.</p>' +
+					'<p>Click the \'i in a circle\' icon for more <a href=index.html#readme.md title="Click here for help and information" >help</a>.</p>' +
+					'<p>' +
+						'\'We stand on the shoulders of giants.\' In this case the giant is ' +
+						'<a href="https://developers.google.com/maps/documentation/javascript/" target="_blank">Google Maps JavaScript API</a>' +
+					'</p>' +
+				'</details>' +
+*/
 
 				'<hr>' +
 
@@ -148,7 +169,6 @@ Display in 3D. Add TMS overlay;
 // assets
 
 		initMapViewMenu();
-
 		setMenu();
 
 	}
