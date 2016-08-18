@@ -304,7 +304,7 @@ console.time( 'timer0' );
 			map = JSON.parse( xhr.responseText );
 			onLoadElevations();
 
-			location.hash = fName;
+			location.hash = 'file=' + fName;
 
 		}
 
