@@ -2,7 +2,7 @@
 
 
 //	var defaultFile = '../elevations-data-02/elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_150_200_.txt';
-	var defaultFile = '../elevations-data-02/elevations_Igualada_12_2066_1525_3_3_300_300_.txt';
+	var defaultFile = 'elevations_Tenzing-Hillary Airport, Lukla, Eastern Region, Nepal_12_3033_1718_3_4_510_680_.txt';
 
 	var defaultFiles = [
 
@@ -43,7 +43,9 @@
 	map.updateCamera = true; // is this needed?
 
 	map.pixelsPerTile = 256;
-	map.verticalscale = 0.1;
+
+	map.verticalScaleDefault = 0.1;
+	map.plainOpacityDefault = 1;
 
 	var b = '<br>';
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
@@ -51,7 +53,7 @@
 	var backgroundColor = 0x7ec0ee ;
 
 
-	function initUI() {
+	function initMenu() {
 
 		setMenuDetailsAPIKey();
 
@@ -61,9 +63,24 @@
 
 		setMenuDetailsTerrain();
 
-		getGitHubAPITreeContents( getFileElevations );
+// default action here
+
+		getGitHubAPITreeContents( onLoad );
 
 		toggleFog();
+
+
+		function onLoad() {
+
+			if ( map.elevations === undefined ) {
+
+				file = urlBase + selFiles.value;
+
+				getElevationsFileXHR( file );
+
+			}
+
+		}
 
 	}
 
@@ -89,10 +106,10 @@
 		'<details open >' +
 			'<summary><h3>Select file to view</h3></summary>' +
 			'<small>Select or open a file to view in 3D</small>' +
-			'<p>' + //Elevations:<br>' +
-				'<select id=selFiles onchange=getFileElevations(this.value); size=12 style=width:100%;  ></select>' +
+			'<p>' +
+				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%;  ></select>' +
 			'</p>' +
-			'<p><input type=file id=inpFile onchange=openFileReader(this); /></p>' +
+			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +
 
 			'<details>' +
 
@@ -100,7 +117,7 @@
 
 				'<div id=menuDetailsFileNameParameters >cccc</div>' +
 
-			'</details>' + b;
+			'</details>' + b +
 
 		'</details>' + b;
 
@@ -116,7 +133,7 @@
 
 				'<p>Map overlay<br><select id=selMap onchange=drawMapOverlay(); size=5 /></select></p>' +
 
-				'<p>Map zoom level<br><select id=selMapZoom onchange=drawMapOverlay(); size=1 /></select></p>' +
+				'<p>Map overlay zoom level<br><select id=selMapZoom onchange=drawMapOverlay(); size=1 /></select></p>' +
 
 				'<details>' +
 
@@ -125,7 +142,7 @@
 
 				'</details>' +
 
-			'</details>' + b
+			'</details>' + b +
 
 		'';
 
@@ -139,10 +156,10 @@
 
 		selMap.selectedIndex = 2;
 
-		for ( var i = 12; i < 16; i++ ) {
+		for ( var i = 0; i < 4; i++ ) {
 
 			selMapZoom.appendChild( document.createElement( 'option' ) );
-			selMapZoom.children[ i - 12 ].text = i;
+			selMapZoom.children[ i ].text = i;
 
 		}
 
@@ -160,6 +177,9 @@
 
 				'<p>Vertical scale: <output id=outVertical >value</output>' +
 					'<input type=range id=inpVertical max=0.0002 min=0.000001 step=0.000001 value=0.0001 oninput=updateTerrain() title="" style=width:100%; >' +
+//					'<input type=range id=inpVertical max=0.0002 min=0.000001 step=0.000001 value=0.0001 oninput=initElevations() title="" style=width:100%; >' +
+
+
 				'</p>' +
 
 				'<p>' +
@@ -188,13 +208,71 @@
 	}
 
 
-// gather the data file open dialog
 
-	function openFileReader( files ) { 
+// Gather data when using the default
+
+	function getElevationsFileXHR( fName ) {
+
+		var xhr, response;
+
+		map.verticalScale = map.verticalScaleDefault;
+		map.plainOpacity = map.plainOpacityDefault;
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', fName, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback() {
+
+			scene = new THREE.Scene();
+
+			toggleFog();
+
+			response = xhr.responseText;
+
+// process extra data
+
+			if ( response.match( '{' ) ) {
+
+				values = window;
+
+				itemsString = response.slice( 0, response.indexOf( '}' ) + 1 );
+
+				map.items = JSON.parse( itemsString );
+
+				updateSettings();
+
+				response = response.replace( itemsString, '' );
+
+				elevations = response.split( ',' ).slice( 1 );
+
+			} else {
+
+				map.items = '';
+
+				elevations = response.split( ',' );
+
+			}
+
+			map.elevations = elevations.map( function( item ) { return parseFloat( item ); } );
+
+			getFileNameParameters( fName );
+
+			initElevations();
+
+		}
+
+	}
+
+// gather the data using file open dialog
+
+	function getElevationsFileReader( files ) { 
 
 		var reader, data, fileName;
 
-//		setMenuDetailsSettings();
+		map.verticalScale = map.verticalScaleDefault;
+		map.plainOpacity = map.plainOpacityDefault;
 
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
@@ -205,7 +283,7 @@
 
 			fileName = files.files[ 0 ].name;
 
-			getParametersFileName( fileName );
+			getFileNameParameters( fileName );
 
 			initElevations();
 
@@ -215,63 +293,24 @@
 
 	}
 
-// 
-	function getFileElevations( fName ) {
-
-		var xhr, response;
-
-		fileName = fName || selFiles.value;
-//debugger;
-		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', urlBase + fileName, true );
-		xhr.onload = callback;
-		xhr.send( null );
-
-		function callback() {
-
-			response = xhr.responseText;
-			map.elevations = response.split( ',' ).map( function( item ) { return parseFloat( item ); } );
-
-			getParametersFileName( fileName );
-
-			initElevations();
-
-		}
-
-	}
-
-// When in iframe and called by parent
+// Gather data when in iframe and called by parent
 
 	function processElevations( elevs, params ) {
 
 			map.elevations = elevs;
 			map.parameters = params;
 
-//console.log( 'map.parameters', map.parameters );
-
-			setMenuDetailsFileName();
-
-			setMenuDetailsSettings();
-
-			getParametersOverlay();
-
 			initElevations();
-
-//			setBackground();
 
 	}
 
-// when in iframe and called by viewer or app without access to data
+// Gather data when in iframe and called by viewer or app without access to data
 
 	function processElevationsFileName( elevs, fName ) {
 
 			map.elevations = elevs;
 
-			getParametersFileName( fName );
-
-			setMenuDetailsFileName();
-
-			getParametersOverlay();
+			getFileNameParameters( fName );
 
 			initElevations();
 
@@ -281,15 +320,15 @@
 
 // utilities to help while gathering data
 
-	function getParametersFileName( fName ) {
+	function getFileNameParameters( fName ) {
 
-		var parametersArray, delta;
+		var parametersArray;
 
 		parametersArray = fName.split( '_' );
 
 		map.parameters = {
 
-			location: parametersArray[ 1 ],
+			origin: parametersArray[ 1 ],
 			zoom: parseInt( parametersArray[ 2 ], 10 ),
 			ULtileX: parseInt( parametersArray[ 3 ], 10 ),
 			ULtileY: parseInt( parametersArray[ 4 ], 10 ),
@@ -309,7 +348,7 @@
 
 		menuDetailsFileNameParameters.innerHTML =
 
-			'Location:<br>' + map.parameters.location + b + b +
+			'Location:<br>' + map.parameters.origin + b + b +
 
 			'Zoom level: ' + map.parameters.zoom + b + b +
 
@@ -322,7 +361,8 @@
 			'Tiles X: ' + map.parameters.tilesX + b +
 			'Tiles Y: ' + map.parameters.tilesY + b +
 
-		'';
+		b;
+
 
 	}
 
@@ -338,7 +378,7 @@
 		map.min = arrayMin( map.elevations );
 		map.max = arrayMax( map.elevations );
 
-		scale = map.verticalscale / ( map.max - map.min );
+		scale = map.verticalScale / ( map.max - map.min );
 
 		inpVertical.value = scale;
 		inpVertical.max = 3 * scale;
@@ -357,7 +397,7 @@
 		cenLat = LRlat + 0.5 * ( ULlat - LRlat );
 		cenLon = ULlon + 0.5 * ( LRlon - ULlon );
 
-		setMapGeometry();
+		initMapGeometry();
 		drawMapOverlay( true );
 
 		menuDetailsTerrainParameters.innerHTML =
@@ -380,7 +420,7 @@
 
 	}
 
-	function setMapGeometry() {
+	function initMapGeometry() {
 
 		var vertices;
 
@@ -407,6 +447,7 @@
 
 		if ( window.self !== window.top && parent.frame ) { 
 
+			controls.enableZoom = false;
 			parent.ifr = parent.frame.contentWindow; 
 			parent.outVertical.value = parent.inpVertical.value = inpVertical.value;
 			parent.inpVertical.max = inpVertical.max;
@@ -421,7 +462,7 @@
 	function drawMapOverlay( updateCamera ) {
 
 		var baseURL, count;
-		var texture;
+		var texture, tilesTotal;
 
 		if ( selMap.selectedIndex > 8 ) {
 
@@ -433,10 +474,9 @@
 
 		}
 
-		getParametersOverlay();
+		getMapOverlayParameters();
 
 		baseURL = mapTypes[ selMap.selectedIndex ][ 1 ];
-		count = 0;
 
 		for ( var x = map.parameters.ULtileXOverlay; x < map.parameters.ULtileXOverlay + map.parameters.tilesXOverlay; x++ ) {
 
@@ -460,7 +500,8 @@
 		texture.minFilter = texture.magFilter = THREE.NearestFilter;
 		texture.needsUpdate = true;
 
-		var tilesTotal = map.parameters.tilesXOverlay * map.parameters.tilesYOverlay;
+		tilesTotal = map.parameters.tilesXOverlay * map.parameters.tilesYOverlay;
+		count = 0;
 
 
 			function loadImage( fName, x, y ) {
@@ -481,7 +522,7 @@
 
 						map.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2 } );
 
-						drawMap( map.updateCamera );
+						drawMap( updateCamera );
 
 					}
 
@@ -491,12 +532,14 @@
 
 	}
 
-	function getParametersOverlay() {
+	function getMapOverlayParameters() {
 
 		var delta;
 
-		delta = selMapZoom ? selMapZoom.selectedIndex : 1;
+//		selMapZoom.selectedIndex = map.parameters.zoom ;
 
+		delta = selMapZoom ? selMapZoom.selectedIndex: 1;
+console.log( 'delta', delta );
 		map.parameters.zoomOverlay = delta + map.parameters.zoom;
 		map.parameters.ULtileXOverlay = Math.pow( 2, delta ) * map.parameters.ULtileX;
 		map.parameters.ULtileYOverlay = Math.pow( 2, delta ) * map.parameters.ULtileY;
@@ -524,18 +567,120 @@
 	}
 
 
+// Three.js
+
+	function drawMap( updateCamera ) {
+
+		map.mesh = new THREE.Mesh( map.geometry, map.material );
+		map.mesh.name = map.parameters.origin;
+		map.mesh.position.set( cenLon, cenLat, 0 );
+		scene.add( map.mesh );
+
+		map.boxHelper = new THREE.BoxHelper( map.mesh, 0xff0000 );
+		map.boxHelper.name = 'boxHelper';
+		scene.add( map.boxHelper );
+//		map.boxHelper.visible = false;
+
+		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
+//		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: map.plainOpacity, side: 2, transparent: true } );
+
+		map.plain = new THREE.Mesh( geometry, material );
+		map.plain.name = 'plain';
+		map.plain.position.set( cenLon, cenLat, 0 ); // sea level
+		scene.add( map.plain );
+
+		if ( updateCamera === true ) { setCamera(); }
+
+console.timeEnd( 'timer0' );
+
+	}
+
+
+	function updateSettings() {
+
+		if ( !map.items ) { return; }
+
+		keys = Object.keys( map.items ); 
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			items = keys[ i ].split( '.' );
+
+			values = window;
+
+			for ( j = 0; j < items.length - 1; j++ ) {
+
+				values = values[ items[ j ] ];
+
+			}
+
+//console.log( 'params ', j, values[ items[ j ] ], keys[ i ] );
+
+			values[ items[ j ] ] = map.items[ keys[ i ] ];
+
+		}
+
+
+	}
+
+	function updateTerrain() {
+
+		scene = new THREE.Scene();
+
+		toggleFog();
+
+		updateSettings();
+
+		initMapGeometry();
+
+		drawMapOverlay();
+
+	}
+
+	function setCamera() {
+
+		var cameraPosition;
+
+		map.radius = map.boxHelper.geometry.boundingSphere.radius;
+
+		cameraPosition = 0.7 * map.radius;
+
+		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
+		controls.maxDistance = 3 * map.radius;
+
+		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
+
+	}
+
+	function toggleFog() {
+
+		if ( chkFog.checked === true ) {
+
+			scene.fog = new THREE.Fog( 0x7ec0ee, 0.05, 1 );
+
+		} else {
+
+			scene.fog.far = 0 ;
+
+		}
+
+	}
+
+
 // GitHub API
 
-	function getGitHubAPITreeContents( callback2 ) {
+	function getGitHubAPITreeContents( callback ) {
 
-		var xhr, response, files, file, element;
+		var xhr, response, files, file;
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', urlAPITreeContents, true );
-		xhr.onload = callback;
+		xhr.onload = onLoadGitHubTreeContents;
 		xhr.send( null );
 
-		function callback() {
+		function onLoadGitHubTreeContents() {
 
 			response = JSON.parse( xhr.response );
 			files = [];
@@ -546,7 +691,8 @@
 
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.txt' ) { continue; }
 
-				file = file.slice( file.lastIndexOf( '\/' ) + 1 );
+				file = file.split( '\/' ).pop();
+
 				files.push( file );
 
 				selFiles[ selFiles.length ] = new Option( file, file );
@@ -555,7 +701,7 @@
 
 			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
 
-			callback2();
+			callback();
 
 		}
 
@@ -625,71 +771,3 @@
 
 	}
 
-// Three.js
-
-
-	function updateTerrain() {
-
-
-		setMapGeometry();
-		drawMapOverlay();
-
-	}
-
-	function drawMap( updateCamera ) {
-
-		scene.remove( map.mesh );
-		map.mesh = new THREE.Mesh( map.geometry, map.material );
-		map.mesh.position.set( cenLon, cenLat, 0 );
-		scene.add( map.mesh );
-
-		scene.remove( map.boxHelper );
-		map.boxHelper = new THREE.BoxHelper( map.mesh, 0xff0000 );
-		scene.add( map.boxHelper );
-
-		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
-//		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
-//		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, side: 2 } );
-
-		scene.remove( map.plain );
-		map.plain = new THREE.Mesh( geometry, material );
-		map.plain.position.set( cenLon, cenLat, 0 ); // sea level
-		scene.add( map.plain );
-
-//		if ( updateCamera === true ) 
-
-		setCamera();
-
-console.timeEnd( 'timer0' );
-
-	}
-
-
-
-	function setCamera() {
-
-		map.radius = map.boxHelper.geometry.boundingSphere.radius;
-
-		var cameraPosition = 1.2 * map.radius;
-
-		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
-		controls.maxDistance = 3 * map.radius;
-
-		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
-
-	}
-
-	function toggleFog() {
-
-		if ( chkFog.checked === true ) {
-
-			scene.fog = new THREE.Fog( 0x7ec0ee, 0.05, 1 );
-
-		} else {
-
-			scene.fog.far = 0 ;
-
-		}
-
-	}

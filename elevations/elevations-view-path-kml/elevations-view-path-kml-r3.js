@@ -1,3 +1,4 @@
+// 2016-08-17 ~ R3
 
 	var defaultFile = '../elevations-data-kml/7mile_ski_trail_13_1688_3105_3_3_90_90_.txt';
 
@@ -8,8 +9,8 @@
 
 	var path;
 
-	var aircraft = {};
-	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/seymour/seymour.js';
+//	var aircraft = {};
+//	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/seymour/seymour.js';
 
 	var index = 0;
 	var indexDefault = 0;
@@ -18,8 +19,8 @@
 	var d2r = pi / 180, r2d = 180 / pi;
 
 // prevent default from happening
-	function setCamera(){};
-	function animate(){};
+	function setCamera(){}
+	function animate(){}
 
 
 	function otherInits() {
@@ -30,6 +31,11 @@
 
 		setMenu();
 
+		actor = getActor();
+		actor.name = 'actor';
+
+		scene.add( actor );
+
 //		inpFly.checked = true;
 
 		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );
@@ -37,13 +43,15 @@
 		pointer = new THREE.Mesh( geometry, material );
 		pointer.position.set( 0.002, 0.0012, -0.005 );
 
-		target = new THREE.Object3D();
-		target.name = 'target'
-		scene.add( target );
+//		target = new THREE.Object3D();
+//		target.name = 'target';
+//		scene.add( target );
 
-		getAircraftMesh();
+//		getAircraftMesh();
 
 		getFilePathKML();
+
+
 
 //controls.autoRotate = false;
 
@@ -62,7 +70,7 @@
 			material = new THREE.MeshNormalMaterial( { side: 2 } );
 			aircraft.mesh = new THREE.Mesh( geometry, material );
 			aircraft.mesh.scale.set( 10, 10, 10 );
-			target.add( aircraft.mesh );
+//			target.add( aircraft.mesh );
 
 		} );
 
@@ -72,12 +80,13 @@
 	function setMenu() {
 
 		menuPlugins.innerHTML =
-
+/*
 		'<details open >' +
 			'<summary><h3>Flight</h3></summary>' +
 			'<p><input id=inpFly type=checkbox checked > Flying</p>' +
 			'<p><button onclick=setCameraWorld(); >Camera World</button> <button onclick=setCameraChase() >Camera Chase</button></p>' +
 		'</details>' +
+*/
 
 		'<details open >' +
 			'<summary><h3>Flight details</h3></summary>' +
@@ -159,13 +168,15 @@ console.timeEnd( 't1' );
 //		geometry.vertices = path.points;
 
 
-		var curve = new THREE.CatmullRomCurve3( path.points );
+		ccurve = new THREE.CatmullRomCurve3( path.points );
 //		curve.closed = true;
 
 		geometry = new THREE.Geometry();
 
-		geometry.vertices = curve.getPoints( 500 );
+		geometry.vertices = ccurve.getPoints( 500 );
 
+
+curve = new THREE.CatmullRomCurve3( geometry.vertices );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 		path.path = new THREE.Line( geometry, material);
@@ -199,16 +210,20 @@ console.timeEnd( 't1' );
 			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b +
 		b;
 
+		target = center; 
+
+		animatePlus();
+
 //		inpFly.checked = true;
 
-		setCameraWorld();
+		cameraWorld();
 //		setCameraChase();
 
-		camera.add( pointer );
+//		camera.add( pointer );
 
 	}
 
-
+/*
 	function setCameraChase() {
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
@@ -267,7 +282,7 @@ console.timeEnd( 't1' );
 
 		target.position.copy( path.path.geometry.vertices[ index ] );
 
-/*
+
 //		aircraft.mesh.rotation.z = path.rotations[ index ].x;
 //		pointer.rotation.z = path.rotations[ index ].x;
 
@@ -280,6 +295,7 @@ console.timeEnd( 't1' );
 //			'heading Deg: ' + ( aircraft.mesh.rotation.z * r2d ).toFixed() + b +
 
 		b;
-*/
+
 
 	}
+*/

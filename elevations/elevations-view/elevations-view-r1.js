@@ -1,4 +1,4 @@
-// 2016-08-10
+// 2016-08-18
 
 // R10.1
 
@@ -62,10 +62,12 @@
 
 		if ( location.hash && location.hash.match( 'cat=' ) ) {
 
-			start = location.hash.indexOf( 'cat=' ) + 5;
-			end = location.hash.slice( start ).indexOf( '/' ) + 4;
+			start = location.hash.indexOf( 'cat=' ) + 4;
+			end = location.hash.indexOf( '/' ) + 1;
 
 			searchInFolder = location.hash.slice( start, end );
+
+			urlBase = 'https://jaanga.github.io/terrain3/elevations/' + searchInFolder;
 
 		}
 
@@ -121,7 +123,7 @@
 
 		function setAPIkey() {
 
-			script = document.body.appendChild( document.createElement('script') );
+			script = document.body.appendChild( document.createElement( 'script' ) );
 			script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
 
 		}
@@ -137,7 +139,6 @@
 			'<small>Select or open a file to view in 3D</small>' +
 			'<p>' +
 				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%; >' +
-//					'<option>Select a file</option></select>' +
 			'</p>' +
 
 			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +
@@ -146,7 +147,7 @@
 
 				'<summary><h4>file name parameters</h4></summary>' +
 
-				'<div id=menuDetailsFileNameParameters >cccc</div>' +
+				'<div id=menuDetailsFileNameParameters ></div>' +
 
 			'</details>' + b +
 
@@ -294,6 +295,7 @@
 console.time( 'timer0' );
 
 		var xhr;
+		map = {};
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', fName, true );
@@ -301,6 +303,8 @@ console.time( 'timer0' );
 
 			map = JSON.parse( xhr.responseText );
 			onLoadElevations();
+
+			location.hash = fName;
 
 		}
 

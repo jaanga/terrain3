@@ -54,6 +54,10 @@ This project is an attempt to remedy the situation.
 
 * TBD
 
+## Categories
+
+### Family & Friends]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html#cat=elevations-data-family+friends/ )
+
 ## Issues
 
 * Elevations view needs a cleanup
@@ -61,7 +65,13 @@ This project is an attempt to remedy the situation.
 
 ## Change Log
 
-### 2016-08-16 ~ 
+
+### 2016-08-18 ~ R1.1
+
+* Fix categories issue
+* Add permalinks
+
+### 2016-08-16 ~ R1
 
 * Add Elevations Get Path CSV R2
 	* Moved from sandbox
