@@ -603,24 +603,28 @@ console.timeEnd( 'timer0' );
 
 		setCamera();
 
-//		otherInits();
-
-
+		otherInits();
 
 	}
+
+	function postInits(){};
+
 
 	function setCamera() {
 
 		var cameraPosition;
 
 		map.radius = map.boxHelper.geometry.boundingSphere.radius;
+		map.center = map.boxHelper.geometry.boundingSphere.center;
 
-		controls.target.copy( map.boxHelper.geometry.boundingSphere.center );
+		controls.target.copy( map.center );
 		controls.maxDistance = 3 * map.radius;
 		controls.autoRotate = true;
 
 		cameraPosition = 0.7 * map.radius;
-		camera.position.copy( map.boxHelper.geometry.boundingSphere.center ).add( v( 0, -cameraPosition, cameraPosition ) );
+		camera.position.copy( map.center.clone() ).add( v( 0, -cameraPosition, cameraPosition ) );
+
+		postInits();
 
 	}
 
