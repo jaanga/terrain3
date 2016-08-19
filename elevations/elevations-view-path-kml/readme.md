@@ -31,6 +31,12 @@ _Elevations View Path KML_
 
 ## Change Log
 
+### 2016-08-19 ~ R4
+
+* Added the fore cameras
+	* Took a while
+
+
 ### 2016-08-12 ~ R1
 
 * First commit script and read me

@@ -45,11 +45,7 @@
 //		material = new THREE.MeshNormalMaterial();
 //		actorMesh = new THREE.Mesh( geometry, material );
 
-
-
 		path = new THREE.Object3D();
-		path.points = [];
-		path.path = [];
 
 		getFilePathKML();
 
@@ -184,6 +180,10 @@ console.time( 't1' );
 
 console.timeEnd( 't1' );
 
+
+		path.points = [];
+		path.path = [];
+
 		path.points = map.points; // .map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
 
 		spline = new THREE.CatmullRomCurve3( path.points );
@@ -224,6 +224,9 @@ console.timeEnd( 't1' );
 		b;
 
 	}
+
+
+// cameras
 
 
 	function setCameraChase() {
