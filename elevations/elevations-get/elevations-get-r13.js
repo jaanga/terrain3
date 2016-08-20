@@ -4,16 +4,13 @@
 // https://developers.google.com/maps/documentation/javascript/elevation
 // https://developers.google.com/maps/documentation/elevation/start
 
-	var scriptGoobleAPIMaps;
 
 	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r11.html';
+//	var urlViewElevations3D = '../elevations-view/index.html';
 
 	var place = {};
-	var path = {};
 
-	var placeholder = 'Tenzing-Hillary Airport, Lukla, Nepal';
-
-	place.vicinity = placeholder;
+	place.vicinity = 'Tenzing-Hillary Airport, Lukla, Nepal';
 
 	place.latitude = 27.6878; // 27.71110193545;
 	place.longitude = 86.7314; // 86.71228385040001;
@@ -22,20 +19,21 @@
 
 	place.tilesX = 3;
 	place.tilesY = 3;
+	place.samplesDefaultIndex = 0;
 
-	var googleMap, googleMapCenter, geocoder, infoWindow;
-	var googleElevator;
+	var scriptGoobleAPIMaps;
+	var googleMap, googleMapCenter;
 
 	var ULlat, ULlon, LRlat, LRlon;
 	var LRtileX, LRtileY;
 
 	var startTime;
-	var count = 0;
-	var delay = 50;
-	var delay = 2000;
+	var count;
+	var delay;
 
-	var thisDelay = 0;
-	var polyline;
+	var newWindow;
+	var offX;
+	var offY;
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
 	var d2r = pi / 180;
@@ -43,45 +41,53 @@
 	var b = '<br>';
 
 
-	function initMapGetMenu() {
+	function initElevationsGetMenu() {
 
 		threejs.style.display = 'none';
 
 		setMenuDetailsAPIKey();
 		setMenuDetailsMapParameters();
-		setMenuDetailsMapClick();
 		setMenuDetailsElevations();
+		setMenuDetailsTilesData();
 		setMenuDetailsAbout();
 
-		onHashChange();
+		onChangeLocationHash();
 
 	}
+
+// inits
 
 	function setMenuDetailsAPIKey() {
 
 		menuDetailsAPIKey.innerHTML =
 
 			'<details id=apiKey >' +
-				'<summary><h3>api key</h3></summary>' +
+
+				'<summary><h3>Set api key</h3></summary>' +
+
 				'<small>If small request, no need for API key</small>' +
+
 				'<p>api key: <input id=inpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
-				'<p><button onclick=setAPIkey(); >Set API key</button></p>' +
-			'</details>' + b;
+				'<p><button onclick=onEventAPIKeyUpdate(); >Set API key</button></p>' +
+
+			'</details>' + 
+
+		b;
 
 	}
-
 
 	function setMenuDetailsMapParameters() {
 
 		menuDetailsMapParameters.innerHTML =
 
 			'<details open>' +
-				'<summary><h3>set map parameters</p></summary>' +
 
-				'<p>Zoom: <select id=selZoom onchange=onChangeMapParameter(); title="Select the zoom" size=1 ></select></p>' +
+				'<summary><h3>Set map parameters</p></summary>' +
+
+				'<p>Zoom: <select id=selZoom onchange=onEventMapParameters(); title="Select the zoom" size=1 ></select></p>' +
 
 				'<p>' +
-					'Map overlay: <select id=selMap onchange=onChangeMapParameter(); size=1 />' +
+					'Map overlay: <select id=selMap onchange=onEventMapParameters(); title="images courtesy of Google Maps API" size=1 />' +
 					'<option>Hybrid</option>' +
 					'<option>Roadmap</option>' +
 					'<option>Satellite</option>' +
@@ -89,14 +95,24 @@
 					'</select>' +
 				'</p>' +
 
-				'<p>Tiles width: <select id=selTilesX onchange=onChangeMapParameter(); type=number size=1 ></select></p>' +
-				'<p>Tiles height: <select id=selTilesY onchange=onChangeMapParameter(); type=number size=1 ></select></p>' +
+				'<p>Tiles width: <select id=selTilesX onchange=onEventMapParameters(); type=number size=1 ></select></p>' +
+				'<p>Tiles height: <select id=selTilesY onchange=onEventMapParameters(); type=number size=1 ></select></p>' +
 
-				'<p>Samples per tile: <select id=selSamples onchange=onChangeMapParameter(); title="Select the number of samples per tile" size=1 ></select></p>' +
+				'<p>Samples per tile: <select id=selSamples onchange=onEventMapParameters(); title="Select the number of samples per tile" size=1 ></select></p>' +
 
 			'</details>' +
 
-		'';
+			'<details open >' +
+
+				'<summary><h4>click details</h4></summary>' +
+
+				'<div id=menuClickDetails >' +
+					'<small id=menuClickMessage >When you click on the map, location details appear here.</small>'
+				'</div>' +
+
+			'</details>' +
+
+		b;
 
 
 		for ( var i = 0; i < 20; i++ ) {
@@ -146,11 +162,133 @@
 			selSamples.options[ i ].title = samps[ i ][ 1 ];
 		}
 
-		selSamples.selectedIndex = 0;
+		selSamples.selectedIndex = place.samplesDefaultIndex;
 
 	}
 
-	function onChangeMapParameter() {
+	function setMenuDetailsElevations() {
+
+		menuDetailsElevations.innerHTML =
+
+			'<details open>' +
+
+				'<summary><h3>Get elevations</h3></summary>' +
+
+				'<small id=menuElevationsMessage >from the Google Maps Elevation Service</small>' +
+
+				'<p>' +
+					'<button onclick=setElevations(); >Get Elevations</button> &nbsp; ' +
+					'<button onclick=saveFile(); >Save Elevations to File</button>' +
+				'</p>' +
+
+				'<textarea id=txtElevations >Elevation data appears here as it arrives. When complete a 3D model is generated and displayed.</textarea>' +
+
+				'<details >' +
+
+					'<summary><h4>open elevations file</h4></summary>' +
+
+					'<input type=file id=inpFile onchange=openFile(this,"elevations"); >' +
+					'<div id=menuOpenFileElevations >When you open an elevations file, details will appear here</div>' +
+
+				'</details>' +
+
+				'<details id=detailsElevations >' +
+
+					'<summary><h4>elevations details</h4></summary>' +
+					'<div id=divElevationsDetails >When you click \'get elevations\', details will appear here</div>' +
+
+				'</details>' +
+
+			'</details >' +
+
+		b;
+
+	}
+
+	function setMenuDetailsTilesData() {
+
+		menuDetailsTilesData.innerHTML =
+
+			'<details open>' +
+
+			'<summary><h3>Get tile data</h3></summary>' +
+
+			'<small>Information on current map</small>' +
+
+				'<details>' +
+
+					'<summary><h4>center tile data</h4></summary>' +
+					'<div id=divCenterTilesData ></div>' +
+
+				'</details>' +
+
+				'<details>' +
+
+					'<summary><h4>sample tile</h4></summary>' +
+					'<div id=divSampleTile ></div>' +
+
+				'</details>' +
+
+				'<details>' +
+
+					'<summary><h4>tiles data</h4></summary>' +
+					'<div id=divTilesData ></div>' +
+
+				'</details>' +
+
+			'</details>' + 
+
+		b;
+
+	}
+
+	function setMenuDetailsAbout() {
+
+		menuDetailsAbout.innerHTML =
+
+			'<details>' +
+
+				'<summary><h3>About</h3></summary>' +
+
+				'<p>' +
+					'Copyright &copy; 2016 <a href=https://github.com/orgs/jaanga/people target="_blank">Jaanga authors</a>.' + b +
+					'<jaanga.github.io/license.md >MIT license</a>' +
+				'</p>' +
+
+				'<p>Thank you <a href=https://developers.google.com/maps/documentation/javascript/elevation > Google Maps </a> and ' +
+					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
+
+				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
+
+			'</details>' +
+
+		b;
+
+	}
+
+
+// events
+
+	function onEventAPIKeyUpdate() {
+
+		if ( scriptGoobleAPIMaps ) { scriptGoobleAPIMaps.src = ''; google = {}; }
+
+		scriptGoobleAPIMaps = document.body.appendChild( document.createElement('script') );
+		scriptGoobleAPIMaps.onload = onLoadGoogleMap;
+
+		if ( inpAPI.value !== '' ) {
+
+			scriptGoobleAPIMaps.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
+
+		} else {
+
+			scriptGoobleAPIMaps.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
+
+		}
+
+	}
+
+	function onEventMapParameters() {
 
 		place.zoom = selZoom.selectedIndex + 1;
 
@@ -164,54 +302,7 @@
 
 	}
 
-	function setMenuDetailsMapClick() {
-
-		menuDetailsMapClick.innerHTML =
-
-			'<div >' +
-				'<details open >' +
-					'<summary><h4>click details</h4></summary>' +
-					'<small id=menuClickMessage >When you click on the map, location details appear here.</small>' +
-					'<div id=menuClickDetails></div>' +
-				'</details>' +
-
-			'</div>' +
-
-		'';
-
-	}
-
-	function setMenuDetailsElevations() {
-
-		menuDetailsElevations.innerHTML =
-			'<details open>' +
-				'<summary><h3>get elevations</h3></summary>' +
-				'<small id=menuElevationsMessage >from the Google Maps Elevation Service</small>' +
-				'<p>' +
-					'<button onclick=setElevations(); >Get Elevations</button> &nbsp; ' +
-					'<button onclick=saveFile(); >Save Elevations to File</button>' +
-				'</p>' +
-
-				'<textarea id=txtElevations >Elevation data appears here as it arrives. When complete a 3D model is generated and displayed.</textarea>' +
-
-				'<details >' +
-					'<summary><h4>open elevations file</h4></summary>' +
-					'<input type=file id=inpFile onchange=openFile(this,"elevations"); >' +
-					'<div id=menuOpenFileElevations >When you open an elevations file, details will appear here</div>' +
-				'</details>' +
-
-				'<details id=detailsElevations >' +
-					'<summary><h4>elevations details</h4></summary>' +
-					'<div id=divElevationsDetails >When you click \'get elevations\', details will appear here</div>' +
-				'</details>' +
-
-			'</details >' +
-
-		'';
-
-	}
-
-	function setMenuElevations( results ) {
+	function onEventMenuElevationsDetails( results ) {
 
 		divElevationsDetails.innerHTML =
 
@@ -232,32 +323,8 @@
 
 	}
 
-	function setMenuDetailsAbout() {
 
-		menuDetailsAbout.innerHTML =
-
-			'<details>' +
-
-				'<summary><h3>about</h3></summary>' +
-
-				'<p>' +
-					'Copyright &copy; 2016 <a href=https://github.com/orgs/jaanga/people target="_blank">Jaanga authors</a>.' + b +
-					'<jaanga.github.io/license.md >MIT license</a>' +
-				'</p>' +
-
-				'<p>Thank you <a href=https://developers.google.com/maps/documentation/javascript/elevation > Google Maps </a> and ' +
-					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
-
-				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
-
-			'</details>' +
-
-		'';
-
-	}
-
-
-	function onHashChange() {
+	function onChangeLocationHash() {
 
 		if ( location.hash ) {
 
@@ -267,13 +334,14 @@
 
 				apiKey.setAttribute('open', 'open');
 
-console.log( 'key', inpAPI.value );
-
 			}
+
 /*
 
-			hashes = location.hash.split( '#' );
+// what is best syntax? Or use query strings?
 
+
+			hashes = location.hash.split( '#' );
 			inpLatitude.value = place.latitude = parseFloat( hashes[ 1 ] );
 			inpLongitude.value = place.longitude = parseFloat( hashes[ 2 ] );
 			selZoom.selectedIndex = parseInt( hashes[ 3 ] - 1, 10 ) || 12;
@@ -281,32 +349,14 @@ console.log( 'key', inpAPI.value );
 */
 		}
 
-		setAPIkey();
+		onEventAPIKeyUpdate();
 
 	}
 
-	function setAPIkey() {
 
-		if ( scriptGoobleAPIMaps ) { scriptGoobleAPIMaps.src = ''; google = {}; }
+	function onLoadGoogleMap() {
 
-		scriptGoobleAPIMaps = document.body.appendChild( document.createElement('script') );
-		scriptGoobleAPIMaps.onload = initMap;
-
-		if ( inpAPI.value !== '' ) {
-
-			scriptGoobleAPIMaps.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
-
-		} else {
-
-			scriptGoobleAPIMaps.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
-
-		}
-
-	}
-
-	function initMap() {
-
-		onChangeMapParameter();
+		onEventMapParameters();
 
 		initGeocoder();
 
@@ -314,12 +364,49 @@ console.log( 'key', inpAPI.value );
 
 	}
 
+	function onClickGoogleMap( event ) {
+
+		var latLng, lat, lon;
+
+		latLng = event.latLng;
+
+		lat = latLng.lat();
+		lon = latLng.lng();
+
+		menuClickDetails.innerHTML =
+
+			'Latitude: ' + lat.toFixed( 4 ) + '&deg;' + b +
+			'Longitude: ' + lon.toFixed( 4 ) + '&deg;' + b + b +
+
+			'Tile X: ' + lon2tile( lon, place.zoom ) + b +
+			'Tile Y: ' + lat2tile( lat, place.zoom ) + b + b +
+
+//			'Pixel X: ' + event.pixel.x + 'px' + b +
+//			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
+
+//			'<p><button onclick=inpLatitude.value=' + lat + ';inpLongitude.value=' + lon + ';initMap(); >Set click location as map center</button></p>' +
+			'<p><button onclick=setCenter(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
+
+		'';
+
+		var marker = new google.maps.Marker({
+
+			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+			title: 'lat: ' + lat + ', lng: ' + lon,
+			position: {lat: lat, lng: lon } ,
+			map: googleMap
+
+		});
+
+	}
+
+
+// geocode
+
+
 	function initGeocoder() {
 
 		var origin_autocomplete, marker;
-
-		geocoder = new google.maps.Geocoder();
-		googleElevator = new google.maps.ElevationService();
 
 		googleMap = new google.maps.Map( mapDiv, {
 
@@ -347,16 +434,15 @@ console.log( 'key', inpAPI.value );
 
 		});
 
-		googleMap.addListener( 'click', onGoogleMapClick );
+		googleMap.addListener( 'click', onClickGoogleMap );
 
 		otherInits();
 
 	}
 
-	function otherInits() {}
+// see if maps on load can supplant this
 
-
-// geocode
+	function otherInits() {} // plugins can use this
 
 	function setCenter( lat, lon ) {
 
@@ -370,39 +456,13 @@ console.log( 'key', inpAPI.value );
 
 		googleMap.setZoom( place.zoom );
 
-		geocodeLatLng();
-
 		getTiles();
 
 	}
 
-	function geocodeLatLng() {
-
-		geocoder.geocode( { 'location': googleMapCenter }, function( results, status ) {
-
-			if ( status === google.maps.GeocoderStatus.OK ) {
-
-				if ( results[ 1 ] ) {
-
-//					inpAddress.value = results[ 1 ].formatted_address;
-
-				} else {
-
-					menuPlaceMessage.innerHTML = 'No results found';
-
-				}
-
-			} else {
-
-				menuPlaceMessage.innerHTML = 'Geocoder failed due to: ' + status;
-
-			}
-
-		} );
-
-	}
-
 //
+
+// big streamline needed here...
 
 	function getTiles() {
 
@@ -440,10 +500,7 @@ console.log( 'key', inpAPI.value );
 		mTileLat = meridionalCircumference / Math.pow( 2, zoom );
 		mTileLon = equatoriaCircumferenceLocal / Math.pow( 2, zoom );
 
-		menuDetailsCenterTileData.innerHTML =
-
-		'<details>' +
-			'<summary><h4>center tile data</h4></summary>' +
+		divCenterTilesData.innerHTML =
 
 			'Location latitude : ' + place.latitude.toFixed( 4 ) + '&deg;' + b +
 			'Location longitude: ' + place.longitude.toFixed( 4 ) + '&deg;' + b + b +
@@ -481,26 +538,22 @@ console.log( 'key', inpAPI.value );
 			'Meters/sample (' + selSamples.value + '/tile) lat: ' + Math.round( ( meridionalCircumference / Math.pow( 2, zoom ) ) * tilesY / place.samplesY ).toLocaleString() + b +
 			'Meters/sample (' + selSamples.value + '/tile) lon: ' + Math.round( ( equatoriaCircumferenceLocal / Math.pow( 2, zoom ) ) * tilesX / place.samplesX ).toLocaleString() + b +
 
-		'</details>';
+		'';
 
 		source = 'http://c.tile.opencyclemap.org/cycle/' + zoom + '/' + tileX + '/' + tileY + '.png';
 
-		menuDetailsCenterTileImage.innerHTML =
+		divSampleTile.innerHTML =
 
-		'<details>' +
-
-			'<summary><h4>sample tile</h4></summary>' +
 			'<img src=' + source + ' >' + b +
 			'<a href=' + source + ' >' + source.slice( 7 ) + '</a>' +
 
-		'</details>' + b;
+		b;
 
 		getMenuDetailsTilesData();
 
 		drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, '#0000ff' );
 
 		drawTilesonMap();
-
 
 		marker = new google.maps.Marker({
 
@@ -537,18 +590,15 @@ console.log( 'key', inpAPI.value );
 		LRlat = tile2lat( tileY + tileOffsetY + ( tilesY % 2 ? 1 : 0 ), zoom );
 		LRlon = tile2lon( tileX + tileOffsetX + ( tilesX % 2 ? 1 : 0 ), zoom );
 
-		menuDetailsTilesData.innerHTML =
+		divTilesData.innerHTML =
 
-		'<details>' +
-
-			'<summary><h4>tiles data</h4></summary>' +
 			'UL TileY: ' + place.ULtileY + ' Lat: ' + ULlat.toFixed( 4 ) + '&deg;' + b +
 			'LR TileY: ' + LRtileY + ' Lat: ' + LRlat.toFixed( 4 ) + '&deg;' + b +
 
 			'UL TileX: ' + place.ULtileX + ' Lon: ' + ULlon.toFixed( 4 ) + '&deg;' + b +
-			'LR TileX: ' + LRtileX + ' Lon: ' + LRlon.toFixed( 4 ) + '&deg;' + b +
+			'LR TileX: ' + LRtileX + ' Lon: ' + LRlon.toFixed( 4 ) + '&deg;' +
 
-		'</details>';
+		b;
 
 		var marker = new google.maps.Marker({
 
@@ -612,38 +662,25 @@ console.log( 'key', inpAPI.value );
 
 	}
 
-	function drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, color ) {
-
-		var tileCoordinates, tilePath;
-
-		tileCoordinates = [
-			{ lat: ULlat, lng: ULlon },
-			{ lat: ULlat, lng: LRlon },
-			{ lat: LRlat, lng: LRlon },
-			{ lat: LRlat, lng: ULlon },
-			{ lat: ULlat, lng: ULlon }
-		];
-
-		tilePath = new google.maps.Polyline( {
-
-			path: tileCoordinates,
-//			fillOpacity: 0.075,
-			strokeColor: color,
-			strokeOpacity: 1.0,
-			strokeWeight: 2
-		} );
-
-		tilePath.setMap( googleMap );
-
-	}
+//
 
 	function setElevations() {
 
 		startTime = Date.now();
 
+		place.googleElevator = new google.maps.ElevationService();
+
 		place.elevations = [];
 		place.resolutions = [];
 		count = 0;
+
+		if ( place.samplesX < 31 ) { delay = 5;
+		} else if ( place.samplesX < 61 ) { delay = 330;
+		} else if ( place.samplesX < 91 ) { delay = 700;
+		} else if ( place.samplesX < 121 ) { delay = 1000;
+		} else if ( place.samplesX < 151 ) { delay = 1500;
+		} else if ( place.samplesX < 181 ) { delay = 2000;
+		} else { delay = 4000; }
 
 		nextElevations();
 
@@ -659,7 +696,9 @@ console.log( 'key', inpAPI.value );
 			lat = ULlat - count * latDelta;
 			color = '#0000cc';
 			points = [ { lat: lat, lng: ULlon }, {lat: lat, lng: LRlon } ];
+
 //debugger;
+
 		} else {
 
 			latDelta = ( ULlat - LRlat ) / ( 2 * place.samplesY - 1 );
@@ -689,25 +728,11 @@ console.log( 'key', inpAPI.value );
 
 	}
 
-	function drawPline( pline, map, color, width ) {
-
-		new google.maps.Polyline({
-
-			path: pline,
-			strokeColor: color,
-			opacity: 0.1,
-			strokeWeight: width || 1,
-			map: map
-
-		});
-
-	}
-
 	function getElevations( path, map, elevations ) {
 
-		var orig;
+		var tempArr, elevation, resolution;
 
-		googleElevator.getElevationAlongPath( {
+		place.googleElevator.getElevationAlongPath( {
 
 			'path': path,
 			'samples': place.samplesX
@@ -740,7 +765,7 @@ console.log( 'key', inpAPI.value );
 
 					txtElevations.value = tempArr;
 
-					setMenuElevations( results );
+					onEventMenuElevationsDetails( results );
 
 
 				} else {
@@ -769,14 +794,6 @@ console.log( 'count', count, 'index', index, 'status', status, 'delay', delay );
 
 				index = place.samplesX * count;
 
-				if ( place.samplesX < 31 ) { delay = 5;
-				} else if ( place.samplesX < 61 ) { delay = 330;
-				} else if ( place.samplesX < 91 ) { delay = 700;
-				} else if ( place.samplesX < 121 ) { delay = 1000;
-				} else if ( place.samplesX < 151 ) { delay = 1500;
-				} else if ( place.samplesX < 181 ) { delay = 2000;
-				} else { delay = 4000; }
-
 				setTimeout( nextElevations, delay );
 
 			} else {
@@ -785,7 +802,7 @@ console.log( 'complete count', count, elevations.length );
 
 //			txtElevations.innerText = 'complete count: ' + ( count + 1 ) + b;
 
-				setIframe();
+				onSuccessSetIframe();
 
 			}
 
@@ -794,111 +811,50 @@ console.log( 'complete count', count, elevations.length );
 	}
 
 
-	function setIframe() {
 
-//		var icw;
+// drawing om map
 
-		threejs.style.display = '';
+	function drawPline( pline, map, color, width ) {
 
-		threejs.innerHTML =
+		new google.maps.Polyline({
 
-			'<div id=threejsHeader >' +
-
-				'<button onclick=onchange=ifrThreejs.contentWindow.controls.autoRotate=!ifrThreejs.contentWindow.controls.autoRotate; > rotation </button>' +
-				'<button onclick=threejs.style.display=threejs.style.display===""?"none":""; > [X] </button>' +
-
-			'</div>' +
-
-			'<iframe id=ifrThreejs src=' + urlViewElevations3D + ' ></iframe>' +
-
-		'';
-
-		ifrThreejs.onload = function() {
-
-			icw = ifrThreejs.contentWindow;
-/*
-			parameters = {
-
-				origin: place.origin,
-				ULtileX: place.ULtileX,
-				ULtileY: place.ULtileY,
-				zoom: place.zoom,
-				tilesX: place.tilesX,
-				tilesY: place.tilesY,
-				segmentsX: place.samplesX,
-				segmentsY: place.samplesY
-
-			};
-*/
-
-//			icw.map.verticalScale = icw.map.verticalScaleDefault;
-//			icw.map.plainOpacity = icw.map.plainOpacityDefault;
-
-//			icw.map.elevations = place.elevations.slice( 0, place.samplesX * place.samplesY );
-//			icw.map.parameters = parameters;
-
-// http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-an-object-in-javascript
-//			icw.map = JSON.parse(JSON.stringify( place ));
-
-			icw.map = Object.create( place );
-			icw.onLoadElevations();
-			icw.controls.autoRotate = true;
-
-		};
-
-	}
-
-//
-
-
-	function onGoogleMapClick( event ) {
-
-		var latLng, lat, lon;
-
-		latLng = event.latLng;
-
-		lat = latLng.lat();
-		lon = latLng.lng();
-
-		setGoogleMapLocation( lat, lon );
-
-	}
-
-	function setGoogleMapLocation( lat, lon ) {
-
-		lat = parseFloat( lat );
-
-		lon = parseFloat( lon );
-
-		menuClickDetails.innerHTML =
-
-			'Latitude: ' + lat.toFixed( 4 ) + '&deg;' + b +
-			'Longitude: ' + lon.toFixed( 4 ) + '&deg;' + b + b +
-
-			'Tile X: ' + lon2tile( lon, place.zoom ) + b +
-			'Tile Y: ' + lat2tile( lat, place.zoom ) + b + b +
-
-//			'Pixel X: ' + event.pixel.x + 'px' + b +
-//			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
-
-
-//			'<p><button onclick=inpLatitude.value=' + lat + ';inpLongitude.value=' + lon + ';initMap(); >Set click location as map center</button></p>' +
-			'<p><button onclick=setCenter(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
-
-		'';
-
-		menuClickMessage.innerHTML = '';
-
-		var marker = new google.maps.Marker({
-
-			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-			title: 'lat: ' + lat + ', lng: ' + lon,
-			position: {lat: lat, lng: lon } ,
-			map: googleMap
+			path: pline,
+			strokeColor: color,
+			opacity: 0.1,
+			strokeWeight: width || 1,
+			map: map
 
 		});
 
 	}
+
+	function drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, color ) {
+
+		var tileCoordinates, tilePath;
+
+		tileCoordinates = [
+			{ lat: ULlat, lng: ULlon },
+			{ lat: ULlat, lng: LRlon },
+			{ lat: LRlat, lng: LRlon },
+			{ lat: LRlat, lng: ULlon },
+			{ lat: ULlat, lng: ULlon }
+		];
+
+		tilePath = new google.maps.Polyline( {
+
+			path: tileCoordinates,
+//			fillOpacity: 0.075,
+			strokeColor: color,
+			strokeOpacity: 1.0,
+			strokeWeight: 2
+		} );
+
+		tilePath.setMap( googleMap );
+
+	}
+
+
+//
 
 	function openFile( files, type ) {
 
@@ -907,7 +863,7 @@ console.log( 'complete count', count, elevations.length );
 		reader = new FileReader();
 		reader.onload = function( event ) {
 
-//				var parametersArray, delta;
+				var parametersArray, delta;
 
 				parametersArray = files.files[0].name.split( '_' );
 
@@ -920,7 +876,6 @@ console.log( 'complete count', count, elevations.length );
 				place.samplesX = parseInt( parametersArray[ 7 ], 10 );
 				place.samplesY = parseInt( parametersArray[ 8 ], 10 );
 				fileName = files.files[0].name;
-
 
 				data = reader.result;
 
@@ -952,87 +907,6 @@ console.log( 'complete count', count, elevations.length );
 		reader.readAsText( files.files[0] );
 
 	}
-
-
-/*
-	function parseDataGetMap( data ) {
-
-		var lines, txtline;
-		var latitudes, longitudes;
-
-		var latMin, latMax, lonMin, lonMax;
-
-		latitudes = [];
-		longitudes = [];
-
-		lines = data.split(/\r\n|\n/);
-
-		for ( var i = 1; i < lines.length; i++ ) {
-
-			txtline = lines[ i ].split( ',' );
-
-			latitudes.push( parseFloat( txtline[ 1 ] ) );
-
-			longitudes.push( parseFloat( txtline[ 0 ] ) );
-
-		}
-
-		path.latMin = arrayMin( latitudes );
-		path.latMax = arrayMax( latitudes );
-
-		path.lonMin = arrayMin( longitudes );
-		path.lonMax = arrayMax( longitudes );
-
-		path.latCen = path.latMin + 0.5 * ( path.latMax - path.latMin );
-		path.lonCen = path.lonMin + 0.5 * ( path.lonMax - path.lonMin );
-
-		menuPathBoundaries.innerHTML =
-
-			'<details open>' +
-				'<summary><h4>path boundaries</h4></summary>' +
-				'<p>' +
-					'latMin: ' + path.latMin.toFixed( 4 ) + '&deg;' + b +
-					'latMax: ' + path.latMax.toFixed( 4 ) + '&deg;' + b + b +
-
-					'lonMin: ' + path.lonMin.toFixed( 4 ) + '&deg;' + b +
-					'lonMax: ' + path.lonMax.toFixed( 4 ) + '&deg;' + b + b +
-
-					'latCen: ' + path.latCen.toFixed( 4 ) + '&deg;' + b +
-					'lonCen: ' + path.lonCen.toFixed( 4 ) + '&deg;' + b +
-
-				'</p>' +
-
-		'</details>';
-
-		path.vertices = [];
-
-		delta = Math.floor( latitudes.length / 100 );
-
-		for ( i = 0; i < latitudes.length; i += delta ) {
-
-			path.vertices.push( { lat: latitudes[ i ], lng: longitudes[ i ] } );
-
-		}
-
-		drawPline( path.vertices, googleMap, '#ffff00', 3 );
-
-		drawTitleBoundary( path.latMax, path.lonMin, path.latMin, path.lonMax, '#ff00ff' );
-
-		marker = new google.maps.Marker({
-
-			position: { lat: path.latCen, lng: path.lonCen } ,
-			map: googleMap
-
-		});
-
-		setGoogleMapLocation( path.latCen, path.lonCen );
-
-//		image.src = source;
-//		image.src = mapsAPISource + path;
-
-	}
-
-*/
 
 	function saveFile() {
 
@@ -1066,6 +940,56 @@ console.log( 'complete count', count, elevations.length );
 
 	}
 
+	function viewElevations() {
+
+console.log( '', 23 );
+
+		newWindow = window.open( urlViewElevations3D );
+
+		newWindow.addEventListener(  'load', onLoad, false);
+
+		function onLoad() {
+
+			if ( window.focus ) { newWindow.focus() }
+
+			newWindow.window.map = Object.create( place );
+			newWindow.window.onLoadElevations();
+			newWindow.window.autoRotate = true;
+
+		};
+
+	}
+
+	function onSuccessSetIframe() {
+
+		var icw;
+
+		threejs.style.display = '';
+
+		threejs.innerHTML =
+
+			'<div id=threejsHeader >' +
+
+				'<button onclick=viewElevations(); >View elevations full screen</button>' +
+				'<button onclick=onchange=ifrThreejs.contentWindow.controls.autoRotate=!ifrThreejs.contentWindow.controls.autoRotate; > rotation </button>' +
+				'<button onclick=threejs.style.display=threejs.style.display===""?"none":""; > [X] </button>' +
+
+			'</div>' +
+
+			'<iframe id=ifrThreejs src=' + urlViewElevations3D + ' ></iframe>' +
+
+		'';
+
+		ifrThreejs.onload = function() {
+
+			icw = ifrThreejs.contentWindow;
+			icw.map = Object.create( place );
+			icw.onLoadElevations();
+			icw.controls.autoRotate = true;
+
+		};
+
+	}
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
 

@@ -4,29 +4,68 @@ Dev Notes
 
 ## Peeps to Contact
 
-* Ronan et Quentin
-* Tim Child
+* Ask do you know anybody who is interested in 3D cartography
+
+* Tim Child << on jaanga
 * Jim Michler
-* Caltopo dude
-* Mostapha
+* Abe Megahed
+* Callum Prentice
+* Jaume Sanchez
+* Aymeric
+* David Naylor
+* Matt Fuchs
+* Robert Wenig
+* Gharen
+* Caltopo dude - Matt Jacobs
+	* Ask Kyle first
+
+* Good subreddits
+* Good blogs
+* Ronan et Quentin
+* vA3C
+* John Walker
+* OS lady
+* GitHub geoGSON dude
+* Stamen
+* Norwegian viewer peeps
+* Ted Nelson << ??
+* Scripps
 
 
+* Walks KML data for Europe
+	* Aymeric
+	* Jeremy Tammik
+	* John Walker
 
-## Coding to Do
+* http://freegisdata.rtwilson.com/
 
-* 2016-08-13 ~ Google nearby places
-* Smooth Fly controls parameters
-* Headings, pitch and roll
-* Placards
-* Pokemonsters
-* Physics
-* Voice
-* Editing splines
-* CodePen Maps
-* Maps of Armenia & Beiruit & China
+
+## Ongoing contact
+
+* Ladies
+	* page in demo/aceit with links to maps of family places
+* FGx
+* Ladybug
 
 
 ## Change Log
+
+### 2016-08-19
+
+* General read me clean up
+
+###2016-08-17
+
+* FGx
+* Mostapha << 2016-08-17
+
+###
+
+## 2016-08-??
+
+* Khoren
+* SMS to Paul Masson < no answer
+* Email to David Naylor
 
 ### 2016-08-12
 
@@ -40,14 +79,96 @@ Dev Notes
 
 ### 2016-08-09
 
-* Message t Abantech
+* Message to Abantech
 * Message to Art Scott
 
-#### testing
+
+
+
+notes-jaanga-terrain.txt
+
+David T. Sandwell 
+Chris Olson
+Amber Jackson
+Joseph J. Becker 
+Rachael Munda 
+
+dsandwell@ucsd.edu
+cjolson@ucsd.edu
+amberleajackson@gmail.com
+joseph.becker.ctr@nrlssc.navy.mil
+rmunda@ucsd.edu
+
+
+
+
+2015-04-09 ~ 
+
+Tim Childs
+FGx << sent
+Aymeric  << sent
+Abe 
+Callum Prentice
+
+vA3C
+Ted Nelson << ??
+
+Blog Post
+Jaume Sanchez
+
+Scripps << sent #1
+
+
+#### Coding / testing
+
+120 * 360 * 180 * 120 * 2 = 1,866,240,000 bytes
+
+240 * 360 * 240 * 180 * 2 = 7,464,960,000
+
+wget --limit-rate=80k --wait=60 --random-wait --level=1 --recursive --no-parent --accept zip http://dds.cr.usgs.gov/srtm/version2_1/SRTM1/Region_07/
+
+is 80K nice??
+
+
+http://www.labnol.org/software/wget-command-examples/28750/
+http://www.computerhope.com/unix/wget.htm
+
+
+http://earthexplorer.usgs.gov/ > Data Sets tab > NASA LPDAAC Collections > NASA SRTM (SRTM 3) collections> 
+
+
+
+nice bathymetric - magellen = http://alteredqualia.com/xg/examples/earth_bathymetry.html
+http://visibleearth.nasa.gov/view_cat.php?categoryID=1484
+
+
+http://maps.googleapis.com/maps/api/staticmap?center=37.5,-122.5&maptype=hybrid&zoom=9&scale=2&size=360x460&markers=color:blue%7C37,-123%7C38,-123%7C38,-122%7C37,-122
+
+http://maps.googleapis.com/maps/api/staticmap?center=37.5,-122.5&maptype=hybrid&zoom=9&scale=2&size=360x460&markers=color:blue|37,-123|38,-123|38,-122|37,-122
+
 
 *Test on various devices in browserstack
 
+
+
+wget --limit-rate=80k --wait=60 --random-wait --level=1 --recursive --no-parent --accept zip http://dds.cr.usgs.gov/srtm/version2_1/SRTM1/Region_07/
+
+is 80K nice??
+
+
+http://www.labnol.org/software/wget-command-examples/28750/
+http://www.computerhope.com/unix/wget.htm
+
+
+http://earthexplorer.usgs.gov/ > Data Sets tab > NASA LPDAAC Collections > NASA SRTM (SRTM 3) collections> 
+
+
+
 ### 2016-08-07
+
+
+
+
 ## Templates
 
 
@@ -138,7 +259,4 @@ You will also be able to request or get help in perfecting the map of your dream
 
 
 
-## Communications
 
-* SMS to Paul Masson
-* Email to David Naylor

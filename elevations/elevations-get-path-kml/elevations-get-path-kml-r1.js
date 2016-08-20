@@ -1,26 +1,35 @@
 
 
 	var urlBase = 'https://jaanga.github.io/terrain3/data-path-kml/';
-	var urlViewElevations3D = '../..//sandbox/elevations-view-path-kml/elevations-view-path-kml-r1.html';
 
 	function openMap() {
 
-		defaultFile = defaultFile ? defaultFile : urlBase + selFiles.value;
+		url = urlBase + selFiles.value;
 
-		fileName = location.hash ? location.hash.slice( 1 ) : defaultFile ;
-
-		place.kmlFile = fileName;
-		place.vicinity = place.origin = fileName.split( '/' ).pop().slice( 0, -4 );
-
-		openKML( fileName );
+		openKML( url );
 
 	}
+
 
 	function otherInits() {
 
-console.log( 'lat', place );
+	}
+
+	function openKML( url ) {
+
+		place.kmlFile = url;
+		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, -4 );
+
+
+		layer = new google.maps.KmlLayer({
+
+			url: url,
+			map: googleMap
+
+		});
 
 	}
+
 
 	function setMenuDetailsSelectPathKMLExample() {
 
@@ -38,22 +47,6 @@ console.log( 'lat', place );
 			'</details>' +
 
 		'';
-
-	}
-
-	function openKML( url ) {
-
-		place.kmlFile = url;
-		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, -4 );
-
-
-		layer = new google.maps.KmlLayer({
-
-			url: url,
-			map: googleMap
-
-		});
-
 
 	}
 

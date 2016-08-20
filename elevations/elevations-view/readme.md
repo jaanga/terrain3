@@ -74,30 +74,50 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
-* 2016-08-15 ~ Add resolution details
-* 2016-08-15 ~ Add autoRotate checkbox
-* 2016-08-11 ~ Add overall name space
-* 2016-08-11 ~ Add separate init file
-* 2016-08-11 ~ Add fog controls
-* 2016-08-11 ~ Add physics
-* 2016-08-11 ~ Add easy to make animated GIF
-* 2016-08-05 ~ Save changes to data file
-* 2016-08-05 ~ Add skybox, background
-* Add pokemons?
-* Add placards
-* Accurate elevation measurement
-* Link to escape iframe
-* Add More overlays?
+* Codebase
+	* 2016-08-11 ~ Add overall name space
+	* 2016-08-11 ~ Add separate init file
+
+* Plugins
+	* 2016-08-11 ~ Add easy to make animated GIF
+	* 2016-08-05 ~ Save changes to data file
+	* Add pokemons?
+	* Add placards
+	* Link to escape iframe
+	* 2016-08-13 ~ Google nearby places
+	* 2016-08-11 ~ Add physics
+	* Accurate elevation measurement
+	* Add voice
+	* geoJSON
+	* CodePen Maps
+	* Fiddle maps
+* View settings
+	* 2016-08-19 ~ Add view settings menu item
+	* 2016-08-15 ~ Add autoRotate checkbox
+	* 2016-08-19 ~ for camera controllers everywhere
+		* Smooth Fly controls parameters
+	* 2016-08-05 ~ Add skybox, background
+*Overlay settings
+	* Add more overlays?
+* Terrain settings
+	* 2016-08-11 ~ Add fog controls
+
+	* 2016-08-15 ~ Add resolution details
+* Path Settings
+	* Headings, pitch and roll everywhere
+	* Editing splines
 
 
 ## Issues
+
 
 
 ## Users
 
 Intended for generating flightpaths
 
-* [FGx Sandbox]( http://fgx.github.io/sandbox/index.html );
+* [FGx Sandbox]( http://fgx.github.io/sandbox/index.html )
+
 
 
 ## Goals

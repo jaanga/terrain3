@@ -56,12 +56,11 @@ This project is an attempt to remedy the situation.
 
 ## Categories
 
-### Family & Friends]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html#cat=elevations-data-family+friends/ )
+### [Family & Friends]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html#cat=elevations-data-family+friends/ )
 
 ## Issues
 
-* Elevations view needs a cleanup
-	* Move init code from html file js file
+
 
 ## Change Log
 

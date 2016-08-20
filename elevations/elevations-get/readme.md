@@ -93,18 +93,23 @@ value='Source code listing' >
 
 ## Interesting sites
 
+
 Fun possibilities for making new maps
 
+* For family and friends
+	* Maps of Armenia and China
 * Island Fernando de Noronha, brazil
 * http://forums.simviation.com/
 * Pythagoreio, Samos Prefecture, Greece
 * BGBW Narsarsuaq Airport
 * EGNS / isle of Man
 * PHOG hawaii
-
+* Walks KML data for Europe
 
 ## Issues
 
+* Erase previous boundaries before a new get elevations
+* Add back addresses and lat/lon entry 
 * When you load elevations, there must be a way to go there
 	* Otherwise wrong elevations requested
 * Cannot see some error messages such as rate limit exceeded
@@ -140,9 +145,15 @@ Intended for general use
 ## Change Log
 
 
+### 2016-08-20 ~ R13
+
+* Add 'view elevations full screen' button - opens new tab and transfers data
+* Good effort on making variable and function names more obvious
+* Big code cleanup
+
 ### 2016-08-13 ~ R11
 
-* * Big code cleanup
+* Big code cleanup
 
 ### 2016-08-08 ~ R9
 
