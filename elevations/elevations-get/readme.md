@@ -146,6 +146,9 @@ Intended for general use
 
 ## Change Log
 
+### 2016-08-21 ~ R14
+
+* Add tiles object and finally cleaned up the tiles code
 
 ### 2016-08-20 ~ R13
 
@@ -166,7 +169,7 @@ Intended for general use
 
 ### 2016-08-05 ~ R8
 
-* Move variable declrations functions into a separate JavaScript file
+* Move variable declarations functions into a separate JavaScript file
 
 
 ### 2016-07-29 ~ R7
