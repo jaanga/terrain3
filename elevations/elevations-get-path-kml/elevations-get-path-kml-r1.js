@@ -11,15 +11,10 @@
 	}
 
 
-	function otherInits() {
-
-	}
-
 	function openKML( url ) {
 
 		place.kmlFile = url;
 		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, -4 );
-
 
 		layer = new google.maps.KmlLayer({
 
@@ -27,6 +22,13 @@
 			map: googleMap
 
 		});
+
+console.log( '', googleMap.center.lat(), googleMap.center.lng() );
+	}
+
+	function otherInits() {
+
+		openMap() ;
 
 	}
 
@@ -88,7 +90,7 @@
 
 			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
 
-			callback();
+//			callback();
 
 		}
 

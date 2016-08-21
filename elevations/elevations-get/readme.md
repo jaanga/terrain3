@@ -8,7 +8,9 @@
 [Elevations Get Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-get/ )
 ===
 
-## Full Screen: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html )
+## Full Screen - stable: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html )
+
+## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/dev/index.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >

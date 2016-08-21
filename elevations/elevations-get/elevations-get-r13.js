@@ -177,7 +177,7 @@
 				'<small id=menuElevationsMessage >from the Google Maps Elevation Service</small>' +
 
 				'<p>' +
-					'<button onclick=setElevations(); >Get Elevations</button> &nbsp; ' +
+					'<button onclick=initElevations(); >Get Elevations</button> &nbsp; ' +
 					'<button onclick=saveFile(); >Save Elevations to File</button>' +
 				'</p>' +
 
@@ -664,9 +664,18 @@
 
 //
 
-	function setElevations() {
+	function initElevations() {
+
+		if( !googleMapCenter ) {
+
+console.log( 'lat', place.latitude, 'lon', place.longtitude );
+
+console.log( 'googleMapCenter', googleMap.center.lat(), googleMap.center.lng() );
+
+		}
 
 		startTime = Date.now();
+
 
 		place.googleElevator = new google.maps.ElevationService();
 
@@ -674,7 +683,9 @@
 		place.resolutions = [];
 		count = 0;
 
+// update to select
 		if ( place.samplesX < 31 ) { delay = 5;
+
 		} else if ( place.samplesX < 61 ) { delay = 330;
 		} else if ( place.samplesX < 91 ) { delay = 700;
 		} else if ( place.samplesX < 121 ) { delay = 1000;
@@ -682,11 +693,11 @@
 		} else if ( place.samplesX < 181 ) { delay = 2000;
 		} else { delay = 4000; }
 
-		nextElevations();
+		nextLineElevations();
 
 	}
 
-	function nextElevations() {
+	function nextLineElevations() {
 
 		var latDelta, lat, color, points;
 
@@ -794,7 +805,7 @@ console.log( 'count', count, 'index', index, 'status', status, 'delay', delay );
 
 				index = place.samplesX * count;
 
-				setTimeout( nextElevations, delay );
+				setTimeout( nextLineElevations, delay );
 
 			} else {
 
