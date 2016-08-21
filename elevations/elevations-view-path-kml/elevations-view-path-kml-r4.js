@@ -33,6 +33,7 @@
 
 	function postInits() {
 
+		setMenuDetailsPath();
 		setMenuDetailsCameraActions();
 
 		actor = new THREE.Object3D();
@@ -51,6 +52,9 @@
 
 //		animate();
 		animatePlus();
+
+// nope
+//		selFiles.selectedIndex = 1;
 
 	}
 
@@ -75,6 +79,25 @@
 
 	}
 
+
+	function setMenuDetailsPath() {
+
+		menuDetailsPath.innerHTML =
+
+			'<details open>' +
+
+				'<summary><h3>Path</h3></summary>' +
+
+				'<p>' +
+//					'<button onclick=initElevations(); >Get Elevations</button> &nbsp; ' +
+					'<button onclick=saveFile(); >Save Elevations to File</button>' +
+				'</p>' +
+
+			'</details>' +
+
+		b;
+
+	}
 
 	function setMenuDetailsCameraActions() {
 
@@ -171,7 +194,7 @@ console.time( 't1' );
 
 		for ( var i = 0; i < map.points.length; i++ ) {
 
-			raycaster.set( map.points[ i ], up, 0, 1 );
+			raycaster.set( map.points[ i ], up, 0, 2 );
 			collisions = raycaster.intersectObject( map.mesh );
 
 			map.points[ i ].z = collisions.length ? collisions[ 0 ].distance : 0 ;
@@ -193,7 +216,7 @@ console.timeEnd( 't1' );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 		path.path = new THREE.Line( geometry, material);
-		path.name = 'flightpath';
+		path.name = 'path';
 
 
 		geometry.computeBoundingSphere();
@@ -226,6 +249,26 @@ console.timeEnd( 't1' );
 	}
 
 
+	function saveFile() {
+
+// http://ausdemmaschinenraum.wordpress.com/2012/12/06/how-to-save-a-file-from-a-url-with-javascript/
+
+		var pl, blob, fileName, a;
+
+		pl = JSON.stringify( map );
+		blob = new Blob( [ pl ] );
+
+		fileName = map.fileName
+
+		a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = fileName;
+		a.click();
+
+		delete a;
+
+	}
+
 // cameras
 
 
@@ -244,7 +287,6 @@ console.timeEnd( 't1' );
 		aircraft.mesh.scale.set( 1, 1, 1 );
 
 	}
-
 
 	function setCameraInside() {
 

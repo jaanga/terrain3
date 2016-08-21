@@ -16,6 +16,7 @@
 	var fogFar = 1;
 	var backgroundColor = 0x7ec0ee ;
 
+	var place;
 	var map;
 
 	var mapTypes = [
@@ -34,7 +35,6 @@
 	];
 
 	var urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
-
 
 	var searchInFolder = 'elevations-data-03/';
 //	var searchInFolder = 'elevations-data-family+friends/';
@@ -71,7 +71,7 @@
 
 		}
 
-		setMenuDetailsAPIKey();
+//		setMenuDetailsAPIKey();
 
 		setMenuDetailsSelectFile();
 
@@ -87,9 +87,9 @@
 
 		function onGitHubTreeLoad() {
 
-// map could have been created by iframe parent
+// place may be created by iframe parent
 
-			if ( map === undefined ) {
+			if ( place === undefined ) {
 
 // add location.hash
 // add selFiles update
@@ -107,7 +107,7 @@
 	}
 
 // inits
-
+/*
 	function setMenuDetailsAPIKey() {
 
 		if ( typeof menuDetailsAPIKey === 'undefined' ) { return; }
@@ -129,6 +129,7 @@
 		}
 
 	}
+*/
 
 	function setMenuDetailsSelectFile() {
 
@@ -295,16 +296,18 @@
 console.time( 'timer0' );
 
 		var xhr;
-		map = {};
+		place = {};
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', fName, true );
 		xhr.onload = function callback() {
 
-			map = JSON.parse( xhr.responseText );
-			onLoadElevations();
+			place = JSON.parse( xhr.responseText );
+			place.fileName = fName.split( '/' ).pop();
 
 			location.hash = 'file=' + fName;
+
+			onLoadElevations();
 
 		}
 
@@ -323,7 +326,8 @@ console.time( 'timer0' );
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
 
-			map = JSON.parse( reader.result );
+			place = JSON.parse( reader.result );
+			place.fileName = files.files[ 0 ].name;
 			onLoadElevations();
 
 		};
@@ -336,9 +340,9 @@ console.time( 'timer0' );
 
 			scene = new THREE.Scene();
 
-			toggleFog();
 
 //console.log( 'map.verticalScale', map );
+			map = {};
 
 			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScale;
 
@@ -360,6 +364,8 @@ console.time( 'timer0' );
 
 			initElevations();
 
+			toggleFog();
+
 			otherInits();
 
 	}
@@ -377,23 +383,23 @@ console.time( 'timer0' );
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
 
-		map.min = arrayMin( map.elevations );
-		map.max = arrayMax( map.elevations );
+		map.min = arrayMin( place.elevations );
+		map.max = arrayMax( place.elevations );
 
 //		inpVertical.value = map.verticalScale ;
 //		inpVertical.max = 3 * map.verticalScale ;
 
-		ULlat = tile2lat( map.ULtileY, map.zoom );
-		ULlon = tile2lon( map.ULtileX, map.zoom );
+		ULlat = tile2lat( place.ULtileY, place.zoom );
+		ULlon = tile2lon( place.ULtileX, place.zoom );
 
-		LRlat = tile2lat( map.ULtileY + map.tilesY, map.zoom );
-		LRlon = tile2lon( map.ULtileX + map.tilesX, map.zoom );
+		LRlat = tile2lat( place.ULtileY + place.tilesY, place.zoom );
+		LRlon = tile2lon( place.ULtileX + place.tilesX, place.zoom );
 
 		deltaLat = ULlat - LRlat;
 		deltaLon = LRlon - ULlon;
 
-		map.deltaLonTile = deltaLon / map.tilesX;
-		map.deltaLatTile = deltaLat / map.tilesY;
+		map.deltaLonTile = deltaLon / place.tilesX;
+		map.deltaLatTile = deltaLat / place.tilesY;
 
 		map.cenLat = LRlat + 0.5 * ( ULlat - LRlat );
 		map.cenLon = ULlon + 0.5 * ( LRlon - ULlon );
@@ -403,7 +409,7 @@ console.time( 'timer0' );
 
 		menuDetailsTerrainParameters.innerHTML =
 
-			'Number of data points: ' + map.elevations.length.toLocaleString() + b + b +
+			'Number of data points: ' + place.elevations.length.toLocaleString() + b + b +
 
 			'Elevation maximum: ' + Math.round( map.max ).toLocaleString() + 'm' + b +
 			'Elevation minimum: ' + Math.round( map.min ).toLocaleString() + 'm' +b + b +
@@ -425,13 +431,13 @@ console.time( 'timer0' );
 
 		var vertices;
 
-		map.geometry = new THREE.PlaneBufferGeometry( map.deltaLonTile * map.tilesX, map.deltaLatTile * map.tilesY, map.samplesX - 1, map.samplesY - 1 );
+		map.geometry = new THREE.PlaneBufferGeometry( map.deltaLonTile * place.tilesX, map.deltaLatTile * place.tilesY, place.samplesX - 1, place.samplesY - 1 );
 
 		vertices = map.geometry.attributes.position.array;
 
-		for ( var i = 2, j = 0; j < map.elevations.length; i += 3, j++ ) {
+		for ( var i = 2, j = 0; j < place.elevations.length; i += 3, j++ ) {
 
-			vertices[ i ] = map.elevations[ j ];
+			vertices[ i ] = place.elevations[ j ];
 
 		}
 
@@ -460,6 +466,7 @@ console.time( 'timer0' );
 
 			map.material = new THREE.MeshNormalMaterial( { side: 2 } );
 
+
 			drawMap( updateCamera );
 
 			return;
@@ -480,7 +487,7 @@ console.time( 'timer0' );
 
 				} else {
 
-					loadImage( map.zoom + '/' + x + '/' + y + '.png', x - map.ULtileXOverlay , y - map.ULtileYOverlay );
+					loadImage( place.zoom + '/' + x + '/' + y + '.png', x - map.ULtileXOverlay , y - map.ULtileYOverlay );
 
 				}
 
@@ -529,11 +536,11 @@ console.time( 'timer0' );
 
 		delta = map.deltaOverlay;
 
-		map.zoomOverlay = delta + map.zoom;
-		map.ULtileXOverlay = Math.pow( 2, delta ) * map.ULtileX;
-		map.ULtileYOverlay = Math.pow( 2, delta ) * map.ULtileY;
-		map.tilesXOverlay = Math.pow( 2, delta ) * map.tilesX;
-		map.tilesYOverlay = Math.pow( 2, delta ) * map.tilesY;
+		map.zoomOverlay = delta + place.zoom;
+		map.ULtileXOverlay = Math.pow( 2, delta ) * place.ULtileX;
+		map.ULtileYOverlay = Math.pow( 2, delta ) * place.ULtileY;
+		map.tilesXOverlay = Math.pow( 2, delta ) * place.tilesX;
+		map.tilesYOverlay = Math.pow( 2, delta ) * place.tilesY;
 
 		map.canvas = document.createElement( 'canvas' );
 		map.context = map.canvas.getContext( '2d' );
@@ -573,7 +580,7 @@ console.time( 'timer0' );
 		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
 //		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
 //		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: map.plainOpacity, side: 2, transparent: true } );
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: place.plainOpacity, side: 2, transparent: true } );
 
 		map.plain = new THREE.Mesh( geometry, material );
 		map.plain.name = 'plain';
@@ -632,7 +639,7 @@ console.timeEnd( 'timer0' );
 
 		if ( chkFog.checked === true ) {
 
-			scene.fog = new THREE.Fog( 0x7ec0ee, map.fogNear, map.fogFar );
+			scene.fog = new THREE.Fog( 0x7ec0ee, place.fogNear, place.fogFar );
 
 		} else {
 

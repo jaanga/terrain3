@@ -177,8 +177,8 @@
 				'<small id=menuElevationsMessage >from the Google Maps Elevation Service</small>' +
 
 				'<p>' +
-					'<button onclick=initElevations(); >Get Elevations</button> &nbsp; ' +
-					'<button onclick=saveFile(); >Save Elevations to File</button>' +
+					'<button onclick=initElevations(); >Get elevations</button> &nbsp; ' +
+					'<button onclick=saveFile(); >Save path to file</button>' +
 				'</p>' +
 
 				'<textarea id=txtElevations >Elevation data appears here as it arrives. When complete a 3D model is generated and displayed.</textarea>' +
@@ -551,7 +551,7 @@
 
 		getMenuDetailsTilesData();
 
-		drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, '#0000ff' );
+		drawTileBoundary( ULlat, ULlon, LRlat, LRlon, '#0000ff' );
 
 		drawTilesonMap();
 
@@ -639,7 +639,6 @@
 		tileOffsetX = - Math.floor( 0.5 * tilesX );
 		tileOffsetY = - Math.floor( 0.5 * tilesY );
 
-
 		for ( var x = 0; x < tilesX; x++ ) {
 
 			for ( var y = 0; y < tilesY; y++ ) {
@@ -650,7 +649,7 @@
 				LRlat = tile2lat( tileY + y + tileOffsetY + 1, zoom );
 				LRlon = tile2lon( tileX + x + tileOffsetX + 1, zoom );
 
-				drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, '#ff0000' );
+				drawTileBoundary( ULlat, ULlon, LRlat, LRlon, '#ff0000' );
 
 //if ( x === 0 && y === 0 ) { console.log( 'UL', ULlat.toFixed( 4 ), ULlon.toFixed( 4 ) ); }
 
@@ -735,11 +734,11 @@ console.log( 'googleMapCenter', googleMap.center.lat(), googleMap.center.lng() )
 
 		drawPline( points, googleMap, color );
 
-		getElevations( points, googleMap, place.elevations );
+		getElevations( points, place.elevations );
 
 	}
 
-	function getElevations( path, map, elevations ) {
+	function getElevations( path, elevations ) {
 
 		var tempArr, elevation, resolution;
 
@@ -823,9 +822,9 @@ console.log( 'complete count', count, elevations.length );
 
 
 
-// drawing om map
+// drawing on map
 
-	function drawPline( pline, map, color, width ) {
+	function drawPline( pline, gMap, color, width ) {
 
 		new google.maps.Polyline({
 
@@ -833,13 +832,13 @@ console.log( 'complete count', count, elevations.length );
 			strokeColor: color,
 			opacity: 0.1,
 			strokeWeight: width || 1,
-			map: map
+			map: gMap
 
 		});
 
 	}
 
-	function drawTitleBoundary( ULlat, ULlon, LRlat, LRlon, color ) {
+	function drawTileBoundary( ULlat, ULlon, LRlat, LRlon, color ) {
 
 		var tileCoordinates, tilePath;
 
@@ -994,7 +993,7 @@ console.log( '', 23 );
 		ifrThreejs.onload = function() {
 
 			icw = ifrThreejs.contentWindow;
-			icw.map = Object.create( place );
+			icw.place = Object.create( place );
 			icw.onLoadElevations();
 			icw.controls.autoRotate = true;
 

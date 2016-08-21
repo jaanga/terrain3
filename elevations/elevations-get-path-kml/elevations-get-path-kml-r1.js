@@ -23,7 +23,8 @@
 
 		});
 
-console.log( '', googleMap.center.lat(), googleMap.center.lng() );
+//console.log( '', googleMap.center.lat(), googleMap.center.lng() );
+
 	}
 
 	function otherInits() {
