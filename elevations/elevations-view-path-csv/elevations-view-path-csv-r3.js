@@ -11,26 +11,22 @@
 	var index = 0;
 	var indexDefault;
 
-	var deltaDefault = 2;
-
 	var path = new THREE.Object3D();
-	var target;
+	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
+	path.color = 0xff0000;
+	path.points = [];
+	path.rotations = [];
 
 	var aircraft = {};
 	aircraft.file = 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
 
+
+	var target;
 	var pointer;
-
-	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
-	path.color = 0xff0000;
-
-	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
-
-	path.points = [];
-	path.rotations = [];
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
 	var d2r = pi / 180, r2d = 180 / pi;
+	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 
 	function otherInits() {
@@ -94,7 +90,7 @@
 		var xhr, text, waypoints;
 
 		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', map.csvFiles[ 0 ], true );
+		xhr.open( 'GET', place.csvFiles[ 0 ], true );
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -106,7 +102,7 @@
 
 			path.waypoints = waypoints.slice( 1, -1 );
 
-			indexDefault = map.indexDefault[ 0 ];
+			indexDefault = place.indexDefault[ 0 ];
 
 			drawPath( path );
 
@@ -119,9 +115,9 @@
 
 		var scale, geometry, material;
 
-		scene.remove( path.path, path.box );
+//		scene.remove( path.path, path.box );
 
-		path.points = path.waypoints.map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
+		path.points = path.waypoints.map( function( p ) { return v( p[ 0 ], p[ 1 ], place.verticalScale * p[ 2 ]  * 0.3048  ); } );
 		path.rotations = path.waypoints.map( function( p ) { return v( p[ 3 ] * - d2r, p[ 4 ], p[ 5 ] ); } );
 
 		geometry = new THREE.Geometry();
@@ -180,7 +176,7 @@
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 1;
 
-		aircraft.mesh.scale.set( 1, 1, 1 );
+		if ( aircraft.mesh ) { aircraft.mesh.scale.set( 1, 1, 1 ); }
 
 	}
 

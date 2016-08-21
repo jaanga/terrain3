@@ -5,12 +5,12 @@
 // https://developers.google.com/maps/documentation/elevation/start
 
 
-	var urlViewElevations3D = '../elevations-view/elevations-view-3d-core-r11.html';
-//	var urlViewElevations3D = '../elevations-view/index.html';
+//	not: var urlViewElevations3D = '../elevations-view/index.html';
+	var urlViewElevations3D = '../elevations-view/elevations-view-r1.html';
 
 	var place = {};
 
-	place.vicinity = 'Tenzing-Hillary Airport, Lukla, Nepal';
+	place.vicinity = place.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
 
 	place.latitude = 27.6878; // 27.71110193545;
 	place.longitude = 86.7314; // 86.71228385040001;
@@ -667,9 +667,9 @@
 
 		if( !googleMapCenter ) {
 
-console.log( 'lat', place.latitude, 'lon', place.longtitude );
+//console.log( 'lat', place.latitude, 'lon', place.longtitude );
 
-console.log( 'googleMapCenter', googleMap.center.lat(), googleMap.center.lng() );
+//console.log( 'googleMapCenter', googleMap.center.lat(), googleMap.center.lng() );
 
 		}
 

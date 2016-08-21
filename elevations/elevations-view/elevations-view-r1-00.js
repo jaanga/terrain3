@@ -1,6 +1,6 @@
 // 2016-08-18
 
-// R1.2
+// R10.1
 
 //	var defaultFile = '../elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
 //	var defaultFile = 'https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
@@ -242,18 +242,18 @@
 
 		menuDetailsFileNameParameters.innerHTML =
 
-			'Location:<br>' + place.origin + b + b +
+			'Location:<br>' + map.origin + b + b +
 
-			'Zoom level: ' + place.zoom + b + b +
+			'Zoom level: ' + map.zoom + b + b +
 
-			'Samples X: ' + place.samplesX + b +
-			'Samples Y: ' + place.samplesY + b + b +
+			'Samples X: ' + map.samplesX + b +
+			'Samples Y: ' + map.samplesY + b + b +
 
-			'UL tile X: ' + place.ULtileX + b +
-			'UL tile Y: ' + place.ULtileY + b + b +
+			'UL tile X: ' + map.ULtileX + b +
+			'UL tile Y: ' + map.ULtileY + b + b +
 
-			'Tiles X: ' + place.tilesX + b +
-			'Tiles Y: ' + place.tilesY + b +
+			'Tiles X: ' + map.tilesX + b +
+			'Tiles Y: ' + map.tilesY + b +
 
 		b;
 
@@ -342,19 +342,21 @@ console.time( 'timer0' );
 
 //console.log( 'map.verticalScale', map );
 
-			place.verticalScale = place.verticalScale ? place.verticalScale : verticalScale;
+			map = {};
 
-			inpVertical.value =  100000 * place.verticalScale;
-			inpVertical.max =  300000 * place.verticalScale;
+			map.verticalScale = map.verticalScale ? map.verticalScale : verticalScale;
+
+			inpVertical.value =  100000 * map.verticalScale;
+			inpVertical.max =  300000 * map.verticalScale;
 			outVertical.value = inpVertical.valueAsNumber.toFixed( 1 );
 
-			place.plainOpacity = place.plainOpacity ? place.plainOpacity : plainOpacity;
+			map.plainOpacity = map.plainOpacity ? map.plainOpacity : plainOpacity;
 
-			place.fogNear = place.fogNear ? place.fogNear : fogNear;
-			place.fogFar = place.fogFar ? place.fogFar : fogFar;
+			map.fogNear = map.fogNear ? map.fogNear : fogNear;
+			map.fogFar = map.fogFar ? map.fogFar : fogFar;
 
-			place.deltaOverlay = place.deltaOverlay ? place.deltaOverlay : deltaOverlay;
-			place.plainOpacity = place.plainOpacity ? place.plainOpacity : plainOpacity;
+			map.pixelsPerTile = pixelsPerTile;
+//			map.deltaOverlay = place.deltaOverlay ? place.deltaOverlay : deltaOverlay;
 
 			selMapZoom.selectedIndex = place.deltaOverlay;
 
@@ -368,6 +370,7 @@ console.time( 'timer0' );
 
 	}
 
+
 	function otherInits() {};
 
 
@@ -376,9 +379,6 @@ console.time( 'timer0' );
 	function initElevations() {
 
 		var LRlat, LRlon, deltaLat, deltaLon, deltaLatTile;
-
-		map = {};
-		map.pixelsPerTile = pixelsPerTile;
 		map.mesh = new THREE.Object3D();
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
@@ -443,7 +443,7 @@ console.time( 'timer0' );
 
 //		scale = map.verticalScale / ( map.max - map.min );
 
-		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, place.verticalScale ) );
+		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, map.verticalScale ) );
 
 		map.geometry.computeFaceNormals();
 		map.geometry.computeVertexNormals();
@@ -541,6 +541,8 @@ console.time( 'timer0' );
 		map.tilesXOverlay = Math.pow( 2, delta ) * place.tilesX;
 		map.tilesYOverlay = Math.pow( 2, delta ) * place.tilesY;
 
+		map.plainOpacity = map.plainOpacity ? map.plainOpacity : 0.5;
+
 		map.canvas = document.createElement( 'canvas' );
 		map.context = map.canvas.getContext( '2d' );
 
@@ -567,7 +569,7 @@ console.time( 'timer0' );
 	function drawMap( updateCamera ) {
 
 		map.mesh = new THREE.Mesh( map.geometry, map.material );
-		map.mesh.name = place.origin;
+		map.mesh.name = map.origin;
 		map.mesh.position.set( map.cenLon, map.cenLat, 0 );
 		scene.add( map.mesh );
 
@@ -579,7 +581,7 @@ console.time( 'timer0' );
 		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
 //		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
 //		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: place.plainOpacity, side: 2, transparent: true } );
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: map.plainOpacity, side: 2, transparent: true } );
 
 		map.plain = new THREE.Mesh( geometry, material );
 		map.plain.name = 'plain';
@@ -599,7 +601,7 @@ console.timeEnd( 'timer0' );
 
 		toggleFog();
 
-		place.verticalScale = 0.00001 * inpVertical.valueAsNumber;
+		map.verticalScale = 0.00001 * inpVertical.valueAsNumber;
 
 		outVertical.value = inpVertical.valueAsNumber.toFixed( 1 );
 
