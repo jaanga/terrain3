@@ -209,7 +209,7 @@
 
 
 
-console.log( '', place.points );
+//console.log( '', place.points );
 console.time( 't1' );
 
 			drawPath();
@@ -226,8 +226,6 @@ console.time( 't1' );
 		var scale, geometry, material;
 		var spline;
 
-console.timeEnd( 't1' );
-
 		path.points = [];
 		path.path = [];
 
@@ -238,7 +236,7 @@ console.timeEnd( 't1' );
 
 		} 
 
-console.log( 'pathp', path.points  );
+// console.log( 'pathp', path.points  );
 //		path.points = place.points; // .map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
 
 		spline = new THREE.CatmullRomCurve3( path.points );
