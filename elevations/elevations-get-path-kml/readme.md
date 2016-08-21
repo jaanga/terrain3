@@ -8,7 +8,10 @@
 [Elevations Get Path KML Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-get-path-kml/ )
 ===
 
-## Full Screen: [Elevations Get Path KML View]( https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html )
+## Full Screen - safe: [Elevations Get Path KML View]( https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/index.html )
+
+
+## Full Screen - latest: [Elevations Get Path KML View]( https://jaanga.github.io/terrain3/elevations/elevations-get-path-kml/dev/index.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/17637554/30450756-6099-11e6-9c75-8facc3c37bd8.png" style=display:none; width=800 >
@@ -53,9 +56,13 @@ _Elevations Get Path KML View_
 ## Links of Interest
 
 * https://caltopo.com/map.html
+
 ## Change Log
 
 
+### 2016-08-21 ~ R2
+
+* Add core
 
 ### 2016-08-13 ~ R1
 

@@ -82,7 +82,7 @@
 				if ( file.indexOf( searchInFolder ) === -1 || file.slice( -4 ) !== '.kml' ) { continue; }
 
 
-				file = file.split( '\/' ).pop();
+				file = file.split( '/' ).pop();
 
 				files.push( file );
 
