@@ -466,7 +466,6 @@ console.time( 'timer0' );
 
 			map.material = new THREE.MeshNormalMaterial( { side: 2 } );
 
-
 			drawMap( updateCamera );
 
 			return;
@@ -542,6 +541,8 @@ console.time( 'timer0' );
 		map.tilesXOverlay = Math.pow( 2, delta ) * place.tilesX;
 		map.tilesYOverlay = Math.pow( 2, delta ) * place.tilesY;
 
+		map.plainOpacity = map.plainOpacity ? map.plainOpacity : 0.5;
+
 		map.canvas = document.createElement( 'canvas' );
 		map.context = map.canvas.getContext( '2d' );
 
@@ -580,7 +581,7 @@ console.time( 'timer0' );
 		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
 //		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
 //		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: place.plainOpacity, side: 2, transparent: true } );
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: map.plainOpacity, side: 2, transparent: true } );
 
 		map.plain = new THREE.Mesh( geometry, material );
 		map.plain.name = 'plain';

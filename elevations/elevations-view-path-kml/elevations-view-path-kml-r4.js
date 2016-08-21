@@ -48,7 +48,15 @@
 
 		path = new THREE.Object3D();
 
-		getFilePathKML();
+		if ( !place.points ) {
+
+			getFilePathKML();
+
+		} else {
+
+			drawPath();
+
+		}
 
 //		animate();
 		animatePlus();
@@ -149,7 +157,7 @@
 		var xhr, response, xmlParse, text, points;
 
 		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', map.kmlFile, true );
+		xhr.open( 'GET', place.kmlFile, true );
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -162,15 +170,51 @@
 			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
 			text = text.textContent;
 
-			points = text.split( '\n' ).
-				map( function( point ) { 
-					return new THREE.Vector3().fromArray( 
-						point.split( ',' ).map( parseFloat ) ); 
-				} );
+			lines = text.split( '\n' ); //
+			ppoints = [];
+			for ( var i = 0; i < lines.length; i++ ) {
+				line = lines[ i ];
+				point = line.split( ',' ).map( parseFloat );
+				ppoints = ppoints.concat( point );
 
-			map.points = points.slice( 0, -1 );
+			} 
+
+//			points.map ( function( point ) { return point.split( ',' ); } );
+
+//.
+//				map( function( point ) { 
+//					return new THREE.Vector3().fromArray( 
+//						point.split( ',' ).map( parseFloat ) ); 
+//				} );
+
+			place.points = ppoints.slice( 0, -1 );
+
+
+			var raycaster, up;
+
+			raycaster = new THREE.Raycaster();
+			up = v( 0, 0, 1 );
+
+			map.mesh.updateMatrixWorld();
+
+			var pp = place.points;
+			for ( var i = 0; i < place.points.length; i += 3 ) {
+
+				raycaster.set( v( pp[ i ], pp[ i + 1], pp[ i + 2] ), up, 0, 2 );
+				collisions = raycaster.intersectObject( map.mesh );
+
+				pp[ i + 2 ] = collisions.length ? collisions[ 0 ].distance : 0 ;
+
+			}
+
+
+
+console.log( '', place.points );
+console.time( 't1' );
 
 			drawPath();
+
+
 
 		}
 
@@ -181,33 +225,21 @@
 
 		var scale, geometry, material;
 		var spline;
-		var raycaster, up;
-
-		scene.remove( path.path, path.box );
-
-		raycaster = new THREE.Raycaster();
-		up = v( 0, 0, 1 );
-
-		map.mesh.updateMatrixWorld();
-
-console.time( 't1' );
-
-		for ( var i = 0; i < map.points.length; i++ ) {
-
-			raycaster.set( map.points[ i ], up, 0, 2 );
-			collisions = raycaster.intersectObject( map.mesh );
-
-			map.points[ i ].z = collisions.length ? collisions[ 0 ].distance : 0 ;
-
-		}
 
 console.timeEnd( 't1' );
-
 
 		path.points = [];
 		path.path = [];
 
-		path.points = map.points; // .map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
+		var pp = place.points;
+		for ( var i = 0; i < place.points.length; ) {
+
+			path.points.push( v( pp[ i++ ], pp[ i++ ], pp[ i++ ] ) )
+
+		} 
+
+console.log( 'pathp', path.points  );
+//		path.points = place.points; // .map( function( p ) { return v( p[ 0 ], p[ 1 ], map.verticalScale * p[ 2 ]  * 0.3048  ); } );
 
 		spline = new THREE.CatmullRomCurve3( path.points );
 
@@ -253,19 +285,17 @@ console.timeEnd( 't1' );
 
 // http://ausdemmaschinenraum.wordpress.com/2012/12/06/how-to-save-a-file-from-a-url-with-javascript/
 
-		var pl, blob, fileName, a;
+		var pl, blob, a;
 
-		pl = JSON.stringify( map );
+		pl = JSON.stringify( place );
 		blob = new Blob( [ pl ] );
-
-		fileName = map.fileName
 
 		a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-		a.download = fileName;
+		a.download = place.fileName;
 		a.click();
 
-		delete a;
+//		delete a;
 
 	}
 
@@ -311,7 +341,6 @@ console.timeEnd( 't1' );
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
 		camera.up.set( 0, 0, 1 );
 		cameraPosition = 0.7 * path.radius;
-
 
 		camera.position.copy( path.center ).add( v( -cameraPosition, 0, cameraPosition ) );
 
