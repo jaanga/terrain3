@@ -1,6 +1,5 @@
 // 2016-08-21
 
-
 	var searchInFolder = 'elevations-airports-01/';
 	var urlBase = '../../elevations/' + searchInFolder;
 
@@ -22,7 +21,8 @@
 
 	function otherInits() {
 
-		inpFly.checked = false;
+console.log( 'place ', place );
+		getFilePathCSV();
 
 		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );
 		material = new THREE.MeshNormalMaterial( { opacity: 0.5, side: 2, transparent: true } );
@@ -46,8 +46,6 @@
 
 		} );
 
-		getFilePathCSV();
-
 	}
 
 
@@ -70,6 +68,8 @@
 			'<summary><h3>Flightpath details</h3></summary>' +
 			'<div id=menuFlightPathData ></div>' +
 		'</details>';
+
+		inpFly.checked = false;
 
 	}
 
@@ -201,6 +201,7 @@
 		aircraft.mesh.scale.set( 10, 10, 10 );
 
 	}
+
 
 	function animate() {
 

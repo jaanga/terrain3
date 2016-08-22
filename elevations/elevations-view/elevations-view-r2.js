@@ -2,7 +2,6 @@
 
 // R1.2
 
-	var place;
 
 //	location.hash = 'file=https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
 
@@ -22,6 +21,7 @@
 
 	var updateCamera = true; // is this needed?
 
+	var place;
 
 	function initMapViewMenu() {
 
@@ -246,7 +246,7 @@
 console.time( 'timer0' );
 
 		var xhr;
-		place = {};
+//		place = {};
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', fName, true );
@@ -291,6 +291,7 @@ console.time( 'timer0' );
 			scene = new THREE.Scene();
 
 //console.log( 'map.verticalScale', map );
+JT3.setPlaceDefaults();
 
 			place.verticalScale = place.verticalScale ? place.verticalScale : defaults.verticalScale;
 
@@ -316,7 +317,7 @@ console.time( 'timer0' );
 
 	}
 
-	function otherInits() {}
+function otherInits() {}
 
 
 // start second stage of processing

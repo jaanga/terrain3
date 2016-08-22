@@ -68,8 +68,6 @@
 
 	};
 
-	place = {};
-
 	defaults = {};
 
 	defaults.backgroundColor = 0x7ec0ee ;
