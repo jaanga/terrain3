@@ -68,6 +68,8 @@
 
 	};
 
+	place = {};
+
 	defaults = {};
 
 	defaults.backgroundColor = 0x7ec0ee ;
@@ -81,7 +83,6 @@
 	defaults.tilesX = 3;
 	defaults.tilesY = 3;
 
-
 	defaults.verticalScale = 0.00002;
 
 	defaults.plainOpacity = 0.5;
@@ -89,6 +90,7 @@
 
 	defaults.fogNear = 0.5;
 	defaults.fogFar = 1;
+
 
 	var map = {};
 	map.pixelsPerTile = 256;
@@ -116,3 +118,24 @@
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var b = '<br>';
 
+
+	JT3.setPlaceDefaults = function() {
+
+			place.origin = place.origin ? place.origin : defaults.origin;
+
+			place.latitude = place.latitude ? place.latitude : defaults.latitude;
+			place.longitude = place.longitude ? place.longitude : defaults.longitude;
+
+			place.zoom = place.zoom ? place.zoom : defaults.zoom;
+
+			place.tilesX = place.tilesX ? place.tilesX : defaults.tilesX;
+			place.tilesY = place.tilesY ? place.tilesY : defaults.tilesY;
+
+
+			place.plainOpacity = place.plainOpacity ? place.plainOpacity : defaults.plainOpacity;
+			place.deltaOverlay = place.deltaOverlay ? place.deltaOverlay : defaults.deltaOverlay;
+
+			place.fogNear = place.fogNear ? place.fogNear : defaults.fogNear;
+			place.fogFar = place.fogFar ? place.fogFar : defaults.fogFar;
+
+	}

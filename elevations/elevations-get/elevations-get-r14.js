@@ -26,6 +26,8 @@
 		googleMap = {};
 		tiles = {};
 
+		JT3.setPlaceDefaults();
+
 		setMenuDetailsAPIKey();
 		setMenuDetailsMapParameters();
 		setMenuDetailsElevations();
