@@ -146,6 +146,11 @@ Intended for general use
 
 ## Change Log
 
+### 2016-08-22
+
+* Erase all markings with change of center or updates of parameters
+* if map center and last click position not equal, give notice and correct if user OKs
+
 ### 2016-08-21 ~ R14
 
 * Add tiles object and finally cleaned up the tiles code

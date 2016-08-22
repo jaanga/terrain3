@@ -44,6 +44,8 @@ console.log( 'place ', place );
 			aircraft.mesh = new THREE.Mesh( geometry, material );
 			target.add( aircraft.mesh );
 
+			setCameraChase();
+
 		} );
 
 	}
@@ -151,7 +153,7 @@ console.log( 'place ', place );
 	}
 
 // prevent default from happening
-//	function setCamera(){};
+	function setCamera(){};
 
 	function setCameraChase() {
 
@@ -202,6 +204,12 @@ console.log( 'place ', place );
 
 	}
 
+
+	function postInits() {
+
+		setCameraChase();
+
+	}
 
 	function animate() {
 

@@ -6,11 +6,13 @@
 
 
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
-	var urlViewElevations3D = '../elevations-view/elevations-view-r1.html';
+	var urlViewElevations3D = '../elevations-view/elevations-view-r2.html';
 
 	var samplesDefaultIndex = 0; // 10 samples per tile
 
 	var googleMap;
+	var geocoder;
+
 	var tiles;
 
 	var startTime;
@@ -23,10 +25,10 @@
 
 		if ( divThreejs && divThreejs.style ) { divThreejs.style.display = 'none'; }
 
+		place = {};
+		JT3.setPlaceDefaults();
 		googleMap = {};
 		tiles = {};
-
-		JT3.setPlaceDefaults();
 
 		setMenuDetailsAPIKey();
 		setMenuDetailsMapParameters();
@@ -283,6 +285,8 @@
 
 		place.mapTypeId = selMap.value.toLowerCase();
 
+		if ( googleMap.map ) { setCenter(); }
+
 	}
 
 	function onEventMenuElevationsDetails( results ) {
@@ -341,7 +345,7 @@
 
 		onEventMapParameters();
 
-		initGeocoder();
+		initGoogleMap();
 
 		getTiles();
 
@@ -349,7 +353,7 @@
 
 	function onClickGoogleMap( event ) {
 
-		var latLng, lat, lon;
+		var latLng, lat, lon, marker;
 
 		latLng = event.latLng;
 
@@ -372,7 +376,7 @@
 
 		'';
 
-		var marker = new google.maps.Marker({
+		marker = new google.maps.Marker({
 
 			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
 			title: 'lat: ' + lat + ', lng: ' + lon,
@@ -381,12 +385,16 @@
 
 		});
 
+		googleMap.markings.push( marker );
+
+		googleMap.click = marker;
+
 	}
 
 
-// geocode
+// google maps
 
-	function initGeocoder() {
+	function initGoogleMap() {
 
 		var origin_autocomplete, marker;
 
@@ -406,15 +414,32 @@
 
 		});
 
+		googleMap.markings = [];
+
+		googleMap.clearAll = function() {
+
+			for ( var i = 0; i < googleMap.markings.length; i++ ) {
+
+				googleMap.markings[ i ].setMap( null );
+
+			}
+
+			googleMap.markings = [];
+
+		};
+
 		marker = new google.maps.Marker({
 
 			icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
 			position: {lat: place.latitude, lng: place.longitude },
 			title: 'lat: ' + place.latitude + ', lng: ' + place.longitude,
-			snippet: 'snippet',
 			map: googleMap.map
 
 		});
+
+		googleMap.markings.push( marker );
+
+		googleMap.click = googleMap.center = marker;
 
 		googleMap.map.addListener( 'click', onClickGoogleMap );
 
@@ -426,28 +451,43 @@
 
 	function otherInits() {} // plugins can use this
 
+
 	function setCenter( lat, lon ) {
+
+		googleMap.clearAll();
 
 		place.latitude = lat ? parseFloat( lat ) : place.latitude;
 
 		place.longitude = lon ? parseFloat( lon ) : place.longitude;
 
-		googleMap.center = { lat: place.latitude , lng: parseFloat( place.longitude  ) };
+		marker = new google.maps.Marker({
 
-		googleMap.map.setCenter( googleMap.center );
+			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+			position: {lat: place.latitude, lng: place.longitude },
+			title: 'lat: ' + place.latitude + ', lng: ' + place.longitude,
+			map: googleMap.map
+
+		});
+
+		googleMap.markings.push( marker );
+
+		googleMap.map.setCenter( marker.position );
 
 		googleMap.map.setZoom( place.zoom );
 
+		googleMap.center = marker;
+
 		getTiles();
 
-	}
+		return marker;
 
+	}
 
 //
 
 	function getTiles() {
 
-		var p, t;
+		var p, t, boundary, marker;
 		p = place;
 		t = tiles;
 
@@ -520,7 +560,9 @@
 
 		'';
 
-		drawTileBoundary( t.cenULlat, t.cenULlon, t.cenLRlat, t.cenLRlon, '#0000ff' );
+//		boundary = drawTileBoundary( t.cenULlat, t.cenULlon, t.cenLRlat, t.cenLRlon, '#0000ff' );
+
+//		googleMap.markings.push( boundary );
 
 		marker = new google.maps.Marker({
 
@@ -529,6 +571,7 @@
 
 		});
 
+		googleMap.markings.push( marker );
 //
 
 		source = 'http://c.tile.opencyclemap.org/cycle/' + p.zoom + '/' + t.cenTileX + '/' + t.cenTileY + '.png';
@@ -549,7 +592,7 @@
 
 		function drawTilesOnMap() {
 
-			var ULlat, ULlon, LRlat, LRlon;
+			var ULlat, ULlon, LRlat, LRlon, boundary;
 
 			for ( var x = 0; x < p.tilesX; x++ ) {
 
@@ -561,7 +604,9 @@
 					LRlat = tile2lat( t.cenTileY + y - t.offsetY + 1, p.zoom );
 					LRlon = tile2lon( t.cenTileX + x - t.offsetX + 1, p.zoom );
 
-					drawTileBoundary( ULlat, ULlon, LRlat, LRlon, '#ff0000' );
+					boundary = drawTileBoundary( ULlat, ULlon, LRlat, LRlon, '#ff0000' );
+
+					googleMap.markings.push( boundary );
 
 				}
 
@@ -571,6 +616,8 @@
 
 
 		function getMenuDetailsTilesData() {
+
+			var markerl
 
 			t.ULlat = tile2lat( t.cenTileY - t.offsetY, p.zoom );
 			t.ULlon = tile2lon( t.cenTileX - t.offsetX, p.zoom );
@@ -597,7 +644,7 @@
 
 			b;
 
-			var marker = new google.maps.Marker({
+			marker = new google.maps.Marker({
 
 				icon: 'https://maps.google.com/mapfiles/ms/icons/orange-dot.png',
 				title: 'lat: ' + t.ULlat.toFixed( 4 ) + ', lng: ' + t.ULlon.toFixed( 4 ),
@@ -605,6 +652,8 @@
 				map: googleMap.map
 
 			});
+
+			googleMap.markings.push( marker );
 
 			marker = new google.maps.Marker({
 
@@ -615,14 +664,34 @@
 
 			});
 
+			googleMap.markings.push( marker );
+
 		}
 
 	}
 
-
 //
 
 	function initElevations() {
+
+		if ( googleMap.click.position !== googleMap.center.position ) {
+
+			response = confirm ( 
+
+				'Clicked position and center of map are in different places.\n\n' +
+				'Click OK to move map center to clicked position.'
+
+			);
+
+			if ( response === true ) {
+
+				lat = googleMap.click.position.lat();
+				lon = googleMap.click.position.lng();
+				setCenter( lat, lon );
+
+			}
+
+		}
 
 		startTime = Date.now();
 
@@ -688,7 +757,9 @@
 
 		}
 
-		drawPline( points, googleMap.map, color );
+		pline = drawPline( points, googleMap.map, color );
+
+		googleMap.markings.push( pline );
 
 		getElevations( points, place.elevations );
 
@@ -782,7 +853,9 @@ console.log( 'complete count', count, elevations.length );
 
 	function drawPline( pline, gMap, color, width ) {
 
-		new google.maps.Polyline({
+		var polyline;
+
+		polyline  = new google.maps.Polyline({
 
 			path: pline,
 			strokeColor: color,
@@ -792,7 +865,10 @@ console.log( 'complete count', count, elevations.length );
 
 		});
 
+		return polyline;
+
 	}
+
 
 	function drawTileBoundary( ULlat, ULlon, LRlat, LRlon, color ) {
 
@@ -817,8 +893,9 @@ console.log( 'complete count', count, elevations.length );
 
 		tilePath.setMap( googleMap.map );
 
-	}
+		return tilePath;
 
+	}
 
 //
 

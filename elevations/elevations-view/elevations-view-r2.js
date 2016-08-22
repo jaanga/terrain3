@@ -561,7 +561,7 @@ console.timeEnd( 'timer0' );
 
 	}
 
-	function postInits(){}
+
 
 
 	function setCamera() {
@@ -581,6 +581,8 @@ console.timeEnd( 'timer0' );
 		postInits();
 
 	}
+
+	function postInits(){}
 
 	function toggleFog() {
 
