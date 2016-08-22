@@ -47,11 +47,12 @@ _Elevations Get Path KML View_
 
 ## Wish list / To Do
 
-* Simplify the startup procedures
-* View path in pop-pm 3D iframe display
-	* Let view calculate 3D Path
-	( Save 3D path to 3D data file along with elevations etc
+* Read multiple paths
+* Recognize more KML object types
 
+## Issues
+
+* Stop going t Nepal first
 
 ## Links of Interest
 
