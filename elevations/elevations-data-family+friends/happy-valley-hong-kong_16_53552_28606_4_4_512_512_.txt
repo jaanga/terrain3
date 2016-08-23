@@ -6,7 +6,7 @@
 	"tilesX":4,
 	"tilesY":4,
 	"plainOpacity":0.5,
-	"deltaOverlay": 3,
+	"deltaOverlay":3,
 	"fogNear":0.5,
 	"fogFar":1,
 	"samplesX":512,

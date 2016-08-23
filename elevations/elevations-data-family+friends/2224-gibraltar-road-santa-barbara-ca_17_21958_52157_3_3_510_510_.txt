@@ -1,7 +1,7 @@
 {
-	"origin":"2224-gibraltar Road, Santa Barbara CA,
-	"latitude":34.456314,"
-	longitude":-119.68638299999998,
+	"origin": "2224 Gibraltar Road, Santa Barbara CA",
+	"latitude": 34.456314,
+	"longitude":-119.68638299999998,
 	"zoom":17,
 	"tilesX":3,
 	"tilesY":3,
