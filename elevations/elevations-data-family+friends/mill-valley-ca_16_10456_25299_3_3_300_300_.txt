@@ -9,6 +9,7 @@
 	"samplesY": 300,
 	"ULtileX": 10456,
 	"ULtileY": 25299,
+	"deltaOverlay": 3,
 	"plainOpacity" : 0.5,
 	"verticalScale" : 0.00002,
 	"fogNear" : 0.5,

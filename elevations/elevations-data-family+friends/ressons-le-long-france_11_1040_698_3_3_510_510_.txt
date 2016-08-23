@@ -1,5 +1,5 @@
 {
-	"vicinity": "Ressons-le-long",
+	"vicinity": "Ressons-le-long - distant",
 	"latitude": 0,
 	"longitude": 0,
 	"zoom": 11,
