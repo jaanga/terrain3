@@ -79,6 +79,8 @@ value='Source code listing' >
 	* 2016-08-11 ~ Add separate init file
 
 * Plugins
+	* 2016-08-22 ~ Add OBJ files
+	* 2016-08-22 ~ Analemmas
 	* 2016-08-11 ~ Add easy to make animated GIF
 	* 2016-08-05 ~ Save changes to data file
 	* Add pokemons?

@@ -91,15 +91,17 @@ value='Source code listing' >
 
 ### Code
 
-* 2016-08-09 ~ All menus into functions
+
+
 
 ## Interesting sites
-
 
 Fun possibilities for making new maps
 
 * For family and friends
 	* Maps of Armenia and China
+* Gibralter
+* Haiti
 * Island Fernando de Noronha, brazil
 * http://forums.simviation.com/
 * Pythagoreio, Samos Prefecture, Greece
@@ -110,11 +112,7 @@ Fun possibilities for making new maps
 
 ## Issues
 
-* Erase previous boundaries before a new get elevations
-* Add back addresses and lat/lon entry 
-* When you load elevations, there must be a way to go there
-	* Otherwise wrong elevations requested
-* Cannot see some error messages such as rate limit exceeded
+* meters per tile is broken
 
 
 ### Usage limits
@@ -149,7 +147,15 @@ Intended for general use
 ### 2016-08-22
 
 * Erase all markings with change of center or updates of parameters
-* if map center and last click position not equal, give notice and correct if user OKs
+* If map center and last click position not equal, give notice and correct if user OKs
+
+Issues mostly dealt with:
+* 2016-08-09 ~ All menus into functions
+* Erase previous boundaries before a new get elevations
+* Add back addresses and lat/lon entry 
+* When you load elevations, there must be a way to go there
+	* Otherwise wrong elevations requested
+* Cannot see some error messages such as rate limit exceeded
 
 ### 2016-08-21 ~ R14
 
