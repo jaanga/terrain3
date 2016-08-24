@@ -214,8 +214,6 @@ console.time( 't1' );
 
 			drawPath();
 
-
-
 		}
 
 	}
