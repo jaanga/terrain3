@@ -1,9 +1,9 @@
 // 2016-08-18 ~ R4
 
-	var defaultFile = '../elevations-data-kml/7mile_ski_trail_13_1688_3105_3_3_90_90_.txt';
+	var defaultFile = 'san-francisco_10_163_394_3_3_450_450_.txt';
 
-	var searchInFolder = 'elevations-data-kml/';
-	var urlBase = '../../elevations/' + searchInFolder;
+	var searchInFolder = '';
+	var urlBase = '' + searchInFolder;
 
 	var path;
 
@@ -154,7 +154,7 @@
 
 	function getFilePathKML() {
 
-		var xhr, response, xmlParse, text, points;
+//		var xhr, response, xmlParse, text, points;
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', place.kmlFile, true );
@@ -188,7 +188,7 @@
 //				} );
 
 			place.points = ppoints.slice( 0, -1 );
-
+//console.log( '', place.points );
 
 			var raycaster, up;
 
@@ -200,7 +200,7 @@
 			var pp = place.points;
 			for ( var i = 0; i < place.points.length; i += 3 ) {
 
-				raycaster.set( v( pp[ i ], pp[ i + 1], pp[ i + 2] ), up, 0, 2 );
+				raycaster.set( v( pp[ i ], pp[ i + 1], 0 ), up, 0, 2 );
 				collisions = raycaster.intersectObject( map.mesh );
 
 				pp[ i + 2 ] = collisions.length ? collisions[ 0 ].distance : 0 ;
@@ -209,7 +209,7 @@
 
 
 
-//console.log( '', place.points );
+console.log( '', place.points );
 console.time( 't1' );
 
 			drawPath();
