@@ -32,6 +32,8 @@
 
 			defaultFile = location.hash.slice( start, end );
 
+			selFiles.selectedIndex = -1;
+
 		}
 
 		if ( location.hash && location.hash.match( 'cat=' ) ) {

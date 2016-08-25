@@ -2,24 +2,31 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API2 Init R1</title>
+<title>Elevations Get Path KML R4</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
-
+<meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
+Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
+Display results in 3D. Display useful info.
 ' >
 <meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
-<meta name=date content='2016-07-25' >
+<meta name=date content='2016-08-24' >
 </head>
 <body>
 <script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
 <script src=../../google-maps-api2/google-maps-api-init/google-maps-api-init-r1.js ></script>
+<script src=../../google-maps-api2/google-maps-api-lat-lon-geocoder/google-maps-api-lat-lon-geocoder-r2.js ></script>
+<script src=../../google-maps-api2/google-maps-api-map-parameters/google-maps-api-map-parameters-r1.js ></script>
+<script src=../../elevations/elevations-get/elevations-get-r16.js ></script>
+<script src=../elevations-get-path-kml/elevations-get-path-kml-r4.js ></script>
 <script>
+
+	var divThreejs;
 
 	init();
 
 	function init() {
 
-		var mapDiv, container, menu, hamburger;
+		var mapDiv, hamburger, menu, contents;
 
 		setCSS();
 
@@ -39,21 +46,39 @@
 
 			getMenuDetailsHeader() +
 
-//			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
+			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
 
 			getMenuDetailsAPIKey() +
 
 			getMenuDetailsMapClick() +
 
+			getMenuDetailsGeocoder() +
+
+			'<p id=menuDetailsSelectPathKMLExample ></p>' +
+
+			getMenuDetailsMapParameters() +
+
+			'<p id=menuDetailsElevations ></p>' +
+
+			'<p id=menuDetailsTilesData ></p>' +
+
 			getMenuDetailsAbout() +
 
 			getMenuFooter() +
 
-		b;
-
-		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+		'';
 
 		onEventAPIKeyUpdate();
+
+		setMapParameters();
+
+		setMenuDetailsElevations();
+
+		setMenuDetailsTilesData();
+
+		setMenuDetailsSelectPathKMLExample();
+
+		getGitHubAPITreeContents( openMap );
 
 	}
 

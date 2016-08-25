@@ -2,24 +2,23 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API2 Init R1</title>
+<title>Google Maps API Core R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
-
+<meta name=description content='Obtains elevation data via the Google Maps API Elevation service..
 ' >
 <meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
-<meta name=date content='2016-07-25' >
+<meta name=date content='2016-08-25' >
 </head>
 <body>
 <script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
-<script src=../../google-maps-api2/google-maps-api-init/google-maps-api-init-r1.js ></script>
+
 <script>
 
 	init();
 
 	function init() {
 
-		var mapDiv, container, menu, hamburger;
+		var mapDiv, hamburger, menu, contents;
 
 		setCSS();
 
@@ -41,19 +40,17 @@
 
 //			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
 
-			getMenuDetailsAPIKey() +
-
-			getMenuDetailsMapClick() +
+			'<p>' +
+				'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?' +
+			'</p>' +
 
 			getMenuDetailsAbout() +
 
 			getMenuFooter() +
 
-		b;
+		'';
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
-
-		onEventAPIKeyUpdate();
 
 	}
 

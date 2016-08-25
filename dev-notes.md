@@ -6,8 +6,7 @@ Dev Notes
 
 * Ask do you know anybody who is interested in 3D cartography
 
-* Tim Child << on jaanga
-* Jim Michler
+
 * Abe Megahed
 * Callum Prentice
 * Jaume Sanchez
@@ -42,8 +41,10 @@ Dev Notes
 
 ## Ongoing contact
 
+* Tim Child << on jaanga
+* Jim Michler < will send bike path
 * Ladies
-	* page in demo/aceit with links to maps of family places
+	* page in demo/aceit with links to maps of family places < 2016-08-25 sent
 * FGx
 * Ladybug
 

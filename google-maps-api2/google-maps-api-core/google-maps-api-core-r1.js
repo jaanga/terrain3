@@ -1,4 +1,4 @@
-
+// copyright &copy 2016 jaanga authors 
 
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
@@ -8,29 +8,32 @@
 
 	var place;
 	var googleMap;
+	var geocoder;
+	var tiles;
+
+	var divThreejs;
 
 	defaults = {};
-
+	defaults.deltaOverlay = 1;
 	defaults.backgroundColor = 0x7ec0ee ;
-	defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
+
+	defaults.fogNear = 0.5;
+	defaults.fogFar = 1;
 
 	defaults.latitude = 27.6878; // 27.71110193545;
 	defaults.longitude = 86.7314; // 86.71228385040001;
 
-	defaults.zoom = 12;
+	defaults.mapTypeId = 'hybrid';
+	defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
+	defaults.plainOpacity = 0.5;
 
 	defaults.tilesX = 3;
 	defaults.tilesY = 3;
 
 	defaults.verticalScale = 0.00002;
 
-	defaults.plainOpacity = 0.5;
-	defaults.deltaOverlay = 1;
+	defaults.zoom = 12;
 
-	defaults.fogNear = 0.5;
-	defaults.fogFar = 1;
-
-	defaults.mapTypeId = 'hybrid';
 
 	function setCSS() {
 
@@ -98,31 +101,26 @@
 
 // menus
 
-	function getMenuDetailsAPIKey() {
+	function getMenuDetailsHeader() {
 
-		menuDetailsAPIKey =
+		var menuDetailsHeader = 
 
-			'<details id=apiKey >' +
+			'<h2>' +
+				'<a href=https://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a>' + b +
+				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
+				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
+			'</h2>' +
 
-				'<summary><h3>Set api key</h3></summary>' +
+		b
 
-				'<small>If small request, no need for API key</small>' +
+		return menuDetailsHeader;
 
-				'<p>api key: <input id=inpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
-				'<p><button onclick=onEventAPIKeyUpdate(); >Set API key</button></p>' +
-
-			'</details>' + 
-
-		b;
-
-		return menuDetailsAPIKey;
 
 	}
 
-
 	function getMenuDetailsAbout() {
 
-		menuDetailsAbout =
+		var menuDetailsAbout =
 
 			'<details>' +
 
@@ -170,24 +168,7 @@
 
 // events
 
-	function onEventAPIKeyUpdate() {
 
-		if ( googleMap.script ) { googleMap.script.src = ''; google = {}; }
-
-		googleMap.script = document.body.appendChild( document.createElement('script') );
-		googleMap.script.onload = initGoogleMap;
-
-		if ( inpAPI.value !== '' ) {
-
-			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
-
-		} else {
-
-			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
-
-		}
-
-	}
 
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
@@ -219,6 +200,7 @@
 		return max;
 
 	}
+
 
 // Source http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29
 
