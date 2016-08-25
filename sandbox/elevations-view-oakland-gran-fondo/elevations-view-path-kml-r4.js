@@ -1,6 +1,6 @@
 // 2016-08-18 ~ R4
 
-	var defaultFile = 'san-francisco_10_163_394_3_3_450_450_.txt';
+	var defaultFile = 'san-francisco_10_163_394_3_3_450_450-elev_.txt';
 
 	var searchInFolder = '';
 	var urlBase = '' + searchInFolder;
@@ -187,7 +187,7 @@
 //						point.split( ',' ).map( parseFloat ) ); 
 //				} );
 
-			place.points = ppoints.slice( 0, -1 );
+			place.points = ppoints.slice( 2, -1 );
 //console.log( '', place.points );
 
 			var raycaster, up;

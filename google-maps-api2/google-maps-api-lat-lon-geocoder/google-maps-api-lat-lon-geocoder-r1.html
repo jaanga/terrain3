@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Google Maps API Lat Lon Geocoder R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
+Menu and contents in HTML.
+' >
+<meta name=keywords content='CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-07-24' >
+</head>
+<body>
+<script src=../google-maps-api-core/google-maps-api-core-r1.js ></script>
+<script src=../google-maps-api-init/google-maps-api-init-r1.js ></script>
+<script src=../google-maps-api-lat-lon-geocoder/google-maps-api-lat-lon-geocoder-r1.js ></script>
+<script>
+
+//  http://jaanga.github.io/cookbook-html/templates/hamburger-menu/
+
+	init();
+
+	function init() {
+
+		var container, contents, hamburger, menu;
+
+		setCSS();
+
+		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
+		mapDiv.id = 'mapDiv';
+
+		container = document.body.appendChild( document.createElement( 'div' ) );
+		container.id = 'container';
+		container.innerHTML =
+
+			'<div id=menu >' +
+
+				'<h2>' +
+					'<a href=http://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
+					'<a href="" title="Click here to refresh this page" >' + document.title + '</a>' +
+					' ~ <a href=index.html#readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
+				'</h2>' +
+
+				'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
+
+				getMenuDetailsAPIKey() +
+
+				getMenuDetailsMapClick() +
+
+//				getMenuDetailsGeocoder() +
+
+				'<p id=menuDetailsGeocoder ></p>' +
+
+				getMenuDetailsAbout() +
+
+				getMenuFooter() +
+
+			'</div>' +
+
+			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
+				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
+			'</div>' +
+
+		'';
+
+		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+
+		onEventAPIKeyUpdate();
+
+
+
+	}
+
+</script>
+</body>
+</html>
