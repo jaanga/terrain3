@@ -144,6 +144,13 @@ Intended for general use
 
 ## Change Log
 
+
+### 2016-08-24 ~ R15
+
+* Partially in smaller modules
+	* See google maps api2
+	* Code gets tighter and tighter
+
 ### 2016-08-22
 
 * Erase all markings with change of center or updates of parameters
