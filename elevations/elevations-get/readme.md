@@ -144,6 +144,11 @@ Intended for general use
 
 ## Change Log
 
+### 2016-08-25 ~ R16
+
+* Another module: google-maps-api-map-parameters
+* Code: smaller, tighter, faster
+
 
 ### 2016-08-24 ~ R15
 
