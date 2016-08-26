@@ -4,7 +4,7 @@ Dev Notes
 
 ## Peeps to Contact
 
-* Ask do you know anybody who is interested in 3D cartography
+* Ask: do you know anybody who is interested in 3D cartography
 
 
 * Abe Megahed
@@ -23,7 +23,7 @@ Dev Notes
 * Ronan et Quentin
 * vA3C
 * John Walker
-* OS lady
+* FOSS lady
 * GitHub geoGSON dude
 * Stamen
 * Norwegian viewer peeps
@@ -41,9 +41,10 @@ Dev Notes
 
 ## Ongoing contact
 
-* Tim Child << on jaanga
+* Tim Child << on jaanga < wellington
 * Jim Michler < will send bike path
 * Ladies
+	* Add animated GIFs for peeps who can't see things
 	* page in demo/aceit with links to maps of family places < 2016-08-25 sent
 * FGx
 * Ladybug

@@ -77,18 +77,19 @@ value='Source code listing' >
 * Codebase
 	* 2016-08-11 ~ Add overall name space
 	* 2016-08-11 ~ Add separate init file
-
 * Plugins
 	* 2016-08-22 ~ Add OBJ files
 	* 2016-08-22 ~ Analemmas
 	* 2016-08-11 ~ Add easy to make animated GIF
 	* 2016-08-05 ~ Save changes to data file
 	* Add pokemons?
-	* Add placards
+	* Add placards/signs
 	* Link to escape iframe
 	* 2016-08-13 ~ Google nearby places
 	* 2016-08-11 ~ Add physics
-	* Accurate elevation measurement
+	* Add accurate elevation measurement
+		* Clock to read altitude
+		* Accurate vertical scale readout
 	* Add voice
 	* geoJSON
 	* CodePen Maps
@@ -103,7 +104,6 @@ value='Source code listing' >
 	* Add more overlays?
 * Terrain settings
 	* 2016-08-11 ~ Add fog controls
-
 	* 2016-08-15 ~ Add resolution details
 * Path Settings
 	* Headings, pitch and roll everywhere

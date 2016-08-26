@@ -1,12 +1,14 @@
 
 	var JT3 = {};
 
-	JT3.setCSSView = function() {
+	function setCSSView() {
 
-		JT3.cssView = document.body.appendChild( document.createElement('style') );
-		JT3.cssView.innerHTML =
+		var cssView;
 
-			'body { font: 12pt monospace; margin: 0; overflow: hidden; }' +
+		cssView = document.body.appendChild( document.createElement('style') );
+		cssView.innerHTML =
+
+			'body { font: 12pt monospace; margin: 0; overflow: hidden; padding: 0; }' +
 			'a { color: crimson; text-decoration: none; }' +
 
 			'button, input[type=button] { background-color: #ccc; border: 2px #fff solid; color: #322; }' +

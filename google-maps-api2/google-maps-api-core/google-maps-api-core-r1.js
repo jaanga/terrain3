@@ -43,7 +43,7 @@
 		css.innerHTML =
 
 			'html { height: 100%; }' +
-			'body { font: 12pt monospace; height: 100%; margin: 0; }' +
+			'body { font: 12pt monospace; height: 100%; margin: 0; padding: 0; }' +
 			'h2, h3 { margin: 0; }' +
 			'a { color: crimson; text-decoration: none; }' +
 			'button, input[type=button] { background-color: #ccc; border: 2px #fff solid; color: #322; }' +
@@ -74,7 +74,7 @@
 
 	function getPlaceDefaults() {
 
-		place = {};
+		if ( !place ) { place = {}; }
 
 		place.origin = place.origin || defaults.origin;
 
@@ -114,7 +114,6 @@
 		b
 
 		return menuDetailsHeader;
-
 
 	}
 

@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View R2.1</title>
+<title>Elevations View Get Altitude R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -16,12 +16,13 @@ Display in 3D. Add TMS overlay;
 <script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
 <script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
 -->
-<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/r78/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=../../elevations/core/elevations-core-r1.js ></script>
-<script src=../../elevations/elevations-view/elevations-view-r2.js ></script>
-
+<script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
+<script src=../../elevations/core/elevations-core-r2.js ></script>
+<script src=../../elevations/elevations-view/elevations-view-r3.js ></script>
+<script src=get-altitude-r2.js  ></script>
 <script>
 
 	var stats, renderer, scene, camera, controls;
@@ -35,7 +36,7 @@ Display in 3D. Add TMS overlay;
 		var geometry, material, mesh;
 		var axisHelper;
 
-		JT3.setCSSView();
+		setCSSView();
 
 		container = document.body.appendChild( document.createElement( 'div' ) );
 		container.id = 'container';
@@ -43,32 +44,23 @@ Display in 3D. Add TMS overlay;
 
 			'<div id=menu >' +
 
-				'<h2>' +
-					'<a href=http://jaanga.github.io title="Jaanga - your 3D happy place" > &#x2766 </a><br>' +
-					'<a href="" title="Click here to refresh this page" >' + document.title + '</a>' +
-					' ~ <a href=index.html#elevations/elevations-view/readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
-				'</h2>' +
-
-				'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
+				getMenuDetailsHeader() +
 
 				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-				'<div id=menuPlugins ></div>' +
+				'<p id=menuPlugins ></p>' +
 
-				'<div id=menuDetailsSelectFile ></div>' +
+				'<div id=menuDetailsAltitude ></div>' +
 
-				'<div id=menuDetailsOverlay ></div>' +
+				getMenuDetailsSelectFile() +
 
-				'<div id=menuDetailsTerrain ></div>' +
+				getMenuDetailsOverlay() +
 
-				'<div id=menuDetailsAbout ></div>' +
+				getMenuDetailsTerrain() +
 
-				'<hr>' +
+				getMenuDetailsAbout() +
 
-				'<center>' +
-					'<a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a></center>' +
-					'<div class=popUp id=pop2 style=display:none;bottom:10px; >Jaanga - your 3D happy place.<br>Click here to return to the top of the page</div>' +
-				'</center>' +
+				getMenuFooter() +
 
 			'</div>' +
 
@@ -76,7 +68,7 @@ Display in 3D. Add TMS overlay;
 				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
 			'</div>' +
 
-		'';
+		b;
 
 
 // three.js
@@ -117,6 +109,12 @@ Display in 3D. Add TMS overlay;
 // assets
 
 		initMapViewMenu();
+
+	}
+
+	function otherInits() {
+
+		initGetAltitude();
 
 	}
 

@@ -6,7 +6,7 @@
 
 
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
-	var urlViewElevations3D = '../elevations-view/elevations-view-r2.html';
+	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r2.html';
 
 	var tiles = {};
 

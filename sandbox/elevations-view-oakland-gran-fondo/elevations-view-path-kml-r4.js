@@ -1,6 +1,7 @@
 // 2016-08-18 ~ R4
 
 	var defaultFile = 'san-francisco_10_163_394_3_3_450_450-elev_.txt';
+	var defaultFile = 'oakland-gran-fondo-100-r1_12_656_1582_3_3_510_510_.txt';
 
 	var searchInFolder = '';
 	var urlBase = '' + searchInFolder;
