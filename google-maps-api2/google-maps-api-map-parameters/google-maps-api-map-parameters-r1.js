@@ -11,10 +11,10 @@
 
 				'<p>' +
 					'Map overlay: <select id=selMap onchange=onEventMapParameters(); title="images courtesy of Google Maps API" size=1 />' +
-					'<option>Hybrid</option>' +
-					'<option>Roadmap</option>' +
-					'<option>Satellite</option>' +
-					'<option selected >Terrain</option>' +
+					'<option> Hybrid </option>' +
+					'<option> Roadmap </option>' +
+					'<option> Satellite </option>' +
+					'<option> Terrain </option>' +
 					'</select>' +
 				'</p>' +
 
@@ -43,6 +43,8 @@
 		}
 
 		selZoom.selectedIndex = defaults.zoom - 1;
+
+		selMap.selectedIndex = 0;
 
 		for ( i = 0; i < 12; i++ ) {
 

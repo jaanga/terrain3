@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Get R17</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
+Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
+Display results in 3D. Display useful info.
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-08-26' >
+</head>
+<body>
+<script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
+<script src=../../google-maps-api2/google-maps-api-init/google-maps-api-init-r1.js ></script>
+<script src=../../google-maps-api2/google-maps-api-lat-lon-geocoder/google-maps-api-lat-lon-geocoder-r2.js ></script>
+<script src=../../google-maps-api2/google-maps-api-map-parameters/google-maps-api-map-parameters-r1.js ></script>
+<script src=../../google-maps-api2/google-maps-api-tiles-data/google-maps-api-tiles-data-r1.js ></script>
+<script src=../../elevations/elevations-get/elevations-get-r17.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		var mapDiv, hamburger, menu, contents;
+
+		setCSS();
+
+		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
+		mapDiv.id = 'mapDiv';
+
+		hamburger = document.body.appendChild( document.createElement( 'div' ) );
+		hamburger.id = 'hamburger';
+		hamburger.innerHTML = '<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>';
+
+		bars.id = 'bars';
+		bars.onclick = function() { hamburger.style.left = hamburger.style.left === "0px" ? "325px" : 0; };
+
+		menu = hamburger.appendChild( document.createElement( 'div' ) );
+		menu.id = 'menu';
+		menu.innerHTML =
+
+			getMenuDetailsHeader() +
+
+			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
+
+			getMenuDetailsAPIKey() +
+
+			getMenuDetailsMapClick() +
+
+			getMenuDetailsGeocoder() +
+
+			getMenuDetailsMapParameters() +
+
+			'<p id=menuDetailsElevations ></p>' +
+
+			getMenuDetailsTilesData() +
+
+			getMenuDetailsAbout() +
+
+			getMenuFooter() +
+
+		'';
+
+
+		onEventAPIKeyUpdate();
+
+		setMapParameters();
+
+		setMenuDetailsElevations();
+
+	}
+
+</script>
+</body>
+</html>
