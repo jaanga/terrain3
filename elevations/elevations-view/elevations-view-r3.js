@@ -82,7 +82,7 @@
 			'<summary><h3>Select file to view</h3></summary>' +
 			'<small>Select or open a file to view in 3D</small>' +
 			'<p>' +
-				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%; >' +
+				'<select id=selFiles onchange=file=urlBase+this.value;getElevationsFileXHR(file); size=12 style=width:100%; ></select>' +
 			'</p>' +
 
 			'<p><input type=file id=inpFile onchange=getElevationsFileReader(this); /></p>' +

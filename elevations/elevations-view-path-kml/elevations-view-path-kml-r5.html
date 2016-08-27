@@ -8,7 +8,7 @@
 Display in 3D. Add TMS overlay;
 ' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-21' >
+<meta name=date content='2016-08-27' >
 </head>
 <body>
 <!--
@@ -19,19 +19,19 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
 <script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
-<script src=../../elevations/core/elevations-core-r2.js ></script>
-
 <script src=../../elevations/elevations-view/elevations-view-r3.js ></script>
-<script src=../../github-api1/github-api-get-files/github-api-get-files-r1.js ></script>
 
+<script src=../../elevations/elevations-view-path-kml/elevations-view-path-kml-r5.js ></script>
+<script src=../../elevations/core/camera-actions-select-r1.js ></script>
 
 <script>
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
-	animate();
+//	animate();
 
 	function init() {
 
@@ -51,9 +51,13 @@ Display in 3D. Add TMS overlay;
 
 				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
-				'<p id=menuPlugins ></p>' +
-
 				getMenuDetailsSelectFile() +
+
+				'<div id=menuDetailsPath ></div>' +
+
+				getMenuDetailsCameraActions() +
+
+				'<div id=menuPlugins ></div>' +
 
 				getMenuDetailsOverlay() +
 

@@ -97,7 +97,7 @@ value='Source code listing' >
 ## Interesting sites
 
 Fun possibilities for making new maps
-
+* sabang pulau
 * Wellinton < Tim Child
 * For family and friends
 	* Maps of Armenia and China
@@ -144,6 +144,13 @@ Intended for general use
 
 
 ## Change Log
+
+### 2016-08-27 ~ R17
+
+* Add: googgle maps elevations R1
+* Now each of the modules needs a cleanup
+
+
 
 ### 2016-08-26 ~ R17
 
