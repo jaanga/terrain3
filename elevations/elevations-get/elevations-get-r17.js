@@ -8,12 +8,45 @@
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
 	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r2.html';
 
-
-
 	var startTime;
 	var count;
 	var delay;
 	var newWindow;
+
+	function onChangeLocationHash() {
+
+		if ( location.hash ) {
+
+			if ( location.hash.match( 'key=' ).length > 0 ) {
+
+				inpAPI.value = location.hash.slice( 5 ); 
+
+				apiKey.setAttribute('open', 'open');
+
+			}
+
+/*
+
+// what is best syntax? Or use query strings?
+
+
+			hashes = location.hash.split( '#' );
+			inpLatitude.value = place.latitude = parseFloat( hashes[ 1 ] );
+			inpLongitude.value = place.longitude = parseFloat( hashes[ 2 ] );
+			selZoom.selectedIndex = parseInt( hashes[ 3 ] - 1, 10 ) || 12;
+			inpAddress.value = inpAddress.placeholder = hashes[ 4 ] || '';
+*/
+		}
+
+		onEventAPIKeyUpdate();
+
+	}
+
+// see if maps on load can supplant this
+
+	function otherInits() {} // plugins can use this
+
+
 
 
 // inits
@@ -81,39 +114,6 @@
 	}
 
 
-	function onChangeLocationHash() {
-
-		if ( location.hash ) {
-
-			if ( location.hash.match( 'key=' ).length > 0 ) {
-
-				inpAPI.value = location.hash.slice( 5 ); 
-
-				apiKey.setAttribute('open', 'open');
-
-			}
-
-/*
-
-// what is best syntax? Or use query strings?
-
-
-			hashes = location.hash.split( '#' );
-			inpLatitude.value = place.latitude = parseFloat( hashes[ 1 ] );
-			inpLongitude.value = place.longitude = parseFloat( hashes[ 2 ] );
-			selZoom.selectedIndex = parseInt( hashes[ 3 ] - 1, 10 ) || 12;
-			inpAddress.value = inpAddress.placeholder = hashes[ 4 ] || '';
-*/
-		}
-
-		onEventAPIKeyUpdate();
-
-	}
-
-// see if maps on load can supplant this
-
-	function otherInits() {} // plugins can use this
-
 
 
 //
@@ -169,6 +169,8 @@ console.log( 'googleMap.center.position', googleMap.center.position );
 		nextLineElevations();
 
 	}
+
+
 
 	function nextLineElevations() {
 
