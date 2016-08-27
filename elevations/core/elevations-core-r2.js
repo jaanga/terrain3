@@ -103,6 +103,4 @@
 			place.fogNear = place.fogNear ? place.fogNear : defaults.fogNear;
 			place.fogFar = place.fogFar ? place.fogFar : defaults.fogFar;
 
-
-
 	}
