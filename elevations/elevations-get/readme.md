@@ -98,6 +98,7 @@ value='Source code listing' >
 
 Fun possibilities for making new maps
 
+* Wellinton < Tim Child
 * For family and friends
 	* Maps of Armenia and China
 * Gibralter
@@ -143,6 +144,11 @@ Intended for general use
 
 
 ## Change Log
+
+### 2016-08-26 ~ R17
+
+* Add: google-maps-api-tiles-data
+* Make progress on getting altitudes
 
 ### 2016-08-25 ~ R16
 

@@ -7,6 +7,7 @@
 	var urlEvents = 'https://api.github.com/orgs/jaanga/events';
 //	var urlEvents = 'https://api.github.com/repos/mrdoob/three.js/events';
 //	var urlEvents = 'https://api.github.com/orgs/sagemath/events';
+
 /*
 	var repo = 'jaanga.github.io';
 	var branch = 'master';
@@ -20,11 +21,9 @@
 	var folder = '';
 
 	var urlGitHubTree = 'https://api.github.com/repos/' + user + '/' + repo + '/git/trees/' + branch + '?recursive=1';
-//	var urlGHPages = 'https://' + user + '.github.io/' + repo + '/';
-	var urlGHPages = './';
-
+	var urlGHPages = 'https://' + user + '.github.io/' + repo + '/';
 	var urlSource = 'https://github.com/' + user + '/' + repo + '/tree/' + branch + '/';
-	var urlIssues = 'https://api.github.com/repos/' + user + '/' + repo + '/issues?labels=Status%20Update';
+	var urlIssues = 'https://api.github.com/repos/' + user + '/' + repo + '/issues';
 
 	var filesAll, filesSelected;
 
@@ -47,7 +46,7 @@
 			'h2 a { color: crimson; }' +
 			'img { max-width: 100%; }' +
 			'iframe { width: 100%; }' +
-			'summary h2, summary h3, #menuBreadCrumbs h3 { display: inline; }' +
+			'summary h2, summary h3 { display: inline; }' +
 			'summary { outline: none; }' +
 
 			'#menu { box-sizing: border-box; background-color: #ccc; padding: 0 0 0 10px; position: absolute; max-width: 20%; }' +
@@ -78,8 +77,8 @@
 
 			'<center>' +
 				'<a href=javascript:window.scrollTo(0,0); style=text-decoration:none; title="' + user + ' - ' + tagLine + '" >' +
-				'<h1>' + logo + '<h1>' +
-			'</a></center>' +
+				'<h1>' + logo + '<h1></a>' +
+			'</center>' +
 
 		'';
 
@@ -93,7 +92,7 @@
 
 		setMenuDetailsPageActions();
 
-		requestGitHubAPIEvents()
+		requestGitHubAPIEvents();
 
 		setMenuRepositoryEvents();
 
@@ -233,13 +232,14 @@
 				'<p>Thank you <a href=https://developers.google.com/maps/documentation/javascript/elevation > Google Maps </a> and ' +
 					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
 
-				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
+//				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
 
 			'</details>' +
 
 		'';
 
 	}
+
 //
 
 	function onHashChange() {
@@ -277,9 +277,6 @@
 
 		if ( folder === '' ) {
 
-
-
-
 		}
 
 	}
@@ -287,7 +284,7 @@
 
 	function setBreadCrumbs( dir ) {
 
-		var breadCrumbs, dirArray;
+//		var breadCrumbs, dirArray;
 
 		dirArray = dir.split( '/' );
 
@@ -295,7 +292,7 @@
 
 		'<h2>' +
 
-			'<a href=http://' + user + '.github.io title="' + user + ' - ' + tagLine + '" >' + logo + ' ' + user + '</a>&raquo; ' +
+			'<a href=http://' + user + '.github.io title="' + user + ' - ' + tagLine + '" >' + logo + ' ' + user + '</a> &raquo; ' +
 			'<a href=# >' + repo + '</a> &raquo; ' +
 
 		'</h2>';
@@ -304,11 +301,11 @@
 
 			dirString = dirArray.slice( 0, i + 1 ).join( '/' );
 
-			breadCrumbs += '<h3><a href=#' + dirString + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a>&raquo </h3>';
+			breadCrumbs += '<h3><a href=#' + dirString + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a> &raquo </h3>';
 
 		}
 
-		breadCrumbs += '<h4><a href=#' + dir + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a></h4>';
+		breadCrumbs += '<h3><a href=#' + dir + ' >' + dirArray[ i ].replace( /-/g, ' ' ) + '</a></h3>';
 
 		menuBreadCrumbs.innerHTML = breadCrumbs;
 
@@ -317,13 +314,13 @@
 
 	function getFilesFromFolder( dir ) {
 
-		var file, fileArray;
+		var item, itemArray;
 
 		dirsSelected = [];
 
-		dirArray = dir.split( '/' );
+		var dirArray = dir.split( '/' );
 
-		dirLen = dir === '' ? 0 : dirArray.length;
+		var dirLen = dir === '' ? 0 : dirArray.length;
 
 		for ( var i = 0; i < itemsAll.length; i++ ) {
 
@@ -382,10 +379,12 @@
 
 	}
 
+
+
 	function requestGitHubAPIEvents() {
 
 		var xhr;
-		var events, event, txt, dates;
+		var events, event, txt, dates, actor, repo;
 		var eventSet = {};
 
 		xhr = new XMLHttpRequest();
@@ -407,7 +406,7 @@
 
 				if ( dates.indexOf( event.created_at.slice( 0, 10 ) ) === -1 ) {
 
-					dates.push( event.created_at.slice( 0, 10 ) )
+					dates.push( event.created_at.slice( 0, 10 ) );
 
 					txt += '<h4>' + event.created_at.slice( 0, 10 ) + '</h4>';
 
@@ -415,9 +414,12 @@
 
 				actor = ' <a href=' + event.actor.url + ' > ' + event.actor.login + '</a> ';
 
+				repo = ' <a href=' + event.repo.url + ' > ' + event.repo.name.replace ( org, '' ) + '</a> ';
+
 				if ( eventSet[ 'on' + event.type ] !== undefined ) {
 
-					txt += ( i + 1 ) + ' ' + event.created_at.slice( 11, -4 ) + actor + eventSet[ 'on' + event.type ]( event ) + b
+					txt += ( i + 1 ) + ' ' + event.created_at.slice( 11, -4 ) + actor + ' ' + repo + b + 
+						eventSet[ 'on' + event.type ]( event ) + b;
 
 				} else {
 
@@ -431,35 +433,35 @@ console.log( 'non-event', event );
 
 		}
 
-		eventSet.onCommitCommentEvent = function( event ) { return 'commit comment <a href=' + event.payload.comment.html_url + ' >' + event.payload.comment.body + '</a>'; }
+		eventSet.onCommitCommentEvent = function( event ) { return 'commit comment <a href=' + event.payload.comment.html_url + ' >' + event.payload.comment.body + '</a>'; };
 
-		eventSet.onCreateEvent = function( event ) { return 'create ' + event.payload.master_branch; }
+		eventSet.onCreateEvent = function( event ) { return 'create ' + event.payload.master_branch; };
 
-		eventSet.onDeleteEvent = function( event ) { return 'delete ' + event.payload.ref_type; }
+		eventSet.onDeleteEvent = function( event ) { return 'delete ' + event.payload.ref_type; };
 
-		eventSet.onForkEvent = function( event ) { return 'fork';}
+		eventSet.onForkEvent = function( event ) { return 'fork'; };
 
-		eventSet.onGollumEvent = function( event ) { return 'wiki edited'; }
+		eventSet.onGollumEvent = function( event ) { return 'wiki edited'; };
 
-		eventSet.onIssuesEvent = function( event ) { return 'issue <a href=' + event.payload.issue.html_url + ' >' + event.payload.issue.title + '</a>'; }
+		eventSet.onIssuesEvent = function( event ) { return 'issue <a href=' + event.payload.issue.html_url + ' >' + event.payload.issue.title + '</a>'; };
 
-		eventSet.onIssueCommentEvent = function( event ) { return 'issue comment <a href=' + event.payload.issue.html_url + ' >' + event.payload.issue.title + '<a>'; }
+		eventSet.onIssueCommentEvent = function( event ) { return 'issue comment <a href=' + event.payload.issue.html_url + ' >' + event.payload.issue.title + '<a>'; };
 
-		eventSet.onMemberEvent = function( event ) { return 'member ' + event.payload.action; }
+		eventSet.onMemberEvent = function( event ) { return 'member ' + event.payload.action; };
 
 		eventSet.onPushEvent = function( event ) {
 
 			commit = event.payload.commits[ 0 ];
 			return 'push <a href=https://github.com/' + event.repo.name + '/commit/' + commit.sha + ' >' + commit.message + '</a>';
 
-		}
+		};
 
-		eventSet.onPullRequestEvent = function( event ) { return 'pull request ' + event.payload.pull_request.body; }
+		eventSet.onPullRequestEvent = function( event ) { return 'pull request ' + event.payload.pull_request.body; };
 
-		eventSet.onPullRequestReviewCommentEvent = function( event ) { return 'pull comment ' + event.payload.comment.body; }
+		eventSet.onPullRequestReviewCommentEvent = function( event ) { return 'pull comment ' + event.payload.comment.body; };
 
-		eventSet.onReleaseEvent = function( event ) { return 'release ' + event.payload.release.name ; }
+		eventSet.onReleaseEvent = function( event ) { return 'release ' + event.payload.release.name; };
 
-		eventSet.onWatchEvent = function( event ) {	return 'watch ' + event.payload.action ; }
+		eventSet.onWatchEvent = function( event ) {	return 'watch ' + event.payload.action; };
 
 	}
