@@ -263,7 +263,6 @@ console.time( 'timer0' );
 
 			scene = new THREE.Scene();
 
-
 			place.deltaOverlay = place.deltaOverlay || defaults.deltaOverlay;
 
 			place.fogNear = place.fogNear || defaults.fogNear;
