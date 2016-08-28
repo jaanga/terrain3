@@ -1,19 +1,15 @@
 // 2016-08-18 ~ R4
 
-	var defaultFile = '../elevations-data-kml/7mile_ski_trail_13_1688_3105_3_3_90_90_.txt';
+//	var defaultFile = '../elevations-data-kml/7mile_ski_trail_13_1688_3105_3_3_90_90_.txt';
 
 	var searchInFolder = 'elevations-data-kml/';
 	var urlBase = '../../elevations/' + searchInFolder;
 
 	var path;
-
-
 	var points = 200;
 	var zoomScale = 0.1;
 
 	function postInits() {
-
-		setMenuDetailsPath();
 
 		getActor();
 
@@ -32,13 +28,11 @@
 
 		}
 
-		animatePlus();
-
 	}
 
-	function setMenuDetailsPath() {
+	function getMenuDetailsPath() {
 
-		menuDetailsPath.innerHTML =
+		menuDetailsPath =
 
 			'<details open>' +
 
@@ -53,12 +47,14 @@
 
 		b;
 
+		return menuDetailsPath;
+
 	}
 
 
 	function getFilePathKML() {
 
-		var xhr, response, xmlParse, text, points;
+		var xhr, response, xmlParse, text, coordinates;
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', place.kmlFile, true );
@@ -75,11 +71,11 @@
 			text = text.textContent;
 
 			lines = text.split( '\n' ); //
-			ppoints = [];
+			coordinates = [];
 			for ( var i = 0; i < lines.length; i++ ) {
 				line = lines[ i ];
 				point = line.split( ',' ).map( parseFloat );
-				ppoints = ppoints.concat( point );
+				coordinates = coordinates.concat( point );
 
 			} 
 
@@ -91,7 +87,7 @@
 //						point.split( ',' ).map( parseFloat ) ); 
 //				} );
 
-			place.points = ppoints.slice( 0, -1 );
+			place.points = coordinates.slice( 0, -3 );
 
 
 			var raycaster, up;
@@ -157,9 +153,6 @@ console.time( 't1' );
 		path.center = geometry.boundingSphere.center;
 		path.radius = 2 * geometry.boundingSphere.radius;
 
-		curve = new THREE.CatmullRomCurve3( geometry.vertices );
-		center = path.center.clone();
-
 		path.box = new THREE.BoxHelper( path.path );
 
 		scene.add( path.path, path.box );
@@ -181,6 +174,9 @@ console.time( 't1' );
 			'Center Longitude: ' + path.center.x.toFixed( 4 ) + '&deg;' + b +
 		b;
 
+		curve = new THREE.CatmullRomCurve3( geometry.vertices );
+		center = path.center.clone();
+
 	}
 
 
@@ -191,6 +187,7 @@ console.time( 't1' );
 		var pl, blob, a;
 
 		pl = JSON.stringify( place );
+		pl = pl.replace ( /,\"/g, ',\n"' );
 		blob = new Blob( [ pl ] );
 
 		a = document.body.appendChild( document.createElement( 'a' ) );

@@ -69,7 +69,7 @@
 
 		actor.add( camera );
 		camera.position.set( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
-		target = origin;
+		target = origin.clone();
 
 	}
 
@@ -78,7 +78,7 @@
 
 		actor.mesh.add( camera );
 		camera.position.set( 40 * zoomScale, 0 * zoomScale, 0 * zoomScale );
-		target = origin;
+		target = origin.clone();
 		controls.autoRotate = false;
 
 	}
@@ -88,7 +88,7 @@
 
 		actor.mesh.remove( camera );
 		camera.position.copy( center.clone().add( v( -80 * zoomScale, 10 * zoomScale, 80 * zoomScale ) ) );
-		target = actor.position;
+		target = actor.position.clone();
 
 	}
 
