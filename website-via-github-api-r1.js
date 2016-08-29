@@ -267,7 +267,12 @@
 
 			requestFile( urlGHPages + item + '/readme.md', function callbackMD( xhr ) {
 
-				contents.innerHTML = converter.makeHtml( xhr.target.responseText );
+				if ( xhr.target.status !== 404 ) {
+
+					contents.innerHTML = converter.makeHtml( xhr.target.responseText );
+
+				}
+
 				contents.style.overflow = 'auto';
 
 			} );

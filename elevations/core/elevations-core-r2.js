@@ -48,7 +48,7 @@
 	defaults.tilesX = 3;
 	defaults.tilesY = 3;
 
-	defaults.verticalScale = 0.00002;
+	defaults.verticalScale = 2;
 
 	defaults.plainOpacity = 0.5;
 	defaults.deltaOverlay = 1;

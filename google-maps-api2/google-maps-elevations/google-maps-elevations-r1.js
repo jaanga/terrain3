@@ -1,5 +1,10 @@
 
 
+
+//	not: var urlViewElevations3D = '../elevations-view/index.html';
+	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r3.html';
+
+
 	function getMenuDetailsElevations() {
 
 		var menuDetailsElevations =
@@ -254,4 +259,62 @@ console.log( 'complete count', count, elevations.length );
 		detailsElevations.setAttribute( 'open', 'open' );
 
 	}
+
+
+	function onSuccessSetIframe() {
+
+		var icw;
+
+		if ( !divThreejs || divThreejs === true ) {
+
+			divThreejs = document.body.appendChild( document.createElement( 'div' ) );
+			divThreejs.id = 'divThreejs';
+
+		}
+		divThreejs.style.display = '';
+
+		divThreejs.innerHTML =
+
+			'<div id=threejsHeader >' +
+
+				'<button onclick=getNewTabElevationsView(); >View elevations full screen</button>' +
+				'<button onclick=onchange=ifrThreejs.contentWindow.controls.autoRotate=!ifrThreejs.contentWindow.controls.autoRotate; > rotation </button>' +
+				'<button onclick=divThreejs.style.display=divThreejs.style.display===""?"none":""; > [X] </button>' +
+
+			'</div>' +
+
+			'<iframe id=ifrThreejs src=' + urlViewElevations3D + ' ></iframe>' +
+
+		'';
+
+		ifrThreejs.onload = function() {
+
+			icw = ifrThreejs.contentWindow;
+			icw.place = Object.create( place );
+			icw.onLoadElevations();
+			icw.controls.autoRotate = true;
+
+		};
+
+	}
+
+	function getNewTabElevationsView() {
+
+		newWindow = window.open( urlViewElevations3D );
+
+		newWindow.addEventListener(  'load', onLoad, false);
+
+		function onLoad() {
+
+			if ( window.focus ) { newWindow.focus() }
+
+			newWindow.window.place = Object.create( place );
+			newWindow.window.onLoadElevations();
+			newWindow.window.autoRotate = true;
+
+		};
+
+	}
+
+
 

@@ -2,11 +2,9 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KML R5</title>
+<title>Camera Action Select R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
-Display in 3D. Add TMS overlay;
-' >
+<meta name=description content='' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
 <meta name=date content='2016-08-28' >
 </head>
@@ -22,25 +20,18 @@ Display in 3D. Add TMS overlay;
 
 <script src=../../elevations-core/core/elevations-core-r1.js ></script>
 <script src=../../elevations-core/camera-action-select/camera-action-select-r2.js ></script>
-
-<script src=../../elevations/elevations-view/elevations-view-r3.js ></script>
-<script src=../../elevations/elevations-view-path-kml/elevations-view-path-kml-r5.js ></script>
-
 <script>
 
-	var zoomScale = 0.01;
-	var actorScale = 0.0001;
-
-	var stats, renderer, scene, camera, controls;
+	var stats, renderer, scene, camera, controls, mesh;
 
 	init();
 //	animate();
 
 	function init() {
 
-		var container, hamburger, bars, menu;
-		var geometry, material, mesh;
-		var axisHelper;
+		var css, hamburger, menu;
+		var geometry, material;
+		var gridHelper, axisHelper;
 
 		setCSSView();
 
@@ -52,19 +43,7 @@ Display in 3D. Add TMS overlay;
 
 				getMenuDetailsHeader() +
 
-				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
-
-				getMenuDetailsSelectFile() +
-
-				getMenuDetailsPath() +
-
 				getMenuDetailsCameraActions() +
-
-				'<div id=menuPlugins ></div>' +
-
-				getMenuDetailsOverlay() +
-
-				getMenuDetailsTerrain() +
 
 				getMenuDetailsAbout() +
 
@@ -78,49 +57,68 @@ Display in 3D. Add TMS overlay;
 
 		b;
 
-
-// three.js
-
 		stats = new Stats();
 		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0;' ;
 		document.body.appendChild( stats.domElement );
 		stats.domElement.style.display = window.innerWidth < 500 ? 'none' : '';
 
 		renderer = new THREE.WebGLRenderer( {  alpha: 1, antialias: true }  );
-		renderer.setClearColor( defaults.backgroundColor );
 //		renderer.setClearColor( 0xf0f0f0 );
 //		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-		camera.position.set( 1, 1, 1 );
-		camera.up.set( 0, 0, 1 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+		camera.position.set( 200, 200, 200 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 1;
-
+		controls.maxDistance = 800;
 		controls.autoRotate = true;
 
 		scene = new THREE.Scene();
 
 		window.addEventListener( 'resize', onWindowResize, false );
-		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
+		window.addEventListener( 'keyup', onKeyUp, false );
+		renderer.domElement.addEventListener( 'click', function() {  controls.autoRotate = !controls.autoRotate; chkRotate.checked = controls.autoRotate; }, false );
 
-		if ( window.self !== window.top ) { container.style.left = '-325px'; }
 
 // helpers
-		axisHelper = new THREE.AxisHelper( 180 );
-		axisHelper.name = 'axisHelper';
+
+		position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+		mesh.position.set( position.x, -31, position.z );
+		scene.add( mesh );
+
+		gridHelper  = new THREE.GridHelper( 50, 10 );
+		gridHelper.position.set( position.x, -30, position.z );
+		scene.add( gridHelper );
+
+		axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
 
 // assets
 
-		initMapViewMenu();
+		line = getNicePath();
+		line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
+		scene.add( line );
+
+		line.geometry.computeBoundingSphere();
+
+		center = line.geometry.boundingSphere.center;
+		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+		getActor()
+
+		cameraWorld();
 
 		animatePlus();
 
+		motion = true;
+
 	}
+
 
 	function onWindowResize() {
 
@@ -133,12 +131,32 @@ Display in 3D. Add TMS overlay;
 
 	}
 
+	function onKeyUp ( event ) {
+
+//console.log( 'key', event.keyCode );
+
+//		controls.enableKeys = false;
+
+		event.preventDefault();
+
+		switch( event.keyCode ) {
+
+			case 32: controls.autoRotate = !controls.autoRotate;  break; // space bar
+
+		}
+
+	}
+
+
 	function animate() {
 
-		requestAnimationFrame( animate );
-		controls.update();
 		stats.update();
+
+		controls.update();
+
 		renderer.render( scene, camera );
+
+		requestAnimationFrame( animate );
 
 	}
 

@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KML R5</title>
+<title>Elevations View R4</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -21,20 +21,13 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 
 <script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../elevations-core/camera-action-select/camera-action-select-r2.js ></script>
-
-<script src=../../elevations/elevations-view/elevations-view-r3.js ></script>
-<script src=../../elevations/elevations-view-path-kml/elevations-view-path-kml-r5.js ></script>
-
+<script src=../../elevations/elevations-view/elevations-view-r4.js ></script>
 <script>
-
-	var zoomScale = 0.01;
-	var actorScale = 0.0001;
 
 	var stats, renderer, scene, camera, controls;
 
 	init();
-//	animate();
+	animate();
 
 	function init() {
 
@@ -54,13 +47,9 @@ Display in 3D. Add TMS overlay;
 
 				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
+				'<p id=menuPlugins ></p>' +
+
 				getMenuDetailsSelectFile() +
-
-				getMenuDetailsPath() +
-
-				getMenuDetailsCameraActions() +
-
-				'<div id=menuPlugins ></div>' +
 
 				getMenuDetailsOverlay() +
 
@@ -117,8 +106,6 @@ Display in 3D. Add TMS overlay;
 // assets
 
 		initMapViewMenu();
-
-		animatePlus();
 
 	}
 

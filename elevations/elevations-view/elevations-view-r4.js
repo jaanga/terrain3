@@ -270,10 +270,11 @@ console.time( 'timer0' );
 
 			place.plainOpacity = place.plainOpacity || defaults.plainOpacity;
 
-			place.verticalScale = place.verticalScale || defaults.verticalScale;
+//			place.verticalScale = place.verticalScale || defaults.verticalScale;
+			place.verticalScale = defaults.verticalScale;
 
-			inpVertical.value = 100000 * place.verticalScale;
-			inpVertical.max = 300000 * place.verticalScale;
+			inpVertical.value = place.verticalScale;
+			inpVertical.max = 3 * place.verticalScale;
 			outVertical.value = inpVertical.valueAsNumber.toFixed( 1 );
 			selMapZoom.selectedIndex = place.deltaOverlay;
 
@@ -364,7 +365,7 @@ console.time( 'timer0' );
 //		scale = map.verticalScale / ( map.max - map.min );
 
 //		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, place.verticalScale ) );
-		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, 1 / 110946 ) );
+		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, place.verticalScale / 111111 ) );
 
 		map.geometry.computeFaceNormals();
 		map.geometry.computeVertexNormals();
@@ -519,7 +520,7 @@ console.timeEnd( 'timer0' );
 
 		toggleFog();
 
-		place.verticalScale = 0.00001 * inpVertical.valueAsNumber;
+		place.verticalScale = inpVertical.valueAsNumber;
 
 		outVertical.value = inpVertical.valueAsNumber.toFixed( 1 );
 

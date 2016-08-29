@@ -6,7 +6,7 @@
 
 
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
-	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r2.html';
+//	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r2.html';
 
 	var startTime;
 	var count;
@@ -181,10 +181,10 @@
 
 		var icw;
 
-		if ( !divThreejs ) {
+		if ( !divThreejs || divThreejs === true ) {
 
-		divThreejs = document.body.appendChild( document.createElement( 'div' ) );
-		divThreejs.id = 'divThreejs';
+			divThreejs = document.body.appendChild( document.createElement( 'div' ) );
+			divThreejs.id = 'divThreejs';
 
 		}
 		divThreejs.style.display = '';

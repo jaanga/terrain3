@@ -2,13 +2,13 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KML R5</title>
+<title>Elevations View Path KML Oakland Gran Fondo R3</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
 ' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-28' >
+<meta name=date content='2016-08-27' >
 </head>
 <body>
 <!--
@@ -23,13 +23,22 @@ Display in 3D. Add TMS overlay;
 <script src=../../elevations-core/core/elevations-core-r1.js ></script>
 <script src=../../elevations-core/camera-action-select/camera-action-select-r2.js ></script>
 
-<script src=../../elevations/elevations-view/elevations-view-r3.js ></script>
+<script src=../../elevations/elevations-view/elevations-view-r4.js ></script>
+<!--
 <script src=../../elevations/elevations-view-path-kml/elevations-view-path-kml-r5.js ></script>
+-->
+
+<script src=elevations-view-path-kml-oakland-gran-fondo-r3.js ></script>
 
 <script>
 
-	var zoomScale = 0.01;
-	var actorScale = 0.0001;
+	var zoomScale = 0.003;
+	var actorScale = 0.001;
+
+	var searchInFolder = 'sandbox/elevations-view-oakland-gran-fondo/';
+	var urlBase = '../../' + searchInFolder;
+
+	var defaultFile = 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
 	var stats, renderer, scene, camera, controls;
 
@@ -94,11 +103,10 @@ Display in 3D. Add TMS overlay;
 		document.body.appendChild( renderer.domElement );
 
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-		camera.position.set( 1, 1, 1 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 1;
+		controls.maxDistance = 10;
 
 		controls.autoRotate = true;
 

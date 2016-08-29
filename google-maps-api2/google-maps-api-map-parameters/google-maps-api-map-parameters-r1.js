@@ -1,4 +1,6 @@
 
+	var mapParameters = true;
+
 	function getMenuDetailsMapParameters() {
 
 		menuDetailsMapParameters =
@@ -86,8 +88,6 @@
 		}
 
 		selSamples.selectedIndex = samplesDefaultIndex;
-
-		return menuDetailsMapParameters;
 
 	}
 

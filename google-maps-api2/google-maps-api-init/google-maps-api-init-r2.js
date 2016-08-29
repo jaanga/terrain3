@@ -1,24 +1,27 @@
 
 	googleMap = {};
 
-	function onEventAPIKeyUpdate() {
+	function getMenuDetailsAPIKey() {
 
-		if ( googleMap.script ) { googleMap.script.src = ''; google = {}; }
+		menuDetailsAPIKey =
 
-		googleMap.script = document.body.appendChild( document.createElement('script') );
-		googleMap.script.onload = initGoogleMap;
+			'<details id=apiKey >' +
 
-		if ( inpAPI.value !== '' ) {
+				'<summary><h3>Set api key</h3></summary>' +
 
-			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
+				'<small>If small request, no need for API key</small>' +
 
-		} else {
+				'<p>api key: <input id=inpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
+				'<p><button onclick=onEventAPIKeyUpdate(); >Set API key</button></p>' +
 
-			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
+			'</details>' + 
 
-		}
+		b;
+
+		return menuDetailsAPIKey;
 
 	}
+
 
 	function getMenuDetailsMapClick() {
 
@@ -38,24 +41,23 @@
 
 	}
 
-	function getMenuDetailsAPIKey() {
 
-		menuDetailsAPIKey =
+	function onEventAPIKeyUpdate() {
 
-			'<details id=apiKey >' +
+		if ( googleMap.script ) { googleMap.script.src = ''; google = {}; }
 
-				'<summary><h3>Set api key</h3></summary>' +
+		googleMap.script = document.body.appendChild( document.createElement('script') );
+		googleMap.script.onload = initGoogleMap;
 
-				'<small>If small request, no need for API key</small>' +
+		if ( inpAPI.value !== '' ) {
 
-				'<p>api key: <input id=inpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
-				'<p><button onclick=onEventAPIKeyUpdate(); >Set API key</button></p>' +
+			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + inpAPI.value;
 
-			'</details>' + 
+		} else {
 
-		b;
+			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
 
-		return menuDetailsAPIKey;
+		}
 
 	}
 
@@ -115,7 +117,7 @@
 
 		if ( geocoder !== undefined ) { initGoogleGeocoder(); }
 
-//		if ( tiles !== undefined ) { setMenuDetailsMapParameters(); }
+		if ( mapParameters == true ) { setMapParameters(); }
 
 		if ( divThreejs && divThreejs.style ) { divThreejs.style.display = 'none'; }
 
@@ -144,13 +146,9 @@
 			'Latitude: ' + lat.toFixed( 4 ) + '&deg;' + b +
 			'Longitude: ' + lon.toFixed( 4 ) + '&deg;' + b + b +
 
-//			'Tile X: ' + lon2tile( lon, place.zoom ) + b +
-//			'Tile Y: ' + lat2tile( lat, place.zoom ) + b + b +
-
 //			'Pixel X: ' + event.pixel.x + 'px' + b +
 //			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
 
-//			'<p><button onclick=inpLatitude.value=' + lat + ';inpLongitude.value=' + lon + ';initMap(); >Set click location as map center</button></p>' +
 			'<p><button onclick=setCenter(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
 
 		'';
@@ -193,10 +191,6 @@
 		googleMap.center = marker;
 
 		googleMap.map.setCenter( marker.position );
-
-//		googleMap.map.setZoom( place.zoom );
-
-//		googleMap.map.setMapTypeId( place.mapTypeId );
 
 		if ( tiles ) { getTiles(); }
 

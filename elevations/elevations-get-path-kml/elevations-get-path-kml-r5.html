@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations Get R18</title>
+<title>Elevations Get Path KML R5</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
 Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
@@ -19,6 +19,8 @@ Display results in 3D. Display useful info.
 <script src=../../google-maps-api2/google-maps-api-tiles-data/google-maps-api-tiles-data-r2.js ></script>
 <script src=../../google-maps-api2/google-maps-elevations/google-maps-elevations-r1.js ></script>
 <script src=../../elevations/elevations-get/elevations-get-r18.js ></script>
+
+<script src=../../elevations/elevations-get-path-kml/elevations-get-path-kml-r5.js ></script>
 <script>
 
 	init();
@@ -53,6 +55,8 @@ Display results in 3D. Display useful info.
 
 			getMenuDetailsGeocoder() +
 
+			getMenuDetailsSelectPathKMLExample() +
+
 			getMenuDetailsMapParameters() +
 
 			getMenuDetailsElevations() +
@@ -66,6 +70,8 @@ Display results in 3D. Display useful info.
 		'';
 
 		onEventAPIKeyUpdate();
+
+		getGitHubAPITreeContents( openMap );
 
 	}
 
