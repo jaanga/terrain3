@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KML Oakland Gran Fondo R3</title>
+<title>Elevations View Path KML Oakland Gran Fondo R4</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -21,26 +21,26 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 
 <script src=../../elevations-core/core/elevations-core-r1.js ></script>
+<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
 <script src=../../elevations-core/camera-action-select/camera-action-select-r3.js ></script>
-
 <script src=../../elevations/elevations-view/elevations-view-r4.js ></script>
-<!--
-<script src=../../elevations/elevations-view-path-kml/elevations-view-path-kml-r5.js ></script>
--->
 
-<script src=elevations-view-path-kml-oakland-gran-fondo-r3.js ></script>
+<script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
+<script src=../../elevations-core/mesh-lines/mesh-lines-r1.js ></script>
+<script src=elevations-view-path-kml-oakland-gran-fondo-r4.js ></script>
 
 <script>
 
 	var zoomScale = 0.003;
 	var actorScale = 0.001;
 
+	var cameraOffsetWorld =  v( 0 * zoomScale, -130 * zoomScale, 130 * zoomScale );
+	var cameraOffsetTrack =  v( 0 * zoomScale, 0 * zoomScale, 100 * zoomScale );
+
 	var searchInFolder = 'sandbox/elevations-view-oakland-gran-fondo/';
 	var urlBase = '../../' + searchInFolder;
 
 	var defaultFile = 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
-
-	var stats, renderer, scene, camera, controls;
 
 	init();
 //	animate();
@@ -48,8 +48,6 @@ Display in 3D. Add TMS overlay;
 	function init() {
 
 		var container, hamburger, bars, menu;
-		var geometry, material, mesh;
-		var axisHelper;
 
 		setCSSView();
 
@@ -87,66 +85,20 @@ Display in 3D. Add TMS overlay;
 
 		b;
 
+		getThreeJS();
 
-// three.js
-
-		stats = new Stats();
-		stats.domElement.style.cssText = 'position: absolute; right: 0; top: 0;' ;
-		document.body.appendChild( stats.domElement );
-		stats.domElement.style.display = window.innerWidth < 500 ? 'none' : '';
-
-		renderer = new THREE.WebGLRenderer( {  alpha: 1, antialias: true }  );
 		renderer.setClearColor( defaults.backgroundColor );
-//		renderer.setClearColor( 0xf0f0f0 );
-//		renderer.setPixelRatio( window.devicePixelRatio );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
-
 		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
 		camera.up.set( 0, 0, 1 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.maxDistance = 10;
 
-		controls.autoRotate = true;
-
-		scene = new THREE.Scene();
-
-		window.addEventListener( 'resize', onWindowResize, false );
-		window.addEventListener( 'click', function() { controls.autoRotate = false; }, false );
-
-		if ( window.self !== window.top ) { container.style.left = '-325px'; }
-
-// helpers
-		axisHelper = new THREE.AxisHelper( 180 );
-		axisHelper.name = 'axisHelper';
-		scene.add( axisHelper );
-
 // assets
 
 		initMapViewMenu();
 
 		animatePlus();
-
-	}
-
-	function onWindowResize() {
-
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-
-		stats.domElement.style.display = window.innerWidth < 500 ? 'none' : '';
-
-	}
-
-	function animate() {
-
-		requestAnimationFrame( animate );
-		controls.update();
-		stats.update();
-		renderer.render( scene, camera );
 
 	}
 

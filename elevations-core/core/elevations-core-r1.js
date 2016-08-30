@@ -56,6 +56,9 @@
 	var d2r = pi / 180, r2d = 180 / pi;
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
+	var sin = Math.sin;
+	var cos = Math.cos;
+	var abs = Math.abs;
 
 	var b = '<br>';
 
