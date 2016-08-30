@@ -17,8 +17,11 @@
 
 	var v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var origin = v( 0, 0, 0 );
-	var cameraOffsetWorld =  v( 80 * zoomScale, 80 * zoomScale, 80 * zoomScale );
-	var cameraOffsetTrack =  v( -80 * zoomScale, 10 * zoomScale, 80 * zoomScale );
+
+	var cameraOffsetChase = v( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
+	var cameraOffsetInside = v( 0 * zoomScale, 20 * zoomScale, 0 * zoomScale );
+	var cameraOffsetTrack = v( -80 * zoomScale, 10 * zoomScale, 80 * zoomScale );
+	var cameraOffsetWorld = v( 80 * zoomScale, 80 * zoomScale, 80 * zoomScale );
 
 	var center = origin;
 	var target = origin;
@@ -77,7 +80,7 @@
 
 		controls.autoRotate = false;
 		actor.add( camera );
-		camera.position.set( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
+		camera.position.copy( cameraOffsetChase );
 		target = origin.clone();
 //		controls.target.copy( target );
 		follow = true;
@@ -87,10 +90,12 @@
 	function cameraInside() {
 
 		controls.autoRotate = false;
+		cameraPoints = 30000;
 		actor.mesh.add( camera );
-		camera.position.set( 0 * zoomScale, 20 * zoomScale, 0 * zoomScale );
+		camera.up.set( 0, 0, 1 );
+		camera.position.copy( origin.clone().add( cameraOffsetInside ) );
 		target = origin.clone();
-//		controls.target.copy( target );
+		controls.target.copy( target );
 		follow = true;
 
 	}
@@ -201,14 +206,17 @@
 		if ( !motion ) { return; }
 
 		dd = delta / cameraPoints;
-		delta = abs( index + dd ) > 1 ? -delta : delta;
 
 		index += dd;
 
-//		point = abs( sin( index ) );  // nice bounce effect
-		point = abs( index - dd );
+		delta = ( abs( index ) + abs ( dd ) ) > 1 ? - delta : delta;
 
-		if ( point - dd > 0 ) { actor.position.copy( curve.getPoint( point - dd ) ); }
+//		point = abs( sin( index ) );  // nice bounce effect
+		point = abs( index );
+
+		if ( point - dd <  0 ) { return; }
+
+		actor.position.copy( curve.getPoint( point - dd ) );
 
 //		actor.mesh.rotation.setFromVector3( curve.getTangent( point ) ); // wobbles a lot
 

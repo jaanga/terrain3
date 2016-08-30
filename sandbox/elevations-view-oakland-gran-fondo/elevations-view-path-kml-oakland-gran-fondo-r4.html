@@ -34,8 +34,10 @@ Display in 3D. Add TMS overlay;
 	var zoomScale = 0.003;
 	var actorScale = 0.001;
 
-	var cameraOffsetWorld =  v( 0 * zoomScale, -130 * zoomScale, 130 * zoomScale );
-	var cameraOffsetTrack =  v( 0 * zoomScale, 0 * zoomScale, 100 * zoomScale );
+	var cameraOffsetChase = v( 0 * zoomScale, 1 * zoomScale, 1 * zoomScale );
+	var cameraOffsetInside = v( 5 * zoomScale, 2 * zoomScale, 1 * zoomScale  );
+	var cameraOffsetTrack = v( 0 * zoomScale, 0 * zoomScale, 100 * zoomScale );
+	var cameraOffsetWorld = v( 0 * zoomScale, -130 * zoomScale, 130 * zoomScale );
 
 	var searchInFolder = 'sandbox/elevations-view-oakland-gran-fondo/';
 	var urlBase = '../../' + searchInFolder;

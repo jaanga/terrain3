@@ -118,11 +118,11 @@
 
 		} 
 
-		spline = new THREE.CatmullRomCurve3( path.points );
+//		spline = new THREE.CatmullRomCurve3( path.points );
 
 		geometry = new THREE.Geometry();
-//		geometry.vertices = spline.getPoints( points );
 
+//		geometry.vertices = spline.getPoints( points );
 		geometry.vertices = path.points;
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 		path.path = new THREE.Line( geometry, material);
@@ -155,26 +155,18 @@
 
 		b;
 
-
-
-//		curve = new THREE.CatmullRomCurve3( geometry.vertices );
-
-		curve = new THREE.CatmullRomCurve3( path.points );
 		center = path.center.clone();
 
+		cmcurve1 = new THREE.CatmullRomCurve3( path.points );
+		cmcurve1.closed = false;
 
-		geometry = new THREE.Geometry();
-		geometry.vertices = spline.getPoints( 300 );
-//		material = new THREE.LineBasicMaterial( { color: 0x00ff00 } );
+		spacedPoints = cmcurve1.getSpacedPoints( 1000 );
 
-//		line2 = new THREE.Line( geometry, material );
-
-//		scene.add( line2 )
-
-		vertices = curve.getPoints( 300 );
-		meshLine = getMeshLine( vertices, 0x00ff00, 0.001 );
-
+		meshLine = getMeshLine( spacedPoints, 0x00ff00, 0.001 );
 		scene.add( meshLine );
+
+		cmcurve2 = new THREE.CatmullRomCurve3( spacedPoints );
+		curve = cmcurve2;
 
 	}
 
