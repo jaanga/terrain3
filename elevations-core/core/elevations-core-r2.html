@@ -2,16 +2,15 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API Core R1</title>
+<title>Terrain3 Elevations Core R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Obtains elevation data via the Google Maps API Elevation service..
+<meta name=description content='Set Defaults, set CSS, build simple web page.
 ' >
 <meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
-<meta name=date content='2016-08-25' >
+<meta name=date content='2016-08-31' >
 </head>
 <body>
-<script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
-
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
 <script>
 
 	init();
@@ -20,8 +19,9 @@
 
 		var mapDiv, hamburger, menu, contents;
 
-		setCSS();
-		getPlaceDefaults();
+		getCSSCore();
+
+		getPlaceDefaultsCore();
 
 		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
 		mapDiv.id = 'mapDiv';
@@ -37,7 +37,7 @@
 		menu.id = 'menu';
 		menu.innerHTML =
 
-			getMenuDetailsHeader() +
+			getMenuDetailsHeaderCore() +
 
 //			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
 
@@ -45,17 +45,19 @@
 				'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?' +
 			'</p>' +
 
-			getMenuDetailsObjectProperties( place );
+			getMenuDetailsObjectPropertiesCore( place );
 
-			getMenuDetailsAbout() +
+			getMenuDetailsAboutCore() +
 
-			getMenuFooter() +
+			getMenuFooterCore() +
 
 		'';
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
 
 	}
+
+
 
 </script>
 </body>

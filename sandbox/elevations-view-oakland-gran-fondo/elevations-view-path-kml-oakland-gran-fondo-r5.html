@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View Path KML Oakland Gran Fondo R4</title>
+<title>Elevations View Path KML Oakland Gran Fondo R5</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Read a file of elevations. Create a Three.js 3D Mesh.
 Display in 3D. Add TMS overlay;
@@ -20,24 +20,25 @@ Display in 3D. Add TMS overlay;
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 
-<script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
+
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
+<script src=../../elevations-core/core-threejs/core-threejs-r2.js ></script>
 <script src=../../elevations-core/camera-action-select/camera-action-select-r4.js ></script>
 <script src=../../elevations/elevations-view/elevations-view-r4.js ></script>
 
 <script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
 <script src=../../elevations-core/mesh-lines/mesh-lines-r1.js ></script>
-<script src=elevations-view-path-kml-oakland-gran-fondo-r4.js ></script>
+<script src=elevations-view-path-kml-oakland-gran-fondo-r5.js ></script>
 
 <script>
 
-	var zoomScale = 0.003;
+
 	var actorScale = 0.001;
 
-	var cameraOffsetChase = v( 0 * zoomScale, 1 * zoomScale, 1 * zoomScale );
-	var cameraOffsetInside = v( 5 * zoomScale, 2 * zoomScale, 1 * zoomScale  );
-	var cameraOffsetTrack = v( 0 * zoomScale, 0 * zoomScale, 100 * zoomScale );
-	var cameraOffsetWorld = v( 0 * zoomScale, -130 * zoomScale, 130 * zoomScale );
+	var cameraOffsetChase = v( 0.01 * zoomScale, -0.01 * zoomScale, -0.01 * zoomScale );
+	var cameraOffsetInside = v( 0.01 * zoomScale, 0.0 * zoomScale, -0.02 * zoomScale );
+	var cameraOffsetTrack = v( -0.2 * zoomScale, 0.2 * zoomScale, 0.05 * zoomScale );
+	var cameraOffsetWorld = v( 0 * zoomScale, -0.48 * zoomScale, 0.3 * zoomScale );
 
 	var searchInFolder = 'sandbox/elevations-view-oakland-gran-fondo/';
 	var urlBase = '../../' + searchInFolder;
@@ -51,7 +52,7 @@ Display in 3D. Add TMS overlay;
 
 		var container, hamburger, bars, menu;
 
-		setCSSView();
+		getCSSThreejsCore();
 
 		container = document.body.appendChild( document.createElement( 'div' ) );
 		container.id = 'container';
@@ -59,7 +60,7 @@ Display in 3D. Add TMS overlay;
 
 			'<div id=menu >' +
 
-				getMenuDetailsHeader() +
+				getMenuDetailsHeaderCore() +
 
 				'<p><a href="../elevations-get/index.html" >Elevations Get</a></p>' +
 
@@ -75,9 +76,9 @@ Display in 3D. Add TMS overlay;
 
 				getMenuDetailsTerrain() +
 
-				getMenuDetailsAbout() +
+				getMenuDetailsAboutCore() +
 
-				getMenuFooter() +
+				getMenuFooterCore() +
 
 			'</div>' +
 
@@ -89,12 +90,12 @@ Display in 3D. Add TMS overlay;
 
 		getThreeJS();
 
-		renderer.setClearColor( defaults.backgroundColor );
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
-		camera.up.set( 0, 0, 1 );
+//		renderer.setClearColor( defaults.backgroundColor );
+//		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 2000 );
+//		camera.up.set( 0, 0, 1 );
 
-		controls = new THREE.OrbitControls( camera, renderer.domElement );
-		controls.maxDistance = 10;
+//		controls = new THREE.OrbitControls( camera, renderer.domElement );
+//		controls.maxDistance = 10;
 
 // assets
 

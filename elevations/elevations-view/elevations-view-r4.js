@@ -1,7 +1,8 @@
 // 2016-08-25
 
-// R3
+// R4
 
+	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 //	location.hash = 'file=https://jaanga.github.io/terrain3/elevations/elevations-data-03/tenzing-hillary-airport-lukla-nepal_12_3033_1718_3_4_510_680_.txt';
 
@@ -20,6 +21,24 @@
 	var updateCamera = true; // is this needed?
 
 	var place;
+
+	var map = {};
+	map.pixelsPerTile = 256;
+
+	map.mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
+		['Mesh Normal Material', '']
+
+	];
 
 	function initMapViewMenu() {
 

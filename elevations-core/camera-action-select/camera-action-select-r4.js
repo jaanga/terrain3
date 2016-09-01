@@ -2,36 +2,38 @@
 
 // http://jaanga.github.io/cookbook-threejs/examples/animation/camera-actions-select/
 
+	var tangent = new THREE.Vector3();
+	var axis = new THREE.Vector3();
+	var up = new THREE.Vector3( 0, 1, 0 );
 
-	var cameraPoints = 2000;
+	var cameraPoints = 5000;
 	var zoomScale = 1;
 	var actorScale = 1;
 
 	var actor;
 	var curve;
 
+	var point = 0;
 	var index = 0;
 	var delta = 1;
+
 	var motion = false;
 	var follow = false;
 
-	var v = function ( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 	var origin = v( 0, 0, 0 );
-
-	var cameraOffsetChase = v( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
-	var cameraOffsetInside = v( 0 * zoomScale, 20 * zoomScale, 0 * zoomScale );
-	var cameraOffsetTrack = v( -80 * zoomScale, 10 * zoomScale, 80 * zoomScale );
-	var cameraOffsetWorld = v( 80 * zoomScale, 80 * zoomScale, 80 * zoomScale );
-
 	var center = origin;
 	var target = origin;
 
-	var sin = Math.sin;
-	var cos = Math.cos;
-	var abs = Math.abs;
+	var cameraOffsetChase = v( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
+	var cameraOffsetInside = v( 0 * zoomScale, 20 * zoomScale, 0 * zoomScale );
+	var cameraOffsetTrack = v( -80 * zoomScale, 10 * zoomScale, 10 * zoomScale );
+	var cameraOffsetWorld = v( 80 * zoomScale, 80 * zoomScale, 80 * zoomScale );
+
 
 // prevent default animate
 //	function animate() {}
+
+	var CAS = {};
 
 
 	function getMenuDetailsCameraActions() {
@@ -104,7 +106,7 @@
 	function cameraTrack() {
 
 		controls.autoRotate = false;
-		actor.mesh.remove( camera );
+		scene.add( camera );
 		camera.position.copy( center.clone().add( cameraOffsetTrack ) );
 		target = actor.position;
 //		controls.target.copy( target );
@@ -116,7 +118,7 @@
 	function cameraWorld() {
 
 		controls.autoRotate = false;
-		actor.mesh.remove( camera );
+		scene.add( camera );
 		camera.position.copy( center.clone().add( cameraOffsetWorld ) );
 		target = center.clone();
 		controls.target.copy( target );
@@ -125,9 +127,10 @@
 	}
 
 
-// just in case 
+// just in case
 
-	function getActor() {
+
+	CAS.getActorTorusKnot = function() {
 
 		actor = new THREE.Object3D();
 
@@ -143,11 +146,67 @@
 	}
 
 
+	CAS.getActorCylinder = function() {
+
+		var geometry, material, mesh;
+
+		actor = new THREE.Object3D();
+
+		geometry = new THREE.CylinderGeometry( 2 * actorScale, 5 * actorScale, 1 * actorScale, 20 );
+//		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 0.1, 1 ) );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+		actor.add( mesh );
+
+		actor.mesh = mesh;
+
+		geometry = new THREE.BoxGeometry( 1 * actorScale, 3 * actorScale, 1 * actorScale );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * actorScale, 2 * actorScale, 3 * actorScale ) );
+		material = new THREE.MeshNormalMaterial();
+		mesh = new THREE.Mesh( geometry, material );
+
+		actor.add( mesh );
+
+		scene.add( actor );
+
+	}
+
+
+	CAS.getActorBitmap = function( bitmap ) {
+
+		var loader, geometry, material, mesh;
+
+		actor = new THREE.Object3D();
+
+		loader = new THREE.TextureLoader();
+		loader.crossOrigin = '';
+		texture = loader.load( bitmap || '../../bitmaps/j.gif' );
+
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+//		texture.needsUpdate = true;
+//		geometry = new THREE.BoxGeometry( 1 * actorScale, 3 * actorScale, 1 * actorScale );
+		geometry = new THREE.PlaneBufferGeometry( 5 * actorScale, 5 * actorScale );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
+
+		material = new THREE.MeshBasicMaterial( {  map: texture, side: THREE.DoubleSide, transparent: true } );
+//		material = new THREE.MeshNormalMaterial();
+
+		mesh = new THREE.Mesh( geometry, material );
+
+		actor.add( mesh );
+		actor.mesh = mesh;
+
+		scene.add( actor );
+
+	}
+
+
 	function getNicePath( scale ) {
 
 		var segments = 20;
 		var points = 500;
-		var vertices, spline;
+		var vertices, curve;
 		var geometry, material, line;
 
 		scale = scale || 30;
@@ -159,11 +218,11 @@
 
 		}
 
-		spline = new THREE.CatmullRomCurve3( vertices );
-		spline.closed = true;
+		curve = new THREE.CatmullRomCurve3( vertices );
+		curve.closed = true;
 
 		geometry = new THREE.Geometry();
-		geometry.vertices = spline.getPoints( points );
+		geometry.vertices = curve.getPoints( points );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 
@@ -191,7 +250,7 @@
 	}
 
 
-	function animatePlus() {
+	function animatePlusLookAt () {
 
 		var point, pointAhead;
 
@@ -201,7 +260,7 @@
 
 		renderer.render( scene, camera );
 
-		requestAnimationFrame( animatePlus );
+		requestAnimationFrame( animatePlusLookAt );
 
 		if ( !motion ) { return; }
 
@@ -223,11 +282,108 @@
 		actor.lookAt( curve.getPoint( point ) );
 
 
-		if ( follow === true ) { 
+		if ( follow === true ) {
 
-			controls.target.copy( target ); 
+			controls.target.copy( target );
 			camera.up.set( 0, 0, 1 );
 
 		}
+
+//		if ( index > 0.03 ) motion = false;
+
+	}
+
+	function animatePlusWestLangley() {
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+		point = point <= 1 ? point: 0;
+
+		actor.position.copy( curve.getPointAt( point ) );
+
+		tangent = curve.getTangentAt( point ).normalize();
+
+		axis.crossVectors( up, tangent ).normalize();
+
+		var radians = Math.acos( up.dot( tangent ) );
+
+		actor.quaternion.setFromAxisAngle( axis, radians );
+
+		point += 1 / cameraPoints;
+
+	}
+
+
+
+	function animatePlusJayField() {
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+			point = ( point + 1 / cameraPoints ) %1.0 ;//increment t while maintaining it between 0.0 and 1.0
+			var p = curve.getPoint( point ); //point at t
+			var pn = curve.getPoint(( point + 1 / cameraPoints ) % 1.0 );//point at next t iteration
+
+			if(p != null && pn != null){
+				//move to current position
+				actor.position.x = p.x;
+				actor.position.z = p.z;
+				//get orientation based on next position
+				actor.rotation.y = Math.atan2( pn.z - p.z, pn.x - p.x );
+
+			}
+
+	}
+
+
+// http://stackoverflow.com/questions/11179327/orient-objects-rotation-to-a-spline-point-tangent-in-three-js/11181366#11181366
+
+// http://jsfiddle.net/SCXNQ/891/
+
+
+	function animatePlusWestLangleyType2() {
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+// set the marker position
+		pt = curve.getPoint( point );
+		actor.position.set( pt.x, pt.y, pt.z );
+
+// get the tangent to the curve
+		tangent = curve.getTangent( t ).normalize();
+
+// calculate the axis to rotate around
+		axis.crossVectors( up, tangent ).normalize();
+
+// calculate the angle between the up vector and the tangent
+		radians = Math.acos( up.dot( tangent ) );
+
+// set the quaternion
+		actor.quaternion.setFromAxisAngle( axis, radians );
+
+		point = ( point >= 1 ) ? 0 : point += 1 / cameraPoints ;
 
 	}

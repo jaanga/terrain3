@@ -32,8 +32,10 @@
 	var divThreejs;
 
 	defaults = {};
-	defaults.deltaOverlay = 1;
+
+
 	defaults.backgroundColor = 0x7ec0ee ;
+	defaults.deltaOverlay = 1;
 
 	defaults.fogNear = 0.5;
 	defaults.fogFar = 1;
@@ -48,7 +50,7 @@
 	defaults.tilesX = 3;
 	defaults.tilesY = 3;
 
-	defaults.verticalScale = 0.00002;
+	defaults.verticalScale = 1;
 
 	defaults.zoom = 12;
 
@@ -149,6 +151,33 @@
 
 	}
 
+	function getMenuDetailsObjectProperties( obj ) {
+
+		var keys = Object.keys( obj );
+
+		var objProperties = '';
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			objProperties += keys[ i ] + ': ' + obj[ keys[ i ] ] + '<br>';
+
+		}
+
+		var menuDetailsObjectProperties =
+
+			'<details open>' +
+
+				'<summary><h3>Object Properties: ' + obj.constructor.name + ' </h3></summary>' +
+
+				'<p>' + objProperties + '</p>' +
+
+			'</details>' +
+
+		b;
+
+		return menuDetailsObjectProperties;
+
+	}
 
 // menus
 

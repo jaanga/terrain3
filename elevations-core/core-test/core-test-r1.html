@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Core Test R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-08-31' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
+<script src=../../elevations-core/core-threejs/core-threejs-r2.js ></script>
+<script src=../../elevations-core/camera-action-select/camera-action-select-r4.js ></script>
+<script>
+
+	var cameraOffsetChase = v( 1 * zoomScale, -0.5 * zoomScale, -2 * zoomScale );
+	var cameraOffsetInside = v( 0.1 * zoomScale, 0.0 * zoomScale, -0.2 * zoomScale );
+	var cameraOffsetTrack = v( 0 * zoomScale, 0.05 * zoomScale, 0.05 * zoomScale );
+	var cameraOffsetWorld = v( 0 * zoomScale, -0.05 * zoomScale, 0.05 * zoomScale );
+
+	var container;
+
+	init();
+	animate();
+
+	function init() {
+
+		var hamburger, menu;
+
+		getCSSThreejsCore();
+
+		getPlaceDefaultsCore();
+
+		container = document.body.appendChild( document.createElement( 'div' ) );
+		container.id = 'container';
+		container.innerHTML =
+
+			'<div id=menu >' +
+
+				getMenuDetailsHeaderCore() +
+
+				getMenuDetailsCameraActions() +
+
+				getMenuDetailsObjectPropertiesCore( place ) +
+
+				getMenuDetailsAboutCore() +
+
+				getMenuFooterCore() +
+
+			'</div>' +
+
+			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
+				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
+			'</div>' +
+
+		b;
+
+		getThreeJS();
+
+		getMapGeometry();
+
+	}
+
+	function getMoreInits() {
+
+			actor = getActorBitmapCoreThreejs( );
+			actor.scale.set( 0.002, 0.002, 0.002 );
+			actor.position.set( place.longitudeCenter, place.latitudeCenter, 0.01 );
+
+			scene.add( actor );
+
+			line = getNicePath();
+			line.geometry.applyMatrix( new THREE.Matrix4().makeScale(  0.001, 0.001, 0.0002 ) );
+			line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( place.longitudeCenter, place.latitudeCenter, 0.01 ) );
+
+			line.geometry.computeBoundingSphere();
+			line.updateMatrixWorld()
+
+			scene.add( line );
+
+			curve1 = new THREE.CatmullRomCurve3( line.geometry.vertices );
+			spacedPoints = curve1.getSpacedPoints( 300 );
+
+			center = map.mesh.position;
+
+//			center = v( place.longitudeCenter, place.latitudeCenter, 0.01 );
+			curve = new THREE.CatmullRomCurve3( spacedPoints );
+
+			cameraWorld();
+
+			animatePlus = animatePlusLookAt;
+
+	//		animate = animatePlusWestLangley;
+
+	//		animate = animatePlusJayField;
+
+	//		animate = animatePlusWestLangleyType2
+
+			animatePlus();
+
+			motion = true;
+
+	}
+
+</script>
+</body>
+</html>

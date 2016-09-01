@@ -13,6 +13,15 @@
 
 		CAS.getActorBitmap( 'logo-beb-main-site.png' );
 
+		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeScale( 2, 1, 1 ) );
+
+		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -pi05 ) );
+		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( pi05 ) );
+
+//		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( pi05 ) );
+
+		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -0.005, 0, 0 ) );
+
 		path = new THREE.Object3D();
 
 //		if ( !place.points ) {
@@ -118,11 +127,8 @@
 
 		} 
 
-//		spline = new THREE.CatmullRomCurve3( path.points );
-
 		geometry = new THREE.Geometry();
 
-//		geometry.vertices = spline.getPoints( points );
 		geometry.vertices = path.points;
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 		path.path = new THREE.Line( geometry, material);
@@ -179,6 +185,7 @@
 		scene.add( line3 );
 
 		curve = curve2;
+
 //		meshLine = getMeshLine( spacedPoints, 0x00ff00, 0.001 );
 //		scene.add( meshLine );
 

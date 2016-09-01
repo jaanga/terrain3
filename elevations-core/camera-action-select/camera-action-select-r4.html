@@ -2,11 +2,11 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Core Three.js R1</title>
+<title>Camera Action Select R4</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='' >
+<meta name=description content='track object moving along spline' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-31' >
+<meta name=date content='2016-08-20' >
 </head>
 <body>
 <!--
@@ -20,12 +20,12 @@
 
 <script src=../../elevations-core/core/elevations-core-r1.js ></script>
 <script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
+<script src=../../elevations-core/camera-action-select/camera-action-select-r4.js ></script>
 <script>
 
-	var container;
 
 	init();
-	animate();
+//	animate();
 
 	function init() {
 
@@ -41,6 +41,8 @@
 
 				getMenuDetailsHeader() +
 
+				getMenuDetailsCameraActions() +
+
 				getMenuDetailsAbout() +
 
 				getMenuFooter() +
@@ -55,7 +57,63 @@
 
 		getThreeJS();
 
-		getMapGeometry();
+		window.addEventListener( 'keyup', onKeyUp, false );
+		renderer.domElement.addEventListener( 'click', function() {  controls.autoRotate = !controls.autoRotate; chkRotate.checked = controls.autoRotate; }, false );
+
+// assets
+
+		position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
+
+		ground.position.set( position.x, -31, position.z );
+		gridHelper.position.set( position.x, -30, position.z );
+
+		line = getNicePath();
+		line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
+		scene.add( line );
+
+		line.geometry.computeBoundingSphere();
+
+		center = line.geometry.boundingSphere.center;
+		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+
+//		CAS.getActorBitmap();
+
+		CAS.getActorCylinder();
+
+		cameraWorld();
+
+		animatePlus = animatePlusLookAt;
+
+//		animate = animatePlusWestLangley;
+
+//		animate = animatePlusJayField;
+
+//		animate = animatePlusWestLangleyType2
+
+		animatePlus();
+
+		motion = true;
+
+	}
+
+
+
+
+
+	function onKeyUp ( event ) {
+
+//console.log( 'key', event.keyCode );
+
+//		controls.enableKeys = false;
+
+		event.preventDefault();
+
+		switch( event.keyCode ) {
+
+			case 32: controls.autoRotate = !controls.autoRotate;  break; // space bar
+
+		}
 
 	}
 

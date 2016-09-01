@@ -3,7 +3,7 @@
 "latitude":37.62945956107554,
 "longitude":-122.07664489746094,
 "zoom":11,
-"verticalScale":0.00002,
+"verticalScale": 5,
 "tilesX":3,
 "tilesY":3,
 "plainOpacity":0.05,

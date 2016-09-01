@@ -1,8 +1,5 @@
 // copyright &copy 2016 jaanga authors 
 
-	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
-	var d2r = pi / 180, r2d = 180 / pi;
-
 	var place;
 	var googleMap;
 	var geocoder;
@@ -10,10 +7,20 @@
 	var mapParameters;
 	var divThreejs = true;
 
-	var map = {};
-	map.pixelsPerTile = 256;
 
-	map.mapTypes = [
+	defaults = {};
+
+	defaults.backgroundColor = 0x7ec0ee ;
+	defaults.deltaOverlay = 1;
+
+	defaults.fogNear = 0.5;
+	defaults.fogFar = 1;
+
+	defaults.latitude = 27.6878; // 27.71110193545;
+	defaults.longitude = 86.7314; // 86.71228385040001;
+
+	defaults.mapTypeId = 'hybrid';
+	defaults.mapTypes = [
 
 		['Google Maps','https://mt1.google.com/vt/x='],
 		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
@@ -28,42 +35,48 @@
 
 	];
 
-	defaults = {}; // in alphabetical order
 
-
-	defaults.backgroundColor = 0x7ec0ee ;
-	defaults.deltaOverlay = 1;
-
-	defaults.fogNear = 0.5;
-	defaults.fogFar = 1;
-
-	defaults.latitude = 27.6878; // 27.71110193545;
-	defaults.longitude = 86.7314; // 86.71228385040001;
-
-	defaults.mapTypeId = 'hybrid';
 	defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
+	defaults.pixelsPerTile = 256;
 	defaults.plainOpacity = 0.5;
-
-	defaults.samples = 10;
 
 	defaults.tilesX = 3;
 	defaults.tilesY = 3;
 
-	defaults.verticalScale = 2;
+	defaults.verticalScale = 5;
 
 	defaults.zoom = 12;
 
 // shortcuts
 
-
 	var b = '<br>';
 
-	function setCSS() {
+
+//
+
+	function getPlaceDefaultsCore() {
+
+		if ( !place ) { place = {}; }
+
+		place.name = 'Place';
+
+		keys = Object.keys( defaults ); 
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			place[ keys[ i ] ] = place[ keys[ i ] ] || defaults[ keys[ i ] ];
+
+		}
+
+	}
+
+
+	function getCSSCore() {
 
 		var css;
 
 		css = document.body.appendChild( document.createElement('style') );
-		css.innerHTML =  // in alphabetical order
+		css.innerHTML =
 
 			'html { height: 100%; }' +
 			'body { font: 12pt monospace; height: 100%; margin: 0; padding: 0; }' +
@@ -99,12 +112,13 @@
 
 	}
 
-	function setCSSView() {
 
-		var cssView;
+	function getCSSThreejsCore() {
 
-		cssView = document.body.appendChild( document.createElement('style') );
-		cssView.innerHTML =
+		var css;
+
+		css = document.body.appendChild( document.createElement('style') );
+		css.innerHTML =
 
 			'body { font: 12pt monospace; margin: 0; overflow: hidden; padding: 0; }' +
 			'a { color: crimson; text-decoration: none; }' +
@@ -133,61 +147,28 @@
 
 	}
 
-	function getPlaceDefaults() {
-
-		if ( !place ) { place = {}; }
-
-		place.deltaOverlay = place.deltaOverlay || defaults.deltaOverlay;
-
-		place.fogFar = place.fogFar || defaults.fogFar;
-		place.fogNear = place.fogNear || defaults.fogNear;
-
-		place.latitude = place.latitude || defaults.latitude;
-		place.longitude = place.longitude || defaults.longitude;
-
-		place.mapTypeId = place.mapTypeId || defaults.mapTypeId;
-
-		place.origin = place.origin || defaults.origin;
-
-		place.plainOpacity = place.plainOpacity || defaults.plainOpacity;
-
-		place.samples = place.samples || defaults.samples;
-
-		place.tilesX = place.tilesX || defaults.tilesX;
-		place.tilesY = place.tilesY || defaults.tilesY;
-
-		place.verticalScale = place.verticalScale || defaults.verticalScale;
-
-		place.zoom = place.zoom || defaults.zoom;
-
-	}
-
 
 // menus
 
-	function getMenuDetailsHeader() {
+
+	function getMenuDetailsHeaderCore() {
 
 		var menuDetailsHeader = 
 
 			'<h2>' +
-
 				'<a href=https://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a>' + b +
 				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
-//				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
-				'<a href=index.html#readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
-
+				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
 			'</h2>' +
 
-			'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
-
-		b;
+		b
 
 		return menuDetailsHeader;
 
 	}
 
 
-	function getMenuDetailsAbout() {
+	function getMenuDetailsAboutCore() {
 
 		var menuDetailsAbout =
 
@@ -214,7 +195,7 @@
 	}
 
 
-	function getMenuFooter() {
+	function getMenuFooterCore() {
 
 		var footer = 
 
@@ -235,9 +216,39 @@
 	}
 
 
-// utilities
+	function getMenuDetailsObjectPropertiesCore( obj ) {
+
+		var keys, objProperties, menuDetailsObjectProperties;
+
+		keys = Object.keys( obj );
+
+		var objProperties = '';
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			objProperties += keys[ i ] + ': ' + obj[ keys[ i ] ] + '<br>';
+
+		}
+
+		 menuDetailsObjectPropertiesCore =
+
+			'<details open>' +
+
+				'<summary><h3>Object Properties: ' + obj.name + ' </h3></summary>' +
+
+				'<p>' + objProperties + '</p>' +
+
+			'</details>' +
+
+		b;
+
+		return menuDetailsObjectPropertiesCore;
+
+	}
 
 
+
+// utils
 
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
@@ -267,33 +278,5 @@
 		}
 
 		return max;
-
-	}
-
-
-// Source http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29
-
-	function lon2tile( lon, zoom ) {
-
-		return Math.floor( ( lon + 180 ) / 360 * Math.pow( 2, zoom ) );
-
-	}
-
-	function lat2tile( lat, zoom ) {
-
-		return Math.floor(( 1 - Math.log( Math.tan( lat * pi / 180) + 1 / Math.cos( lat * pi / 180)) / pi )/2 * Math.pow(2, zoom) );
-
-	}
-
-	function tile2lon( x, zoom ) {
-
-		return ( x / Math.pow( 2, zoom ) * 360 - 180 );
-
-	}
-
-	function tile2lat( y, zoom ) {
-
-		var n = pi - 2 * pi * y / Math.pow( 2, zoom );
-		return 180 / pi * Math.atan( 0.5 * ( Math.exp( n ) - Math.exp( -n ) ));
 
 	}

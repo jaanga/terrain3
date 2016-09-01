@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Core Three.js R1</title>
+<title>Core Three.js R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -18,8 +18,8 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 
-<script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
+<script src=../../elevations-core/core-threejs/core-threejs-r2.js ></script>
 <script>
 
 	var container;
@@ -31,7 +31,9 @@
 
 		var hamburger, menu;
 
-		setCSSView();
+		getCSSThreejsCore();
+
+		getPlaceDefaultsCore();
 
 		container = document.body.appendChild( document.createElement( 'div' ) );
 		container.id = 'container';
@@ -39,11 +41,13 @@
 
 			'<div id=menu >' +
 
-				getMenuDetailsHeader() +
+				getMenuDetailsHeaderCore() +
 
-				getMenuDetailsAbout() +
+				getMenuDetailsObjectPropertiesCore( place ) +
 
-				getMenuFooter() +
+				getMenuDetailsAboutCore() +
+
+				getMenuFooterCore() +
 
 			'</div>' +
 
@@ -54,8 +58,6 @@
 		b;
 
 		getThreeJS();
-
-		getMapGeometry();
 
 	}
 

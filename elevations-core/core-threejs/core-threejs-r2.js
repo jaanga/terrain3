@@ -1,12 +1,15 @@
 
 	var pi = Math.PI, pi05 = pi * 0.5, pi2 = pi + pi;
 	var d2r = pi / 180, r2d = 180 / pi;
+
 	var v = function( x, y, z ){ return new THREE.Vector3( x, y, z ); };
 
 	var sin = Math.sin;
 	var cos = Math.cos;
 	var abs = Math.abs;
+	var ran = Math.random;
 
+	var map = {};
 
 	var stats, renderer, scene, camera, controls, mesh;
 	var ground, gridHelper, axisHelper;
@@ -26,7 +29,7 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.0000001, 1000 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00000001, 100 );
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -60,23 +63,21 @@
 	}
 
 
-
 	function getMapGeometry() {
 
 		var vertices;
 
 		script = document.body.appendChild( document.createElement( 'script' ) );
 
-		script.onload = doit;
+		script.onload = callback;
 		script.src = '../../data-path-csv/san-francisco_10_163_394_3_3_450_450_.js';
 
+		function callback() {
 
-		function doit() {
-
-			var scale = 0.1;
+			renderer.setClearColor( place.backgroundColor );
 
 	//		map.geometry = new THREE.PlaneBufferGeometry( map.deltaLonTile * place.tilesX, map.deltaLatTile * place.tilesY, place.samplesX - 1, place.samplesY - 1 );
-			map.geometry = new THREE.PlaneBufferGeometry( place.deltaLatitude, place.deltaLatitude, 449, 449 );
+			map.geometry = new THREE.PlaneBufferGeometry( place.latitudeDelta, place.latitudeDelta, 449, 449 );
 
 			vertices = map.geometry.attributes.position.array;
 
@@ -86,7 +87,7 @@
 
 			}
 
-			map.geometry.applyMatrix( new THREE.Matrix4().makeScale( scale, scale, 1 / 111111 ) );
+			map.geometry.applyMatrix( new THREE.Matrix4().makeScale( place.latitudeDelta, place.latitudeDelta, place.verticalScale * place.latitudeDelta / 111111 ) );
 
 			map.geometry.computeFaceNormals();
 			map.geometry.computeVertexNormals();
@@ -97,16 +98,14 @@
 			map.mesh = new THREE.Mesh( map.geometry, map.material );
 			map.mesh.name = place.origin;
 
-	//		map.mesh.position.set( map.cenLon, map.cenLat, 0 );
-
-	// comment out next line to get marker at proper location
-			map.mesh.position.set( -122.4, 37.8, 0 );
+// comment out next line to get marker at proper location
+			map.mesh.position.set( place.longitudeCenter, place.latitudeCenter, 0 );
 			map.mesh.updateMatrixWorld();
 
 			map.boxHelper = new THREE.BoxHelper( map.mesh, 0xff0000 );
 			map.boxHelper.name = 'boxHelper';
 			scene.add( map.boxHelper );
-	//		map.boxHelper.visible = false;
+//			map.boxHelper.visible = false;
 
 			scene.add( map.mesh );
 
@@ -118,10 +117,15 @@
 */
 			setCamera();
 
+			getMoreInits();
 
 		}
 
 	}
+
+
+	function getMoreInits() {}
+
 
 	function setCamera() {
 
@@ -132,13 +136,39 @@
 		map.center = map.boxHelper.geometry.boundingSphere.center;
 
 		controls.target.copy( map.center );
-		controls.maxDistance = 3 * map.radius;
+//		controls.maxDistance = 3 * map.radius;
 //		controls.autoRotate = true;
 
 		cameraPosition = 0.7 * map.radius;
 		camera.position.copy( map.center.clone() ).add( v( 0, -cameraPosition, cameraPosition ) );
 
-//		postInits();
+	}
+
+
+	function getActorBitmapCoreThreejs( bitmap ) {
+
+		var loader, texture, geometry, material, mesh;
+
+		obj = new THREE.Object3D();
+
+		loader = new THREE.TextureLoader();
+		loader.crossOrigin = '';
+		texture = loader.load( bitmap || '../../bitmaps/j.gif' );
+
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+//		texture.needsUpdate = true;
+
+		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
+
+		material = new THREE.MeshBasicMaterial( {  map: texture, side: THREE.DoubleSide, transparent: true } );
+
+		mesh = new THREE.Mesh( geometry, material );
+
+		obj.add( mesh );
+		obj.mesh = mesh;
+
+		return obj;
 
 	}
 
@@ -156,8 +186,6 @@
 
 
 // utils
-
-
 
 // Source http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#ECMAScript_.28JavaScript.2FActionScript.2C_etc..29
 

@@ -2,26 +2,28 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API Core R1</title>
+<title>Google Maps API2 Map Parameters R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Obtains elevation data via the Google Maps API Elevation service..
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
 ' >
 <meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
-<meta name=date content='2016-08-25' >
+<meta name=date content='2016-07-25' >
 </head>
 <body>
-<script src=../../google-maps-api2/google-maps-api-core/google-maps-api-core-r1.js ></script>
-
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
+<script src=../google-maps-api-init/google-maps-api-init-r2-1.js ></script>
+<script src=../google-maps-api-lat-lon-geocoder/google-maps-api-lat-lon-geocoder-r2-1.js ></script>
+<script src=../google-maps-api-map-parameters/google-maps-api-map-parameters-r2.js ></script>
 <script>
+
 
 	init();
 
 	function init() {
 
-		var mapDiv, hamburger, menu, contents;
+		var mapDiv, container, menu, hamburger;
 
-		setCSS();
-		getPlaceDefaults();
+		getCSSCore();
 
 		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
 		mapDiv.id = 'mapDiv';
@@ -37,23 +39,27 @@
 		menu.id = 'menu';
 		menu.innerHTML =
 
-			getMenuDetailsHeader() +
+			getMenuDetailsHeaderCore() +
 
 //			'<p><a href="../elevations-view/index.html" >Elevations View</a></p>' +
 
-			'<p>' +
-				'lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?' +
-			'</p>' +
+			getMenuDetailsAPIKeyInit() +
 
-			getMenuDetailsObjectProperties( place );
+			getMenuDetailsMapClickInit() +
 
-			getMenuDetailsAbout() +
+			getMenuDetailsGeocoder() +
 
-			getMenuFooter() +
+			getMenuDetailsMapParameters() +
 
-		'';
+			getMenuDetailsAboutCore() +
+
+			getMenuFooterCore() +
+
+		b;
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+
+		onEventAPIKeyUpdateInit();
 
 	}
 

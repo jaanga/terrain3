@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API2 Init R2</title>
+<title>Google Maps API2 Init R2.1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
 
@@ -11,8 +11,8 @@
 <meta name=date content='2016-07-25' >
 </head>
 <body>
-<script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../google-maps-api2/google-maps-api-init/google-maps-api-init-r2.js ></script>
+<script src=../../elevations-core/core/elevations-core-r2.js ></script>
+<script src=../../google-maps-api2/google-maps-api-init/google-maps-api-init-r2-1.js ></script>
 <script>
 
 	init();
@@ -21,7 +21,7 @@
 
 		var mapDiv, container, menu, hamburger;
 
-		setCSS();
+		getCSSCore();
 
 		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
 		mapDiv.id = 'mapDiv';
@@ -37,21 +37,21 @@
 		menu.id = 'menu';
 		menu.innerHTML =
 
-			getMenuDetailsHeader() +
+			getMenuDetailsHeaderCore() +
 
-			getMenuDetailsAPIKey() +
+			getMenuDetailsAPIKeyInit() +
 
-			getMenuDetailsMapClick() +
+			getMenuDetailsMapClickInit() +
 
-			getMenuDetailsAbout() +
+			getMenuDetailsAboutCore() +
 
-			getMenuFooter() +
+			getMenuFooterCore() +
 
 		b;
 
 		if ( window.self !== window.top ) { container.style.left = '-325px'; }
 
-		onEventAPIKeyUpdate();
+		onEventAPIKeyUpdateInit();
 
 	}
 
