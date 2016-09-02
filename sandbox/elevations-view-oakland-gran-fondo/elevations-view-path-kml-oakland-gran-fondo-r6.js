@@ -133,7 +133,7 @@
 		geometry.center();
 
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( - delta.x - 0.002, delta.y + 0.001, - delta.y - 0.006 ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( - delta.x - 0, delta.y + 0.0005, - delta.y - 0.006 ) );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff00ff } );
 		line = new THREE.Line( geometry, material);
