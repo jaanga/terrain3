@@ -2,11 +2,11 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Core Test R1</title>
+<title>Camera Action Select R5</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='' >
+<meta name=description content='track object moving along spline' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-31' >
+<meta name=date content='2016-09-01' >
 </head>
 <body>
 <!--
@@ -23,23 +23,15 @@
 <script src=../../elevations-core/camera-action-select/camera-action-select-r5.js ></script>
 <script>
 
-	var cameraOffsetChase = v( 1 * zoomScale, -0.5 * zoomScale, -2 * zoomScale );
-	var cameraOffsetInside = v( 0.1 * zoomScale, 0.0 * zoomScale, -0.2 * zoomScale );
-	var cameraOffsetTrack = v( 0 * zoomScale, 0.05 * zoomScale, 0.05 * zoomScale );
-	var cameraOffsetWorld = v( 0 * zoomScale, -0.05 * zoomScale, 0.05 * zoomScale );
-
-	var container;
 
 	init();
-	animate();
+//	animate();
 
 	function init() {
 
 		var hamburger, menu;
 
 		getCSSThreejsCore();
-
-		getPlaceDefaultsCore();
 
 		container = document.body.appendChild( document.createElement( 'div' ) );
 		container.id = 'container';
@@ -50,8 +42,6 @@
 				getMenuDetailsHeaderCore() +
 
 				getMenuDetailsCameraActions() +
-
-				getMenuDetailsObjectPropertiesCore( place ) +
 
 				getMenuDetailsAboutCore() +
 
@@ -67,48 +57,63 @@
 
 		getThreeJS();
 
-		getMapGeometry();
+		window.addEventListener( 'keyup', onKeyUp, false );
+		renderer.domElement.addEventListener( 'click', function() {  controls.autoRotate = !controls.autoRotate; chkRotate.checked = controls.autoRotate; }, false );
+
+// assets
+
+		position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
+
+		ground.position.set( position.x, -31, position.z );
+		gridHelper.position.set( position.x, -30, position.z );
+
+		line = getNicePath();
+		line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
+		scene.add( line );
+
+		line.geometry.computeBoundingSphere();
+
+		center = line.geometry.boundingSphere.center;
+		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+
+//		CAS.getActorBitmap();
+
+		CAS.getActorCylinder();
+
+		cameraWorld();
+
+		animatePlus = animatePlusLookAt;
+
+//		animate = animatePlusWestLangley;
+
+//		animate = animatePlusJayField;
+
+//		animate = animatePlusWestLangleyType2
+
+		animatePlus();
+
+		motion = true;
 
 	}
 
-	function getMoreInits() {
 
-			actor = getActorBitmapCoreThreejs( );
-			actor.scale.set( 0.002, 0.002, 0.002 );
-			actor.position.set( place.longitudeCenter, place.latitudeCenter, 0.01 );
 
-			scene.add( actor );
 
-			line = getNicePath();
-			line.geometry.applyMatrix( new THREE.Matrix4().makeScale(  0.001, 0.001, 0.0002 ) );
-			line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( place.longitudeCenter, place.latitudeCenter, 0.01 ) );
 
-			line.geometry.computeBoundingSphere();
-			line.updateMatrixWorld()
+	function onKeyUp ( event ) {
 
-			scene.add( line );
+//console.log( 'key', event.keyCode );
 
-			curve1 = new THREE.CatmullRomCurve3( line.geometry.vertices );
-			spacedPoints = curve1.getSpacedPoints( 300 );
+//		controls.enableKeys = false;
 
-			center = map.mesh.position;
+		event.preventDefault();
 
-//			center = v( place.longitudeCenter, place.latitudeCenter, 0.01 );
-			curve = new THREE.CatmullRomCurve3( spacedPoints );
+		switch( event.keyCode ) {
 
-			cameraWorld();
+			case 32: controls.autoRotate = !controls.autoRotate;  break; // space bar
 
-			animatePlus = animatePlusLookAt;
-
-	//		animate = animatePlusWestLangley;
-
-	//		animate = animatePlusJayField;
-
-	//		animate = animatePlusWestLangleyType2
-
-			animatePlus();
-
-			motion = true;
+		}
 
 	}
 

@@ -97,7 +97,7 @@
 
 		menuDetailsSelectFile =
 
-		'<details open >' +
+		'<details id=detailsSelectFile open >' +
 			'<summary><h3>Select file to view</h3></summary>' +
 			'<small>Select or open a file to view in 3D</small>' +
 			'<p>' +
@@ -124,7 +124,7 @@
 
 		menuDetailsOverlay =
 
-			'<details open >' +
+			'<details id=detailsOverlay open >' +
 				'<summary><h3>Overlay settings</h3></summary>' +
 				'<small>Adjust 2D bitmaps</small>' +
 
@@ -173,7 +173,7 @@
 
 		menuDetailsTerrain =
 
-			'<details open >' +
+			'<details id=detailsTerrain open >' +
 				'<summary><h3>Terrain settings</h3></summary>' +
 				'<small>Adjust 3D terrain</small>' +
 
@@ -456,7 +456,7 @@ console.time( 'timer0' );
 
 					if ( count === tilesTotal ) {
 
-						map.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2 } );
+						map.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 0 } );
 
 						drawMap( updateCamera );
 
@@ -563,7 +563,7 @@ console.timeEnd( 'timer0' );
 
 		controls.target.copy( map.center );
 		controls.maxDistance = 3 * map.radius;
-		controls.autoRotate = true;
+//		controls.autoRotate = true;
 
 		cameraPosition = 0.7 * map.radius;
 		camera.position.copy( map.center.clone() ).add( v( 0, -cameraPosition, cameraPosition ) );

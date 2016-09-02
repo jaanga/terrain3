@@ -52,7 +52,7 @@
 
 				'<p>' +
 					'Camera positions: <output id=outSpeed >' + cameraPoints + '</output><br>' +
-					'<input type=range id=inpSpeed min=200 max=10000 step=100 value=' + cameraPoints + ' oninput=outSpeed.value=cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
+					'<input type=range id=inpSpeed min=200 max=40000 step=100 value=' + cameraPoints + ' oninput=outSpeed.value=cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
 				'</p>' +
 
 
@@ -95,7 +95,6 @@
 		controls.autoRotate = false;
 		cameraPoints = 30000;
 		actor.mesh.add( camera );
-		camera.up.set( 0, 0, 1 );
 		camera.position.copy( origin.clone().add( cameraOffsetInside ) );
 		target = origin.clone();
 		controls.target.copy( target );
@@ -123,7 +122,7 @@
 		controls.autoRotate = false;
 		cameraPoints = 10000;
 		scene.add( camera );
-		camera.position.copy( center.clone().add( cameraOffsetWorld ) );
+		camera.position.copy( cameraOffsetWorld );
 		target = center.clone();
 		controls.target.copy( target );
 		follow = false;
@@ -272,27 +271,15 @@
 
 		index += dd;
 
-//		delta = ( abs( index ) + abs ( dd ) ) > 1 ? - delta : delta;
-
-		index = index > 1 ? dd : index;
-
-
-//		point = abs( sin( index ) );  // nice bounce effect
-//		point = abs( index );
-
-//		if ( point - dd <  0 ) { return; }
+		index = index <= 1 ? index : dd;
 
 		actor.position.copy( curve.getPoint( index - dd ) );
 
-//		actor.mesh.rotation.setFromVector3( curve.getTangent( point ) ); // wobbles a lot
-
-		actor.mesh.lookAt( curve.getPoint( index ) );
-
+		actor.lookAt( curve.getPoint( index ) );
 
 		if ( follow === true ) {
 
 			controls.target.copy( target );
-
 
 		}
 
@@ -301,6 +288,8 @@
 	}
 
 	function animatePlusWestLangley() {
+
+		var radians;
 
 		stats.update();
 
@@ -320,7 +309,7 @@
 
 		axis.crossVectors( up, tangent ).normalize();
 
-		var radians = Math.acos( up.dot( tangent ) );
+		radians = Math.acos( up.dot( tangent ) );
 
 		actor.quaternion.setFromAxisAngle( axis, radians );
 

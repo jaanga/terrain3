@@ -11,6 +11,8 @@
 
 	function postInits() {
 
+	camera.up.set( 0, 0, 1 );
+
 		CAS.getActorBitmap( 'logo-beb-main-site.png' );
 
 		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeScale( 2, 1, 1 ) );
@@ -18,11 +20,9 @@
 		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -pi05 ) );
 		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( pi05 ) );
 
-//		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( pi05 ) );
-
 		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -0.005, 0, 0 ) );
 
-		path = new THREE.Object3D();
+
 
 //		if ( !place.points ) {
 
@@ -116,6 +116,7 @@
 		var scale, geometry, material;
 		var spline;
 
+		path = new THREE.Object3D();
 		path.points = [];
 		path.path = [];
 
@@ -180,13 +181,14 @@
 		geometry = new THREE.Geometry();
 		geometry.vertices =  curve2.getSpacedPoints( 2000 );
 		material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
-		line3 = new THREE.Line( geometry, material );
 
+		line3 = new THREE.Line( geometry, material );
+//		mine = getMeshLine( spacedPoints, 0x00ff00, 0.001 );
 		scene.add( line3 );
 
 		curve = curve2;
 
-//		meshLine = getMeshLine( spacedPoints, 0x00ff00, 0.001 );
+
 //		scene.add( meshLine );
 
 	}

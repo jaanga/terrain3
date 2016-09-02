@@ -29,7 +29,7 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
 
-		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00000001, 100 );
+		camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.000001, 5 );
 		camera.position.set( 100, 100, 100 );
 
 		controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -115,6 +115,7 @@
 			particle.scale.x = particle.scale.y = 0.01 * scale;
 			scene.add( particle );
 */
+
 			setCamera();
 
 			getMoreInits();

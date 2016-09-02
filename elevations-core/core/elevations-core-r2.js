@@ -35,7 +35,6 @@
 
 	];
 
-
 	defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
 	defaults.pixelsPerTile = 256;
 	defaults.plainOpacity = 0.5;
