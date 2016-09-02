@@ -96,7 +96,9 @@
 
 			drawPath2();
 
-			cameraWorld();
+//			cameraWorld();
+
+			cameraTrack();
 
 			motion = true;
 

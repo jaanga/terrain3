@@ -6,7 +6,7 @@
 	var axis = new THREE.Vector3();
 	var up = new THREE.Vector3( 0, 1, 0 );
 
-	var cameraPoints = 5000;
+	var cameraPoints = 9000;
 	var zoomScale = 1;
 	var actorScale = 1;
 
