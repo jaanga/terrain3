@@ -141,7 +141,7 @@
 
 				'</details>' +
 
-			'</details>' + b +
+			'</details>' +
 
 		'';
 
@@ -199,7 +199,7 @@
 					'<summary><h4>terrain parameters</h4></summary>' +
 					'<div id=menuDetailsTerrainParameters ></div>' +
 
-				'</details>' + b +
+				'</details>' +
 
 			'</details>' +
 
@@ -456,7 +456,7 @@ console.time( 'timer0' );
 
 					if ( count === tilesTotal ) {
 
-						map.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 0 } );
+						map.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2 } );
 
 						drawMap( updateCamera );
 
