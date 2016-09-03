@@ -169,7 +169,7 @@
 
 	function getMenuDetailsAboutCore() {
 
-		var menuDetailsAbout =
+			'<details id=detailsAbout >' +
 
 			'<details>' +
 
