@@ -160,7 +160,7 @@
 				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
 			'</h2>' +
 
-		b
+		b;
 
 		return menuDetailsHeader;
 

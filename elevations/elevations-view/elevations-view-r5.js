@@ -209,7 +209,6 @@
 
 	}
 
-
 	function setMenuDetailsFileNameParameters() {
 
 		menuDetailsFileNameParameters.innerHTML =
@@ -382,10 +381,15 @@ console.time( 'timer0' );
 
 		}
 
+//		scale = map.verticalScale / ( map.max - map.min );
+
+//		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, place.verticalScale ) );
 		map.geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 1, place.verticalScale / 111111 ) );
 
 		map.geometry.computeFaceNormals();
 		map.geometry.computeVertexNormals();
+
+//		outVertical.value = ( 100000 * map.verticalScale );
 
 	}
 
@@ -568,10 +572,7 @@ console.timeEnd( 'timer0' );
 
 	}
 
-
 	function postInits(){}
-
-
 
 	function toggleFog() {
 
