@@ -12,10 +12,11 @@
 		map.plain.rotation.x = -pi05;
 		map.plain.position.set( 0, -0.05, 0 );
 
-//		controls.target = v( 0, 0, 0 );
-//		controls.maxDistance = 600;
-//		scene.fog.near = 1000;
-//		scene.fog.far = 1000;
+
+		controls.target = v( 0, 0, 0 );
+		controls.maxDistance = 0.8;
+		scene.fog.near = 1000;
+		scene.fog.far = 1000;
 
 		axisHelper = new THREE.AxisHelper( 50 );
 		scene.add( axisHelper );
@@ -30,6 +31,7 @@
 //		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( pi05 ) );
 
 		actor.mesh.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0.005, 0 ) );
+
 
 	}
 

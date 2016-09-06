@@ -56,6 +56,14 @@ console.log( 'loaded', place );
 
 	}
 
+	OVR.drawMapOverlay = function( updateCamera ) {
+
+		OVR.getMapOverlayParameters();
+
+		drawMapOverlay();
+
+	}
+
 
 
 	function initMapGeometry() {
@@ -105,6 +113,7 @@ console.timeEnd( 'timer0' );
 			return;
 
 		}
+
 
 		OVR.getMapOverlayParameters();
 

@@ -2,7 +2,6 @@
 
 
 
-
 	COR.getMenuPlugins = function() {
 
 		return TER.getMenuDetailsTerrain();
@@ -26,7 +25,9 @@
 				'<p>' +
 
 					'Vertical scale: <output id=outVertical >value</output>' +
-					'<input type=range id=inpVertical min=0 max=10 step=0.1 value=5 oninput=updateTerrain() title="" style=width:100%; >' +
+//					'<input type=range id=inpVertical min=0 max=10 step=0.1 value=5 oninput=updateTerrain() title="" style=width:100%; >' +
+					'<input type=range id=inpVertical min=0 max=10 step=0.1 value=5 oninput=SEL.onLoadJSONFile() title="" style=width:100%; >' +
+
 
 				'</p>' +
 

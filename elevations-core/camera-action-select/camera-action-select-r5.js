@@ -106,7 +106,7 @@
 	function cameraTrack() {
 
 		controls.autoRotate = false;
-		cameraPoints = 10000;
+		cameraPoints = 9000;
 		scene.add( camera );
 		camera.position.copy( center.clone().add( cameraOffsetTrack ) );
 		controls.target.copy( center.clone() );
@@ -120,7 +120,7 @@
 	function cameraWorld() {
 
 		controls.autoRotate = false;
-		cameraPoints = 10000;
+		cameraPoints = 9000;
 		scene.add( camera );
 		camera.position.copy( cameraOffsetWorld );
 		target = center.clone();
