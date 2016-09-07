@@ -15,17 +15,10 @@
 
 	var THR = {};
 
-	var mesh, ground, gridHelper, axisHelper;
-
-	THR.initThreeJS = function () {
-
-		COR.initLeftMenu();
-		THR.getThreeJS();
-
-	}
 
 	THR.getThreeJS = function() {
 
+		var ground, gridHelper, axisHelper;
 		var geometry, material;
 
 		THR.stats = new Stats();
@@ -62,10 +55,10 @@
 		gridHelper  = new THREE.GridHelper( 50, 10 );
 		gridHelper.position.set( 0, -30, 0 );
 		THR.scene.add( gridHelper );
-
+*/
 		axisHelper = new THREE.AxisHelper( 50 );
 		THR.scene.add( axisHelper );
-*/
+
 // assets
 
 		THR.moreThreejsInits()

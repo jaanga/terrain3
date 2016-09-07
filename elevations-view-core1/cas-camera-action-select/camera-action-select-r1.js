@@ -99,8 +99,16 @@
 
 		position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
 
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshNormalMaterial();
+		ground = new THREE.Mesh( geometry, material );
 		ground.position.set( position.x, -31, position.z );
+		THR.scene.add( ground );
+
+		gridHelper  = new THREE.GridHelper( 50, 10 );
 		gridHelper.position.set( position.x, -30, position.z );
+		THR.scene.add( gridHelper );
+
 
 		line = CAS.getNicePath();
 		line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
@@ -210,7 +218,7 @@
 
 		actor.mesh = mesh;
 
-		geometry = new THREE.BoxGeometry( 1 * actorScale, 3 * actorScale, 1 * actorScale );
+		geometry = new THREE.BoxGeometry( 100 * actorScale, 300 * actorScale, 100 * actorScale );
 		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * actorScale, 2 * actorScale, 3 * actorScale ) );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );

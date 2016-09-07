@@ -68,7 +68,7 @@
 
 
 // https://github.com/showdownjs/showdown
-	COR.converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true } );
+//	COR.converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true } );
 
 	COR.menuPlugins = '';
 

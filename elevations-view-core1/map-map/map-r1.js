@@ -9,6 +9,7 @@
 
 	};
 
+
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
@@ -24,11 +25,33 @@
 
 console.log( 'loaded', place );
 
+		inpVertical.onchange = function() { place.verticalScale = parseFloat( inpVertical.value ); initMapGeometry(); };
+
 		inpVertical.value = place.verticalScale;
 		inpVertical.max = 3 * place.verticalScale;
 		outVertical.value = inpVertical.valueAsNumber.toFixed( 1 );
 
 		selMapZoom.selectedIndex = place.deltaOverlay;
+
+		initMapGeometry();
+
+	}
+
+
+	OVR.drawMapOverlay = function( updateCamera ) {
+
+		OVR.getMapOverlayParameters();
+
+		drawMapOverlay();
+
+	}
+
+
+
+	function initMapGeometry() {
+
+		var place = COR.place;
+		var vertices;
 
 		MAP = {};
 
@@ -51,25 +74,6 @@ console.log( 'loaded', place );
 		MAP.cenLon = ULlon + 0.5 * ( LRlon - ULlon );
 
 		menuDetailsTerrainParameters.innerHTML = TER.setMenuDetailsTerrain();
-
-		initMapGeometry();
-
-	}
-
-	OVR.drawMapOverlay = function( updateCamera ) {
-
-		OVR.getMapOverlayParameters();
-
-		drawMapOverlay();
-
-	}
-
-
-
-	function initMapGeometry() {
-
-		var place = COR.place;
-		var vertices;
 
 		MAP.geometry = new THREE.PlaneBufferGeometry( MAP.deltaLonTile * place.tilesX, MAP.deltaLatTile * place.tilesY, place.samplesX - 1, place.samplesY - 1 );
 

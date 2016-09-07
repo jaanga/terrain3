@@ -11,9 +11,12 @@
 
 	var SEL = {};
 
-	SEL.defaultFile; // if no default, select a random file
+	SEL.defaultFile = '../../sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+//	SEL.defaultFile; // if no default, select a random file
+
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 	SEL.searchInFolder = 'elevations-data-04/';
+
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
 
@@ -110,7 +113,7 @@ console.time( 'timer0' );
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', fName, true );
-		xhr.onload = function callback() {
+		xhr.onload = function callbackXHR() {
 
 			SEL.fileJSON = JSON.parse( xhr.responseText );
 			SEL.fileName = fName.split( '/' ).pop();
@@ -144,8 +147,8 @@ console.time( 'timer0' );
 //			COR.place = JSON.parse( reader.result );
 //			COR.place.fileName = files.files[ 0 ].name;
 
-			SEL.fileJSON = JSON.parse( xhr.responseText );
-			SEL.fileName = fName.split( '/' ).pop();
+			SEL.fileJSON = JSON.parse( reader.result );
+			SEL.fileName = files.files[ 0 ].name;
 
 			SEL.onLoadJSONFile();
 
@@ -154,6 +157,7 @@ console.time( 'timer0' );
 		reader.readAsText( files.files[ 0 ] );
 
 	}
+
 
 
 	SEL.onLoadJSONFile = function() {
