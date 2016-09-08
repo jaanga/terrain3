@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Oakland Gran Fondo Test R7</title>
+<title>Terrain3 Oakland Gran Fondo Test R8</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -31,12 +31,12 @@
 <script>
 
 
-	SEL.defaultFile = '../sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+	SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
-	var cameraOffsetChase = v( -5 * zoomScale, 5 * zoomScale, -5 * zoomScale );
-	var cameraOffsetInside = v( 0.5 * zoomScale, 2 * zoomScale, -0.5 * zoomScale );
-	var cameraOffsetTrack = v( -20 * zoomScale, 20 * zoomScale, 0 * zoomScale );
-	var cameraOffsetWorld = v( 0 * zoomScale, 30 * zoomScale, 30 * zoomScale );
+	CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
+	CAS.cameraOffsetInside = v( 0.5 * CAS.zoomScale, 2 * CAS.zoomScale, -0.5 * CAS.zoomScale );
+	CAS.cameraOffsetTrack = v( -20 * CAS.zoomScale, 20 * CAS.zoomScale, 0 * CAS.zoomScale );
+	CAS.cameraOffsetWorld = v( 0 * CAS.zoomScale, 30 * CAS.zoomScale, 30 * CAS.zoomScale );
 
 	COR.initLeftMenu();
 
@@ -44,19 +44,35 @@
 
 	THR.moreThreejsInits = function() {
 
-		CAS.getActorBitmap();
+		THR.renderer.setClearColor( 0x7ec0ee );
+
+		THR.axisHelper = new THREE.AxisHelper( 50 );
+		THR.scene.add( THR.axisHelper );
+		THR.axisHelper.visible = false;
+
+		TERchkAxisHelper.checked  = false;
+		TERchkBoxHelper.checked = false;
+
+		detailsOverlay.removeAttribute( 'open' );
+		detailsTerrain.removeAttribute( 'open' );
+
+		THR.radius = 40;
+		THR.toggleFog( true );
+
+		CAS.getActorBitmap( '../logo-beb-main-site.png' );
 
 		CAS.cameraTrack();
 
-		animatePlus = CAS.animatePlusLookAt;
-
-		animatePlus();
+		CAS.animatePlusLookAt();
 
 	};
 
 	THR.getThreeJS();
 
-	THR.animate();
+
+
+//	THR.animate();
+
 
 </script>
 </body>

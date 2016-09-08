@@ -53,7 +53,10 @@
 
 		MAP.geometry.center();
 
-//		if ( updateCamera === true ) { setCamera(); }
+//		MAP.geometry.computeBoundingSphere();
+
+//		MAP.radius = MAP.geometry.boundingSphere.radius;
+//		MAP.center = MAP.geometry.boundingSphere.center;
 
 		MAP.drawMapOverlay();
 
@@ -77,7 +80,6 @@ console.timeEnd( 'timer0' );
 			return;
 
 		}
-
 
 		OVR.getMapOverlayParameters();
 
@@ -138,39 +140,32 @@ console.timeEnd( 'timer0' );
 
 	MAP.drawMap = function() {
 
-		THR.scene.remove( MAP.mesh );
+		var geometry, material;
+
+		THR.scene.remove( MAP.mesh, MAP.boxHelper, MAP.groundPlane );
 
 		MAP.mesh = new THREE.Mesh( MAP.geometry, MAP.material );
 		MAP.mesh.name = COR.place.origin;
 
 		THR.scene.add( MAP.mesh );
 
-		THR.viewObject( MAP.mesh );
-
-
-/*
-
-		MAP.mesh.name = place.origin;
-		MAP.mesh.scale.set( 100, 100, 100 );
-//		MAP.mesh.position.set( MAP.cenLon, MAP.cenLat, 0 );
-		THR.scene.add( MAP.mesh );
-
 		MAP.boxHelper = new THREE.BoxHelper( MAP.mesh, 0xff0000 );
 		MAP.boxHelper.name = 'boxHelper';
 		THR.scene.add( MAP.boxHelper );
-//		MAP.boxHelper.visible = false;
-
+		MAP.boxHelper.visible = TERchkBoxHelper.checked;
 
 		geometry = new THREE.PlaneBufferGeometry( 300, 300 );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
-//		material = new THREE.MeshBasicMaterial( { color: 0x223322, specular: 0x222222, shininess: 0.5, side: 2 } );
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: place.plainOpacity, side: 2, transparent: true } );
+		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
 
-		MAP.plain = new THREE.Mesh( geometry, material );
-		MAP.plain.name = 'plain';
-		MAP.plain.position.set( 0, -10, 0 ); // sea level
-		THR.scene.add( MAP.plain );
-*/
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: COR.place.plainOpacity, side: 2, transparent: true } );
+
+		MAP.groundPlane = new THREE.Mesh( geometry, material );
+		MAP.groundPlane.name = 'groundPlane';
+		MAP.groundPlane.position.set( 0, - MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 ); // sea level
+		THR.scene.add( MAP.groundPlane );
+
+		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
+		THR.toggleFog( true );
 
 	}
 

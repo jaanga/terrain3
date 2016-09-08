@@ -84,7 +84,7 @@
 
 		curve3 = new THREE.CatmullRomCurve3( line3.geometry.vertices  );
 
-		curve = curve3;
+		CAS.curve = curve3;
 
 		motion = true;
 

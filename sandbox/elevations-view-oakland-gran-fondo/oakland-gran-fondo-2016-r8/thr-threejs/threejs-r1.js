@@ -15,7 +15,6 @@
 
 	var THR = THR || {};
 
-
 	THR.getThreeJS = function() {
 
 		var ground, gridHelper, axisHelper;
@@ -43,22 +42,6 @@
 
 		window.addEventListener( 'resize', THR.onWindowResize, false );
 
-
-// helpers
-/*
-		geometry = new THREE.BoxGeometry( 100, 2, 100 );
-		material = new THREE.MeshNormalMaterial();
-		ground = new THREE.Mesh( geometry, material );
-		ground.position.set( 0, -31, 0 );
-		THR.scene.add( ground );
-
-		gridHelper  = new THREE.GridHelper( 50, 10 );
-		gridHelper.position.set( 0, -30, 0 );
-		THR.scene.add( gridHelper );
-*/
-		axisHelper = new THREE.AxisHelper( 50 );
-		THR.scene.add( axisHelper );
-
 // assets
 
 		THR.moreThreejsInits()
@@ -67,7 +50,7 @@
 
 	THR.onLoadJSONFILE = function() {
 
-		THR.scene = new THREE.Scene();
+//		THR.scene = new THREE.Scene();
 
 	};
 
@@ -82,18 +65,33 @@
 		mesh.updateMatrixWorld();
 		mesh.geometry.computeBoundingSphere();
 
-		radius = mesh.geometry.boundingSphere.radius;
-		center = mesh.geometry.boundingSphere.center;
+		THR.radius = mesh.geometry.boundingSphere.radius;
+		THR.center = mesh.geometry.boundingSphere.center;
 
-		THR.controls.target.copy( center );
-		THR.controls.maxDistance = 3 * radius;
+		THR.controls.target.copy( THR.center );
+		THR.controls.maxDistance = 3 * THR.radius;
 
-		cameraPosition = 1.2 * radius;
-		THR.camera.position.copy( center.clone() ).add( v( 0, cameraPosition, cameraPosition ) );
+		cameraPosition = 1.2 * THR.radius;
+		THR.camera.position.copy( THR.center.clone() ).add( v( 0, cameraPosition, cameraPosition ) );
 
 	}
 
 
+	THR.toggleFog = function( checked ) {
+
+		if ( checked === true ) {
+
+//			THR.scene.fog = new THREE.Fog( 0x7ec0ee, COR.place.fogNear, COR.place.fogFar );
+			THR.scene.fog = new THREE.Fog( 0x7ec0ee, 2 * THR.radius, 3 * THR.radius );
+
+		} else {
+
+			THR.scene.fog.near = 5000 ;
+			THR.scene.fog.far = 5000 ;
+
+		}
+
+	}
 
 	THR.onWindowResize = function() {
 

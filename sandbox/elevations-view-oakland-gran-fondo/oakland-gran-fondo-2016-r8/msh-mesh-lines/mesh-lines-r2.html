@@ -17,12 +17,13 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-
-<script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
-
 <script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
-<script src=../../elevations-core/mesh-lines/mesh-lines-r1.js ></script>
+
+<script src=../cor-core/core-r1.js ></script>
+<script src=../thr-threejs/threejs-r1.js ></script>
+
+
+<script src=../msh-mesh-lines/mesh-lines-r1.js ></script>
 <script>
 
 	var container;
@@ -47,48 +48,7 @@
 
 	var points;
 
-	init();
-	animate();
-
-	function init() {
-
-		var hamburger, menu;
-
-		setCSSView();
-
-		container = document.body.appendChild( document.createElement( 'div' ) );
-		container.id = 'container';
-		container.innerHTML =
-
-			'<div id=menu >' +
-
-				getMenuDetailsHeader() +
-
-				'<p><button onclick=demo(); >demo</button></p>' +
-
-				'<p><button onclick=spiral(); >spiral</button></p>' +
-
-				'<p><button onclick=getRandom(); >random</button></p>' +
-
-				'<p><button onclick=getNicePath(); > nice path</button></p>' +
-
-				getMenuDetailsAbout() +
-
-				getMenuFooter() +
-
-			'</div>' +
-
-			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
-				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
-			'</div>' +
-
-		b;
-
-		getThreeJS();
-
-
-
-	}
+	COR.initLeftMenu();
 
 	function getNicePath( scale ) {
 

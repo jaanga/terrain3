@@ -16,7 +16,7 @@
 	SEL.searchInFolder = 'elevations-data-04/';
 
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
 
 
 	SEL.getMenuDetailsSelectFile = function() {
@@ -118,9 +118,6 @@ console.time( 'timer0' );
 			SEL.fileJSON = JSON.parse( xhr.responseText );
 			SEL.fileName = fName.split( '/' ).pop();
 
-//			COR.place = JSON.parse( xhr.responseText );
-//			COR.place.fileName = fName.split( '/' ).pop();
-
 			location.hash = 'file=' + fName;
 
 			SEL.onLoadJSONFile();
@@ -144,9 +141,6 @@ console.time( 'timer0' );
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
 
-//			COR.place = JSON.parse( reader.result );
-//			COR.place.fileName = files.files[ 0 ].name;
-
 			SEL.fileJSON = JSON.parse( reader.result );
 			SEL.fileName = files.files[ 0 ].name;
 
@@ -162,15 +156,14 @@ console.time( 'timer0' );
 
 	SEL.onLoadJSONFile = function() {
 
-console.log( 'file loaded', SEL.fileName );
-
 		COR.place = SEL.fileJSON;
-		var place = COR.place;
-		place.name = SEL.fileName;
+		COR.place.name = SEL.fileName;
 
 		COR.getPlaceDefaults();
 
 		COR.onLoadJSONFile();
+
+//console.log( 'file loaded', SEL.fileName );
 
 	}
 

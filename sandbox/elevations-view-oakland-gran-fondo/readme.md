@@ -42,6 +42,15 @@ _Oakland Gran Fondo 2016 ~ 3D Route Viewer_
 ## Change Log
 
 
+### 2016-09-08 ~ R8
+
+* Added/fixed toggles for:
+	* AutoRotate, Fog, Sea level, Axis helper, Box helper
+	* Added Fog wjich near and gar calculated by algorithm
+* Position ground plane by algorithm
+* Continue variable/namespace objectification
+  
+ 
 ### 2016-09-07 ~ R7
 
 * Complete rebuild

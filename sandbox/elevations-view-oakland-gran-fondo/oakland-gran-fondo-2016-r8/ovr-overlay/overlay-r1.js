@@ -43,12 +43,11 @@
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsOverlay;
 
 	}
-
 
 
 	OVR.setMenuDetailsOverlay = function() {

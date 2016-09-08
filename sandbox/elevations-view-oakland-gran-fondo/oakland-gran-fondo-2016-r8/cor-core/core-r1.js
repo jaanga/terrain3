@@ -68,6 +68,39 @@
 
 // inits
 
+	COR.initLeftMenu = function() {
+
+		var mapDiv, hamburger, menu, contents;
+
+		COR.getCSSLeft();
+
+		COR.getPlaceDefaults();
+
+		hamburger = document.body.appendChild( document.createElement( 'div' ) );
+		hamburger.id = 'hamburger';
+		hamburger.innerHTML = '<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>';
+
+		bars.id = 'bars';
+		bars.onclick = function() { hamburger.style.left = hamburger.style.left === "0px" ? "325px" : 0; };
+
+		menu = hamburger.appendChild( document.createElement( 'div' ) );
+		menu.id = 'menu';
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			COR.getMenuPlugins() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+
+	}
+
 
 	COR.initThreeColumns = function() {
 
@@ -102,41 +135,6 @@
 	};
 
 
-	COR.initLeftMenu = function() {
-
-		var mapDiv, hamburger, menu, contents;
-
-		COR.getCSSLeft();
-
-		COR.getPlaceDefaults();
-
-//		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
-//		mapDiv.id = 'mapDiv';
-
-		hamburger = document.body.appendChild( document.createElement( 'div' ) );
-		hamburger.id = 'hamburger';
-		hamburger.innerHTML = '<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>';
-
-		bars.id = 'bars';
-		bars.onclick = function() { hamburger.style.left = hamburger.style.left === "0px" ? "325px" : 0; };
-
-		menu = hamburger.appendChild( document.createElement( 'div' ) );
-		menu.id = 'menu';
-		menu.innerHTML =
-
-			COR.getMenuDetailsHeader() +
-
-			COR.getMenuPlugins() +
-
-			COR.getMenuDetailsAbout() +
-
-			COR.getMenuFooter() +
-
-		'';
-
-		if ( window.self !== window.top ) { container.style.left = '-325px'; }
-
-	}
 
 
 // CSS

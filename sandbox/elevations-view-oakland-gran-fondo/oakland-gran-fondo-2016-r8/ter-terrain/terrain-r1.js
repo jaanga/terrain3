@@ -29,13 +29,16 @@
 
 				'<p>' +
 
-					'<input type=checkbox onchange=MAP.material.wireframe=!MAP.material.wireframe; > Wireframe' + b +
+					'<input type=checkbox id=TERchkFog onchange=THR.toggleFog(this.checked); checked > Fog' + b +
 
-					'<input type=checkbox onchange=MAP.plain.visible=!MAP.plain.visible; checked > Sea level' + b +
+					'<input type=checkbox id=TERchkGroudPlane onchange=MAP.groundPlane.visible=!MAP.groundPlane.visible; checked > Sea level' + b +
 
-					'<input type=checkbox onchange=MAP.boxHelper.visible=!MAP.boxHelper.visible; checked > Box helper' + b +
+					'<input type=checkbox id=TERchkAxisHelper onchange=THR.axisHelper.visible=!THR.axisHelper.visible; checked > Axis helper' + b +
 
-					'<input type=checkbox id=chkFog onchange=toggleFog(); checked > Fog' +
+					'<input type=checkbox id=TERchkBoxHelper onchange=MAP.boxHelper.visible=!MAP.boxHelper.visible; checked > Box helper' + b +
+
+					'<input type=checkbox id=TERchkWireframe onchange=MAP.material.wireframe=!MAP.material.wireframe; > Wireframe' + b +
+
 
 				'</p>' +
 

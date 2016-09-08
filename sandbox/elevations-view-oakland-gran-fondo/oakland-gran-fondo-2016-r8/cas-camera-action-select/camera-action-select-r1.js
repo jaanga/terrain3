@@ -8,15 +8,10 @@
 	};
 
 
-// http://jaanga.github.io/cookbook-threejs/examples/animation/camera-actions-select/
-
-
-	var cameraPoints = 9000;
-	var zoomScale = 1;
-	var actorScale = 1;
-
-	var actor = new THREE.Object3D();
-	var curve;
+	CAS.actor = new THREE.Object3D();
+	CAS.cameraPoints = 9000;
+	CAS.zoomScale = 1;
+	CAS.actorScale = 1;
 
 	var point = 0;
 	var index = 0;
@@ -26,13 +21,13 @@
 	var follow = false;
 
 	var origin = v( 0, 0, 0 );
-	var center = origin;
+	CAS.center = origin;
 	var target = origin;
 
-	var cameraOffsetChase = v( 50 * zoomScale, 50 * zoomScale, 50 * zoomScale );
-	var cameraOffsetInside = v( 0 * zoomScale, 20 * zoomScale, 0 * zoomScale );
-	var cameraOffsetTrack = v( -80 * zoomScale, 10 * zoomScale, 10 * zoomScale );
-	var cameraOffsetWorld = v( 80 * zoomScale, 80 * zoomScale, 80 * zoomScale );
+	CAS.cameraOffsetChase = v( 50 * CAS.zoomScale, 50 * CAS.zoomScale, 50 * CAS.zoomScale );
+	CAS.cameraOffsetInside = v( 0 * CAS.zoomScale, 20 * CAS.zoomScale, 0 * CAS.zoomScale );
+	CAS.cameraOffsetTrack = v( -80 * CAS.zoomScale, 10 * CAS.zoomScale, 10 * CAS.zoomScale );
+	CAS.cameraOffsetWorld = v( 80 * CAS.zoomScale, 80 * CAS.zoomScale, 80 * CAS.zoomScale );
 
 
 // prevent default animate
@@ -48,13 +43,13 @@
 
 // slide to move actor to desired position
 
-				'<p><input type=checkbox id=chkRotate onchange=controls.autoRotate=!controls.autoRotate checked > scene rotation</p>'  +
+				'<p><input type=checkbox id=chkRotate onchange=THR.controls.autoRotate=!THR.controls.autoRotate > scene rotation</p>'  +
 
 				'<p><input type=checkbox onclick=motion=!motion checked > object motion</p>' +
 
 				'<p>' +
-					'Camera positions: <output id=outSpeed >' + cameraPoints + '</output><br>' +
-					'<input type=range id=inpSpeed min=200 max=40000 step=100 value=' + cameraPoints + ' oninput=outSpeed.value=cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
+					'Camera positions: <output id=outSpeed >' + CAS.cameraPoints + '</output><br>' +
+					'<input type=range id=inpSpeed min=200 max=40000 step=100 value=' + CAS.cameraPoints + ' oninput=outSpeed.value=cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
 				'</p>' +
 
 
@@ -81,49 +76,14 @@
 
 
 
-	THR.moreThreejsInits = function() {
-
-		position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
-
-		geometry = new THREE.BoxGeometry( 100, 2, 100 );
-		material = new THREE.MeshNormalMaterial();
-		ground = new THREE.Mesh( geometry, material );
-		ground.position.set( position.x, -31, position.z );
-		THR.scene.add( ground );
-
-		gridHelper  = new THREE.GridHelper( 50, 10 );
-		gridHelper.position.set( position.x, -30, position.z );
-		THR.scene.add( gridHelper );
-
-
-		line = CAS.getNicePath();
-		line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
-		THR.scene.add( line );
-
-		line.geometry.computeBoundingSphere();
-
-		center = line.geometry.boundingSphere.center;
-		curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
-
-		CAS.getActorCylinder();
-
-		CAS.cameraWorld();
-
-		animatePlus = CAS.animatePlusLookAt;
-
-		animatePlus();
-
-		motion = true;
-
-	};
 
 
 	CAS.cameraChase = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 20000;
-		actor.add( THR.camera );
-		THR.camera.position.copy( cameraOffsetChase );
+		CAS.cameraPoints = 20000;
+		CAS.actor.add( THR.camera );
+		THR.camera.position.copy( CAS.cameraOffsetChase );
 		target = origin.clone();
 		THR.controls.target.copy( target.clone() );
 		follow = true;
@@ -133,9 +93,9 @@
 	CAS.cameraInside = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 30000;
-		actor.mesh.add( THR.camera );
-		THR.camera.position.copy( origin.clone().add( cameraOffsetInside ) );
+		CAS.cameraPoints = 30000;
+		CAS.actor.mesh.add( THR.camera );
+		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetInside ) );
 		target = origin.clone();
 		THR.controls.target.copy( target );
 		follow = true;
@@ -146,11 +106,11 @@
 	CAS.cameraTrack = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 9000;
+		CAS.cameraPoints = 9000;
 		THR.scene.add( THR.camera );
-		THR.camera.position.copy( origin.clone().add( cameraOffsetTrack ) );
-		THR.controls.target.copy( center.clone() );
-		target = actor.position;
+		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+		THR.controls.target.copy( CAS.center.clone() );
+		target = CAS.actor.position;
 		THR.controls.target.copy( target );
 		follow = true;
 
@@ -160,10 +120,10 @@
 	CAS.cameraWorld = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 9000;
+		CAS.cameraPoints = 9000;
 		THR.scene.add( THR.camera );
-		THR.camera.position.copy( cameraOffsetWorld );
-		target = center.clone();
+		THR.camera.position.copy( CAS.cameraOffsetWorld );
+		target = CAS.center.clone();
 		THR.controls.target.copy( target );
 		follow = false;
 
@@ -175,16 +135,18 @@
 
 	CAS.getActorTorusKnot = function() {
 
-		actor = new THREE.Object3D();
+		var geometry, material, mesh;
 
-		geometry = new THREE.TorusKnotGeometry( 5 * actorScale, 1 * actorScale, 80 );
+		CAS.actor = new THREE.Object3D();
+
+		geometry = new THREE.TorusKnotGeometry( 5 * CAS.actorScale, 1 * CAS.actorScale, 80 );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 
-		actor.add( mesh );
-		actor.mesh = mesh;
+		CAS.actor.add( mesh );
+		CAS.actor.mesh = mesh;
 
-		scene.add( actor );
+		scene.add( CAS.actor );
 
 	}
 
@@ -193,25 +155,25 @@
 
 		var geometry, material, mesh;
 
-		actor = new THREE.Object3D();
+		CAS.actor = new THREE.Object3D();
 
-		geometry = new THREE.CylinderGeometry( 2 * actorScale, 5 * actorScale, 1 * actorScale, 20 );
+		geometry = new THREE.CylinderGeometry( 2 * CAS.actorScale, 5 * CAS.actorScale, 1 * CAS.actorScale, 20 );
 //		geometry.applyMatrix( new THREE.Matrix4().makeScale( 1, 0.1, 1 ) );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 
-		actor.add( mesh );
+		CAS.actor.add( mesh );
 
-		actor.mesh = mesh;
+		CAS.actor.mesh = mesh;
 
-		geometry = new THREE.BoxGeometry( 1 * actorScale, 2 * actorScale, 3 * actorScale );
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * actorScale, 2 * actorScale, 3 * actorScale ) );
+		geometry = new THREE.BoxGeometry( 1 * CAS.actorScale, 2 * CAS.actorScale, 3 * CAS.actorScale );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * CAS.actorScale, 2 * CAS.actorScale, 3 * CAS.actorScale ) );
 		material = new THREE.MeshNormalMaterial();
 		mesh = new THREE.Mesh( geometry, material );
 
-		actor.add( mesh );
+		CAS.actor.add( mesh );
 
-		THR.scene.add( actor );
+		THR.scene.add( CAS.actor );
 
 	}
 
@@ -220,7 +182,7 @@
 
 		var loader, geometry, material, mesh;
 
-		actor = new THREE.Object3D();
+		CAS.actor = new THREE.Object3D();
 
 		loader = new THREE.TextureLoader();
 		loader.crossOrigin = '';
@@ -228,20 +190,20 @@
 
 		texture.minFilter = texture.magFilter = THREE.NearestFilter;
 //		texture.needsUpdate = true;
-//		geometry = new THREE.BoxGeometry( 1 * actorScale, 3 * actorScale, 1 * actorScale );
-		geometry = new THREE.PlaneBufferGeometry( 3 * actorScale, 3 * actorScale );
+//		geometry = new THREE.BoxGeometry( 1 * CAS.actorScale, 3 * CAS.actorScale, 1 * CAS.actorScale );
+		geometry = new THREE.PlaneBufferGeometry( 3 * CAS.actorScale, 3 * CAS.actorScale );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -pi05 ) );
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * actorScale, 2 * actorScale, 0 * actorScale ) );
+		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * CAS.actorScale, 2 * CAS.actorScale, 0 * CAS.actorScale ) );
 
 		material = new THREE.MeshBasicMaterial( {  map: texture, side: THREE.DoubleSide, transparent: true } );
 //		material = new THREE.MeshNormalMaterial();
 
 		mesh = new THREE.Mesh( geometry, material );
 
-		actor.add( mesh );
-		actor.mesh = mesh;
+		CAS.actor.add( mesh );
+		CAS.actor.mesh = mesh;
 
-		THR.scene.add( actor );
+		THR.scene.add( CAS.actor );
 
 	}
 
@@ -262,11 +224,11 @@
 
 		}
 
-		curve = new THREE.CatmullRomCurve3( vertices );
-		curve.closed = true;
+		CAS.curve = new THREE.CatmullRomCurve3( vertices );
+		CAS.curve.closed = true;
 
 		geometry = new THREE.Geometry();
-		geometry.vertices = curve.getPoints( points );
+		geometry.vertices = CAS.curve.getPoints( points );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
 
@@ -287,7 +249,7 @@
 
 		switch( event.keyCode ) {
 
-			case 32: controls.autoRotate = !controls.autoRotate;  break; // space bar
+			case 32: THR.controls.autoRotate = !THR.controls.autoRotate;  break; // space bar
 
 		}
 
@@ -308,15 +270,15 @@
 
 		if ( !motion ) { return; }
 
-		dd = delta / cameraPoints;
+		dd = delta / CAS.cameraPoints;
 
 		index += dd;
 
 		index = index <= 1 ? index : dd;
 
-		actor.position.copy( curve.getPoint( index - dd ) );
+		CAS.actor.position.copy( CAS.curve.getPoint( index - dd ) );
 
-		actor.lookAt( curve.getPoint( index ) );
+		CAS.actor.lookAt( CAS.curve.getPoint( index ) );
 
 		if ( follow === true ) {
 

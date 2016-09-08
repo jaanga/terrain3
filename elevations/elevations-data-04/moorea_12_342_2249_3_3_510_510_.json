@@ -7,7 +7,7 @@
 	"samplesY": 510,
 	"ULtileX": 342,
 	"ULtileY": 2249,
-	"plainOpacity" : 0.05,
+	"plainOpacity" : 0.5,
 	"verticalScale" : 2,
 	"fogNear" : 0.5, 
 	"fogFar" : 5,
