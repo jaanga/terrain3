@@ -11,7 +11,7 @@
 
 	var COR = {};
 
-// should these place defaults not be in map.js?? No better here because data use in so many places
+// should these place defaults not be in map.js??
 
 	COR.defaults = {};
 
@@ -62,12 +62,15 @@
 	COR.txt = '<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>';
 //	COR.txt = '<p>GitHub API responses will appear here.</p>';
 
-// https://github.com/showdownjs/showdown
-//	COR.converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true } );
 
 
 // inits
 
+
+// https://github.com/showdownjs/showdown
+//	COR.converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true } );
+
+	COR.menuPlugins = '';
 
 	COR.initThreeColumns = function() {
 
@@ -216,6 +219,7 @@
 
 			'#repositoryEvents h4 { margin: 0; }' +
 			'#repositoryEvents { max-height: 200px; overflow-y: scroll; font-size: 9pt; }' +
+
 
 			'#divSplash { background-color: #ccc; border: 2px solid #888; height: 80%; width: 500px;' +
 				'overflow: hidden; left: 350px; position: absolute; resize: none; top: 100px; }' +
@@ -389,11 +393,10 @@
 
 // utils
 
-// better in SEL?
 
 	COR.getPlaceDefaults = function() {
 
-		var keys;
+//		var keys;
 
 		if ( !COR.place ) { COR.place = {}; }
 

@@ -16,7 +16,7 @@
 	SEL.searchInFolder = 'elevations-data-04/';
 
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
 
 
 	SEL.getMenuDetailsSelectFile = function() {
@@ -162,7 +162,7 @@ console.time( 'timer0' );
 
 	SEL.onLoadJSONFile = function() {
 
-console.log( 'file loaded', SEL.fileName );
+//console.log( 'file loaded', SEL.fileName );
 
 		COR.place = SEL.fileJSON;
 		var place = COR.place;

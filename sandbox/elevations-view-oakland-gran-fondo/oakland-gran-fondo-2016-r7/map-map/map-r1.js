@@ -145,8 +145,7 @@ console.timeEnd( 'timer0' );
 
 		THR.scene.add( MAP.mesh );
 
-		THR.viewObject( MAP.mesh );
-
+//		THR.viewObject( MAP.mesh );
 
 /*
 
@@ -171,6 +170,8 @@ console.timeEnd( 'timer0' );
 		MAP.plain.position.set( 0, -10, 0 ); // sea level
 		THR.scene.add( MAP.plain );
 */
+
+
 
 	}
 

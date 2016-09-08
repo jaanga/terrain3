@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Oakland Gran Fondo Test R7</title>
+<title>Terrain3 Oakland Gran Fondo 2016 R7</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -31,7 +31,7 @@
 <script>
 
 
-	SEL.defaultFile = '../sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+	SEL.defaultFile = '../../elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
 	var cameraOffsetChase = v( -5 * zoomScale, 5 * zoomScale, -5 * zoomScale );
 	var cameraOffsetInside = v( 0.5 * zoomScale, 2 * zoomScale, -0.5 * zoomScale );
@@ -44,7 +44,7 @@
 
 	THR.moreThreejsInits = function() {
 
-		CAS.getActorBitmap();
+		CAS.getActorBitmap( '../logo-beb-main-site.png' );
 
 		CAS.cameraTrack();
 

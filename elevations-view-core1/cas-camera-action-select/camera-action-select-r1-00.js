@@ -10,6 +10,9 @@
 
 // http://jaanga.github.io/cookbook-threejs/examples/animation/camera-actions-select/
 
+	var tangent = new THREE.Vector3();
+	var axis = new THREE.Vector3();
+	var up = new THREE.Vector3( 0, 1, 0 );
 
 	var cameraPoints = 9000;
 	var zoomScale = 1;
@@ -146,9 +149,9 @@
 	CAS.cameraTrack = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 9000;
+		cameraPoints = 10000;
 		THR.scene.add( THR.camera );
-		THR.camera.position.copy( origin.clone().add( cameraOffsetTrack ) );
+		THR.camera.position.copy( center.clone().add( cameraOffsetTrack ) );
 		THR.controls.target.copy( center.clone() );
 		target = actor.position;
 		THR.controls.target.copy( target );
@@ -160,7 +163,7 @@
 	CAS.cameraWorld = function() {
 
 		THR.controls.autoRotate = false;
-		cameraPoints = 9000;
+		cameraPoints = 10000;
 		THR.scene.add( THR.camera );
 		THR.camera.position.copy( cameraOffsetWorld );
 		target = center.clone();
@@ -224,14 +227,13 @@
 
 		loader = new THREE.TextureLoader();
 		loader.crossOrigin = '';
-		texture = loader.load( bitmap || '../bitmaps/j.gif' );
+		texture = loader.load( bitmap || '../../bitmaps/j.gif' );
 
 		texture.minFilter = texture.magFilter = THREE.NearestFilter;
 //		texture.needsUpdate = true;
 //		geometry = new THREE.BoxGeometry( 1 * actorScale, 3 * actorScale, 1 * actorScale );
-		geometry = new THREE.PlaneBufferGeometry( 3 * actorScale, 3 * actorScale );
-		geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -pi05 ) );
-		geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0 * actorScale, 2 * actorScale, 0 * actorScale ) );
+		geometry = new THREE.PlaneBufferGeometry( 5 * actorScale, 5 * actorScale );
+//		geometry.applyMatrix( new THREE.Matrix4().makeRotationZ( -pi05 ) );
 
 		material = new THREE.MeshBasicMaterial( {  map: texture, side: THREE.DoubleSide, transparent: true } );
 //		material = new THREE.MeshNormalMaterial();
@@ -241,7 +243,7 @@
 		actor.add( mesh );
 		actor.mesh = mesh;
 
-		THR.scene.add( actor );
+		scene.add( actor );
 
 	}
 
@@ -325,5 +327,102 @@
 		}
 
 //		if ( index > 0.03 ) motion = false;
+
+	}
+
+	CAS.animatePlusWestLangley = function() {
+
+		var radians;
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( CAS.animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+		point = point <= 1 ? point : 0;
+
+		actor.position.copy( curve.getPointAt( point ) );
+
+		tangent = curve.getTangentAt( point ).normalize();
+
+		axis.crossVectors( up, tangent ).normalize();
+
+		radians = Math.acos( up.dot( tangent ) );
+
+		actor.quaternion.setFromAxisAngle( axis, radians );
+
+		point += 1 / cameraPoints;
+
+	}
+
+
+
+	CAS.animatePlusJayField = function() {
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( CAS.animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+			point = ( point + 1 / cameraPoints ) %1.0 ;//increment t while maintaining it between 0.0 and 1.0
+			var p = curve.getPoint( point ); //point at t
+			var pn = curve.getPoint(( point + 1 / cameraPoints ) % 1.0 );//point at next t iteration
+
+			if(p != null && pn != null){
+				//move to current position
+				actor.position.x = p.x;
+				actor.position.z = p.z;
+				//get orientation based on next position
+				actor.rotation.y = Math.atan2( pn.z - p.z, pn.x - p.x );
+
+			}
+
+	}
+
+
+// http://stackoverflow.com/questions/11179327/orient-objects-rotation-to-a-spline-point-tangent-in-three-js/11181366#11181366
+
+// http://jsfiddle.net/SCXNQ/891/
+
+
+	CAS.animatePlusWestLangleyType2 = function() {
+
+		stats.update();
+
+		controls.update();
+
+		renderer.render( scene, camera );
+
+		requestAnimationFrame( CAS.animatePlusWestLangley );
+
+		if ( !motion ) { return; }
+
+// set the marker position
+		pt = curve.getPoint( point );
+		actor.position.set( pt.x, pt.y, pt.z );
+
+// get the tangent to the curve
+		tangent = curve.getTangent( t ).normalize();
+
+// calculate the axis to rotate around
+		axis.crossVectors( up, tangent ).normalize();
+
+// calculate the angle between the up vector and the tangent
+		radians = Math.acos( up.dot( tangent ) );
+
+// set the quaternion
+		actor.quaternion.setFromAxisAngle( axis, radians );
+
+		point = ( point >= 1 ) ? 0 : point += 1 / cameraPoints ;
 
 	}

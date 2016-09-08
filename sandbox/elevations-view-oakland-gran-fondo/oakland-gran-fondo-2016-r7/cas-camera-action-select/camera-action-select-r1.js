@@ -224,7 +224,7 @@
 
 		loader = new THREE.TextureLoader();
 		loader.crossOrigin = '';
-		texture = loader.load( bitmap || '../bitmaps/j.gif' );
+		texture = loader.load( bitmap || '../../bitmaps/j.gif' );
 
 		texture.minFilter = texture.magFilter = THREE.NearestFilter;
 //		texture.needsUpdate = true;

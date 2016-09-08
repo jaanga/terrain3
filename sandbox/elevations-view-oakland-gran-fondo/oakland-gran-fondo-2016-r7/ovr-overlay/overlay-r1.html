@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View Core1 Core R1</title>
+<title>Terrain3 Elevations View Core1 Overlay R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core
 ' >
@@ -11,15 +11,17 @@
 </head>
 <body>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js ></script>
-<script src=../../elevations-view-core1/cor-core/core-r1.js ></script>
+<script src=../cor-core/core-r1.js ></script>
+<script src=../ovr-overlay/overlay-r1.js ></script>
 <script>
 
 // https://github.com/showdownjs/showdown
 
-	COR.getMenuPlugins = function() { return COR.onLoad(); }
-
 	COR.initLeftMenu();
 
+	OVR.setMenuDetailsOverlay();
+
+	OVR.getMapOverlayParameters();
 
 </script>
 </body>

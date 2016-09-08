@@ -21,8 +21,8 @@
 
 	KML.drawPath = function() {
 
-		var geometry, material, pp, path, center, delta;
-		var line, line2, line3, curve2, curve3;
+//		var geometry, material, pp, path, center, delta;
+//		var line, line2, line3, curve2, curve3;
 		var place = COR.place;
 
 		pp = place.points;
@@ -39,6 +39,8 @@
 		geometry.vertices = path.points;
 		geometry.computeBoundingSphere();
 		pc = geometry.boundingSphere.center;
+
+//console.log( 'delta', pc );
 
 //		delta = v( MAP.cenLon - center.x , center.z, MAP.cenLat - center.y  ) 
 
