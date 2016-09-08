@@ -32,7 +32,7 @@ _Oakland Gran Fondo 2016 ~ 3D Route Viewer_
 ## Links of Interest
 
 
-* [Oakland Gran Fond)( http://www.oaklandgranfondo.com/ )
+* [Oakland Gran Fondo 2016]( http://www.oaklandgranfondo.com/ )
 	* The Oakland Gran Fondo in Jack London Square. Rides of 13.5, 28, 55, &amp; 100 miles highlight Downtown Oakland, East Bay Hills &amp; Valley&#039;s.  Join this
 * [Petite Oakland Gran Fondo - 28M]( https://www.strava.com/routes/6190234 )
 * [Oakland Gran Fondo - 55]( https://www.strava.com/routes/5700000 )
@@ -62,7 +62,16 @@ _Oakland Gran Fondo 2016 ~ 3D Route Viewer_
 	* Inside camera: camera fixed a distance from actor, follows actor position and rotation
 * Slight temporary reduction in some feature
 	* Old and new features to be introduced in the next few days
-
+* Paths are displayed in three ways
+	* Magenta line is the original TCX route of ~3,000 way points - full of twists and turns
+	* Green line is a reduction of the path down to 300 points - takes out all the minor twists
+		* This 'simple' line is used to create the highly visible path that you see
+	* Yellow line is a spline that passes through the 300 points of the green line
+		* You select how many points in the spline - from 200 to 4000
+		* This line is the path for the camera
+		* The camera stops at each point this determining the speed of the camera
+			* The more the points/stops, the slower the camera proceeds
+		* The default of 9,000 points gives a fairly smooth ride along the path
 
 ### 2016-09-01 ~ R6
 
