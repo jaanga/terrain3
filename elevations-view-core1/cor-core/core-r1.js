@@ -336,18 +336,20 @@
 	TER.onLoad = function() { return ''; };
 	THR.onLoad = function() { return ''; };
 
+
+
 	COR.getMenuPlugins = function() {
 
 		return '' +
-//			COR.onLoad() +
-			CAS.onLoad() +
-			KML.onLoad() +
-			MAP.onLoad() +
-			MSH.onLoad() +
-			OVR.onLoad() +
-			SEL.onLoad() +
-			TER.onLoad() +
-			THR.onLoad();
+//		COR.onLoad() +
+		CAS.onLoad() +
+		KML.onLoad() +
+		MAP.onLoad() +
+		MSH.onLoad() +
+		OVR.onLoad() +
+		SEL.onLoad() +
+		TER.onLoad() +
+		THR.onLoad();
 
 	};
 
