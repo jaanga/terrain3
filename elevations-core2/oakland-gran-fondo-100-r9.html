@@ -30,47 +30,52 @@
 <script src=cas-camera-action-select/camera-action-select-r1.js ></script>
 <script>
 
+	init();
 
-	SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+	function init() {
 
-	CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
-	CAS.cameraOffsetInside = v( -0.25 * CAS.zoomScale, 1 * CAS.zoomScale, -2 * CAS.zoomScale );
-	CAS.cameraOffsetTrack = v( -10 * CAS.zoomScale, 15 * CAS.zoomScale, 0 * CAS.zoomScale );
-	CAS.cameraOffsetWorld = v( 0 * CAS.zoomScale, 35 * CAS.zoomScale, 35 * CAS.zoomScale );
+		SEL.baseURL = 'https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/';
+		SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+		SEL.defaultFile = SEL.baseURL + 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
-	COR.initLeftMenu();
+		CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
+		CAS.cameraOffsetInside = v( -0.25 * CAS.zoomScale, 1 * CAS.zoomScale, -2 * CAS.zoomScale );
+		CAS.cameraOffsetTrack = v( -10 * CAS.zoomScale, 15 * CAS.zoomScale, 0 * CAS.zoomScale );
+		CAS.cameraOffsetWorld = v( 0 * CAS.zoomScale, 35 * CAS.zoomScale, 35 * CAS.zoomScale );
 
-	SEL.getJSONFileXHR( SEL.defaultFile );
+		COR.initLeftMenu();
 
-	THR.moreThreejsInits = function() {
+		SEL.getJSONFileXHR( SEL.defaultFile );
 
-		THR.renderer.setClearColor( 0x7ec0ee );
+		THR.moreThreejsInits = function() {
 
-		THR.axisHelper = new THREE.AxisHelper( 50 );
-		THR.scene.add( THR.axisHelper );
-		THR.axisHelper.visible = false;
+			THR.renderer.setClearColor( 0x7ec0ee );
 
-		TERchkAxisHelper.checked  = false;
-		TERchkBoxHelper.checked = false;
+			THR.axisHelper = new THREE.AxisHelper( 50 );
+			THR.scene.add( THR.axisHelper );
+			THR.axisHelper.visible = false;
 
-		detailsOverlay.removeAttribute( 'open' );
-		detailsTerrain.removeAttribute( 'open' );
+			TERchkAxisHelper.checked  = false;
+			TERchkBoxHelper.checked = false;
 
-		THR.radius = 40;
-		THR.controls.maxDistance = 3 * THR.radius;
-		THR.toggleFog( true );
+			detailsOverlay.removeAttribute( 'open' );
+			detailsTerrain.removeAttribute( 'open' );
 
-		CAS.getActorBitmap( '../logo-beb-main-site.png' );
+			THR.radius = 40;
+			THR.controls.maxDistance = 3 * THR.radius;
+			THR.toggleFog( true );
 
-		CAS.cameraTrack();
+			CAS.getActorBitmap( SEL.baseURL + 'logo-beb-main-site.png' );
 
-		CAS.animatePlusLookAt();
+			CAS.cameraTrack();
+
+			CAS.animatePlusLookAt();
 
 	};
 
 	THR.getThreeJS();
 
-
+	}
 
 //	THR.animate();
 

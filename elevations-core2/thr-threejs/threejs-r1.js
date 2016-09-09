@@ -97,7 +97,7 @@
 
 	THR.onKeyUp = function ( event ) {
 
-console.log( 'key', event.keyCode );
+//console.log( 'key', event.keyCode );
 
 //		controls.enableKeys = false;
 
