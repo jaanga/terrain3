@@ -191,10 +191,9 @@
 		ifrThreejs.onload = function() {
 
 			icw = ifrThreejs.contentWindow;
-			icw.COR.place = Object.create( place );
-//			icw.onLoadElevations();
-			icw.COR.onLoadJSONFile();
-			icw.THR.controls.autoRotate = true;
+			icw.place = Object.create( place );
+			icw.onLoadElevations();
+			icw.controls.autoRotate = true;
 
 		};
 
@@ -210,9 +209,9 @@
 
 			if ( window.focus ) { newWindow.focus() }
 
-			newWindow.window.COR.place = Object.create( place );
-			newWindow.window.COR.onLoadJSONFile();
-			newWindow.window.THR.autoRotate = true;
+			newWindow.window.place = Object.create( place );
+			newWindow.window.onLoadElevations();
+			newWindow.window.autoRotate = true;
 
 		};
 

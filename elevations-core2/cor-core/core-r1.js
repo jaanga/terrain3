@@ -97,7 +97,7 @@
 
 		'';
 
-		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+//		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
 	}
 

@@ -2,7 +2,8 @@
 
 
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
-	var urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r3.html';
+//
+	var urlViewElevations3D = '../../elevations/elevations-view/ibdex.html';
 
 
 	function getMenuDetailsElevations() {
@@ -290,9 +291,10 @@ console.log( 'complete count', count, elevations.length );
 		ifrThreejs.onload = function() {
 
 			icw = ifrThreejs.contentWindow;
-			icw.place = Object.create( place );
-			icw.onLoadElevations();
-			icw.controls.autoRotate = true;
+			icw.COR.place = Object.create( place );
+//			icw.onLoadElevations();
+			icw.COR.onLoadJSONFile();
+			icw.THR.controls.autoRotate = true;
 
 		};
 
@@ -308,9 +310,9 @@ console.log( 'complete count', count, elevations.length );
 
 			if ( window.focus ) { newWindow.focus() }
 
-			newWindow.window.place = Object.create( place );
-			newWindow.window.onLoadElevations();
-			newWindow.window.autoRotate = true;
+			newWindow.window.COR.place = Object.create( place );
+			newWindow.window.COR.onLoadJSONFile();
+			newWindow.window.THR.autoRotate = true;
 
 		};
 

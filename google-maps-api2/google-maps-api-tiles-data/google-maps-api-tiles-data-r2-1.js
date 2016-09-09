@@ -136,7 +136,7 @@
 
 		marker = new google.maps.Marker({
 
-			position: {lat: t.cenLat, lng: t.cenLon } ,
+			position: { lat: p.latitude, lng: p.longitude } ,
 			map: googleMap.map
 
 		});

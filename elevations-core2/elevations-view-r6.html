@@ -49,9 +49,18 @@
 
 		COR.initLeftMenu();
 
-		if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
 
-		SEL.getGitHubAPITreeContents();
+		if ( window.self !== window.top ) { 
+
+			hamburger.style.left = '0px';
+
+		} else {
+
+			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
+
+			SEL.getGitHubAPITreeContents();
+
+		}
 
 		THR.moreThreejsInits = function() {
 
@@ -75,9 +84,6 @@
 		THR.getThreeJS();
 
 	}
-
-	THR.animate();
-
 
 </script>
 </body>

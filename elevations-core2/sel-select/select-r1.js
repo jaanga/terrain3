@@ -71,8 +71,6 @@
 
 			}
 
-			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
-
 			SEL.onGitHubTreeLoad();
 
 		}
@@ -84,10 +82,12 @@
 
 // place may be created by iframe parent
 
-		if ( COR.map === undefined ) {
+		if ( COR.place === undefined ) {
 
 // add location.hash
 // add selFiles update
+
+			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
 
 			file = SEL.defaultFile ? SEL.defaultFile : SEL.urlBase + selFiles.value;
 
