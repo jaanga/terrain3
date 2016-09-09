@@ -59,7 +59,7 @@
 
 		}
 
-		OVRselMap.selectedIndex = 3;
+		OVRselMap.selectedIndex = 2;
 
 		for ( var i = 0; i < 4; i++ ) {
 
