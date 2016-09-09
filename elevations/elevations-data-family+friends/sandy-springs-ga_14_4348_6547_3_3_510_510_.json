@@ -10,7 +10,7 @@
 	"ULtileX": 4348,
 	"ULtileY": 6547,
 	"plainOpacity" : 0.5,
-	"verticalScale" : 0.000025,
+	"verticalScale" : 2.5,
 	"deltaOverlay" : 3,
 	"fogNear" : 0.5,
 	"fogFar" : 1,
