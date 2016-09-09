@@ -9,7 +9,7 @@
 
 
 	CAS.actor = new THREE.Object3D();
-	CAS.cameraPoints = 9000;
+	CAS.cameraPoints = 25;
 	CAS.zoomScale = 1;
 	CAS.actorScale = 1;
 
@@ -39,17 +39,18 @@
 
 			'<details open>' +
 
-				'<summary><h3>Animation settings</h3></summary>' +
+				'<summary><h3>Ride settings</h3></summary>' +
 
 // slide to move actor to desired position
 
-				'<p><input type=checkbox id=chkRotate onchange=THR.controls.autoRotate=!THR.controls.autoRotate > scene rotation</p>'  +
+				'<p><input type=checkbox id=CASchkRotate onchange=THR.controls.autoRotate=!THR.controls.autoRotate > scene rotation</p>'  +
 
-				'<p><input type=checkbox onclick=motion=!motion checked > object motion</p>' +
+				'<p><input type=checkbox id=CASchkMotion onclick=motion=!motion checked >Cyclist <i>en route</i></p>' +
 
 				'<p>' +
-					'Camera positions: <output id=outSpeed >' + CAS.cameraPoints + '</output><br>' +
-					'<input type=range id=inpSpeed min=200 max=40000 step=100 value=' + CAS.cameraPoints + ' oninput=outSpeed.value=cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
+					'Cyclist speed: <output id=CHKoutSpeed >' + CAS.cameraPoints + '</output><br>' +
+					'<input type=range id=CASinpSpeed min=0 max=100 step=1 value=' + CAS.cameraPoints + 
+						' oninput=CHKoutSpeed.value=CAS.cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
 				'</p>' +
 
 
@@ -81,7 +82,7 @@
 	CAS.cameraChase = function() {
 
 		THR.controls.autoRotate = false;
-		CAS.cameraPoints = 20000;
+		CHKoutSpeed.value = CAS.cameraPoints = 20;
 		CAS.actor.add( THR.camera );
 		THR.camera.position.copy( CAS.cameraOffsetChase );
 		target = origin.clone();
@@ -93,7 +94,7 @@
 	CAS.cameraInside = function() {
 
 		THR.controls.autoRotate = false;
-		CAS.cameraPoints = 30000;
+		CHKoutSpeed.value = CAS.cameraPoints = 10;
 		CAS.actor.mesh.add( THR.camera );
 		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetInside ) );
 		target = origin.clone();
@@ -106,7 +107,7 @@
 	CAS.cameraTrack = function() {
 
 		THR.controls.autoRotate = false;
-		CAS.cameraPoints = 9000;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
 		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
 		THR.controls.target.copy( CAS.center.clone() );
@@ -120,7 +121,7 @@
 	CAS.cameraWorld = function() {
 
 		THR.controls.autoRotate = false;
-		CAS.cameraPoints = 9000;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
 		THR.camera.position.copy( CAS.cameraOffsetWorld );
 		target = CAS.center.clone();
@@ -270,7 +271,7 @@
 
 		if ( !motion ) { return; }
 
-		dd = delta / CAS.cameraPoints;
+		dd = CAS.cameraPoints / 250000;
 
 		index += dd;
 

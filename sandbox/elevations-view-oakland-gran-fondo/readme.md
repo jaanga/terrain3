@@ -10,8 +10,8 @@
 ===
 
 
-## full screen: [Oakland Gran Fondo 2016 ~ 3D Route Viewer R6]( https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/index.html )
-## Full screen - 'dev' release: [Oakland Gran Fondo 100 2016 ~ 3D Route Viewer R7]( https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/dev/index.html )
+## full screen: [Oakland Gran Fondo 2016 ~ 3D Route Viewer]( https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/index.html )
+## full screen 'dev' release: [Oakland Gran Fondo 100 2016 ~ 3D Route Viewer]( https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/dev/index.html )
 
 ## Concept
 
@@ -27,6 +27,9 @@ _Oakland Gran Fondo 2016 ~ 3D Route Viewer_
 ***
 
 ## Issues
+
+* Background to cyclist's bitmap may display incorrect color
+* Heights of path do not update perporly when you change vertical scale
 
 
 ## Links of Interest
