@@ -54,14 +54,15 @@
 		function onLoadGitHubTreeContents() {
 
 			response = JSON.parse( xhr.response );
+			SEL.extension = SEL.extension || '.json';
 			files = [];
 
 			for ( var i = 0; i < response.tree.length; i++ ) {
 
 				file = response.tree[ i ].path;
 
-				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
-				if ( file.indexOf( SEL.searchInFolder ) === -1 || file.slice( -5 ) !== '.json' ) { continue; }
+				if ( !file.match( SEL.searchInFolder ) ) { continue; }
+				if ( !file.match( SEL.extension ) ) { continue; }
 
 				file = file.split( '\/' ).pop();
 
