@@ -13,11 +13,11 @@
 	SEL.defaultFile; // if no default, select a random file
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
 	SEL.searchInFolder = 'elevations-data-04/';
 
-//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
-
+//	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
 	SEL.getMenuDetailsSelectFile = function() {
 
@@ -30,7 +30,7 @@
 			'<small>Select or open a file to view in 3D</small>' +
 
 			'<p>' +
-				'<select id=selFiles onchange=file=SEL.urlBase+this.value;SEL.getJSONFileXHR(file); size=12 style=width:100%; ></select>' +
+				'<select id=SELselFiles onchange=file=SEL.urlBase+this.value;SEL.getJSONFileXHR(file); size=12 style=width:100%; ></select>' +
 			'</p>' +
 
 			'<p><input type=file id=inpFile onchange=SEL.getJSONFileReader(this); /></p>' +
@@ -67,7 +67,7 @@
 
 				files.push( file );
 
-				selFiles[ selFiles.length ] = new Option( file, file );
+				SELselFiles[ SELselFiles.length ] = new Option( file, file );
 
 			}
 
@@ -80,18 +80,19 @@
 
 	SEL.onGitHubTreeLoad = function() {
 
-// place may be created by iframe parent
+// remember that COR.place may have been created by an iframe parent or previous window
+
+		var file;
 
 		if ( COR.place === undefined ) {
 
-// add location.hash
-// add selFiles update
+// add SELselFiles update
 
-			selFiles.selectedIndex = Math.floor( Math.random() * selFiles.length );
+			SELselFiles.selectedIndex = Math.floor( Math.random() * SELselFiles.length );
 
-			file = SEL.defaultFile ? SEL.defaultFile : SEL.urlBase + selFiles.value;
+			file = SEL.defaultFile ? SEL.defaultFile : SEL.urlBase + SELselFiles.value;
 
-			selFiles.selectedIndex = SEL.defaultFile ? -1 : selFiles.selectedIndex;
+			SELselFiles.selectedIndex = SEL.defaultFile ? -1 : SELselFiles.selectedIndex;
 
 			SEL.getJSONFileXHR( file );
 
@@ -100,7 +101,6 @@
 
 
 	}
-
 
 
 // Gather data when using the default

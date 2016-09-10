@@ -74,7 +74,7 @@
 
 		COR.getCSSLeft();
 
-		COR.getPlaceDefaults();
+//		COR.getPlaceDefaults();
 
 		hamburger = document.body.appendChild( document.createElement( 'div' ) );
 		hamburger.id = 'hamburger';

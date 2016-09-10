@@ -5,11 +5,6 @@
 
 	var KML = KML || {};
 
-	SEL.onLoad = function() {
-
-		return ''; //SEL.getMenuDetailsSelectFile();
-
-	};
 
 
 	KML.onLoadJSONFile = function() {

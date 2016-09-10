@@ -6,7 +6,7 @@
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-09-07' >
+<meta name=date content='2016-09-09' >
 </head>
 <body>
 <!--
@@ -31,18 +31,28 @@
 <script>
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
-	SEL.searchInFolder = 'elevations-data-04/';
 
-	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-//	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+	SEL.searchInFolder = 'oakland-gran-fondo/';
+
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
 
 	init();
 
 	function init() {
 
-		SEL.baseURL = 'https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/';
-		SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
-		SEL.defaultFile = SEL.baseURL + 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	SEL.searchInFolder = 'elevations-data-04/';
+
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+//	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+
+
+
+//		SEL.baseURL = 'https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/';
+//		SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+//		SEL.defaultFile = SEL.baseURL + 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
 		CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
 		CAS.cameraOffsetInside = v( -0.25 * CAS.zoomScale, 1 * CAS.zoomScale, -2 * CAS.zoomScale );
@@ -81,20 +91,17 @@
 			THR.controls.maxDistance = 3 * THR.radius;
 			THR.toggleFog( true );
 
-			CAS.getActorBitmap( SEL.baseURL + 'logo-beb-main-site.png' );
+//			CAS.getActorBitmap( SEL.baseURL + 'logo-beb-main-site.png' );
 
 			CAS.cameraTrack();
 
 			CAS.animatePlusLookAt();
 
-	};
+		};
 
-	THR.getThreeJS();
+		THR.getThreeJS();
 
 	}
-
-//	THR.animate();
-
 
 </script>
 </body>

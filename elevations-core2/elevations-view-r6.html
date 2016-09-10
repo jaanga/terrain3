@@ -25,7 +25,6 @@
 <script src=../../elevations-core2/thr-threejs/threejs-r1.js ></script>
 <script src=../../elevations-core2/map-map/map-r1.js ></script>
 -->
-
 <script src=cor-core/core-r1.js ></script>
 <script src=sel-select/select-r1.js ></script>
 <script src=ovr-overlay/overlay-r1.js ></script>
@@ -35,12 +34,14 @@
 
 <script>
 
+/*
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
 	SEL.searchInFolder = 'elevations-data-04/';
 
+	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-//	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
-
+*/
 
 	init() 
 	THR.animate();
@@ -48,7 +49,6 @@
 	function init() {
 
 		COR.initLeftMenu();
-
 
 		if ( window.self !== window.top ) { 
 

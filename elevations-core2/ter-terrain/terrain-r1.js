@@ -20,10 +20,10 @@
 
 				'<p>' +
 
-					'Vertical scale: <output id=TERoutVertical >' + COR.place.verticalScale + '</output>' +
-//					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.place.verticalScale + ' oninput=updateTerrain() title="" style=width:100%; >' +
-					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.place.verticalScale + 
-						' onchange=TERoutVertical.value=COR.place.verticalScale=parseFloat(this.value);MAP.initMapGeometry(); title="" style=width:100%; >' +
+					'Vertical scale: <output id=TERoutVertical >' + COR.defaults.verticalScale + '</output>' +
+//					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + ' oninput=updateTerrain() title="" style=width:100%; >' +
+					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + 
+						' onchange=TERoutVertical.value=COR.defaults.verticalScale=parseFloat(this.value);MAP.initMapGeometry(); title="" style=width:100%; >' +
 
 				'</p>' +
 
