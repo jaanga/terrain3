@@ -129,6 +129,7 @@
 	}
 
 
+/*
 	function saveFile() {
 
 // http://ausdemmaschinenraum.wordpress.com/2012/12/06/how-to-save-a-file-from-a-url-with-javascript/
@@ -137,10 +138,7 @@
 
 		if ( !place.elevations || place.elevations.length === 0 ) { alert( 'There is no elevation data to save.\n\n Press \'Get Elevations\' to request some data.' ); return; }
 
-		pl = JSON.stringify( place );
-		blob = new Blob( [ pl ] );
-
-		fileName = '' +
+		place.fileName = '' +
 
 			place.origin.toLowerCase() + '_'  +
 			place.zoom + '_' +
@@ -152,6 +150,10 @@
 			place.samplesY + '_' +
 			'.txt';
 
+		pl = JSON.stringify( place );
+		blob = new Blob( [ pl ] );
+
+
 		a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
 		a.download = fileName;
@@ -160,6 +162,8 @@
 		delete a;
 
 	}
+*/
+
 
 	function onSuccessSetIframe() {
 
