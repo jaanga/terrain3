@@ -52,19 +52,27 @@
 
 	OVR.setMenuDetailsOverlay = function() {
 
-		for ( i = 0; i < COR.place.mapTypes.length; i++ ) {
+		if ( !OVRselMap.children.length ) {
 
-			OVRselMap.appendChild( document.createElement( 'option' ) );
-			OVRselMap.children[ i ].text = COR.place.mapTypes[ i ][ 0 ];
+			for ( i = 0; i < COR.mapTypes.length; i++ ) {
+
+				OVRselMap.appendChild( document.createElement( 'option' ) );
+				OVRselMap.children[ i ].text = COR.mapTypes[ i ][ 0 ];
+
+			}
 
 		}
 
 		OVRselMap.selectedIndex = 2;
 
-		for ( var i = 0; i < 4; i++ ) {
+		if ( !OVRselMapZoom.children.length ) {
 
-			OVRselMapZoom.appendChild( document.createElement( 'option' ) );
-			OVRselMapZoom.children[ i ].text = + i;
+			for ( var i = 0; i < 4; i++ ) {
+
+				OVRselMapZoom.appendChild( document.createElement( 'option' ) );
+				OVRselMapZoom.children[ i ].text = + i;
+
+			}
 
 		}
 

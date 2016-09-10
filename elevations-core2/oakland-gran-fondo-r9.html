@@ -36,7 +36,7 @@
 	SEL.extension = '.txt';
 
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
 
 	init();
 
@@ -54,6 +54,8 @@
 //		SEL.baseURL = 'https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/';
 //		SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 //		SEL.defaultFile = SEL.baseURL + 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+
+
 
 		CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
 		CAS.cameraOffsetInside = v( -0.25 * CAS.zoomScale, 1 * CAS.zoomScale, -2 * CAS.zoomScale );
@@ -75,6 +77,9 @@
 		}
 
 		THR.moreThreejsInits = function() {
+
+			detailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
+			SELselFiles.size = 5;
 
 			THR.renderer.setClearColor( 0x7ec0ee );
 

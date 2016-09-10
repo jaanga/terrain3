@@ -1,11 +1,9 @@
 
-	SEL.defaultFile = '../../sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+//	SEL.defaultFile = '../../sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 
 	var actorScale = 1;
 
 	var KML = KML || {};
-
-
 
 	KML.onLoadJSONFile = function() {
 

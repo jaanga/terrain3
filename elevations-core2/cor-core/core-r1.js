@@ -25,20 +25,7 @@
 	COR.defaults.longitude = 86.7314; // 86.71228385040001;
 
 	COR.defaults.mapTypeId = 'hybrid';
-	COR.defaults.mapTypes = [
 
-		['Google Maps','https://mt1.google.com/vt/x='],
-		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
-		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
-		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
-		['Open Street Map','http://tile.openstreetmap.org/'],
-		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
-		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
-		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
-		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
-		['Mesh Normal Material', '']
-
-	];
 
 	COR.defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
 	COR.defaults.pixelsPerTile = 256;
@@ -54,6 +41,20 @@
 
 	COR.defaults.zoom = 12;
 
+	COR.mapTypes = [
+
+		['Google Maps','https://mt1.google.com/vt/x='],
+		['Google Maps Terrain','https://mt1.google.com/vt/lyrs=t&x='],
+		['Google Maps Satellite','https://mt1.google.com/vt/lyrs=s&x='],
+		['Google Maps Hybrid','https://mt1.google.com/vt/lyrs=y&x='],
+		['Open Street Map','http://tile.openstreetmap.org/'],
+		['Open Cycle Map', 'http://tile.opencyclemap.org/cycle/'],
+		['MapQuest OSM', 'http://otile3.mqcdn.com/tiles/1.0.0/osm/'],
+		['MapQuest Satellite', 'http://otile3.mqcdn.com/tiles/1.0.0/sat/'],
+		['Stamen terrain background','http://tile.stamen.com/terrain-background/'],
+		['Mesh Normal Material', '']
+
+	];
 
 // shortcuts
 
@@ -414,7 +415,7 @@
 
 		}
 
-		COR.place.mapTypes = COR.defaults.mapTypes; 
+//		COR.place.mapTypes = COR.defaults.mapTypes; 
 
 	};
 

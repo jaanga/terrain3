@@ -83,7 +83,7 @@ console.timeEnd( 'timer0' );
 
 		OVR.getMapOverlayParameters();
 
-		baseURL = COR.place.mapTypes[ OVRselMap.selectedIndex ][ 1 ];
+		baseURL = COR.mapTypes[ OVRselMap.selectedIndex ][ 1 ];
 
 		for ( var x = MAP.ULtileXOverlay; x < MAP.ULtileXOverlay + MAP.tilesXOverlay; x++ ) {
 

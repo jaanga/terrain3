@@ -80,9 +80,8 @@
 
 				file = response.tree[ i ].path;
 
-				if ( file.indexOf( 'archive' ) !== -1 ) { continue; }
-//				if ( file.indexOf( searchInFolder ) === -1 ) { continue; }
-				if ( file.slice( -4 ) !== '.kml' ) { continue; }
+				if ( !file.match( searchInFolder ) ) { continue; }
+				if ( !file.match( '.kml' ) ) { continue; }
 
 //				file = file.split( '/' ).pop();
 

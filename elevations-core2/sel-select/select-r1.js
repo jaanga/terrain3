@@ -19,6 +19,7 @@
 //	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
+
 	SEL.getMenuDetailsSelectFile = function() {
 
 		var menuDetailsSelectFile =
@@ -30,7 +31,7 @@
 			'<small>Select or open a file to view in 3D</small>' +
 
 			'<p>' +
-				'<select id=SELselFiles onchange=file=SEL.urlBase+this.value;SEL.getJSONFileXHR(file); size=12 style=width:100%; ></select>' +
+				'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
 			'</p>' +
 
 			'<p><input type=file id=inpFile onchange=SEL.getJSONFileReader(this); /></p>' +

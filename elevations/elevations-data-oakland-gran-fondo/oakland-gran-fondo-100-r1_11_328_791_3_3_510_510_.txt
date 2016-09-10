@@ -10,7 +10,7 @@
 "deltaOverlay":3,
 "fogNear":10,
 "fogFar":20,
-"kmlFile":"https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/oakland-gran-fondo-100-r1.kml",
+"kmlFile":"oakland-gran-fondo-100-r1.kml",
 "vicinity":"oakland-gran-fondo-100-r1",
 "samplesX":510,
 "samplesY":510,
