@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View ace-it R2</title>
+<title>Terrain3 Elevations View R6</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -17,31 +17,31 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-
+<!--
+<script src=../../elevations-core2/cor-core/core-r1.js ></script>
+<script src=../../elevations-core2/sel-select/select-r1.js ></script>
+<script src=../../elevations-core2/ovr-overlay/overlay-r1.js ></script>
+<script src=../../elevations-core2/ter-terrain/terrain-r1.js ></script>
+<script src=../../elevations-core2/thr-threejs/threejs-r1.js ></script>
+<script src=../../elevations-core2/map-map/map-r1.js ></script>
+-->
 <script src=cor-core/core-r1.js ></script>
 <script src=sel-select/select-r1.js ></script>
 <script src=ovr-overlay/overlay-r1.js ></script>
 <script src=ter-terrain/terrain-r1.js ></script>
 <script src=thr-threejs/threejs-r1.js ></script>
 <script src=map-map/map-r1.js ></script>
-<!--
-<script src=https://jaanga.github.io/terrain3/elevations-core2/cor-core/core-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core2/sel-select/select-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core2/ovr-overlay/overlay-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core2/ter-terrain/terrain-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core2/thr-threejs/threejs-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core2/map-map/map-r1.js ></script>
--->
+
 <script>
 
+/*
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.searchInFolder = 'elevations-data-family+friends/';
-//	SEL.extension = '.txt';
+	SEL.searchInFolder = 'elevations-data-04/';
 
-//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
-
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+*/
 
 	init() 
 	THR.animate();
@@ -50,9 +50,17 @@
 
 		COR.initLeftMenu();
 
-		if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
+		if ( window.self !== window.top ) { 
 
-		SEL.getGitHubAPITreeContents();
+			hamburger.style.left = '0px';
+
+		} else {
+
+			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
+
+			SEL.getGitHubAPITreeContents();
+
+		}
 
 		THR.moreThreejsInits = function() {
 
@@ -76,9 +84,6 @@
 		THR.getThreeJS();
 
 	}
-
-	THR.animate();
-
 
 </script>
 </body>

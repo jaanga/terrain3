@@ -35,29 +35,21 @@
 
 		menuDetailsTerrainParameters.innerHTML = TER.setMenuDetailsTerrain();
 
-
 		MAP.geometry = new THREE.PlaneBufferGeometry( MAP.deltaLonTile * place.tilesX, MAP.deltaLatTile * place.tilesY, place.samplesX - 1, place.samplesY - 1 );
 
 		vertices = MAP.geometry.attributes.position.array;
 
 		for ( var i = 2, j = 0; j < place.elevations.length; i += 3, j++ ) {
 
-			vertices[ i ] = place.elevations[ j ];
+			vertices[ i ] = place.elevations[ j ] / 111111;
 
 		}
 
-		MAP.geometry.applyMatrix( new THREE.Matrix4().makeScale( 100, 100, 100 * place.verticalScale / 111111 ) );
-		MAP.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -1.5707 ) );
+//		MAP.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( MAP.cenLon, 0, MAP.cenLat ) );
+		MAP.geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05) );
 
 		MAP.geometry.computeFaceNormals();
 		MAP.geometry.computeVertexNormals();
-
-//		MAP.geometry.center();
-
-//		MAP.geometry.computeBoundingSphere();
-
-//		MAP.radius = MAP.geometry.boundingSphere.radius;
-//		MAP.center = MAP.geometry.boundingSphere.center;
 
 		MAP.drawMapOverlay();
 
@@ -146,26 +138,34 @@ console.timeEnd( 'timer0' );
 		THR.scene.remove( MAP.mesh, MAP.boxHelper, MAP.groundPlane );
 
 		MAP.mesh = new THREE.Mesh( MAP.geometry, MAP.material );
+		MAP.mesh.scale.set( 1, TERinpVertical.valueAsNumber, -1 );
+		MAP.mesh.position.set( MAP.cenLon, 0, MAP.cenLat );
+
+		THR.controls.target.set( MAP.cenLon, 0, MAP.cenLat );
+		THR.camera.position.copy( THR.controls.target.clone() ).add( v( 0, 0.2, 0.2 ) );
+
 		MAP.mesh.name = COR.place.origin;
 
 		THR.scene.add( MAP.mesh );
 
+THR.viewObject2( MAP.mesh );
+
 		MAP.boxHelper = new THREE.BoxHelper( MAP.mesh, 0xff0000 );
 		MAP.boxHelper.name = 'boxHelper';
 		THR.scene.add( MAP.boxHelper );
-		MAP.boxHelper.visible = TERchkBoxHelper.checked;
+//		MAP.boxHelper.visible = TERchkBoxHelper.checked;
 
-		geometry = new THREE.PlaneBufferGeometry( 300, 300 );
+		geometry = new THREE.PlaneBufferGeometry( 3, 3 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
 
 		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: COR.place.plainOpacity, side: 2, transparent: true } );
 
 		MAP.groundPlane = new THREE.Mesh( geometry, material );
 		MAP.groundPlane.name = 'groundPlane';
-		MAP.groundPlane.position.set( 0, - MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 ); // sea level
+		MAP.groundPlane.position.set( MAP.cenLon, - MAP.boxHelper.geometry.attributes.position.array[ 1 ], MAP.cenLat ); // sea level
 		THR.scene.add( MAP.groundPlane );
 
-		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
+//		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
 		THR.toggleFog( true );
 
 	}

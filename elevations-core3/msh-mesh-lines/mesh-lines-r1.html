@@ -1,0 +1,206 @@
+﻿<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Mesh Lines R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-08-28' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=../../elevations-core/core/elevations-core-r1.js ></script>
+<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
+
+<script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>z
+<script src=../../elevations-core/mesh-lines/mesh-lines-r1.js ></script>
+<script>
+
+	var container;
+
+	var colors = [
+		0xed6a5a,
+		0xf4f1bb,
+		0x9bc1bc,
+		0x5ca4a9,
+		0xe6ebe0,
+		0xf0b67f,
+		0xfe5f55,
+		0xd6d1b1,
+		0xc7efcf,
+		0xeef5db,
+		0x50514f,
+		0xf25f5c,
+		0xffe066,
+		0x247ba0,
+		0x70c1b3
+	];
+
+	var points;
+
+	init();
+	animate();
+
+	function init() {
+
+		var hamburger, menu;
+
+		setCSSView();
+
+		container = document.body.appendChild( document.createElement( 'div' ) );
+		container.id = 'container';
+		container.innerHTML =
+
+			'<div id=menu >' +
+
+				getMenuDetailsHeader() +
+
+				'<p><button onclick=demo(); >demo</button></p>' +
+
+				'<p><button onclick=spiral(); >spiral</button></p>' +
+
+				'<p><button onclick=getRandom(); >random</button></p>' +
+
+				'<p><button onclick=getNicePath(); > nice path</button></p>' +
+
+				getMenuDetailsAbout() +
+
+				getMenuFooter() +
+
+			'</div>' +
+
+			'<div id=hamburger onclick=container.style.left=container.style.left===""?"-325px":""; >' +
+				'<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>' +
+			'</div>' +
+
+		b;
+
+		getThreeJS();
+
+
+
+	}
+
+	function getNicePath( scale ) {
+
+		var segments = 50;
+		var points = 200;
+		var vertices, spline;
+		var geometry, material, line;
+
+		scene.remove( meshLine );
+
+		scale = scale || 30;
+		vertices = [];
+
+		for ( var i = 0; i < 2 * segments * Math.PI; i++ ) {
+
+			vertices.push( v( scale * sin( i * 7 / segments ), scale * cos( i * 3 / segments  ), scale * sin( i * 2 / segments  ) ) );
+
+		}
+
+		spline = new THREE.CatmullRomCurve3( vertices );
+		spline.closed = true;
+
+		geometry = new THREE.Geometry();
+		vertices = spline.getPoints( points );
+
+		meshLine = getMeshLine( vertices, 0xffffff * Math.random(), 5 );
+
+		scene.add( meshLine );
+
+	}
+
+
+	function getRandom() {
+
+		scene.remove( meshLine );
+
+		points = [];
+
+		for ( var i = 0; i < 25; i++ ) {
+
+			points.push( v( 100 * Math.random() - 50, 100 * Math.random() - 50, 100 * Math.random() - 50 ) );
+
+		}
+
+		meshLine = getMeshLine( points, 0xffffff * Math.random(), 5 );
+
+		scene.add( meshLine );
+
+	}
+
+	function demo() {
+
+		var geometry = new THREE.Geometry();
+
+		scene.remove( meshLine );
+
+		for( var j = 0; j < Math.PI; j += 2 * Math.PI / 100 ) {
+
+			var v = new THREE.Vector3( 25 * Math.cos( j ), 25 * Math.sin( j ), 0 );
+
+			geometry.vertices.push( v );
+		}
+
+		var line = new THREE.MeshLine();
+		line.setGeometry( geometry );
+
+		var material = new THREE.MeshLineMaterial( { color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ), lineWidth: 8 });
+
+		meshLine = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
+		scene.add( meshLine );
+
+	}
+
+	function spiral() {
+
+		var geometry = new THREE.Geometry();
+
+		scene.remove( meshLine );
+
+		for ( var j = 0; j < 5000 * Math.PI; j += 2 * Math.PI / 100 ) {
+
+			var v = new THREE.Vector3( 25 * Math.cos( j ) + 5 * Math.random(), 2 * j, 30 * Math.sin( j ) + 5 * Math.random() );
+			geometry.vertices.push( v );
+
+		}
+
+		var line = new THREE.MeshLine();
+		line.setGeometry( geometry, function( p ) { return 2 + Math.sin( 1 * p ); } );
+
+		var resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
+
+		var material = new THREE.MeshLineMaterial( {
+
+			useMap: false,
+			color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ),
+			opacity: 0.65,
+			resolution: resolution,
+			sizeAttenuation: false,
+			lineWidth: 80,
+			near: camera.near,
+			far: camera.far,
+			transparent: true
+
+		});
+
+		meshLine = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
+
+		scene.add( meshLine );
+
+	}
+
+
+</script>
+</body>
+</html>

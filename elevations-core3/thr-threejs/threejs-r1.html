@@ -2,11 +2,11 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View Core1 KML R1</title>
+<title>Terrain3 Elevations Core2 Three.js R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-09-07' >
+<meta name=date content='2016-08-31' >
 </head>
 <body>
 <!--
@@ -17,55 +17,41 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
 
+<script src=https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js ></script>
 <script src=../cor-core/core-r1.js ></script>
-<script src=../sel-select/select-r1.js ></script>
-<script src=../ovr-overlay/overlay-r1.js ></script>
-<script src=../ter-terrain/terrain-r1.js ></script>
 <script src=../thr-threejs/threejs-r1.js ></script>
-<script src=../map-map/map-r1.js ></script>
-<script src=../msh-mesh-lines/mesh-lines-r1.js ></script>
-<script src=../kml-kml/kml-r1.js ></script>
-
 <script>
-
-
-	SEL.onLoad = function() {
-
-		return ''; //SEL.getMenuDetailsSelectFile();
-
-	};
-
-	SEL.defaultFile = '../../elevations/elevations-data-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
-
 
 	COR.initLeftMenu();
 
 	THR.moreThreejsInits = function() {
 
+		var geometry, material
+
 		THR.renderer.setClearColor( 0x7ec0ee );
 		THR.updateCamera = true;
 
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 50, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+
 		THR.axisHelper = new THREE.AxisHelper( 50 );
 		THR.scene.add( THR.axisHelper );
-//		THR.axisHelper.visible = false;
 
-//		TERchkAxisHelper.checked  = false;
-//		TERchkBoxHelper.checked = false;
 
 	};
 
 
-//	SEL.getGitHubAPITreeContents();
-
-	SEL.getJSONFileXHR( SEL.defaultFile );
-
 	THR.getThreeJS();
 
 	THR.animate();
-
-
 
 </script>
 </body>

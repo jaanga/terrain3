@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Oakland Gran Fondo R9</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-09-09' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
+
+<script src=cor-core/core-r1.js ></script>
+<script src=sel-select/select-r1.js ></script>
+<script src=ovr-overlay/overlay-r1.js ></script>
+<script src=ter-terrain/terrain-r1.js ></script>
+<script src=thr-threejs/threejs-r1.js ></script>
+<script src=map-map/map-r1.js ></script>
+<script src=msh-mesh-lines/mesh-lines-r1.js ></script>
+<script src=kml-kml/kml-r1.js ></script>
+<script src=cas-camera-action-select/camera-action-select-r1.js ></script>
+<script>
+
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+	SEL.searchInFolder = 'elevations-data-oakland-gran-fondo/';
+	SEL.extension = '.txt';
+
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
+
+	init();
+
+	function init() {
+
+//	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	SEL.searchInFolder = 'elevations-data-04/';
+
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+//	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
+
+
+
+//		SEL.baseURL = 'https://jaanga.github.io/terrain3/sandbox/elevations-view-oakland-gran-fondo/';
+//		SEL.defaultFile = '../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+//		SEL.defaultFile = SEL.baseURL + 'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+
+
+
+		CAS.cameraOffsetChase = v( -5 * CAS.zoomScale, 5 * CAS.zoomScale, -5 * CAS.zoomScale );
+		CAS.cameraOffsetInside = v( -0.25 * CAS.zoomScale, 1 * CAS.zoomScale, -2 * CAS.zoomScale );
+		CAS.cameraOffsetTrack = v( -10 * CAS.zoomScale, 15 * CAS.zoomScale, 0 * CAS.zoomScale );
+		CAS.cameraOffsetWorld = v( 0 * CAS.zoomScale, 35 * CAS.zoomScale, 35 * CAS.zoomScale );
+
+		COR.initLeftMenu();
+
+		if ( window.self !== window.top ) { 
+
+			hamburger.style.left = '0px';
+
+		} else {
+
+			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
+
+			SEL.getGitHubAPITreeContents();
+
+		}
+
+		THR.moreThreejsInits = function() {
+
+			detailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
+			SELselFiles.size = 5;
+
+			THR.renderer.setClearColor( 0x7ec0ee );
+
+			THR.axisHelper = new THREE.AxisHelper( 50 );
+			THR.scene.add( THR.axisHelper );
+			THR.axisHelper.visible = false;
+
+			TERchkAxisHelper.checked  = false;
+			TERchkBoxHelper.checked = false;
+
+			detailsOverlay.removeAttribute( 'open' );
+			detailsTerrain.removeAttribute( 'open' );
+
+			THR.radius = 40;
+			THR.controls.maxDistance = 3 * THR.radius;
+			THR.toggleFog( true );
+
+//			CAS.getActorBitmap( SEL.baseURL + 'logo-beb-main-site.png' );
+
+			CAS.cameraTrack();
+
+			CAS.animatePlusLookAt();
+
+		};
+
+		THR.getThreeJS();
+
+	}
+
+</script>
+</body>
+</html>
