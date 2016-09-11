@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Elevations View Core1 Overlay R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core
+' >
+<meta name=keywords content='Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-05' >
+</head>
+<body>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../c-ovr-overlay/overlay-r1.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		COR.taglineHeader = 'Howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			OVR.getMenuDetailsOverlay() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+		OVR.getMapOverlayParameters();
+
+		detailsOverlay.setAttribute('open', 'open');
+
+		detailsOverlayParameters.setAttribute('open', 'open');
+
+	}
+
+</script>
+</body>
+</html>

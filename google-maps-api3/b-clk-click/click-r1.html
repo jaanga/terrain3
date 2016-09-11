@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Google Maps API3 Click R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
+
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../b-clk-click/click-r1.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'click says howdy' + b;
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CLK.getMenuDetailsAPIKeyInit() +
+
+			CLK.getMenuDetailsMapClickInit() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		CLK.onEventAPIKeyUpdateInit();
+
+	}
+
+
+/*
+	init();
+
+	function init() {
+
+		var mapDiv, container, menu, hamburger;
+
+		getCSSCore();
+
+		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
+		mapDiv.id = 'mapDiv';
+
+		hamburger = document.body.appendChild( document.createElement( 'div' ) );
+		hamburger.id = 'hamburger';
+		hamburger.innerHTML = '<div id=bars title="Click this hamburger to slide the menu" > &#9776 </div>';
+
+		bars.id = 'bars';
+		bars.onclick = function() { hamburger.style.left = hamburger.style.left === "0px" ? "325px" : 0; };
+
+		menu = hamburger.appendChild( document.createElement( 'div' ) );
+		menu.id = 'menu';
+		menu.innerHTML =
+
+			getMenuDetailsHeaderCore() +
+
+			getMenuDetailsAPIKeyInit() +
+
+			getMenuDetailsMapClickInit() +
+
+			getMenuDetailsAboutCore() +
+
+			getMenuFooterCore() +
+
+		b;
+
+		if ( window.self !== window.top ) { container.style.left = '-325px'; }
+
+		onEventAPIKeyUpdateInit();
+
+	}
+*/
+
+</script>
+</body>
+</html>

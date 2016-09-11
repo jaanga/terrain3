@@ -9,6 +9,11 @@
 	var TER = {};
 	var THR = {};
 
+	var PAR = {};
+	var TIL = {};
+	var DAT = {};
+	var ELV = {};
+
 	var COR = {};
 
 // should these place defaults not be in map.js?? No better here because data use in so many places
@@ -56,9 +61,22 @@
 
 	];
 
+
 // shortcuts
 
 	var b = '<br>';
+
+	COR.taglineHeader = 
+
+		'<p><small>' +
+			'Rotate|Zoom|Pan = 1|2|3 fingers/buttons' + b +
+			'Rotation = spacebar' +
+		'</small></p>';
+
+
+	COR.aboutCredits = '<p>Thank you <a href=https://developer.github.com/v3/ > GitHub API </a> ';
+//					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
+
 
 	COR.txt = '<p>lorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>';
 //	COR.txt = '<p>GitHub API responses will appear here.</p>';
@@ -71,11 +89,9 @@
 
 	COR.initLeftMenu = function() {
 
-		var mapDiv, hamburger, menu, contents;
+		var hamburger, menu, contents;
 
 		COR.getCSSLeft();
-
-//		COR.getPlaceDefaults();
 
 		hamburger = document.body.appendChild( document.createElement( 'div' ) );
 		hamburger.id = 'hamburger';
@@ -84,24 +100,23 @@
 		bars.id = 'bars';
 		bars.onclick = function() { hamburger.style.left = hamburger.style.left === "0px" ? "325px" : 0; };
 
-		menu = hamburger.appendChild( document.createElement( 'div' ) );
-		menu.id = 'menu';
-		menu.innerHTML =
+		COR.menu = hamburger.appendChild( document.createElement( 'div' ) );
+		COR.menu.id = 'menu';
+		COR.menu.innerHTML =
 
 			COR.getMenuDetailsHeader() +
-
-			COR.getMenuPlugins() +
 
 			COR.getMenuDetailsAbout() +
 
 			COR.getMenuFooter() +
 
-		'';
+		b;
 
-//		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+		COR.onLeftMenuLoaded();
 
 	}
 
+	COR.onLeftMenuLoaded = function (){};
 
 	COR.initThreeColumns = function() {
 
@@ -137,7 +152,6 @@
 
 
 
-
 // CSS
 
 	COR.getCSSLeft = function() {
@@ -165,18 +179,19 @@
 			'.popUp { background-color: white; left: 150px; border: 1px solid red; opacity: 1.0; padding: 5px; position: absolute; width: 120px; z-index: 10; }' +
 
 			'#bars { background-color: #eee; color: crimson; cursor: pointer; font-size: 24pt; text-decoration: none; }' +
-			'#hamburger { left: 325px; position: absolute; top: 20px; transition: left 1s; }' +
+			'#hamburger { left: 325px; position: absolute; top: 20px; transition: left 1s;  z-index: 1;}' +
 			'#mapDiv { height: 100%; text-align: center; }' +
 			'#menu { background-color: #eee; border: 1px #ccc solid; left: -325px; max-height: ' + ( window.innerHeight - 10 ) + 'px; ' +
-				'opacity: 0.85; overflow: auto; padding: 0 10px; position: absolute; top: -20px; transition: left 1s; width: 300px; }' +
-/*
+				'opacity: 0.85; overflow: auto; padding: 0 10px; position: absolute; top: -20px; transition: left 1s; width: 300px; z-index: 1;}' +
+
+
 			'#divThreejs { background-color: #ccc; border: 2px solid #888; height: 80%; min-width: 70%;' +
 				'overflow: hidden; left: 350px; position: absolute; resize: none; top: 100px; }' +
 			'#threejsHeader { text-align: right; }' +
 
 			'#txtElevations { min-height: 50px; width: 100%; }' +
 			'#txtPath { min-height: 60px; width: 100%; }' +
-*/
+
 		'';
 
 	}
@@ -240,10 +255,7 @@
 
 			'</h2>' +
 
-			'<p><small>' +
-				'Rotate|Zoom|Pan = 1|2|3 fingers/buttons' + b +
-				'Rotation = spacebar' +
-			'</small></p>' +
+			COR.taglineHeader +
 
 			'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
 
@@ -294,8 +306,7 @@
 					'<jaanga.github.io/license.md >MIT license</a>' +
 				'</p>' +
 
-				'<p>Thank you <a href=https://developer.github.com/v3/ > GitHub API </a> ' +
-//					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
+				COR.aboutCredits +
 
 				'<p>Click the \'i in a circle\' info icon for more <a href=index.html#readme.md >help</a></p>' +
 
@@ -319,7 +330,7 @@
 				'<a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a>' +
 			'</center>' +
 
-			'<div class=popUp id=pop2 style= display:none; >' +
+			'<div class=popUp id=pop2 style= display:none;bottom:80px; >' +
 				'Jaanga - your 3D happy place.<br>Click here to return to the top of the page' +
 			'</div>' +
 
@@ -329,7 +340,7 @@
 
 	};
 
-
+/*
 	COR.onLoad = function() { return ''; };
 
 	CAS.onLoad = function() { return ''; };
@@ -346,7 +357,7 @@
 	COR.getMenuPlugins = function() {
 
 		return '' +
-//		COR.onLoad() +
+		COR.onLoad() +
 
 		SEL.onLoad() +
 		CAS.onLoad() +
@@ -393,11 +404,9 @@
 		MSH.onLoadJSONFile();
 
 	};
-
+*/
 
 // utils
-
-// better in SEL?
 
 	COR.getPlaceDefaults = function() {
 
@@ -422,7 +431,32 @@
 
 	COR.getMenuDetailsObjectProperties = function( obj ) {
 
-		var keys, txt, menuDetailsObjectProperties;
+//		obj = obj || COR.defaults;
+
+//		var props = COR.getObjectProperties( obj );
+
+		menuDetailsObjectProperties =
+
+			'<details open > ' +
+
+				'<summary><h3>Object Properties: ' + ( obj.name || '' ) + ' </h3></summary>' +
+
+				'<p><button onclick=properties.innerHTML=COR.getObjectProperties(COR.place); >reload</button></p>' +
+
+				'<p id=properties ></p>' +
+
+			'</details>' +
+
+		b;
+
+		return menuDetailsObjectProperties;
+
+	};
+
+	COR.getObjectProperties = function( obj ) {
+
+		var keys, txt;
+console.log( '', obj, COR.place );
 
 		keys = Object.keys( obj );
 
@@ -434,24 +468,9 @@
 
 		}
 
-		txt = '<table>' + txt + '</table>';
+		return '<table>' + txt + '</table>';
 
-		menuDetailsObjectProperties =
-
-			'<details open > ' +
-
-				'<summary><h3>Object Properties: ' + obj.name + ' </h3></summary>' +
-
-				'<p>' + txt + '</p>' +
-
-			'</details>' +
-
-		b;
-
-		return menuDetailsObjectProperties;
-
-	};
-
+	}
 
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values

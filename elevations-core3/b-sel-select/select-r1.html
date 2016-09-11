@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Elevations View Core1 Select R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core
+' >
+<meta name=keywords content='Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-05' >
+</head>
+<body>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js ></script>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../b-sel-select/select-r1.js ></script>
+<script>
+
+
+	init();
+
+	function init() {
+
+		COR.taglineHeader = 'Howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+			COR.getMenuDetailsTemplate() +
+
+			COR.getMenuDetailsObjectProperties( COR.defaults ) +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		SEL.getGitHubAPITreeContents();
+
+	}
+
+	SEL.onLoadJSONFile = function() {
+
+		COR.place = SEL.fileJSON;
+		COR.place.name = SEL.fileName;
+
+		COR.getPlaceDefaults();
+
+console.log( 'file loaded', SEL.fileName );
+
+	}
+
+</script>
+</body>
+</html>

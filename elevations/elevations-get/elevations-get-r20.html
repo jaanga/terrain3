@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Get R20</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
+Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
+Display results in 3D. Display useful info.
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../../elevations-core3/b-sel-select/select-r1.js ></script>
+<script src=../../google-maps-api3/b-clk-click/click-r1.js ></script>
+<script src=../../google-maps-api3/c-geo-geocoder/geocoder-r1.js ></script>
+<script src=../../google-maps-api3/d-par-parameters/parameters-r1.js ></script>
+<script src=../../google-maps-api3/e-til-tiles/tiles-r1.js ></script>
+<script src=../../google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
+
+<script>
+
+	SEL.searchInFolder = 'data-path-kml/';
+	SEL.extension = '.kml';
+
+//	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/' + SEL.searchInFolder;
+
+	SEL.getJSONFileXHR = function(){};
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'howdy' + b;
+		COR.aboutCredits = '<p>Thank you <a href=https://developers.google.com/maps/documentation/javascript/ > Google Maps JavaScript API </a> ';
+
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CLK.getMenuDetailsAPIKeyInit() +
+
+			CLK.getMenuDetailsMapClickInit() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+			COR.getMenuDetailsObjectProperties( COR.defaults ) +
+
+			GEO.getMenuDetailsGeocoder() +
+
+			PAR.getMenuDetailsMapParameters() +
+
+			ELV.getMenuDetailsElevations() +
+
+			TIL.getMenuDetailsTilesData() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		CLK.onEventAPIKeyUpdateInit();
+
+		SEL.getGitHubAPITreeContents();
+
+		SELselFiles.onchange = function() { getFileKML( SEL.urlBase + SELselFiles.value ); }
+
+	}
+
+
+	function openKML( url ) {
+
+		COR.place.kmlFile = url;
+		COR.place.vicinity = COR.place.origin = url.split( '/' ).pop().slice( 0, -4 );
+
+		layer = new google.maps.KmlLayer({
+
+			url: url,
+			map: googleMap.map
+
+		});
+
+//console.log( '', googleMap.center.lat(), googleMap.center.lng() );
+
+	}
+
+
+	function getFileKML( url ) {
+
+//		var xhr, response, xmlParse, text, coordinates;
+
+		openKML( url ) 
+
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', url, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
+		function callback() {
+
+			response = xhr.responseText;
+
+			xmlParse = ( new window.DOMParser() ).parseFromString( response, "text/xml" );
+
+			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
+			text = text.textContent;
+
+//			lines = text.split( '\n' ); //
+			lines = text.split( ' ' ); //
+			coordinates = [];
+
+
+			for ( var i = 0; i < lines.length; i++ ) {
+
+				line = lines[ i ];
+				point = line.split( ',' ).map( parseFloat );
+				coordinates = coordinates.concat( point );
+
+			} 
+
+			COR.place.points = coordinates.slice( 0, -1 );
+
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

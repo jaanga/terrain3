@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Elevations Core3 Terrain R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core
+' >
+<meta name=keywords content='Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-19' >
+</head>
+<body>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../d-ter-terrain/terrain-r1.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		COR.taglineHeader = 'Howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			TER.getMenuDetailsTerrain() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		detailsTerrain.setAttribute('open', 'open');
+
+		detailsTerrainParameters.setAttribute('open', 'open');
+
+	}
+
+</script>
+</body>
+</html>

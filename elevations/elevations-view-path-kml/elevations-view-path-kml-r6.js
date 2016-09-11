@@ -72,6 +72,7 @@
 
 			lines = text.split( '\n' ); //
 			coordinates = [];
+
 			for ( var i = 0; i < lines.length; i++ ) {
 				line = lines[ i ];
 				point = line.split( ',' ).map( parseFloat );

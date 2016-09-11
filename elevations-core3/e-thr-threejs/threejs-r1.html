@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View Core1 Map R2</title>
+<title>Terrain3 Elevations Core2 Three.js R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -18,37 +18,62 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 
-<script src=../cor-core/core-r1.js ></script>
-<script src=../sel-select/select-r1.js ></script>
-<script src=../ovr-overlay/overlay-r1.js ></script>
-<script src=../ter-terrain/terrain-r1.js ></script>
-<script src=../thr-threejs/threejs-r1.js ></script>
-<script src=../map2-map/map-r2.js ></script>
-
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
 <script>
 
-	COR.initLeftMenu();
 
 	THR.moreThreejsInits = function() {
+
+		var geometry, material
 
 		THR.renderer.setClearColor( 0x7ec0ee );
 		THR.updateCamera = true;
 
+		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 50, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+
 		THR.axisHelper = new THREE.AxisHelper( 50 );
 		THR.scene.add( THR.axisHelper );
-//		THR.axisHelper.visible = false;
-
-//		TERchkAxisHelper.checked  = false;
-		TERchkBoxHelper.checked = false;
 
 	};
 
+	init();
 
 	THR.getThreeJS();
 
-	SEL.getGitHubAPITreeContents();
-
 	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader = 'Howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+	}
+
+
+
+
 
 </script>
 </body>

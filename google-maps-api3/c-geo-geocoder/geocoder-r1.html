@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Google Maps API3 Geocoder R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../b-clk-click/click-r1.js ></script>
+<script src=../c-geo-geocoder/geocoder-r1.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'howdy from geocoder' + b;
+
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CLK.getMenuDetailsAPIKeyInit() +
+
+			CLK.getMenuDetailsMapClickInit() +
+
+			GEO.getMenuDetailsGeocoder() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		CLK.onEventAPIKeyUpdateInit();
+
+	}
+
+</script>
+</body>
+</html>
