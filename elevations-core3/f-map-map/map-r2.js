@@ -142,7 +142,6 @@ console.timeEnd( 'timer0' );
 		MAP.mesh.name = COR.place.origin;
 		THR.scene.add( MAP.mesh );
 
-
 		MAP.boxHelper = new THREE.BoxHelper( MAP.mesh, 0xff0000 );
 		MAP.boxHelper.name = 'boxHelper';
 		THR.scene.add( MAP.boxHelper );
@@ -159,7 +158,8 @@ console.timeEnd( 'timer0' );
 		THR.scene.add( MAP.groundPlane );
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
-		THR.toggleFog( true );
+
+//		THR.toggleFog( true );
 
 	}
 

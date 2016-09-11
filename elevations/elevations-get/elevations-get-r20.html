@@ -14,6 +14,7 @@ Display results in 3D. Display useful info.
 <body>
 <script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
 <script src=../../elevations-core3/b-sel-select/select-r1.js ></script>
+
 <script src=../../google-maps-api3/b-clk-click/click-r1.js ></script>
 <script src=../../google-maps-api3/c-geo-geocoder/geocoder-r1.js ></script>
 <script src=../../google-maps-api3/d-par-parameters/parameters-r1.js ></script>
@@ -45,13 +46,13 @@ Display results in 3D. Display useful info.
 
 			CLK.getMenuDetailsAPIKeyInit() +
 
+			GEO.getMenuDetailsGeocoder() +
+
 			CLK.getMenuDetailsMapClickInit() +
 
 			SEL.getMenuDetailsSelectFile() +
 
 			COR.getMenuDetailsObjectProperties( COR.defaults ) +
-
-			GEO.getMenuDetailsGeocoder() +
 
 			PAR.getMenuDetailsMapParameters() +
 

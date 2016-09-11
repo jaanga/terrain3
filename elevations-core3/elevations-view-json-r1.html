@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View KML R1</title>
+<title>Terrain3 Elevations View JSON R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -47,37 +47,6 @@
 //	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
-
-	THR.moreThreejsInits = function() {
-
-
-		THR.renderer.setClearColor( 0x7ec0ee );
-		THR.updateCamera = true;
-
-		THR.axisHelper = new THREE.AxisHelper( 50 );
-		THR.scene.add( THR.axisHelper );
-
-	};
-
-	SEL.onLoadJSONFile = function() {
-
-		COR.place = SEL.fileJSON;
-		COR.place.name = SEL.fileName;
-
-		COR.getPlaceDefaults();
-
-		OVR.setMenuDetailsOverlay();
-
-//		OVR.getMapOverlayParameters();
-
-console.log( 'file loaded', SEL.fileName );
-
-		MAP.initMapGeometry();
-
-		KML.drawPath();
-
-	}
-
 	init();
 
 	THR.getThreeJS();
@@ -114,40 +83,6 @@ console.log( 'file loaded', SEL.fileName );
 
 		detailsOverlayParameters.setAttribute('open', 'open');
 
-	}
-
-
-
-
-/*
-	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
-
-	SEL.searchInFolder = 'elevations-data-kml/';
-	SEL.extension = '.txt';
-
-	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
-//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-
-
-	init() 
-	THR.animate();
-
-	function init() {
-
-		COR.initLeftMenu();
-
-		if ( window.self !== window.top ) { 
-
-			hamburger.style.left = '0px';
-
-		} else {
-
-			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
-
-			SEL.getGitHubAPITreeContents();
-
-		}
-
 		THR.moreThreejsInits = function() {
 
 			THR.renderer.setClearColor( 0x7ec0ee );
@@ -155,22 +90,33 @@ console.log( 'file loaded', SEL.fileName );
 
 			THR.axisHelper = new THREE.AxisHelper( 50 );
 			THR.scene.add( THR.axisHelper );
-			THR.axisHelper.visible = false;
 
-			TERchkAxisHelper.checked  = false;
-			TERchkBoxHelper.checked = false;
-
-			TERchkRotate.click();
-
-			window.addEventListener( 'keyup', THR.onKeyUp, false );
-			THR.toggleFog( true );
+//			THR.toggleFog( true );
 
 		};
 
-		THR.getThreeJS();
+	}
+
+	SEL.onLoadJSONFile = function() {
+
+		COR.place = SEL.fileJSON;
+		COR.place.name = SEL.fileName;
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+//		OVR.getMapOverlayParameters();
+
+console.log( 'file loaded', SEL.fileName );
+
+		MAP.initMapGeometry();
+
+		KML.drawPath();
+
 
 	}
-*/
+
 
 </script>
 </body>

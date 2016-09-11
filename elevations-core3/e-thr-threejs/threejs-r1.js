@@ -48,12 +48,6 @@
 
 	}
 
-	THR.onLoadJSONFILE = function() {
-
-//		THR.scene = new THREE.Scene();
-
-	};
-
 
 	THR.moreThreejsInits = function() {};
 
