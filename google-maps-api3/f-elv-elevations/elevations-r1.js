@@ -300,7 +300,7 @@ console.log( 'complete count', count, elevations.length );
 
 		}
 
-		divThreejs.style.display = 'block';
+		divThreejs.style.display = '';
 		divThreejs.style.zIndex = 5;
 
 		divThreejs.innerHTML =
@@ -308,7 +308,7 @@ console.log( 'complete count', count, elevations.length );
 			'<div id=threejsHeader >' +
 
 				'<button onclick=ELV.getNewTabElevationsView(); >View elevations full screen</button>' +
-				'<button onclick=onchange=ifrThreejs.contentWindow.controls.autoRotate=!ifrThreejs.contentWindow.controls.autoRotate; > rotation </button>' +
+				'<button onclick=onchange=ifrThreejs.contentWindow.THR.controls.autoRotate=!ifrThreejs.contentWindow.THR.controls.autoRotate; > rotation </button>' +
 				'<button onclick=divThreejs.style.display=divThreejs.style.display===""?"none":""; > [X] </button>' +
 
 			'</div>' +

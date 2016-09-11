@@ -113,6 +113,6 @@
 		place.samplesX = parseInt( selSamples.value, 10 ) * place.tilesX;
 		place.samplesY = parseInt( selSamples.value, 10 ) * place.tilesY;
 
-		if ( googleMap.map ) { CLK.setCenterInit(); }
+		if ( googleMap.map ) { CLK.setCenter(); }
 
 	}

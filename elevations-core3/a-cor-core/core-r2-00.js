@@ -16,13 +16,6 @@
 
 	var COR = {};
 
-	var googleMap = {};
-	var geocoder;
-	var mapParameters;
-	var threejs;
-	var divThreejs;
-	var tiles;
-
 // should these place defaults not be in map.js?? No better here because data use in so many places
 
 	COR.defaults = {};
@@ -347,7 +340,71 @@
 
 	};
 
+/*
+	COR.onLoad = function() { return ''; };
 
+	CAS.onLoad = function() { return ''; };
+	KML.onLoad = function() { return ''; };
+	MAP.onLoad = function() { return ''; };
+	MSH.onLoad = function() { return ''; };
+	OVR.onLoad = function() { return ''; };
+	SEL.onLoad = function() { return ''; };
+	TER.onLoad = function() { return ''; };
+	THR.onLoad = function() { return ''; };
+
+
+
+	COR.getMenuPlugins = function() {
+
+		return '' +
+		COR.onLoad() +
+
+		SEL.onLoad() +
+		CAS.onLoad() +
+		OVR.onLoad() +
+		TER.onLoad() +
+		THR.onLoad() +
+		MAP.onLoad() +
+		KML.onLoad() +
+		MSH.onLoad() ;
+
+	};
+
+	COR.onLoad = function() {
+
+		return COR.getMenuDetailsTemplate() + 
+			COR.getMenuDetailsObjectProperties( COR.defaults );
+
+	};
+
+
+// Called by SEL.onLoadJSONFILE
+
+	COR.onLoadJSONFile = function() {};
+	CAS.onLoadJSONFile = function() {};
+	KML.onLoadJSONFile = function() {};
+	MAP.onLoadJSONFile = function() {};
+	MSH.onLoadJSONFile = function() {};
+	OVR.onLoadJSONFile = function() {};
+	SEL.onLoadJSONFile = function() {};
+	TER.onLoadJSONFile = function() {};
+	THR.onLoadJSONFile = function() {};
+
+
+	COR.onLoadJSONFile = function() {
+
+//		SEL.onLoadJSONFile();
+
+		OVR.onLoadJSONFile();
+		TER.onLoadJSONFile();
+		THR.onLoadJSONFile();
+		CAS.onLoadJSONFile();
+		KML.onLoadJSONFile();
+		MAP.onLoadJSONFile();
+		MSH.onLoadJSONFile();
+
+	};
+*/
 
 // utils
 
@@ -357,7 +414,7 @@
 
 		if ( !COR.place ) { COR.place = {}; }
 
-		COR.place.objectName = 'place';
+		COR.place.name = 'Place';
 
 		keys = Object.keys( COR.defaults ); 
 
@@ -372,22 +429,19 @@
 	};
 
 
-
 	COR.getMenuDetailsObjectProperties = function( obj ) {
 
+//		obj = obj || COR.defaults;
 
 //		var props = COR.getObjectProperties( obj );
 
-		var menuDetailsObjectProperties =
+		menuDetailsObjectProperties =
 
 			'<details open > ' +
 
-				'<summary><h3>Object Properties ' + ( obj.name || '' ) + ' </h3></summary>' +
+				'<summary><h3>Object Properties: ' + ( obj.name || '' ) + ' </h3></summary>' +
 
-				'<p>' +
-					'<button onclick=properties.innerHTML=COR.getObjectProperties(COR.place); >Get place properties</button> ' +
-					'<button onclick=properties.innerHTML=COR.getObjectProperties(); >Get defaults</button> ' +
-				'</p>' +
+				'<p><button onclick=properties.innerHTML=COR.getObjectProperties(COR.place); >reload</button></p>' +
 
 				'<p id=properties ></p>' +
 
@@ -399,12 +453,10 @@
 
 	};
 
-
-
 	COR.getObjectProperties = function( obj ) {
 
-		obj = obj || COR.defaults;
 		var keys, txt;
+console.log( '', obj, COR.place );
 
 		keys = Object.keys( obj );
 

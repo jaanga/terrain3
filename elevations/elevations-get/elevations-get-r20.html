@@ -14,6 +14,7 @@ Display results in 3D. Display useful info.
 <body>
 <script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
 <script src=../../elevations-core3/b-sel-select/select-r1.js ></script>
+<script src=../../elevations-core3/h-kml2-kml/kml-r2.js ></script>
 
 <script src=../../google-maps-api3/b-clk-click/click-r1.js ></script>
 <script src=../../google-maps-api3/c-geo-geocoder/geocoder-r1.js ></script>
@@ -44,11 +45,11 @@ Display results in 3D. Display useful info.
 
 			COR.getMenuDetailsHeader() +
 
-			CLK.getMenuDetailsAPIKeyInit() +
+			CLK.getMenuDetailsAPIKey() +
 
 			GEO.getMenuDetailsGeocoder() +
 
-			CLK.getMenuDetailsMapClickInit() +
+			CLK.getMenuDetailsMapClick() +
 
 			SEL.getMenuDetailsSelectFile() +
 
@@ -66,37 +67,26 @@ Display results in 3D. Display useful info.
 
 		'';
 
-		CLK.onEventAPIKeyUpdateInit();
+		CLK.onEventAPIKeyUpdate();
 
 		SEL.getGitHubAPITreeContents();
 
-		SELselFiles.onchange = function() { getFileKML( SEL.urlBase + SELselFiles.value ); }
+		SELmenuSummary.innerHTML = '<h3>Select a KML file</h3>';
+
+		SELinpFile.style.display = 'none';
+
+		SELselFiles.onchange = function() { KML.getFile( SEL.urlBase + SELselFiles.value ); }
 
 	}
 
 
-	function openKML( url ) {
+/*
 
-		COR.place.kmlFile = url;
-		COR.place.vicinity = COR.place.origin = url.split( '/' ).pop().slice( 0, -4 );
-
-		layer = new google.maps.KmlLayer({
-
-			url: url,
-			map: googleMap.map
-
-		});
-
-//console.log( '', googleMap.center.lat(), googleMap.center.lng() );
-
-	}
-
-
-	function getFileKML( url ) {
+	KML.getFile = function( url ) {
 
 //		var xhr, response, xmlParse, text, coordinates;
 
-		openKML( url ) 
+		KML.openKML( url ) 
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', url, true );
@@ -127,9 +117,44 @@ Display results in 3D. Display useful info.
 
 			COR.place.points = coordinates.slice( 0, -1 );
 
+
 		}
 
 	}
+
+	KML.openKML = function( url ) {
+
+// https://developers.google.com/maps/documentation/javascript/examples/layer-kml
+
+		var kmlLayer;
+		var place = COR.place;
+
+		place.kmlFile = url;
+		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, SEL.extension.length );
+
+		kmlLayer = new google.maps.KmlLayer( {
+
+			url: url,
+			map: googleMap.map
+
+		} );
+
+		googleMap.map.addListener( 'center_changed', function(  ) {
+
+//console.log( '', googleMap.map.center.lat(), googleMap.map.center.lng() );
+
+			googleMap.clearAll();
+
+			place.latitude = googleMap.map.center.lat();
+
+			place.longitude = googleMap.map.center.lng();
+
+			CLK.onClickGoogleMap();
+
+        } );
+
+	}
+*/
 
 
 </script>

@@ -159,6 +159,8 @@ console.timeEnd( 'timer0' );
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
 
+//KML.drawPath();
+
 //		THR.toggleFog( true );
 
 	}

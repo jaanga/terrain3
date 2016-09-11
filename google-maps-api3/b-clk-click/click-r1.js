@@ -2,14 +2,9 @@
 
 	var CLK = CLK || {};
 
-	var googleMap = {};
-	var geocoder;
-	var mapParameters;
-	var threejs;
-	var divThreejs;
-	var tiles;
 
-	CLK.getMenuDetailsAPIKeyInit = function() {
+
+	CLK.getMenuDetailsAPIKey = function() {
 
 		var menuDetailsAPIKey =
 
@@ -20,7 +15,7 @@
 				'<small>If small request, no need for API key</small>' +
 
 				'<p>api key: <input id=CLKinpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
-				'<p><button onclick=CLK.onEventAPIKeyUpdateInit(); >Set API key</button></p>' +
+				'<p><button onclick=CLK.onEventAPIKeyUpdate(); >Set API key</button></p>' +
 
 			'</details>' + 
 
@@ -31,7 +26,7 @@
 	}
 
 
-	CLK.getMenuDetailsMapClickInit = function() {
+	CLK.getMenuDetailsMapClick = function() {
 
 		var menuDetailsMapClick =
 
@@ -50,12 +45,12 @@
 	}
 
 
-	CLK.onEventAPIKeyUpdateInit = function() {
+	CLK.onEventAPIKeyUpdate = function() {
 
 		if ( googleMap.script ) { googleMap.script.src = ''; google = {}; }
 
 		googleMap.script = document.body.appendChild( document.createElement('script') );
-		googleMap.script.onload = CLK.initGoogleMapInit;
+		googleMap.script.onload = CLK.initGoogleMap;
 
 		if ( CLKinpAPI.value !== '' ) {
 
@@ -70,7 +65,7 @@
 	}
 
 
-	CLK.initGoogleMapInit = function() {
+	CLK.initGoogleMap = function() {
 
 		var marker;
 
@@ -121,9 +116,9 @@
 
 		googleMap.markings.push( marker );
 
-		googleMap.map.addListener( 'click', CLK.onClickGoogleMapInit );
+		googleMap.map.addListener( 'click', CLK.onClickGoogleMap );
 
-		CLK.onClickGoogleMapInit();
+		CLK.onClickGoogleMap();
 
 		googleMap.center = googleMap.click;
 
@@ -137,7 +132,7 @@
 
 
 
-	CLK.onClickGoogleMapInit = function( event ) {
+	CLK.onClickGoogleMap = function( event ) {
 
 		var place = COR.place;
 		var latLng, lat, lon, marker;
@@ -164,7 +159,7 @@
 //			'Pixel X: ' + event.pixel.x + 'px' + b +
 //			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
 
-			'<p><button onclick=CLK.setCenterInit(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
+			'<p><button onclick=CLK.setCenter(' + lat + ',' + lon + '); >Set location as map center</button></p>' +
 
 		'';
 
@@ -184,7 +179,7 @@
 	}
 
 
-	CLK.setCenterInit = function( lat, lon ) {
+	CLK.setCenter = function( lat, lon ) {
 
 		var place = COR.place;
 

@@ -2,12 +2,11 @@
 
 	SEL = SEL || {};
 
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 
 //	SEL.defaultFile = '../../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
 	SEL.defaultFile; // if no default, select a random file
-
-	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 	SEL.searchInFolder = 'elevations-data-04/';
 	SEL.extension = '.json';
@@ -16,23 +15,26 @@
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
 
+
 	SEL.getMenuDetailsSelectFile = function() {
 
 		var menuDetailsSelectFile =
 
-		'<details id=detailsSelectFile open >' +
+			'<details id=detailsSelectFile open >' +
 
-			'<summary><h3>Select file to view</h3></summary>' +
+				'<summary id=SELmenuSummary ><h3>Select file to view</h3></summary>' +
 
-			'<small>Select or open a file to view in 3D</small>' +
+				'<small id=SELmenuSummaryTagline >Select or open a file to view in 3D</small>' +
 
-			'<p>' +
-				'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
-			'</p>' +
+				'<p>' +
+					'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
+				'</p>' +
 
-			'<p><input type=file id=inpFile onchange=SEL.getJSONFileReader(this); /></p>' +
+				'<p><input type=file id=SELinpFile onchange=SEL.getJSONFileReader(this); /></p>' +
 
-		'</details>';
+			'</details>' +
+
+		b;
 
 		return menuDetailsSelectFile;
 
