@@ -83,7 +83,12 @@
 
 		detailsOverlay.setAttribute('open', 'open');
 
-		detailsOverlayParameters.setAttribute('open', 'open');
+//		detailsOverlayParameters.setAttribute('open', 'open');
+
+		detailsTerrain.setAttribute('open', 'open');
+
+//		detailsTerrainParameters.setAttribute('open', 'open');
+
 
 		THR.moreThreejsInits = function() {
 
@@ -102,15 +107,10 @@
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
-		COR.place.name = SEL.fileName;
 
 		COR.getPlaceDefaults();
 
 		OVR.setMenuDetailsOverlay();
-
-//		OVR.getMapOverlayParameters();
-
-console.log( 'file loaded', SEL.fileName );
 
 		MAP.initMapGeometry();
 
