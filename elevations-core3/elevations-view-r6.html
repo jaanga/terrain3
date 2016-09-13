@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View R6</title>
+<title>Elevations View R6</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -25,12 +25,12 @@
 <script src=../../elevations-core2/thr-threejs/threejs-r1.js ></script>
 <script src=../../elevations-core2/map-map/map-r1.js ></script>
 -->
-<script src=cor-core/core-r1.js ></script>
-<script src=sel-select/select-r1.js ></script>
-<script src=ovr-overlay/overlay-r1.js ></script>
-<script src=ter-terrain/terrain-r1.js ></script>
-<script src=thr-threejs/threejs-r1.js ></script>
-<script src=map-map/map-r1.js ></script>
+<script src=a-cor-core/core-r2.js ></script>
+<script src=b-sel-select/select-r1.js ></script>
+<script src=c-ovr-overlay/overlay-r1.js ></script>
+<script src=d-ter-terrain/terrain-r1.js ></script>
+<script src=e-thr-threejs/threejs-r1.js ></script>
+<script src=f-map-map/map-r2.js ></script>
 
 <script>
 
@@ -43,12 +43,35 @@
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 */
 
-	init() 
+	init();
+
+	THR.getThreeJS();
+
 	THR.animate();
 
 	function init() {
 
 		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+//			KML.getMenuDetailsKML() +
+
+			OVR.getMenuDetailsOverlay() +
+
+			TER.getMenuDetailsTerrain() +
+
+			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
 
 		if ( window.self !== window.top ) { 
 
@@ -62,26 +85,43 @@
 
 		}
 
-		THR.moreThreejsInits = function() {
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
-			THR.renderer.setClearColor( 0x7ec0ee );
-			THR.updateCamera = true;
+ 		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
-			THR.axisHelper = new THREE.AxisHelper( 50 );
-			THR.scene.add( THR.axisHelper );
-			THR.axisHelper.visible = false;
+			THR.moreThreejsInits = function() {
 
-			TERchkAxisHelper.checked  = false;
-			TERchkBoxHelper.checked = false;
+				THR.renderer.setClearColor( 0x7ec0ee );
+				THR.updateCamera = true;
 
-			TERchkRotate.click();
+				THR.axisHelper = new THREE.AxisHelper( 50 );
+				THR.scene.add( THR.axisHelper );
+				THR.axisHelper.visible = false;
 
-			window.addEventListener( 'keyup', THR.onKeyUp, false );
-			THR.toggleFog( true );
+				TERchkAxisHelper.checked = false;
+				TERchkBoxHelper.checked = false;
 
-		};
+				TERchkRotate.click();
 
-		THR.getThreeJS();
+				window.addEventListener( 'keyup', THR.onKeyUp, false );
+				THR.toggleFog( true );
+
+			};
+
+
+	}
+
+	SEL.onLoadJSONFile = function() {
+
+		COR.place = SEL.fileJSON;
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+console.log( 'file loaded', SEL.fileName );
+
+		MAP.initMapGeometry();
 
 	}
 

@@ -5,7 +5,7 @@
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 
-//	SEL.defaultFile = '../../oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+//	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
 	SEL.defaultFile; // if no default, select a random file
 
 	SEL.searchInFolder = 'elevations-data-04/';
@@ -39,6 +39,7 @@
 		return menuDetailsSelectFile;
 
 	}
+
 
 
 	SEL.getGitHubAPITreeContents = function() {
@@ -76,6 +77,7 @@
 		}
 
 	}
+
 
 
 	SEL.onGitHubTreeLoad = function() {
@@ -158,13 +160,13 @@ console.time( 'timer0' );
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
-		COR.place.name = SEL.fileName;
 
 		COR.getPlaceDefaults();
 
 console.log( 'file loaded', SEL.fileName );
 
 	}
+
 */
 
 

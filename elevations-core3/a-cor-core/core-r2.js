@@ -14,7 +14,8 @@
 	var DAT = {};
 	var ELV = {};
 
-	var COR = {};
+
+// !!!
 
 	var googleMap = {};
 	var geocoder;
@@ -23,8 +24,10 @@
 	var divThreejs;
 	var tiles;
 
-// should these place defaults not be in map.js?? No better here because data use in so many places
 
+// should these place defaults not be in map.js?? No better here because the data is used in so many places
+
+	var COR = {};
 	COR.defaults = {};
 
 	COR.defaults.backgroundColor = 0x7ec0ee ;
@@ -38,7 +41,7 @@
 
 	COR.defaults.mapTypeId = 'hybrid';
 
-
+	COR.defaults.objectName = 'defaults';
 	COR.defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
 	COR.defaults.pixelsPerTile = 256;
 	COR.defaults.plainOpacity = 0.5;
@@ -76,8 +79,8 @@
 	COR.taglineHeader = 
 
 		'<p><small>' +
-			'Rotate|Zoom|Pan = 1|2|3 fingers/buttons' + b +
-			'Rotation = spacebar' +
+			'Rotate|Zoom|Pan: 1|2|3 fingers/buttons' + b +
+			'Rotation: spacebar' +
 		'</small></p>';
 
 
@@ -253,9 +256,12 @@
 
 		var menuDetailsHeader =
 
-			'<h2>' +
+			'<h3>' +
 
-				'<a href=https://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo; ' + b +
+				'<a href=http://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo; ' +
+				'<a href=http://jaanga.github.io/terrain3/ title="your happy mappy place" > Terrain3 </a> &raquo; ' + 
+			'</h3>' +
+			'<h2>' +
 				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
 //				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
 				'<a href=../../../index.html#sandbox/elevations-view-oakland-gran-fondo onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
@@ -269,32 +275,6 @@
 		b;
 
 		return menuDetailsHeader;
-
-	};
-
-
-
-	COR.getMenuDetailsTemplate = function() {
-
-		var menuDetailsTemplate =
-
-			'<details id=detailsTemplate open >' +
-
-				'<summary><h3>Template</h3></summary>' +
-
-				'<p id=pTemplate >' +
-
-					'<button > button </button>' + b +
-
-					COR.txt +
-
-			'</p>' +
-
-			'</details>' +
-
-		b;
-
-		return menuDetailsTemplate;
 
 	};
 
@@ -337,7 +317,7 @@
 				'<a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><h1> &#x2766 <h1></a>' +
 			'</center>' +
 
-			'<div class=popUp id=pop2 style= display:none;bottom:80px; >' +
+			'<div class=popUp id=pop2 style= display:none;bottom:100px; >' +
 				'Jaanga - your 3D happy place.<br>Click here to return to the top of the page' +
 			'</div>' +
 
@@ -349,25 +329,27 @@
 
 
 
-// utils
+	COR.getMenuDetailsTemplate = function() {
 
-	COR.getPlaceDefaults = function() {
+		var menuDetailsTemplate =
 
-		var keys;
+			'<details id=detailsTemplate open >' +
 
-		if ( !COR.place ) { COR.place = {}; }
+				'<summary id=menuSummaryTemplate ><h3>Template</h3></summary>' +
 
-		COR.place.objectName = 'place';
+				'<p id=pTemplate >' +
 
-		keys = Object.keys( COR.defaults ); 
+					'<button onclick=alert("Howdy!"); > button </button>' + b +
 
-		for ( var i = 0; i < keys.length; i++ ) {
+					COR.txt +
 
-			COR.place[ keys[ i ] ] = COR.place[ keys[ i ] ] || COR.defaults[ keys[ i ] ];
+			'</p>' +
 
-		}
+			'</details>' +
 
-//		COR.place.mapTypes = COR.defaults.mapTypes; 
+		b;
+
+		return menuDetailsTemplate;
 
 	};
 
@@ -375,36 +357,36 @@
 
 	COR.getMenuDetailsObjectProperties = function( obj ) {
 
-
-//		var props = COR.getObjectProperties( obj );
+		obj = obj || COR.defaults;
 
 		var menuDetailsObjectProperties =
 
-			'<details open > ' +
+			'<details> ' +
 
-				'<summary><h3>Object Properties ' + ( obj.name || '' ) + ' </h3></summary>' +
+				'<summary id=MenuSummaryObjectProperties ><h3>Object Properties: ' + ( obj.objectName || '' ) + ' </h3></summary>' +
 
 				'<p>' +
 					'<button onclick=properties.innerHTML=COR.getObjectProperties(COR.place); >Get place properties</button> ' +
 					'<button onclick=properties.innerHTML=COR.getObjectProperties(); >Get defaults</button> ' +
 				'</p>' +
 
-				'<p id=properties ></p>' +
+				'<p id=properties ></p>' + b +
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsObjectProperties;
 
 	};
 
 
+// utils
 
 	COR.getObjectProperties = function( obj ) {
 
-		obj = obj || COR.defaults;
 		var keys, txt;
+		obj = obj || COR.defaults;
 
 		keys = Object.keys( obj );
 
@@ -416,9 +398,30 @@
 
 		}
 
+		MenuSummaryObjectProperties.innerHTML = '<h3>Object Properties: ' + ( obj.objectName || '' ) + '</h3>';
+
 		return '<table>' + txt + '</table>';
 
 	}
+
+
+
+	COR.getPlaceDefaults = function() {
+
+		var keys;
+
+		if ( !COR.place ) { COR.place = {}; }
+
+		keys = Object.keys( COR.defaults ); 
+
+		for ( var i = 0; i < keys.length; i++ ) {
+
+			COR.place[ keys[ i ] ] = COR.place[ keys[ i ] ] || COR.defaults[ keys[ i ] ];
+
+		}
+
+	};
+
 
 
 // http://stackoverflow.com/questions/1669190/javascript-min-max-array-values

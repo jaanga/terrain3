@@ -39,7 +39,8 @@
 
 		for ( var i = 2, j = 0; j < place.elevations.length; i += 3, j++ ) {
 
-			vertices[ i ] = place.elevations[ j ]  * place.verticalScale / 111111;
+//			vertices[ i ] = place.elevations[ j ] * place.verticalScale / 111111;
+			vertices[ i ] = place.elevations[ j ] / 111111;
 
 		}
 
@@ -139,6 +140,7 @@ console.timeEnd( 'timer0' );
 
 		MAP.mesh = new THREE.Mesh( MAP.geometry, MAP.material );
 		MAP.mesh.position.set( MAP.cenLon, 0, -MAP.cenLat );
+		MAP.mesh.scale.y = COR.place.verticalScale;
 		MAP.mesh.name = COR.place.origin;
 		THR.scene.add( MAP.mesh );
 
@@ -159,9 +161,6 @@ console.timeEnd( 'timer0' );
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
 
-//KML.drawPath();
-
-//		THR.toggleFog( true );
-
 	}
+
 

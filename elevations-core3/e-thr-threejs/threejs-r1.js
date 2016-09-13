@@ -105,6 +105,7 @@
 //			case 32: THR.controls.autoRotate = !THR.controls.autoRotate;  break; // space bar
 
 			case 32: TERchkRotate.click();  break; // space bar
+
 		}
 
 	}

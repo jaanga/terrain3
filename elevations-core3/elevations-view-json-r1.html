@@ -35,11 +35,11 @@
 <script src=./e-thr-threejs/threejs-r1.js ></script>
 <script src=./f-map-map/map-r2.js ></script>
 <script src=./g-msh-mesh-lines/mesh-lines-r1.js ></script>
-<script src=./h-kml2-kml/kml-r2.js ></script>
+<script src=./h-kml-kml/kml-r2.js ></script>
 <script>
 
 
-//	SEL.defaultFile = '../../elevations/elevations-data-oakland-gran-fondo/oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.txt';
+	SEL.defaultFile = '../elevations/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
 
 	SEL.searchInFolder = 'elevations-data-path-json/';
 //	SEL.extension = '.txt';
@@ -68,6 +68,8 @@
 			OVR.getMenuDetailsOverlay() +
 
 			TER.getMenuDetailsTerrain() +
+
+			COR.getMenuDetailsObjectProperties( COR.defaults ) +
 
 			COR.getMenuDetailsAbout() +
 

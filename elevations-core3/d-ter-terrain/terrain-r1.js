@@ -1,13 +1,7 @@
 // Copyright &copy; 2016 Jaanga authors. MIT License
 
 	var TER = TER || {};
-/*
-	TER.onLoad = function() {
 
-		return TER.getMenuDetailsTerrain();
-
-	};
-*/
 
 	TER.getMenuDetailsTerrain = function() {
 
@@ -24,7 +18,7 @@
 					'Vertical scale: <output id=TERoutVertical >' + COR.defaults.verticalScale + '</output>' +
 //					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + ' oninput=updateTerrain() title="" style=width:100%; >' +
 					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + 
-						' onchange=TERoutVertical.value=COR.place.verticalScale=parseFloat(this.value);MAP.initMapGeometry(); title="" style=width:100%; >' +
+						' onchange=TER.TERinpVerticalOnChange(); title="" style=width:100%; >' +
 
 				'</p>' +
 
@@ -62,7 +56,22 @@
 	}
 
 
+	TER.TERinpVerticalOnChange = function() {
 
+		COR.place.verticalScale = parseFloat( TERinpVertical.value );
+
+		TERoutVertical.value = COR.place.verticalScale;
+
+//		if ( MAP.initMapGeometry ) { MAP.initMapGeometry(); }
+		if ( MAP.drawMap ) { MAP.drawMap(); }
+
+		if ( THR.lineX ) { THR.lineX.scale.y = COR.place.verticalScale; }
+
+		if ( THR.line ) { THR.line.scale.y = COR.place.verticalScale; }
+		if ( THR.line2 ) { THR.line2.scale.y = COR.place.verticalScale; }
+		if ( THR.line3 ) { THR.line3.scale.y = COR.place.verticalScale; }
+
+	}
 
 	TER.setMenuDetailsTerrain = function() {
 
