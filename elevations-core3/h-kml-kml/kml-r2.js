@@ -30,6 +30,8 @@
 
 	};
 
+
+
 	KML.setVerticalScaleToOne = function() {
 
 		TERinpVertical.value = 1;
@@ -38,10 +40,11 @@
 
 	}
 
+
+
 	KML.setPathProperties = function() {
 
-//		var place, pp, ppoints, raycaster, up;
-
+//		var place, vertices, vertex, points, raycaster, up, collisions, distance;
 
 		THR.scene.remove( THR.lineX );
 
@@ -50,7 +53,7 @@
 		if ( !place.points ) { return; }
  
 		vertices = THR.line.geometry.vertices
-		ppoints = [];
+		points = [];
 
 		raycaster = new THREE.Raycaster();
 		up = v( 0, 1, 0 );
@@ -63,13 +66,10 @@
 			raycaster.set( v( vertex.x, 0, vertex.z ), up, 0, 1 );
 			collisions = raycaster.intersectObject( MAP.mesh );
 
-			pt = collisions.length ? collisions[ 0 ].distance : 0 ;
-
-			ppoints.push( v( vertex.x, pt, vertex.z ) );
+			vertex.y = collisions.length ? collisions[ 0 ].distance : 0 ;
+			points.push( vertex.x, -vertex.z, 111111 * vertex.y );
 
 			if ( i % 100 === 0 ) { 
-
-				pPathProperties.innerHTML = 'Completed ' + i + ' of ' + vertices.length; 
 
 				if (window.console) { console.log( 'Completed ' + i + ' of ' + vertices.length );
 
@@ -78,12 +78,15 @@
 		}
 
 
-console.log( '', ppoints.slice( 500, 520 ) );
+console.log( '', points.slice( 998, 1016 ) );
 
-		THR.lineX = getMeshLine( ppoints, 0xffff00, 0.0005 );
+		THR.lineX = getMeshLine( vertices, 0xffff00, 0.0005 );
 		THR.lineX.updateMatrixWorld();
 		THR.lineX.scale.y = COR.place.verticalScale;
 		THR.scene.add( THR.lineX );
+
+		place.points = points;
+
 	}
 
 
@@ -123,6 +126,7 @@ console.log( '', ppoints.slice( 500, 520 ) );
 		for ( var i = 0; i < place.points.length; i +=3 ) {
 
 			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale / 111111, -pp[ i + 1 ] ) );
+//			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, pp[ i + 1 ] ) );
 
 		} 
 
@@ -173,6 +177,7 @@ console.log( '', ppoints.slice( 500, 520 ) );
 	}
 
 
+// Called by Elevation Get
 
 	KML.getFile = function( url ) {
 
@@ -217,8 +222,9 @@ console.log( '', ppoints.slice( 500, 520 ) );
 
 			COR.place.points = coordinates; //.slice( 0,  );
 
-pp = COR.place.points;
-console.log( '', pp.slice( 0, 10 ) );
+			pp = COR.place.points;
+
+			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
 
 		}
 
