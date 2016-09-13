@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Elevations Core2 Camera Action Select R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-08-31' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
+<script src=../i-cas-camera-action-select/camera-action-select-r1.js ></script>
+<script>
+
+
+
+	init();
+
+	THR.getThreeJS();
+
+	THR.animate();
+
+	function init() {
+
+//		COR.taglineHeader = 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CAS.getMenuDetailsCameraActions() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+
+		THR.moreThreejsInits = function() {
+
+/*
+			var geometry, material
+
+			THR.renderer.setClearColor( COR.defaults.backgroundColor );
+			THR.updateCamera = true;
+
+			geometry = new THREE.BoxGeometry( 360, 2, 180 );
+			material = new THREE.MeshNormalMaterial();
+			THR.groundPlane = new THREE.Mesh( geometry, material );
+			THR.groundPlane.position.set( 0, -31, 0 );
+			THR.scene.add( THR.groundPlane );
+
+			THR.gridHelper = new THREE.GridHelper( 90, 10 );
+			THR.gridHelper.position.set( 0, -30, 0 );
+			THR.scene.add( THR.gridHelper );
+
+			THR.axisHelper = new THREE.AxisHelper( 90 );
+			THR.scene.add( THR.axisHelper );
+*/
+
+			var position, geometry, material;
+			var ground, gridHelper, line;
+
+			position = new THREE.Vector3( 200 * Math.random() - 100, 0, 200 * Math.random() - 100 );
+
+			geometry = new THREE.BoxGeometry( 100, 2, 100 );
+			material = new THREE.MeshNormalMaterial();
+			ground = new THREE.Mesh( geometry, material );
+			ground.position.set( position.x, -31, position.z );
+			THR.scene.add( ground );
+
+			gridHelper  = new THREE.GridHelper( 50, 10 );
+			gridHelper.position.set( position.x, -30, position.z );
+			THR.scene.add( gridHelper );
+
+			line = CAS.getNicePath();
+			line.geometry.applyMatrix( new THREE.Matrix4().makeTranslation( position.x, 0, position.z ) );
+			THR.scene.add( line );
+
+			line.geometry.computeBoundingSphere();
+
+			CAS.center = line.geometry.boundingSphere.center;
+			CAS.curve = new THREE.CatmullRomCurve3( line.geometry.vertices );
+
+			CAS.getActorCylinder();
+
+			CAS.cameraWorld();
+
+			CAS.animatePlusLookAt();
+
+//			motion = true;
+
+		};
+
+	}
+
+
+</script>
+</body>
+</html>

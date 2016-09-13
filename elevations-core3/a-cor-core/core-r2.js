@@ -79,8 +79,8 @@
 	COR.taglineHeader = 
 
 		'<p><small>' +
-			'Rotate|Zoom|Pan: 1|2|3 fingers/buttons' + b +
-			'Rotation: spacebar' +
+			'Rotate|Zoom|Pan => 1|2|3 finger/button' + b +
+			'Rotation => spacebar' +
 		'</small></p>';
 
 

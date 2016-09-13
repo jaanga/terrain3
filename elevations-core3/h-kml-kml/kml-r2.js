@@ -78,7 +78,7 @@
 		}
 
 
-console.log( '', points.slice( 998, 1016 ) );
+//console.log( '', points.slice( 998, 1016 ) );
 
 		THR.lineX = getMeshLine( vertices, 0xffff00, 0.0005 );
 		THR.lineX.updateMatrixWorld();
@@ -119,8 +119,6 @@ console.log( '', points.slice( 998, 1016 ) );
 		THR.scene.remove( THR.line, THR.line2, THR.line3 );
 
 		if ( !place.points ) { return; }
-
-console.log( 'place.verticalScale', place.verticalScale );
 
 		TERinpVertical.value = place.verticalScale;
 
@@ -180,7 +178,7 @@ console.log( 'place.verticalScale', place.verticalScale );
 
 		CAS.curve = THR.curve3;
 
-//		motion = true;
+		motion = true;
 
 	}
 

@@ -27,20 +27,20 @@
 
 		var geometry, material
 
-		THR.renderer.setClearColor( 0x7ec0ee );
+		THR.renderer.setClearColor( COR.defaults.backgroundColor );
 		THR.updateCamera = true;
 
-		geometry = new THREE.BoxGeometry( 100, 2, 100 );
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
 		material = new THREE.MeshNormalMaterial();
 		THR.groundPlane = new THREE.Mesh( geometry, material );
 		THR.groundPlane.position.set( 0, -31, 0 );
 		THR.scene.add( THR.groundPlane );
 
-		THR.gridHelper = new THREE.GridHelper( 50, 10 );
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
 		THR.gridHelper.position.set( 0, -30, 0 );
 		THR.scene.add( THR.gridHelper );
 
-		THR.axisHelper = new THREE.AxisHelper( 50 );
+		THR.axisHelper = new THREE.AxisHelper( 90 );
 		THR.scene.add( THR.axisHelper );
 
 	};
@@ -53,7 +53,7 @@
 
 	function init() {
 
-		COR.taglineHeader = 'Howdy!' + b;
+//		COR.taglineHeader = 'Three.js Howdy! &rarr;' + b;
 
 		COR.initLeftMenu();
 
@@ -70,9 +70,6 @@
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
 	}
-
-
-
 
 
 </script>

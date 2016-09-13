@@ -31,7 +31,7 @@
 		THR.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( THR.renderer.domElement );
 
-		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 200 );
+		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 3 );
 		THR.camera.position.set( 100, 100, 100 );
 
 		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
