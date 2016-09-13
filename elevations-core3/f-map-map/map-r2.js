@@ -147,7 +147,7 @@ console.timeEnd( 'timer0' );
 		MAP.boxHelper = new THREE.BoxHelper( MAP.mesh, 0xff0000 );
 		MAP.boxHelper.name = 'boxHelper';
 		THR.scene.add( MAP.boxHelper );
-//		MAP.boxHelper.visible = TERchkBoxHelper.checked;
+		MAP.boxHelper.visible = TERchkBoxHelper.checked;
 
 		geometry = new THREE.PlaneBufferGeometry( 3, 3 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
@@ -160,7 +160,7 @@ console.timeEnd( 'timer0' );
 		THR.scene.add( MAP.groundPlane );
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
-
+		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
 	}
 
 

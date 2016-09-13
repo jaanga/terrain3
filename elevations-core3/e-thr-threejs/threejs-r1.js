@@ -54,7 +54,7 @@
 
 	THR.viewObject = function( mesh ) {
 
-		var radius, center, cameraPosition;
+		var cameraPosition;
 
 		mesh.updateMatrixWorld();
 		mesh.geometry.computeBoundingSphere();
@@ -78,7 +78,7 @@
 		if ( checked === true ) {
 
 //			THR.scene.fog = new THREE.Fog( 0x7ec0ee, COR.place.fogNear, COR.place.fogFar );
-			THR.scene.fog = new THREE.Fog( 0x7ec0ee, 2 * THR.radius, 4 * THR.radius );
+			THR.scene.fog = new THREE.Fog( COR.defaults.backgroundColor, 2 * THR.radius, 4 * THR.radius );
 
 		} else {
 
