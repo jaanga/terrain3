@@ -11,7 +11,7 @@
 "plainOpacity":0.5,
 "tilesX":7,
 "tilesY":5,
-"verticalScale":1,
+"verticalScale":5,
 "zoom":13,
 "kmlFile":"https://jaanga.github.io/terrain3/data-path-kml/oakland-gran-fondo-55.kml",
 "vicinity":"oakland-gran-fondo-55",

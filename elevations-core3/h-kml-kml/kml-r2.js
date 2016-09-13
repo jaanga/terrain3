@@ -119,13 +119,18 @@ console.log( '', points.slice( 998, 1016 ) );
 		THR.scene.remove( THR.line, THR.line2, THR.line3 );
 
 		if ( !place.points ) { return; }
- 
+
+console.log( 'place.verticalScale', place.verticalScale );
+		TERinpVertical.value = place.verticalScale;
+
+		TER.TERinpVerticalOnChange();
+
 		pp = place.points;
 		points = [];
 
 		for ( var i = 0; i < place.points.length; i +=3 ) {
 
-			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale / 111111, -pp[ i + 1 ] ) );
+			points.push( v( pp[ i ], pp[ i + 2 ] / 111111, -pp[ i + 1 ] ) );
 //			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, pp[ i + 1 ] ) );
 
 		} 
@@ -136,6 +141,7 @@ console.log( '', points.slice( 998, 1016 ) );
 
 		material = new THREE.LineBasicMaterial( { color: 0xff00ff } );
 		THR.line = new THREE.Line( geometry, material);
+		THR.line.scale.y = COR.place.verticalScale;
 		THR.line.name = 'path';
 
 		THR.scene.add( THR.line );
@@ -153,6 +159,7 @@ console.log( '', points.slice( 998, 1016 ) );
 		THR.line2 = getMeshLine( spacedPoints, 0x00ff00, 0.0005 );
 
 		THR.line2.updateMatrixWorld();
+		THR.line2.scale.y = COR.place.verticalScale;
 		THR.scene.add( THR.line2 );
 
 		THR.curve2 = new THREE.CatmullRomCurve3( spacedPoints );
@@ -165,7 +172,7 @@ console.log( '', points.slice( 998, 1016 ) );
 //		THR.line3 = getMeshLine( spacedPoints, 0x00ff00, 0.01 );
 
 		THR.line3.updateMatrixWorld();
-
+		THR.line3.scale.y = COR.place.verticalScale;
 		THR.scene.add( THR.line3 );
 
 		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
