@@ -394,7 +394,7 @@ console.log( 'complete count', count, elevations.length );
 
 				if ( COR.place.latitude ) {
 
-					CLK.setCenterInit(  COR.place.latitude, COR.place.longitude );
+					CLK.setCenter(  COR.place.latitude, COR.place.longitude );
 
 				}
 
