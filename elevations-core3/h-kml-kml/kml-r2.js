@@ -121,6 +121,7 @@ console.log( '', points.slice( 998, 1016 ) );
 		if ( !place.points ) { return; }
 
 console.log( 'place.verticalScale', place.verticalScale );
+
 		TERinpVertical.value = place.verticalScale;
 
 		TER.TERinpVerticalOnChange();
