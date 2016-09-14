@@ -59,7 +59,7 @@
 
 		CAS.cameraOffsetChase = v( -0.02, 0.05, -0.02 );
 		CAS.cameraOffsetInside = v( -0.001, 0.005, -0.01 );
-		CAS.cameraOffsetTrack = v( -0.5, 0.3, 0 );
+		CAS.cameraOffsetTrack = v( -0.5, 0.2, 0 );
 		CAS.cameraOffsetWorld = v( 0, 0.35, 0.35 );
 
 		COR.initLeftMenu();
@@ -131,14 +131,7 @@
 
 			CAS.getActorBitmap( SEL.urlBase + 'logo-beb-main-site.png' );
 
-//			CAS.center = THR.controls.target.clone();
-
-//			CAS.cameraTrack();
-//			CAS.cameraWorld();
-
 			CAS.animatePlusLookAt();
-
-//			motion = true;
 
 		};
 
@@ -149,6 +142,10 @@
 		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
+
+console.log( 'pts', COR.place.points.length );
+
+
 
 		OVR.setMenuDetailsOverlay();
 

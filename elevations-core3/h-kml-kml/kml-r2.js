@@ -143,7 +143,7 @@
 		THR.line.scale.y = COR.place.verticalScale;
 		THR.line.name = 'path';
 
-		THR.scene.add( THR.line );
+//		THR.scene.add( THR.line );
 
 		THR.curve1 = new THREE.CatmullRomCurve3( THR.line.geometry.vertices );
 		THR.curve1.closed = false;
@@ -159,7 +159,7 @@
 
 		THR.line2.updateMatrixWorld();
 		THR.line2.scale.y = COR.place.verticalScale;
-		THR.scene.add( THR.line2 );
+//		THR.scene.add( THR.line2 );
 
 		THR.curve2 = new THREE.CatmullRomCurve3( spacedPoints );
 
@@ -167,14 +167,18 @@
 		geometry.vertices = THR.curve2.getSpacedPoints( 2000 );
 		material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
 
-		THR.line3 = new THREE.Line( geometry, material );
-//		THR.line3 = getMeshLine( spacedPoints, 0x00ff00, 0.01 );
+//		THR.line3 = new THREE.Line( geometry, material );
+//		THR.line3 = getMeshLine( spacedPoints, 0xffff00, 0.0002 );
+		THR.line3 = getMeshLine( geometry.vertices, 0xffff00, 0.0003 );
+
 
 		THR.line3.updateMatrixWorld();
 		THR.line3.scale.y = COR.place.verticalScale;
+		THR.line3.position.y += 0.001;
 		THR.scene.add( THR.line3 );
 
-		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
+//		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
+		THR.curve3 = new THREE.CatmullRomCurve3( geometry.vertices  );
 
 		CAS.curve = THR.curve3;
 

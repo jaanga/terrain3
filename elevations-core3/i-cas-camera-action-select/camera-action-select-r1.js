@@ -105,6 +105,13 @@
 
 	CAS.cameraTrack = function() {
 
+		CAS.offsetStart = 0;
+		CAS.offsetEnd = 1;
+
+		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
+		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
+
+
 		THR.controls.autoRotate = false;
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
@@ -264,7 +271,7 @@
 
 		index += dd;
 
-		index = index <= 1 ? index : dd;
+		index = index <= CAS.offsetEnd ? index : dd + CAS.offsetStart;
 
 		CAS.actor.position.copy( CAS.curve.getPoint( index - dd ) );
 
