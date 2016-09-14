@@ -128,9 +128,12 @@
 
 	COR.onLeftMenuLoaded = function (){};
 
+
+
+
 	COR.initThreeColumns = function() {
 
-		COR.getCSS();
+		COR.getCSSThreeColomns();
 
 		COR.menu = document.body.appendChild( document.createElement( 'div' ) );
 		COR.menu.id = 'menu';
@@ -206,7 +209,7 @@
 
 	}
 
-	COR.getCSS = function() {
+	COR.getCSSThreeColomns = function() {
 
 		var css;
 
@@ -219,7 +222,7 @@
 
 			'button, input[type=button] { background-color: #ccc; border: 2px #fff solid; color: #322; }' +
 
-			'h2, h1 { margin: 0 }' +
+			'h2, h1 { margin: 0; }' +
 
 			'iframe { width: 100%; }' +
 
@@ -257,7 +260,6 @@
 		var menuDetailsHeader =
 
 			'<h3>' +
-
 				'<a href=http://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo; ' +
 				'<a href=http://jaanga.github.io/terrain3/ title="your happy mappy place" > Terrain3 </a> &raquo; ' + 
 			'</h3>' +

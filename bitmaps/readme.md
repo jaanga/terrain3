@@ -14,6 +14,8 @@ Images or bitmap files used as heightmaps and/or overlays by the various Terrain
 
 There's nothing much to play with here.
 
+But instead of text, there should be a gallery here...
+
 
 ## Two samples
 
