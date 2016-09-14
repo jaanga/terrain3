@@ -25,7 +25,7 @@ But instead of text, there should be a gallery here...
 _Elevations.jpg - 2048x1024 pixels - a typical file_
 
 
-<img src="bathymetry_bw_composite_2k.png" width="500px" >
+<img src="https://jaanga.github.io/terrain3/bitmaps/bathymetry_bw_composite_2k.png" width="500px" >
 
 _bathymetry_bw_composite_2k.png_
 
