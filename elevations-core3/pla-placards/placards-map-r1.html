@@ -2,11 +2,11 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View JSON R1</title>
+<title>Elevations Core3 Placards Map R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-09-07' >
+<meta name=date content='2016-09-12' >
 </head>
 <body>
 <!--
@@ -17,34 +17,23 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
-<script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
 
-<!--
-<script src=../../elevations-core2/cor-core/core-r1.js ></script>
-<script src=../../elevations-core2/sel-select/select-r1.js ></script>
-<script src=../../elevations-core2/ovr-overlay/overlay-r1.js ></script>
-<script src=../../elevations-core2/ter-terrain/terrain-r1.js ></script>
-<script src=../../elevations-core2/thr-threejs/threejs-r1.js ></script>
-<script src=../../elevations-core2/map-map/map-r1.js ></script>
--->
-
-<script src=./a-cor-core/core-r2.js ></script>
-<script src=./b-sel-select/select-r1.js ></script>
-<script src=./c-ovr-overlay/overlay-r1.js ></script>
-<script src=./d-ter-terrain/terrain-r1.js ></script>
-<script src=./e-thr-threejs/threejs-r1.js ></script>
-<script src=./f-map-map/map-r2.js ></script>
-<script src=./g-msh-mesh-lines/mesh-lines-r1.js ></script>
-<script src=./h-kml-kml/kml-r2.js ></script>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../b-sel-select/select-r1.js ></script>
+<script src=../c-ovr-overlay/overlay-r1.js ></script>
+<script src=../d-ter-terrain/terrain-r1.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
+<script src=../f-map-map/map-r2.js ></script>
+<script src=../pla-placards/placards-r1.js ></script>
 <script>
-
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.defaultFile = '../elevations/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
+	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+//	SEL.defaultFile; // if no default, select a random file
 
-	SEL.searchInFolder = 'elevations-data-path-json/';
-//	SEL.extension = '.txt';
+	SEL.searchInFolder = 'elevations-data-04/';
+	SEL.extension = '.json';
 
 //	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
@@ -94,30 +83,41 @@
 
 		THR.moreThreejsInits = function() {
 
-			THR.renderer.setClearColor( 0x7ec0ee );
+			THR.renderer.setClearColor( COR.defaults.backgroundColor );
 			THR.updateCamera = true;
 
 			THR.axisHelper = new THREE.AxisHelper( 50 );
 			THR.scene.add( THR.axisHelper );
 
-//			THR.toggleFog( true );
+
+			TERchkAxisHelper.checked = false;
+			TERchkBoxHelper.checked = false;
+			TERchkFog.checked = true;
 
 		};
 
 	}
+
 
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
+/*
+		p = COR.place;
 
+		p.placards = [
+
+			['Hello, world!', 0.001, 120, 0, 0.1, 0, -122.398, 0, 37.796 ],
+			['Mount Diablo', 0.001, 120, 0, 0.1, 0, -121.9142, 0, 37.8816],
+			['Mount Tamalpais', 0.001, 120, 0, 0.1, 0, -122.596, 0, 37.9235 ]
+
+		];
+*/
 		OVR.setMenuDetailsOverlay();
 
 		MAP.initMapGeometry();
-
-		KML.drawPath();
-
 
 	}
 

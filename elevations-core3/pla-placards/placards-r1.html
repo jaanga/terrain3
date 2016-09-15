@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Core2 Placards R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-08-31' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
+<script src=../pla-placards/placards-r1.js ></script>
+<script>
+
+	THR.cameraNear = 1;
+	THR.cameraFar = 2000;
+
+	THR.moreThreejsInits = function() {
+
+		var geometry, material
+
+
+		THR.updateCamera = true;
+
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+
+		THR.axisHelper = new THREE.AxisHelper( 90 );
+		THR.scene.add( THR.axisHelper );
+
+		PLA.drawPlacePlacards( 'a', 23, 44 );
+
+//		THR.controls.autoRotate = true;
+
+	};
+
+	init();
+
+	THR.getThreeJS();
+
+	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		COR.getPlaceDefaults();
+
+		p = COR.place;
+
+		p.placards = [
+
+			['Hello, world!', 0.1, 120, 0, 40, 0, 35, 0, 30 ],
+			['Thing 2!', 0.1, 120, 0, 40, 0, -22, 0, 10 ],
+			['Thing 3!', 0.1, 120, 0, 40, 0, -35, 0, -30 ]
+
+		];
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
+
+	}
+
+
+</script>
+</body>
+</html>

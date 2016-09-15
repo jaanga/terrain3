@@ -14,6 +14,9 @@
 	var DAT = {};
 	var ELV = {};
 
+	var PLA = {};
+	var SAV = {};
+
 
 // !!!
 
@@ -83,6 +86,7 @@
 			'Rotation => spacebar' +
 		'</small></p>';
 
+	COR.linkReadMe = 'https://jaanga.github.io/terrain3/index.html#elevations-core3';
 
 	COR.aboutCredits = '<p>Thank you <a href=https://developer.github.com/v3/ > GitHub API </a> ';
 //					'<a href=http://threejs.org target="_blank">Mr.doob.</a></p>' +
@@ -266,7 +270,7 @@
 			'<h2>' +
 				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
 //				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
-				'<a href=../../../index.html#sandbox/elevations-view-oakland-gran-fondo onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
+				'<a href=' + COR.linkReadMe + ' onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
 
 			'</h2>' +
 

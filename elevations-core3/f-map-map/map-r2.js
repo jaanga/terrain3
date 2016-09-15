@@ -162,6 +162,12 @@ console.timeEnd( 'timer0' );
 
 		}
 
+		if ( COR.place.placards ) {
+
+			PLA.drawPlacePlacards();
+
+		}
+
 	}
 
 

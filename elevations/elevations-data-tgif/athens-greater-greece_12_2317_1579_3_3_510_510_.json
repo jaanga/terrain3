@@ -27,4 +27,8 @@
 "611"],
 "samplesX":510,
 "samplesY":510,
+"placards" : [ 
+["Hotel Electra Athens", 0.00003, 120, 0, 0.03, 0, 23.7301361, 0, 37.9747379 ],
+["Parthenon", 0.00003, 120, 0, 0.02, 0, 23.7267, 0, 37.9715 ]
+ ],
 "fileName":"5 ermou street, 10563 athens, greece_12_2317_1579_3_3_510_510_.json"}

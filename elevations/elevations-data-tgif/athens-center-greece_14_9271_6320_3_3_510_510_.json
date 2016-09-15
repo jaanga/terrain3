@@ -6,7 +6,7 @@
 "longitude":23.7319278717041,
 "mapTypeId":"hybrid",
 "objectName":"defaults",
-"origin":"Tenzing-Hillary Airport, Lukla, Nepal",
+"origin":"Hotel Electra Athens",
 "pixelsPerTile":256,
 "plainOpacity":0.5,
 "tilesX":3,
@@ -27,4 +27,8 @@
 "2",
 "10",
 "153"],
-"fileName":"tenzing-hillary airport, lukla, nepal_14_9271_6320_3_3_510_510_.json"}
+"placards" : [ 
+["Hotel Electra Athens", 0.00002, 120, 0, 0.01, 0, 23.7301361, 0, 37.9747379 ],
+["Parthenon", 0.00002, 120, 0, 0.01, 0, 23.7267, 0, 37.9715 ]
+ ],
+"fileName":"athens-center-greece_14_9271_6320_3_3_510_510_.json"}

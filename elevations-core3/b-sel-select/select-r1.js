@@ -97,12 +97,10 @@
 			file = SEL.defaultFile ? SEL.defaultFile : SEL.urlBase + SELselFiles.value;
 
 			SELselFiles.selectedIndex = SEL.defaultFile ? -1 : SELselFiles.selectedIndex;
-console.log( 'file', file );
+
 			SEL.getJSONFileXHR( file );
 
 		}
-
-
 
 	}
 
