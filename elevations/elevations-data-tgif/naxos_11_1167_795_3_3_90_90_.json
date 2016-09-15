@@ -24,4 +24,8 @@
 "resolutions":["611"],
 "samplesX":90,
 "samplesY":90,
+"placards" : [ 
+["Naxos Resort Beach Hotel", 0.0001, 120, 0, 0.05, 0, 25.3742703, 0, 37.098476 ],
+["Naxos Island", 0.0001, 120, 0, 0.05, 0, 25.400390625, 0, 37.09020737405244 ]
+ ],
 "fileName":"naxos_11_1167_795_3_3_90_90_.json"}
