@@ -28,19 +28,23 @@
 <script src=../g-msh-mesh-lines/mesh-lines-r1.js ></script>
 <script src=../h-kml-kml/kml-r2.js ></script>
 
+<!--
 <script src=../../google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
+-->
+<script src=http://jaanga.github.io/terrain3/google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
+
 <script>
 
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	SEL.defaultFile = '../../elevations/elevations-data-path-json/oakland-gran-fondo-55_12_657_1582_3_3_30_30_.json';
-	SEL.defaultFile = '../../elevations/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
+//	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	SEL.defaultFile; // if no default, select a random file
 
 	SEL.searchInFolder = 'elevations-data-path-json/';
-//	SEL.extension = '.txt';
+	SEL.extension = '.json';
 
-	SEL.urlBase = '../../elevations/' + SEL.searchInFolder;
-//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
-
+//	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
 	init();
 
@@ -107,7 +111,7 @@
 		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
-console.log( 'svs', COR.place.verticalScale );
+
 		OVR.setMenuDetailsOverlay();
 
 		MAP.initMapGeometry();

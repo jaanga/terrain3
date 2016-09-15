@@ -25,9 +25,9 @@
 
 			COR.getMenuDetailsHeader() +
 
-			COR.getMenuDetailsTemplate() +
-
 			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsTemplate() +
 
 			COR.getMenuDetailsAbout() +
 
@@ -36,6 +36,10 @@
 		b;
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		CORdetailsObjectProperties.setAttribute( 'open', 'open' );
+
+		CORdetailsTemplate.removeAttribute( 'open' );
 
 	}
 

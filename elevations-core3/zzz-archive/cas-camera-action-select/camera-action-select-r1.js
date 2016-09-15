@@ -105,10 +105,26 @@
 
 	CAS.cameraTrack = function() {
 
+		CAS.offsetStart = 0;
+		CAS.offsetEnd = 1;
+
+		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
+		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
+
 		THR.controls.autoRotate = false;
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
-		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+
+		if ( MAP.mesh ) {
+
+			THR.viewObject( MAP.mesh );
+
+		} else {
+
+			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+
+		}
+
 		THR.controls.target.copy( CAS.center.clone() );
 		target = CAS.actor.position;
 		THR.controls.target.copy( target );
@@ -122,7 +138,17 @@
 		THR.controls.autoRotate = false;
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
-		THR.camera.position.copy( CAS.cameraOffsetWorld );
+
+		if ( MAP.mesh !== undefined ) {
+
+//			THR.viewObject( MAP.mesh );
+
+		} else {
+
+			THR.camera.position.copy( CAS.cameraOffsetWorld );
+
+		}
+
 		target = CAS.center.clone();
 		THR.controls.target.copy( target );
 		follow = false;
@@ -242,7 +268,7 @@
 
 	CAS.animatePlusLookAt = function() {
 
-		var point, dd;
+		var point, delta;
 
 		THR.stats.update();
 
@@ -254,13 +280,13 @@
 
 		if ( !motion ) { return; }
 
-		dd = CAS.cameraPoints / 250000;
+		delta = CAS.cameraPoints / 250000;
 
-		index += dd;
+		index += delta;
 
-		index = index <= 1 ? index : dd;
+		index = index <= CAS.offsetEnd ? index : delta + CAS.offsetStart;
 
-		CAS.actor.position.copy( CAS.curve.getPoint( index - dd ) );
+		CAS.actor.position.copy( CAS.curve.getPoint( index - delta ) );
 
 		CAS.actor.lookAt( CAS.curve.getPoint( index ) );
 
@@ -269,7 +295,5 @@
 			THR.controls.target.copy( target );
 
 		}
-
-//		if ( index > 0.03 ) motion = false;
 
 	}

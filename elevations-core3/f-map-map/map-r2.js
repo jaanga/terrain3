@@ -2,14 +2,6 @@
 	var MAP = MAP || {};
 
 
-	MAP.onLoadJSONFile = function() {
-
-//		MAP.initMapGeometry();
-
-	}
-
-
-
 	MAP.initMapGeometry = function() {
 
 		var place = COR.place;
@@ -132,6 +124,8 @@ console.timeEnd( 'timer0' );
 
 	}
 
+
+
 	MAP.drawMap = function() {
 
 		var geometry, material;
@@ -165,6 +159,7 @@ console.timeEnd( 'timer0' );
 
 			CAS.center = MAP.mesh.position.clone(); 
 			CAS.cameraTrack();
+
 		}
 
 	}

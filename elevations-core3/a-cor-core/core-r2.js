@@ -335,11 +335,11 @@
 
 		var menuDetailsTemplate =
 
-			'<details id=detailsTemplate open >' +
+			'<details id=CORdetailsTemplate open >' +
 
-				'<summary id=menuSummaryTemplate ><h3>Template</h3></summary>' +
+				'<summary id=CORmenuSummaryTemplate ><h3>Template</h3></summary>' +
 
-				'<p id=pTemplate >' +
+				'<p id=CORpTemplate >' +
 
 					'<button onclick=alert("Howdy!"); > button </button>' + b +
 
@@ -363,16 +363,16 @@
 
 		var menuDetailsObjectProperties =
 
-			'<details> ' +
+			'<details id=CORdetailsObjectProperties > ' +
 
-				'<summary id=MenuSummaryObjectProperties ><h3>Object Properties: ' + ( obj.objectName || '' ) + ' </h3></summary>' +
+				'<summary id=summaryObjectProperties ><h3>Object Properties: ' + ( obj.objectName || '' ) + ' </h3></summary>' +
 
 				'<p>' +
-					'<button onclick=properties.innerHTML=COR.getObjectProperties(COR.place); >Get place properties</button> ' +
-					'<button onclick=properties.innerHTML=COR.getObjectProperties(); >Get defaults</button> ' +
+					'<button onclick=pProperties.innerHTML=COR.getObjectProperties(COR.place); >Get place properties</button> ' +
+					'<button onclick=pProperties.innerHTML=COR.getObjectProperties(); >Get defaults</button> ' +
 				'</p>' +
 
-				'<p id=properties ></p>' + b +
+				'<p id=pProperties ></p>' + b +
 
 			'</details>' +
 
@@ -400,7 +400,7 @@
 
 		}
 
-		MenuSummaryObjectProperties.innerHTML = '<h3>Object Properties: ' + ( obj.objectName || '' ) + '</h3>';
+		summaryObjectProperties.innerHTML = '<h3>Object Properties: ' + ( obj.objectName || '' ) + '</h3>';
 
 		return '<table>' + txt + '</table>';
 

@@ -34,6 +34,7 @@
 
 				'<p>' +
 					'Map overlay quality' + b +
+					'<small>+ number: better quality but slower</small>' +
 					'<select id=OVRselMapZoom onchange=OVR.getMapOverlayParameters();MAP.drawMapOverlay(); ></select> + zoom level</p>' + b +
 
 				'<details id=detailsOverlayParameters >' +

@@ -15,6 +15,9 @@
 
 	var THR = THR || {};
 
+	THR.cameraNear = 0.001;
+	THR.cameraFar = 2;
+
 	THR.getThreeJS = function() {
 
 		var ground, gridHelper, axisHelper;
@@ -26,16 +29,16 @@
 		THR.stats.domElement.style.display = window.innerWidth < 500 ? 'none' : '';
 
 		THR.renderer = new THREE.WebGLRenderer( {  alpha: 1, antialias: true }  );
-//		THR.renderer.setClearColor( 0xf0f0f0 );
+		THR.renderer.setClearColor( COR.defaults.backgroundColor );
 //		THR.renderer.setPixelRatio( window.devicePixelRatio );
 		THR.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( THR.renderer.domElement );
 
-		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 2 );
+		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, THR.cameraNear, THR.cameraFar );
 		THR.camera.position.set( 100, 100, 100 );
 
 		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
-//		THR.controls.maxDistance = 800;
+		THR.controls.maxDistance = 800;
 //		THR.controls.autoRotate = true;
 
 		THR.scene = new THREE.Scene();
@@ -102,9 +105,9 @@
 
 		switch( event.keyCode ) {
 
-//			case 32: THR.controls.autoRotate = !THR.controls.autoRotate;  break; // space bar
+			case 32: THR.controls.autoRotate = !THR.controls.autoRotate;  break; // space bar
 
-			case 32: TERchkRotate.click();  break; // space bar
+//			case 32: TERchkRotate.click();  break; // space bar
 
 		}
 

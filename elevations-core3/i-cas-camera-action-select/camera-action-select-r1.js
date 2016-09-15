@@ -1,12 +1,13 @@
 
 	var CAS = CAS || {};
 
-	CAS.onLoad = function() {
+	CAS.marker = 'Marker';
 
-		return CAS.getMenuDetailsCameraActions();
+	CAS.offsetStart = 0;
+	CAS.offsetEnd = 1;
 
-	};
-
+//		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
+//		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
 
 	CAS.actor = new THREE.Object3D();
 	CAS.cameraPoints = 25;
@@ -37,35 +38,40 @@
 
 		var menuDetailsCameraActions =
 
-			'<details open>' +
+			'<details id=detailsMarkerActions open>' +
 
-				'<summary><h3>Ride settings</h3></summary>' +
+				'<summary id=summaryCameraActions ><h3>' + CAS.marker + ' settings</h3></summary>' +
 
 // slide to move actor to desired position
 
-
-				'<p><input type=checkbox id=CASchkMotion onclick=motion=!motion checked >Cyclist <i>en route</i></p>' +
+				'<p><input type=checkbox id=CASchkMotion onclick=motion=!motion checked >' + CAS.marker +  ' <i>en route</i></p>' +
 
 				'<p>' +
-					'Cyclist speed: <output id=CHKoutSpeed >' + CAS.cameraPoints + '</output><br>' +
+					CAS.marker + ' speed: <output id=CHKoutSpeed >' + CAS.cameraPoints + '</output><br>' +
 					'<input type=range id=CASinpSpeed min=0 max=100 step=1 value=' + CAS.cameraPoints + 
 						' oninput=CHKoutSpeed.value=CAS.cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
 				'</p>' +
 
+			'</details>' +
+
+			'<details id=detailsCameraActions open>' +
+
+				'<summary id=summaryCameraActions ><h3>Camera settings</h3></summary>' +
 
 				'<p><button onclick=CAS.cameraChase(); >camera chase</button><br>' +
-					'Camera fixed a distance from actor, follows actor position and rotation' +
+					'<small>Camera fixed a distance from actor, follows actor position and rotation</small>' +
 				'</p>' +
 
 				'<p><button onclick=CAS.cameraInside(); >camera inside</button><br>' +
-					'Camera fixed inside actor, follows a point just ahead of the actor' +
+					'<small>Camera fixed inside actor, follows a point just ahead of the actor</small>' +
 				'</p>' +
 
 				'<p><button onclick=CAS.cameraTrack(); >camera track</button><br>' +
-					'Camera fixed at position on ground, follows actor</p>' +
+					'<small>Camera fixed at position on ground, follows actor</small>' +
+				'</p>' +
 
 				'<p><button onclick=CAS.cameraWorld(); >camera world</button><br>' +
-					'Camera fixed at position in the air, follows nothing</p>' +
+					'<small>Camera fixed at position in the air, follows nothing</small></p>' + b +
 
 			'</details>';
 
@@ -105,20 +111,20 @@
 
 	CAS.cameraTrack = function() {
 
-		CAS.offsetStart = 0;
-		CAS.offsetEnd = 1;
-
-		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
-		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
-
-
 		THR.controls.autoRotate = false;
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
 
-		THR.viewObject( MAP.mesh );
+		if ( MAP.mesh ) {
 
-//		THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+			THR.viewObject( MAP.mesh );
+
+		} else {
+
+			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+
+		}
+
 		THR.controls.target.copy( CAS.center.clone() );
 		target = CAS.actor.position;
 		THR.controls.target.copy( target );
@@ -133,9 +139,15 @@
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
 
-		THR.viewObject( MAP.mesh );
+		if ( MAP.mesh !== undefined ) {
 
-//		THR.camera.position.copy( CAS.cameraOffsetWorld );
+			THR.viewObject( MAP.mesh );
+
+		} else {
+
+			THR.camera.position.copy( CAS.cameraOffsetWorld );
+
+		}
 		target = CAS.center.clone();
 		THR.controls.target.copy( target );
 		follow = false;
@@ -282,7 +294,5 @@
 			THR.controls.target.copy( target );
 
 		}
-
-//		if ( index > 0.03 ) motion = false;
 
 	}

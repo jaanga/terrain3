@@ -4,16 +4,27 @@
 <meta charset=utf-8 >
 <title>Elevations Core3 Select R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Core
-' >
+<meta name=description content='Core use GitHuB API to get file names and folders from GitHub Server. A remote LS or DIR service.' >
 <meta name=keywords content='Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
-<meta name=date content='2016-09-05' >
+<meta name=date content='2016-09-14' >
 </head>
 <body>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js ></script>
 <script src=../a-cor-core/core-r2.js ></script>
 <script src=../b-sel-select/select-r1.js ></script>
 <script>
+
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	SEL.defaultFile; // if no default, select a random file
+
+	SEL.searchInFolder = 'elevations-data-04/';
+	SEL.extension = '.json';
+
+//	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+
 
 
 	init();
@@ -30,9 +41,9 @@
 
 			SEL.getMenuDetailsSelectFile() +
 
-			COR.getMenuDetailsTemplate() +
-
 			COR.getMenuDetailsObjectProperties( COR.defaults ) +
+
+			COR.getMenuDetailsTemplate() +
 
 			COR.getMenuDetailsAbout() +
 
@@ -52,7 +63,6 @@
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
-		COR.place.name = SEL.fileName;
 
 		COR.getPlaceDefaults();
 

@@ -23,7 +23,8 @@
 <script src=../i-cas-camera-action-select/camera-action-select-r1.js ></script>
 <script>
 
-
+	THR.cameraNear = 1;
+	THR.cameraFar = 2000;
 
 	init();
 
@@ -50,7 +51,6 @@
 		b;
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
-
 
 		THR.moreThreejsInits = function() {
 
@@ -104,7 +104,7 @@
 
 			CAS.animatePlusLookAt();
 
-//			motion = true;
+			motion = true;
 
 		};
 

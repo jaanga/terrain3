@@ -40,48 +40,19 @@
 
 <script>
 
-	SEL.urlAPITreeContents = 'https://api.github.com/repos/cynthiaarmour/cynthiaarmour.github.io/git/trees/master?recursive=1';
+	CAS.actorScale = 0.005;
 
-	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
-//	SEL.defaultFile; // if no default, select a random file
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.searchInFolder = 'maps/';
+//	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	SEL.defaultFile; // if no default, select a random file
+
+	SEL.searchInFolder = 'elevations-data-04/';
 	SEL.extension = '.json';
 
 //	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
-	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
-	CAS.marker = 'Rider';
-	CAS.actorScale = 0.005;
-
-	CAS.cameraTrack = function() {
-
-		CAS.offsetStart = 0;
-		CAS.offsetEnd = 1;
-
-		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
-		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
-
-		THR.controls.autoRotate = false;
-		CHKoutSpeed.value = CAS.cameraPoints = 25;
-		THR.scene.add( THR.camera );
-
-		if ( MAP.mesh ) {
-
-			THR.viewObject( MAP.mesh );
-
-		} else {
-
-			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
-
-		}
-
-		THR.controls.target.copy( CAS.center.clone() );
-		target = CAS.actor.position;
-		THR.controls.target.copy( target );
-		follow = true;
-
-	}
 
 
 	init();
@@ -129,9 +100,9 @@
 
 			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
 
-		}
+			SEL.getGitHubAPITreeContents();
 
-		SEL.getGitHubAPITreeContents();
+		}
 
 		detailsOverlay.setAttribute('open', 'open');
 
@@ -147,6 +118,7 @@
 			detailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
 			SELselFiles.size = 5;
 
+			THR.renderer.setClearColor( COR.defaults.backgroundColor );
 			THR.updateCamera = true;
 
 			THR.axisHelper = new THREE.AxisHelper( 50 );
@@ -171,7 +143,6 @@
 
 	}
 
-
 	SEL.onLoadJSONFile = function() {
 
 		COR.place = SEL.fileJSON;
@@ -185,6 +156,7 @@
 		KML.drawPath();
 
 	}
+
 
 </script>
 </body>

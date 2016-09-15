@@ -93,6 +93,9 @@
 	KML.getPathProperties = function() {
 
 		var pt;
+
+		if ( !THR.line ) { alert( 'No such geometry.' ); return }
+
 		pt = THR.line.geometry;
 		pt.computeBoundingBox();
 

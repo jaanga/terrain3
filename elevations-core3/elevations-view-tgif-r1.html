@@ -35,12 +35,12 @@
 <script>
 
 
-//	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
 	SEL.searchInFolder = 'elevations-data-tgif/';
 
-	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
-//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+//	SEL.urlBase = '../elevations/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
 
 
 	init();
@@ -81,9 +81,11 @@
 
 			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
 
-			SEL.getGitHubAPITreeContents();
+
 
 		}
+
+			SEL.getGitHubAPITreeContents();
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 

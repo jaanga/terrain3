@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Oakland Gran Fondo 2016 3D Viewer R10</title>
+<title>Oakland Gran Fondo 28 2016 R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -88,7 +88,6 @@
 
 	THR.getThreeJS();
 
-	THR.animate();
 
 	function init() {
 
@@ -133,13 +132,17 @@
 
 		SEL.getGitHubAPITreeContents();
 
-		detailsOverlay.setAttribute('open', 'open');
+		detailsSelectFile.removeAttribute( 'open' );
 
-//		detailsOverlayParameters.setAttribute('open', 'open');
+		detailsMarkerActions.removeAttribute( 'open' );
 
-		detailsTerrain.setAttribute('open', 'open');
+//		detailsOverlay.setAttribute('open', 'open');
 
-//		detailsTerrainParameters.setAttribute('open', 'open');
+//		detailsOverlayParameters.setAttribute( 'open', 'open' );
+
+//		detailsTerrain.setAttribute( 'open', 'open' );
+
+//		detailsTerrainParameters.setAttribute( 'open', 'open' );
 
 
 		THR.moreThreejsInits = function() {
@@ -168,6 +171,8 @@
 			CAS.animatePlusLookAt();
 
 		};
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
 	}
 

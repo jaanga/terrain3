@@ -22,12 +22,14 @@
 <script src=../e-thr-threejs/threejs-r1.js ></script>
 <script>
 
+	THR.cameraNear = 1;
+	THR.cameraFar = 2000;
 
 	THR.moreThreejsInits = function() {
 
 		var geometry, material
 
-		THR.renderer.setClearColor( COR.defaults.backgroundColor );
+
 		THR.updateCamera = true;
 
 		geometry = new THREE.BoxGeometry( 360, 2, 180 );
@@ -43,6 +45,8 @@
 		THR.axisHelper = new THREE.AxisHelper( 90 );
 		THR.scene.add( THR.axisHelper );
 
+		THR.controls.autoRotate = true;
+
 	};
 
 	init();
@@ -53,7 +57,7 @@
 
 	function init() {
 
-//		COR.taglineHeader = 'Three.js Howdy! &rarr;' + b;
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
 
 		COR.initLeftMenu();
 
@@ -68,6 +72,8 @@
 		b;
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
 	}
 
