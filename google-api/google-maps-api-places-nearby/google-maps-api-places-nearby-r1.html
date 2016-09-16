@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var infowindow;
+
+		function initMap() {
+		var place = { lat: 37.796, lng: -122.398 };
+
+		map = new google.maps.Map(document.getElementById('map'), {
+		  center: place,
+		  zoom: 15
+		});
+
+		infowindow = new google.maps.InfoWindow();
+
+		var service = new google.maps.places.PlacesService( map );
+		service.nearbySearch({
+			location: place,
+			radius: 20000,
+//			type: ['natural_feature']
+//			type: ['colloquial_area']
+//			type: ['locality']
+//			type: ['sublocality']
+//			type: ['point_of_interest']
+			types: ['locality','natural_feature']
+
+		}, callback);
+
+		marker = new google.maps.Marker({
+
+			icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+			position: place,
+			title: 'lat: ' + place.lat + ', lng: ' + place.lng,
+			map: map
+
+		});
+
+	  }
+
+	function callback(results, status) {
+
+		if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+			for (var i = 0; i < results.length; i++) {
+
+				createMarker( results[i] );
+			}
+
+console.log( 'results', results );
+
+		}
+
+	}
+
+	  function createMarker( place ) {
+		var placeLoc = place.geometry.location;
+		var marker = new google.maps.Marker({
+		  map: map,
+		  position: place.geometry.location
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+		  infowindow.setContent(place.name);
+		  infowindow.open(map, this);
+		});
+	  }
+
+</script>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap" async defer></script>
+</body>
+</html>
