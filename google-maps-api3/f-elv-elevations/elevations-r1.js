@@ -3,8 +3,8 @@
 
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
 
-	ELV.urlViewElevations3D = '../../elevations/elevations-view/index.html';
-	ELV.urlViewElevations3D = '../../elevations/elevations-view/elevations-view-r6.html';
+//	ELV.urlViewElevations3D = '../elevations/elevations-view/index.html';
+	ELV.urlViewElevations3D = '../elevations/elevations-view/elevations-view-r6.html';
 
 
 	ELV.getMenuDetailsElevations = function() {

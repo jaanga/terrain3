@@ -5,6 +5,8 @@
 
 	PLA.drawPlacePlacards = function() {
 
+		var cpp;
+
 		THR.scene.remove( PLA.placards );
 
 		PLA.placards = new THREE.Object3D();
@@ -25,6 +27,36 @@
 
 	};
 
+	PLA.drawPlaceNearby = function() {
+
+//		var cpn, n;
+
+		THR.scene.remove( PLA.nearby );
+
+		PLA.nearby = new THREE.Object3D();
+
+		cpn = COR.place.nearby;
+
+		for ( var i = 0; i < cpn.length; i++ ) {
+
+			n = cpn[ i ];
+
+console.log( 'n', n );
+
+			placard = PLA.drawPlacard( n.name, 0.00005 , 120, 0, 0.1, 0 );
+
+			placard.position.set( n.lon, MAP.boxHelper.geometry.boundingSphere.center.y, - n.lat );
+
+			PLA.placards.add( placard );
+
+		}
+
+		THR.scene.add( PLA.placards );
+
+	};
+
+
+
 	PLA.drawPlacard = function( text, scale, color, x, y, z ) {
 
 // 2016-02-27 ~ https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-threejs/examples/placards
@@ -40,7 +72,7 @@
 
 		var geometry = new THREE.Geometry();
 		geometry.vertices = [ v( 0, 0, 0 ),  v( x, y, z ) ];
-		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa } );
+		var material = new THREE.LineBasicMaterial( { color: 0xaaaaaa, linewidth: 3 } );
 		var line = new THREE.Line( geometry, material );
 
 		placard.add( sprite, line );

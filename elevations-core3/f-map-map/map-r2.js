@@ -168,6 +168,12 @@ console.timeEnd( 'timer0' );
 
 		}
 
+		if ( COR.place.nearby ) {
+
+			PLA.drawPlaceNearby();
+
+		}
+
 	}
 
 

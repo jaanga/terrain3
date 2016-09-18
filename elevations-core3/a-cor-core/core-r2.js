@@ -327,7 +327,7 @@
 				'Jaanga - your 3D happy place.<br>Click here to return to the top of the page' +
 			'</div>' +
 
-		b;
+		'';
 
 		return footer;
 

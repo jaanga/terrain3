@@ -3,7 +3,6 @@
 	var CLK = CLK || {};
 
 
-
 	CLK.getMenuDetailsAPIKey = function() {
 
 		var menuDetailsAPIKey =
@@ -204,7 +203,7 @@
 
 		googleMap.map.setCenter( marker.position );
 
-		if (  TIL.tiles ) { TIL.getTilesData(); }
+		if ( TIL.tiles ) { TIL.getTilesData(); }
 
 		return marker;
 
