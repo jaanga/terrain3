@@ -64,12 +64,12 @@
 	}
 
 
+
 	CLK.initGoogleMap = function() {
 
-		var marker;
+		var place, marker;
 
-		COR.getPlaceDefaults();
-		var place = COR.place;
+		place = COR.place;
 
 		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
 		mapDiv.id = 'mapDiv';
@@ -82,44 +82,21 @@
 			mapTypeId: place.mapTypeId,
 
 			mapTypeControlOptions: {
+
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 				position: google.maps.ControlPosition.TOP_RIGHT
+
 			},
 
 			fullscreenControl: true
 
 		});
 
+		googleMap.map.addListener( 'click', CLK.onClickGoogleMap );
 		googleMap.markings = [];
 
-		googleMap.clearAll = function() {
-
-			for ( var i = 0; i < googleMap.markings.length; i++ ) {
-
-				googleMap.markings[ i ].setMap( null );
-
-			}
-
-			googleMap.markings = [];
-
-		};
-
-		marker = new google.maps.Marker({
-
-			icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
-			position: {lat: place.latitude, lng: place.longitude },
-			title: 'lat: ' + place.latitude + ', lng: ' + place.longitude,
-			map: googleMap.map
-
-		});
-
-		googleMap.markings.push( marker );
-
-		googleMap.map.addListener( 'click', CLK.onClickGoogleMap );
-
-		CLK.onClickGoogleMap();
-
-		googleMap.center = googleMap.click;
+		CLK.infowindow = new google.maps.InfoWindow();
+		CLK.createMarker( googleMap.map.center );
 
 		if ( geocoder !== undefined ) { GEO.initGoogleGeocoder(); }
 
@@ -162,25 +139,20 @@
 
 		'';
 
-		marker = new google.maps.Marker({
-
-			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-			title: 'lat: ' + lat + ', lng: ' + lon,
-			position: {lat: lat, lng: lon } ,
-			map: googleMap.map
-
-		});
-
-		googleMap.markings.push( marker );
-
-		googleMap.click = marker;
+		CLK.createMarker( event.latLng, 'green' );
 
 	}
 
 
 	CLK.setCenter = function( lat, lon ) {
 
-		var place = COR.place;
+		var place, marker;
+
+		place = COR.place;
+
+		var bounds = googleMap.map.getBounds();
+
+
 
 		googleMap.clearAll();
 
@@ -188,23 +160,74 @@
 
 		place.longitude = lon ? parseFloat( lon ) : place.longitude;
 
-		marker = new google.maps.Marker({
+		placeLocation = { lat: place.latitude, lng: place.longitude };
 
-			icon: 'https://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-			position: {lat: place.latitude, lng: place.longitude },
+		if ( bounds.contains( placeLocation ) === true ) {
+
+			googleMap.map.setCenter( placeLocation );
+
+			CLK.createMarker( placeLocation );
+
+			if ( TIL.tiles ) { TIL.getTilesData(); }
+
+		} else {
+
+			alert( 'curent marker is outside the visible area' );
+
+		}
+
+	}
+
+
+	CLK.createMarker = function( placeLoc, color = 'yellow' ) {
+
+		var place;
+		place = COR.place;
+
+		var marker = new google.maps.Marker( {
+
+			icon: 'https://maps.google.com/mapfiles/ms/icons/' + color + '-dot.png',
 			title: 'lat: ' + place.latitude + ', lng: ' + place.longitude,
-			map: googleMap.map
+			map: googleMap.map,
+			position: placeLoc
 
-		});
+		} );
+
+		google.maps.event.addListener( marker, 'click', function() {
+
+			address = place.address ? 'address: ' + place.addreess + b : '';
+			vicinity = place.vicinity ? 'viciity: ' + place.vicinity + b : '';
+
+			CLK.infowindow.setContent( 
+
+			'<div>' +
+				'<strong>' + place.name + '</strong>' + b +
+                'Place ID: ' + place.place_id + b +
+					address +
+					vicinity + 
+					'types: ' + place.types + b +
+					'lat: ' + placeLoc.lat().toFixed( 3 ) + ' lon: ' + placeLoc.lng().toFixed( 3 ) +
+			'</div>'
+
+			);
+
+			CLK.infowindow.open( googleMap.map, this );
+
+		} );
 
 		googleMap.markings.push( marker );
 
-		googleMap.center = marker;
-
-		googleMap.map.setCenter( marker.position );
-
-		if ( TIL.tiles ) { TIL.getTilesData(); }
-
-		return marker;
-
 	}
+
+	googleMap.clearAll = function() {
+
+		for ( var i = 0; i < googleMap.markings.length; i++ ) {
+
+			googleMap.markings[ i ].setMap( null );
+
+		}
+
+		googleMap.markings = [];
+
+	};
+

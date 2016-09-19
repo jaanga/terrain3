@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Google Maps API3 Click R2</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
+
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../b-clk-click/click-r2.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'click says howdy' + b;
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CLK.getMenuDetailsAPIKey() +
+
+			CLK.getMenuDetailsMapClick() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		CLK.onEventAPIKeyUpdate();
+
+		COR.getPlaceDefaults();
+
+	}
+
+</script>
+</body>
+</html>
