@@ -34,8 +34,8 @@
 
 		service.nearbySearch( {
 
-			location: googleMap.center.position,
-			radius: ( 1.4 * 111111 * COR.place.latitudeDelta),
+			location: googleMap.map.center,
+			radius: ( 1.4 * 111111 * COR.place.latitudeDelta ),
 //			type: ['natural_feature']
 //			type: ['colloquial_area']
 //			type: ['locality']
