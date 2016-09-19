@@ -26,6 +26,10 @@
 
 					'<input type=checkbox id=TERchkRotate onchange=THR.controls.autoRotate=TERchkRotate.checked > scene rotation' + b +
 
+					'<input type=checkbox id=TERchPlacards onchange=THR.placards.visible=!THR.placards.visible; > Messages' + b +
+
+					'<input type=checkbox id=TERchPlacards onchange=THR.nearby.visible=!THR.nerby.visible; > earby Pllaces' + b +
+
 					'<input type=checkbox id=TERchkFog onchange=THR.toggleFog(this.checked); checked > Fog' + b +
 
 					'<input type=checkbox id=TERchkGroudPlane onchange=MAP.groundPlane.visible=!MAP.groundPlane.visible; checked > Sea level' + b +

@@ -94,15 +94,8 @@ Display results in 3D. Display useful info.
 
 console.log( 'file loaded', SEL.fileName );
 
-		if ( COR.place.latitudeCenter ) {
+		CLK.setCenter( COR.place.latitude, COR.place.longitude );
 
-			CLK.setCenter( COR.place.latitudeCenter, COR.place.longitudeCenter );
-
-		} else {
-
-			CLK.setCenter( COR.place.latitude, COR.place.longitude );
-
-		}
 	}
 
 </script>

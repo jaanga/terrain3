@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations View R6</title>
+<title>Elevations Update Place R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -32,6 +32,7 @@
 <script src=e-thr-threejs/threejs-r1.js ></script>
 <script src=f-map-map/map-r2.js ></script>
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
+<script src=../elevations-core3/sav-file-save-open/file-save-open-r1.js ></script>
 <script>
 
 
@@ -58,6 +59,8 @@
 			COR.getMenuDetailsHeader() +
 
 			SEL.getMenuDetailsSelectFile() +
+
+			SAV.getMenuDetailsSaveOpen() +
 
 //			KML.getMenuDetailsKML() +
 
@@ -89,6 +92,8 @@
 
  		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
+		SAVdivOpen.style.display = 'none';
+
 			THR.moreThreejsInits = function() {
 
 				THR.renderer.setClearColor( 0x7ec0ee );
@@ -101,7 +106,7 @@
 				TERchkAxisHelper.checked = false;
 				TERchkBoxHelper.checked = false;
 
-				TERchkRotate.click();
+//				TERchkRotate.click();
 
 				window.addEventListener( 'keyup', THR.onKeyUp, false );
 				THR.toggleFog( true );

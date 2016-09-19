@@ -44,8 +44,6 @@
 
 		MAP.drawMapOverlay();
 
-		menuDetailsTerrainParameters.innerHTML = TER.setMenuDetailsTerrain();
-
 console.timeEnd( 'timer0' );
 
 	}
@@ -60,6 +58,9 @@ console.timeEnd( 'timer0' );
 		if ( OVRselMap.selectedIndex > 8 ) {
 
 			MAP.material = new THREE.MeshNormalMaterial( { side: 2 } );
+
+		MAP.geometry.computeFaceNormals();
+		MAP.geometry.computeVertexNormals();
 
 			MAP.drawMap( updateCamera );
 
@@ -128,14 +129,15 @@ console.timeEnd( 'timer0' );
 
 	MAP.drawMap = function() {
 
-		var geometry, material;
+		var place, geometry, material;
+		place = COR.place
 
 		THR.scene.remove( MAP.mesh, MAP.boxHelper, MAP.groundPlane );
 
 		MAP.mesh = new THREE.Mesh( MAP.geometry, MAP.material );
 		MAP.mesh.position.set( MAP.cenLon, 0, -MAP.cenLat );
-		MAP.mesh.scale.y = COR.place.verticalScale;
-		MAP.mesh.name = COR.place.origin;
+		MAP.mesh.scale.y = place.verticalScale;
+		MAP.mesh.name = place.origin;
 		THR.scene.add( MAP.mesh );
 
 		MAP.boxHelper = new THREE.BoxHelper( MAP.mesh, 0xff0000 );
@@ -146,7 +148,7 @@ console.timeEnd( 'timer0' );
 		geometry = new THREE.PlaneBufferGeometry( 3, 3 );
 		geometry.applyMatrix( new THREE.Matrix4().makeRotationX( -pi05 ) );
 
-		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: COR.place.plainOpacity, side: 2, transparent: true } );
+		material = new THREE.MeshBasicMaterial( { color: 0x223322, opacity: place.plainOpacity, side: 2, transparent: true } );
 
 		MAP.groundPlane = new THREE.Mesh( geometry, material );
 		MAP.groundPlane.name = 'groundPlane';
@@ -162,17 +164,30 @@ console.timeEnd( 'timer0' );
 
 		}
 
-		if ( COR.place.placards ) {
+		if ( place.placards ) {
 
 			PLA.drawPlacePlacards();
 
 		}
 
-		if ( COR.place.nearby ) {
+		if ( place.nearby ) {
 
 			PLA.drawPlaceNearby();
 
 		}
+
+		if ( TER.setMenuDetailsTerrain ) {
+
+			menuDetailsTerrainParameters.innerHTML = TER.setMenuDetailsTerrain();
+
+		}
+
+		place.latitude = MAP.cenLat;
+		place.longitude = MAP.cenLat;
+		place.min = MAP.min;
+		place.max = MAP.max;
+
+
 
 	}
 

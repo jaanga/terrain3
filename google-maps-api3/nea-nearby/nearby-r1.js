@@ -76,6 +76,7 @@ console.log( 'results', results );
 
 	NEA.createMarker = function( place ) {
 
+
 		var placeLoc = place.geometry.location;
 
 		var marker = new google.maps.Marker( {
@@ -106,6 +107,19 @@ console.log( 'results', results );
 
 		} );
 
+		googleMap.markings.push( marker );
+
 	}
 
 
+	NEA.clearAll = function() {
+
+		for ( var i = 0; i < googleMap.markings.length; i++ ) {
+
+			googleMap.markings[ i ].setMap( null );
+
+		}
+
+		googleMap.markings = [];
+
+	};

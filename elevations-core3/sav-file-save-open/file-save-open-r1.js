@@ -1,6 +1,42 @@
 
 	var SAV = SAV || {};
 
+	SAV.getMenuDetailsSaveOpen = function() {
+
+		var menuDetailsSaveOpen  =
+
+			'<details id=SAVdetailsSaveOpen open >' +
+
+				'<summary id=SAVmenuSummarySaveOpen ><h3>SaveOpen</h3></summary>' +
+
+				'<div id=SAVdivOpen >' +
+
+				'<p>' +
+
+					'<input type=file id=inpFile onchange=SAV.openFile(this); >' +
+
+				'</p>' +
+
+				'<div id=SAVdivOpenFile ></div>' +
+
+				'<textarea id=textArea style=height:500px;overflow:auto;width:100%; ></textarea>' +
+
+				'</div>' +
+
+				'<p>' +
+
+					'<button onclick=SAV.saveFile(); >save file</button>' +
+
+				'</p>' +
+
+			'</details>' +
+
+		b;
+
+		return menuDetailsSaveOpen;
+
+	};
+
 
 	SAV.saveFile = function() {
 
@@ -32,6 +68,8 @@
 
 //		delete a;
 
+		a = null;
+
 	};
 
 	SAV.openFile = function( files, type ) {
@@ -51,7 +89,9 @@
 
 				row =  COR.place.elevations.length / COR.place.samplesX;
 
-				menuOpenFileElevations.innerHTML =
+				textArea.innerHTML = reader.result;
+
+				SAVdivOpenFile.innerHTML =
 
 					'file: ' + files.files[0].name + b +
 					'Samples width: ' + COR.place.samplesX + b +

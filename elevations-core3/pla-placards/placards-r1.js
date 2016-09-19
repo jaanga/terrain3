@@ -41,7 +41,7 @@
 
 			n = cpn[ i ];
 
-			nearby = PLA.drawPlacard( n.name, 0.00005 , 120, 0, MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 );
+			nearby = PLA.drawPlacard( n.name, 0.00001 , 120, 0, MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 );
 
 			nearby.position.set( n.lon, 0, - n.lat );
 

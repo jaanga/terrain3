@@ -180,7 +180,9 @@
 
 	CLK.setCenter = function( lat, lon ) {
 
-		var place = COR.place;
+		var place, marker
+
+		place = COR.place;
 
 		googleMap.clearAll();
 
@@ -208,3 +210,5 @@
 		return marker;
 
 	}
+
+
