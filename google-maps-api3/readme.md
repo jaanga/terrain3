@@ -5,12 +5,14 @@
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
 [elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
-[Elevations Get Read Me]( https://jaanga.github.io/terrain3/#elevations/elevations-get/ )
+[Elevations Get Read Me]( https://jaanga.github.io/terrain3/#google-maps-api3/readme.md )
 ===
 
-## Full Screen - stable: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/index.html )
+<!--
+## Full Screen - stable: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/index.html )
+-->
 
-## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/elevations/elevations-get/dev/index.html )
+## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/elevations-get-r21.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >

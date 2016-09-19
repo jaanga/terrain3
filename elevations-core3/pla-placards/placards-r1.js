@@ -5,7 +5,7 @@
 
 	PLA.drawPlacePlacards = function() {
 
-		var cpp;
+		var cpp, p;
 
 		THR.scene.remove( PLA.placards );
 
@@ -29,7 +29,7 @@
 
 	PLA.drawPlaceNearby = function() {
 
-//		var cpn, n;
+		var cpn, n;
 
 		THR.scene.remove( PLA.nearby );
 
@@ -41,17 +41,15 @@
 
 			n = cpn[ i ];
 
-console.log( 'n', n );
+			nearby = PLA.drawPlacard( n.name, 0.00005 , 120, 0, MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 );
 
-			placard = PLA.drawPlacard( n.name, 0.00005 , 120, 0, 0.1, 0 );
+			nearby.position.set( n.lon, 0, - n.lat );
 
-			placard.position.set( n.lon, MAP.boxHelper.geometry.boundingSphere.center.y, - n.lat );
-
-			PLA.placards.add( placard );
+			PLA.nearby.add( nearby );
 
 		}
 
-		THR.scene.add( PLA.placards );
+		THR.scene.add( PLA.nearby );
 
 	};
 

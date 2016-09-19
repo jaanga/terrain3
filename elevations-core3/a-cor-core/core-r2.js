@@ -36,8 +36,8 @@
 	COR.defaults.backgroundColor = 0x7ec0ee ;
 	COR.defaults.deltaOverlay = 1;
 
-	COR.defaults.fogNear = 0.5;
-	COR.defaults.fogFar = 1;
+//	COR.defaults.fogNear = 0.5;
+//	COR.defaults.fogFar = 1;
 
 	COR.defaults.latitude = 27.6878; // 27.71110193545;
 	COR.defaults.longitude = 86.7314; // 86.71228385040001;

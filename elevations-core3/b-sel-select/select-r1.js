@@ -31,7 +31,7 @@
 				'<small id=SELmenuSummaryTagline >Select or open a file to view in 3D</small>' +
 
 				'<p>' +
-					'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
+					'<select id=SELselFiles onchange=console.log("ll",23);SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
 				'</p>' +
 
 				'<p><input type=file id=SELinpFile onchange=SEL.getJSONFileReader(this); /></p>' + b +
@@ -100,6 +100,10 @@
 
 			SEL.getJSONFileXHR( file );
 
+		}  else {
+
+			SELselFiles.selectedIndex = -1;
+
 		}
 
 	}
@@ -110,6 +114,7 @@
 	SEL.getJSONFileXHR = function( fName ) {
 
 console.time( 'timer0' );
+console.log( 'nnnn', 23 );
 
 		var xhr;
 

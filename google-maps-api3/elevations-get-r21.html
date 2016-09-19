@@ -85,6 +85,26 @@ Display results in 3D. Display useful info.
 
 	}
 
+
+	SEL.onLoadJSONFile = function() {
+
+		COR.place = SEL.fileJSON;
+
+		COR.getPlaceDefaults();
+
+console.log( 'file loaded', SEL.fileName );
+
+		if ( COR.place.latitudeCenter ) {
+
+			CLK.setCenter( COR.place.latitudeCenter, COR.place.longitudeCenter );
+
+		} else {
+
+			CLK.setCenter( COR.place.latitude, COR.place.longitude );
+
+		}
+	}
+
 </script>
 </body>
 </html>
