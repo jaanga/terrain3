@@ -16,6 +16,11 @@
 				'<p>api key: <input id=CLKinpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
 				'<p><button onclick=CLK.onEventAPIKeyUpdate(); >Set API key</button></p>' +
 
+//				'<p><button onclick=CLK.setCookie(); >set cookie</button></p>' +
+//				'<p><button onclick=alert(document.cookie); >get cookie</button></p>' +
+//				'<p><button onclick=CLK.resetOnce(); >reset cookie</button></p>' +
+
+
 			'</details>' + 
 
 		b;
@@ -23,6 +28,22 @@
 		return menuDetailsAPIKey;
 
 	}
+
+	CLK.setCookie = function() {
+
+		document.cookie = "apiKey=23"; // + CLKinpAPI.value + ", ";
+
+console.log( 'dc', document.cookie );
+
+	}
+
+
+	CLK.resetOnce = function() { 
+
+		document.cookie = "apiKey=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+	}
+
 
 
 	CLK.getMenuDetailsMapClick = function() {
@@ -51,6 +72,14 @@
 		googleMap.script = document.body.appendChild( document.createElement('script') );
 		googleMap.script.onload = CLK.initGoogleMap;
 
+		if ( location.hash.includes( 'key=') ) {
+
+			CLKinpAPI.value = location.hash.slice( location.hash.indexOf( 'key=' ) + 4, 44 )
+
+		}
+
+
+
 		if ( CLKinpAPI.value !== '' ) {
 
 			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + CLKinpAPI.value;
@@ -60,6 +89,8 @@
 			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places';
 
 		}
+
+console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 
 	}
 
