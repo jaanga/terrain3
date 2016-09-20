@@ -26,9 +26,9 @@
 
 					'<input type=checkbox id=TERchkRotate onchange=THR.controls.autoRotate=TERchkRotate.checked > scene rotation' + b +
 
-					'<input type=checkbox id=TERchPlacards onchange=THR.placards.visible=!THR.placards.visible; > Messages' + b +
+					'<input type=checkbox id=TERchPlacards onchange=PLA.placards.visible=!PLA.placards.visible; > Messages' + b +
 
-					'<input type=checkbox id=TERchPlacards onchange=THR.nearby.visible=!THR.nerby.visible; > earby Pllaces' + b +
+					'<input type=checkbox id=TERchPlacards onchange=PLA.nearby.visible=!PLA.nearby.visible; > Nearby Places' + b +
 
 					'<input type=checkbox id=TERchkFog onchange=THR.toggleFog(this.checked); checked > Fog' + b +
 
