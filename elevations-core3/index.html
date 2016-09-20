@@ -17,18 +17,6 @@
 	var defaultFile = 'index.html';
 	location.hash = 'readme.md';
 
-	var b = '</br>';
-
-	var header = 
-
-		'<span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]' +
-		'( https://jaanga.github.io/terrain3/index.html "View file as a web page." ) </span>' +
-		'<input type=button onclick=window.location.href="https://github.com/jaanga/terrain3/"; value="You are now in GitHub web page view - Click this button to view Read Me file as source code" >' + b +
-		b +
-		'[Jaanga]( https://jaanga.github.io ) &raquo; ' + b
-	'';
-
-
 	var contents;
 
 	init();
@@ -61,8 +49,6 @@
 		'';
 
 		contents = contents ? contents : document.body.appendChild( document.createElement( 'div' ) ) ;
-//		contents = contents || document.body.appendChild( document.createElement( 'div' ) ) ;
-		contents = contents;
 
 		converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true });
 
@@ -70,7 +56,7 @@
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'get', url, true );
-		xhr.onload = function() { contents.innerHTML = header + converter.makeHtml( xhr.responseText ); };
+		xhr.onload = function() { contents.innerHTML = converter.makeHtml( xhr.responseText ); };
 		xhr.send( null );
 
 		document.title = url.split( '/' ).pop();

@@ -40,7 +40,7 @@ _Elevations Core3_
 http://jaanga.github.io/terrain3/elevations-core3xxxxxx/xxxxxx-r1.html" width=100% height=600 ></iframe>
 
 <input type=button onclick=window.location.href="http://jaanga.github.io/tree/gh-pagesterrain3/elevations-core3/xxxxxx-r1.html";
- value="Source code listing" >
+value="Source code listing" >
 
 
 * Open this file: https://github.com/jaanga/jaanga.github.io/tree/master/cookbook-html/templates/xxxxxx/xxxxxx-r1.html
@@ -64,8 +64,3 @@ Intended for general use
 * First commit
 * Add Read Me
 
-***
-
-<center title="Jaanga ~ your 3D happy place" >
-# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a>
-</center>
