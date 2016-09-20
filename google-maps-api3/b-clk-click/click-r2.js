@@ -78,8 +78,6 @@ console.log( 'dc', document.cookie );
 
 		}
 
-
-
 		if ( CLKinpAPI.value !== '' ) {
 
 			googleMap.script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' + CLKinpAPI.value;

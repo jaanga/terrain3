@@ -27,9 +27,11 @@
 
 	};
 
+
+
 	PLA.drawPlaceNearby = function() {
 
-		var cpn, n;
+		var cpn, n, delta, height;
 
 		THR.scene.remove( PLA.nearby );
 
@@ -37,13 +39,21 @@
 
 		cpn = COR.place.nearby;
 
+		MAP.boxHelper.updateMatrixWorld()
+		MAP.boxHelper.geometry.computeBoundingBox()
+
+		delta = MAP.boxHelper.geometry.boundingBox.max.y - MAP.boxHelper.geometry.boundingBox.min.y;
+		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
+
+		console.log( 'MAP.boxHelper', MAP.boxHelper);
+
 		for ( var i = 0; i < cpn.length; i++ ) {
 
 			n = cpn[ i ];
 
-			nearby = PLA.drawPlacard( n.name, 0.00001 , 120, 0, MAP.boxHelper.geometry.attributes.position.array[ 1 ], 0 );
+			nearby = PLA.drawPlacard( n.name, height, 120, 0, delta, 0 );
 
-			nearby.position.set( n.lon, 0, - n.lat );
+			nearby.position.set( n.lon, MAP.boxHelper.geometry.boundingBox.min.y, - n.lat );
 
 			PLA.nearby.add( nearby );
 
