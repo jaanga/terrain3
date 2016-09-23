@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Read Me Builder R1</title>
+<title>Read Me Getter R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
 Menu and contents in HTML.
@@ -16,8 +16,9 @@ Menu and contents in HTML.
 
 //  http://jaanga.github.io/cookbook-html/templates/hamburger-menu/
 
-	var baseURL = 'http://jaanga.github.io/';
+	var COR = {};
 
+	var baseURL = 'http://jaanga.github.io/';
 	var b = '</br>';
 	var path, repo, folders;
 
@@ -32,7 +33,18 @@ Menu and contents in HTML.
 
 	b;
 
+	var footer =
+			'***\n' +
+			'\n' +
+			'<center title="Jaanga ~ your 3D happy place" >\n' +
+			'# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a>\n' +
+			'</center>\n' +
+
+	b;
+
 	var converter = new showdown.Converter( { strikethrough: true, literalMidWordUnderscores: true, simplifiedAutoLink: true, tables: true });
+
+
 
 	init();
 
@@ -277,6 +289,8 @@ console.log( 'path', path );
 			'* First commit\n' +
 			'* Add Read Me\n' +
 			'\n' +
+
+
 			'***\n' +
 			'\n' +
 			'<center title="Jaanga ~ your 3D happy place" >\n' +
@@ -285,9 +299,23 @@ console.log( 'path', path );
 
 		'';
 
+
 		contents.innerHTML = converter.makeHtml( header );
 
 //		contents.innerText = header;
+	}
+
+
+	COR.requestFile = function( url, callback ) {
+
+		var xhr;
+
+		xhr = new XMLHttpRequest();
+		xhr.crossOrigin = 'anonymous';
+		xhr.open( 'GET', url, true );
+		xhr.onload = callback;
+		xhr.send( null );
+
 	}
 
 
