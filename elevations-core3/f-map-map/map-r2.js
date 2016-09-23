@@ -154,6 +154,7 @@ console.timeEnd( 'timer0' );
 		MAP.groundPlane.name = 'groundPlane';
 		MAP.groundPlane.position.set( MAP.cenLon, - MAP.boxHelper.geometry.attributes.position.array[ 1 ], -MAP.cenLat ); // sea level
 		THR.scene.add( MAP.groundPlane );
+		MAP.groundPlane.visible = TERchkGroudPlane.checked;
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
 		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
@@ -164,13 +165,13 @@ console.timeEnd( 'timer0' );
 
 		}
 
-		if ( place.placards ) {
+		if ( place.placards && PLA.drawPlacePlacards ) {
 
 			PLA.drawPlacePlacards();
 
 		}
 
-		if ( place.nearby ) {
+		if ( place.nearby && PLA.drawPlaceNearby ) {
 
 			PLA.drawPlaceNearby();
 
@@ -186,8 +187,6 @@ console.timeEnd( 'timer0' );
 		place.longitude = MAP.cenLat;
 		place.min = MAP.min;
 		place.max = MAP.max;
-
-
 
 	}
 

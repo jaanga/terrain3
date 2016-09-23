@@ -333,7 +333,7 @@
 
 	};
 
-
+// TEMPLATE
 
 	COR.getMenuDetailsTemplate = function() {
 
@@ -343,17 +343,17 @@
 
 				'<summary id=CORmenuSummaryTemplate ><h3>Template</h3></summary>' +
 
-				'<p id=CORpTemplate >' +
+				'<div id=CORdivTemplate >' +
 
 					'<button onclick=alert("Howdy!"); > button </button>' + b +
 
 					COR.txt +
 
-			'</p>' +
+			'</div>' + b +
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsTemplate;
 

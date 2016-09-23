@@ -28,11 +28,11 @@
 
 					'<input type=checkbox id=TERchPlacards onchange=PLA.placards.visible=!PLA.placards.visible; checked > Messages' + b +
 
-					'<input type=checkbox id=TERchPlacards onchange=PLA.nearby.visible=!PLA.nearby.visible; checked > Nearby Places' + b +
+					'<input type=checkbox id=TERchPlacards onchange=PLA.nearby.visible=!PLA.nearby.visible; checked > Nearby places' + b +
 
 					'<input type=checkbox id=TERchkFog onchange=THR.toggleFog(this.checked); checked > Fog' + b +
 
-					'<input type=checkbox id=TERchkGroudPlane onchange=MAP.groundPlane.visible=!MAP.groundPlane.visible; checked > Sea level' + b +
+					'<input type=checkbox id=TERchkGroudPlane onchange=MAP.groundPlane.visible=!MAP.groundPlane.visible; checked > Ground plane' + b +
 
 					'<input type=checkbox id=TERchkAxisHelper onchange=THR.axisHelper.visible=!THR.axisHelper.visible; checked > Axis helper' + b +
 

@@ -114,7 +114,6 @@
 	SEL.getJSONFileXHR = function( fName ) {
 
 console.time( 'timer0' );
-console.log( 'nnnn', 23 );
 
 		var xhr;
 

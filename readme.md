@@ -30,7 +30,7 @@ So, let's get going!
 
 _Each time you load this page a random location appears_
 
-<img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=100% >
 
 <iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html" width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
@@ -42,7 +42,7 @@ _It's one of our favorite projects and a good place to start exploring._
 
 ### full screen: [Earth Globe Displacement Map]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
 
-<img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=800 >
+<img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=100% >
 
 <iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
 
