@@ -1,13 +1,13 @@
 // 2016-08-21
 
 	var searchInFolder = 'elevations-airports-01/';
-	var urlBase = '../../elevations/' + searchInFolder;
+	var urlBase = '../../elevations-data/' + searchInFolder;
 
 	var index = 0;
 	var indexDefault;
 
 	var path = new THREE.Object3D();
-	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
+	path.url = urlBase + 'data-path-csv/6-25-2016-1-cooked.csv';
 	path.color = 0xff0000;
 	path.points = [];
 	path.rotations = [];
@@ -22,6 +22,7 @@
 	function otherInits() {
 
 console.log( 'place ', place );
+
 		getFilePathCSV();
 
 		geometry = new THREE.CylinderGeometry( 0, 0.0001, 0.0008, 3, 1 );

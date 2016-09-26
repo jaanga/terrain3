@@ -25,15 +25,16 @@
 <script src=../../elevations-core2/thr-threejs/threejs-r1.js ></script>
 <script src=../../elevations-core2/map-map/map-r1.js ></script>
 -->
-<script src=a-cor-core/core-r2.js ></script>
-<script src=b-sel-select/select-r1.js ></script>
-<script src=c-ovr-overlay/overlay-r1.js ></script>
-<script src=d-ter-terrain/terrain-r1.js ></script>
-<script src=e-thr-threejs/threejs-r1.js ></script>
-<script src=f-map-map/map-r2.js ></script>
+
+
+<script src=../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../elevations-core3/b-sel-select/select-r1.js ></script>
+<script src=../elevations-core3/c-ovr-overlay/overlay-r1.js ></script>
+<script src=../elevations-core3/d-ter-terrain/terrain-r1.js ></script>
+<script src=../elevations-core3/e-thr-threejs/threejs-r1.js ></script>
+<script src=../elevations-core3/f-map-map/map-r2.js ></script>
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
 <script>
-
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
@@ -81,9 +82,9 @@
 
 			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
 
-			SEL.getGitHubAPITreeContents();
-
 		}
+
+		SEL.getGitHubAPITreeContents();
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
@@ -100,14 +101,11 @@
 
 				TERchkAxisHelper.checked = false;
 				TERchkBoxHelper.checked = false;
+				THR.toggleFog( true );
 
 				TERchkRotate.click();
 
-				window.addEventListener( 'keyup', THR.onKeyUp, false );
-				THR.toggleFog( true );
-
 			};
-
 
 	}
 
@@ -120,8 +118,6 @@
 		OVR.setMenuDetailsOverlay();
 
 		MAP.initMapGeometry();
-
-console.log( 'file loaded', SEL.fileName );
 
 	}
 
