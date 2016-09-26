@@ -1,11 +1,3 @@
-<span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/index.html "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
-
-[Jaanga]( https://jaanga.github.io ) &raquo;
-
-[Terrain 3 Read Me]( https://jaanga.github.io/terrain3/index.html )
-===
 
 
 ## Concept: 3D maps on your home page
@@ -21,37 +13,6 @@ There are, however, few ways to get going with all the data and scripts on a sta
 So, let's get going!
 
 <br>
-
-
-## Two samples of what's here
-
-
-### full screen: [Elevations View Path CSV]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html )
-
-_Each time you load this page a random location appears_
-
-<!--
-<img src="https://cloud.githubusercontent.com/assets/547626/17420676/0f062930-5a59-11e6-9e9d-040cdfaddbd6.png" style=display:none; width=100% >
-
-
-<iframe src="https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html" width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
--->
-_Sample 1: **[Elevations View Path CSV]( https://jaanga.github.io/terrain3/elevations/elevations-view-path-csv/index.html )** ~ a script for displaying 3D data with 2D overlays._
-_It's one of our favorite projects and a good place to start exploring._
-
-<br>
-
-
-### full screen: [Earth Globe Displacement Map]( https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html )
-<!--
-<img src="https://cloud.githubusercontent.com/assets/547626/17420309/e0e6953c-5a56-11e6-96b0-3ebccf01d6e6.png" style=display:none; width=100% >
-
-
-<iframe src=https://jaanga.github.io/terrain3/globes/earth-globe-displacement/index.html width=100% height=500px onload=this.contentWindow.controls.enableZoom=false; ></iframe>
--->
-_Sample 2:  Earth Globe Displacement Map ~ a simple JavaScript for creating a 3D earth._
-_128 lines of code to create over two millions data points. The power to create new worlds is in your hands!_ 
-
 
 
 ### Mission
@@ -150,9 +111,3 @@ The fun bits of cartography are the ones that map what can't be seen.
 * First commit
 * Add Read Me
 
-
-***
-
-<center title='Jaanga ~ your 3D happy place' >
-# <a href=javascript:window.scrollTo(0,0); style=text-decoration:none; > ❦ </a>
-</center>
