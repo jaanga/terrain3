@@ -13,7 +13,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/547626/15918096/f00124f4-2db7-11e6-9053-7f2b57e0e2e3.png" style=display:none; width=800 >
 
-<iframe src=https://jaanga.github.io/terrain3/google-api/map-tiles-canvas/index.html width=100% height=600px ></iframe>
+<iframe src=https://jaanga.github.io/terrain3/google-api/map-tiles-canvas-camera/index.html width=100% height=600px ></iframe>
 
 _Map Tiles Canvas_
 
