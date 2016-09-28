@@ -50,7 +50,15 @@ Dev Notes
 * Ladybug
 
 
+
+
 ## Change Log
+
+### 2016-09-27 ~ website-via-github-api2-r4.html
+
+* Things look good
+* Gallery for bitmaps and method for attaching credits - perhaps to file name?
+
 
 ### 2016-08-19
 
