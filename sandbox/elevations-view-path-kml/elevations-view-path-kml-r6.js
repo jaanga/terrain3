@@ -3,7 +3,7 @@
 //	var defaultFile = '../elevations-data-kml/7mile_ski_trail_13_1688_3105_3_3_90_90_.txt';
 
 	var searchInFolder = 'elevations-data-kml/';
-	var urlBase = '../../elevations/' + searchInFolder;
+	var urlBase = '../../elevations-data/' + searchInFolder;
 
 	var path;
 	var points = 200;

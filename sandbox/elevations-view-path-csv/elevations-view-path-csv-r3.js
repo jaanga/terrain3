@@ -4,7 +4,7 @@
 
 
 	var searchInFolder = 'elevations-airports-01/';
-	var urlBase = '../../elevations/' + searchInFolder;
+	var urlBase = '../../elevations-data/' + searchInFolder;
 
 //	var defaultFile = urlBase + 'vnlkl_12_3033_1718_3_4_510_680_.txt';
 

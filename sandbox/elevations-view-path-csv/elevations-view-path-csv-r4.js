@@ -7,7 +7,7 @@
 	var indexDefault;
 
 	var path = new THREE.Object3D();
-	path.url = urlBase + 'data-path-csv/6-25-2016-1-cooked.csv';
+	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
 	path.color = 0xff0000;
 	path.points = [];
 	path.rotations = [];
@@ -82,7 +82,8 @@ console.log( 'place ', place );
 		var xhr, text, waypoints;
 
 		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', place.csvFiles[ 0 ], true );
+//		xhr.open( 'GET', place.csvFiles[ 0 ], true );
+		xhr.open( 'GET', path.url, true );
 		xhr.onload = callback;
 		xhr.send( null );
 
