@@ -43,9 +43,10 @@
 		MAP.boxHelper.geometry.computeBoundingBox()
 
 		delta = MAP.boxHelper.geometry.boundingBox.max.y - MAP.boxHelper.geometry.boundingBox.min.y;
-		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
+//		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
+		height = 0.00005;
 
-		console.log( 'MAP.boxHelper', MAP.boxHelper);
+//console.log( 'height', height );
 
 		for ( var i = 0; i < cpn.length; i++ ) {
 
