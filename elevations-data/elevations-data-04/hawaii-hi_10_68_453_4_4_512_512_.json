@@ -7,6 +7,7 @@
 "origin":"Hawaii County",
 "pixelsPerTile":256,
 "plainOpacity":0.5,
+"plaHeight": 0.0002,
 "tilesX":4,
 "tilesY":4,
 "ULtileX":68,

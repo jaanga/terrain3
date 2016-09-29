@@ -7,6 +7,7 @@
 "origin":"Honolulu",
 "pixelsPerTile":256,
 "plainOpacity":0.5,
+"plaHeight": 0.00001,
 "tilesX":3,
 "tilesY":3,
 "ULtileX":1009,

@@ -2,7 +2,7 @@
 
 	var PLA = PLA || {};
 
-
+	
 	PLA.drawPlacePlacards = function() {
 
 		var cpp, p;
@@ -33,6 +33,8 @@
 
 		var cpn, n, delta, height;
 
+		height = COR.place.plaHeight || 0.00005;
+
 		THR.scene.remove( PLA.nearby );
 
 		PLA.nearby = new THREE.Object3D();
@@ -44,7 +46,7 @@
 
 		delta = MAP.boxHelper.geometry.boundingBox.max.y - MAP.boxHelper.geometry.boundingBox.min.y;
 //		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
-		height = 0.00005;
+//		height = 0.00005;
 
 //console.log( 'height', height );
 
