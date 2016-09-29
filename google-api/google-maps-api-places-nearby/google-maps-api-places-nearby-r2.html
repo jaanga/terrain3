@@ -21,9 +21,13 @@ html, body { height: 100%; margin: 0; padding: 0; }
 		var infowindow;
 		var b = '<br>';
 
-
-		function initMap() {
+		var radius = 1000;
 		var place = { lat: 37.796, lng: -122.398 };
+
+	function initMap() {
+
+		var service;
+
 
 
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -35,18 +39,19 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 		infowindow = new google.maps.InfoWindow();
 
-		var service = new google.maps.places.PlacesService( map );
+		service = new google.maps.places.PlacesService( map );
 
 		service.nearbySearch( {
 
 			location: place,
-			radius: 1000,
+			radius: radius,
 //			type: ['natural_feature']
 //			type: ['colloquial_area']
 //			type: ['locality']
 //			type: ['sublocality']
 //			type: ['point_of_interest']
-			types: ['locality','natural_feature']
+//			types: [ 'locality','natural_feature']
+			types: [ '(regions)', 'natural_feature','colloquial_area' ]
 
 		}, callback );
 
@@ -72,6 +77,18 @@ html, body { height: 100%; margin: 0; padding: 0; }
 				createMarker( results [ i ] );
 
 			}
+
+		var place = { lat: 37.796, lng: -122.398 };
+			circle = new google.maps.Circle({
+				strokeColor: '#FF0000',
+				strokeOpacity: 0.3,
+				strokeWeight: 2,
+				fillColor: '#FF0000',
+				fillOpacity: 0.35,
+				map: map,
+				center: place,
+				radius: radius,
+			});
 
 console.log( 'results', results );
 

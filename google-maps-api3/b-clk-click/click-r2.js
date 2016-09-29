@@ -181,21 +181,19 @@ console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 
 		var bounds = googleMap.map.getBounds();
 
-
-
 		googleMap.clearAll();
 
 		place.latitude = lat ? parseFloat( lat ) : place.latitude;
 
 		place.longitude = lon ? parseFloat( lon ) : place.longitude;
 
-		placeLocation = { lat: place.latitude, lng: place.longitude };
+		CLK.placeLocation = { lat: place.latitude, lng: place.longitude };
 
-		if ( bounds.contains( placeLocation ) === true ) {
+		if ( bounds.contains( CLK.placeLocation ) === true ) {
 
-			googleMap.map.setCenter( placeLocation );
+			googleMap.map.setCenter( CLK.placeLocation );
 
-			CLK.createMarker( placeLocation );
+			CLK.createMarker( CLK.placeLocation );
 
 			if ( TIL.tiles ) { TIL.getTilesData(); }
 

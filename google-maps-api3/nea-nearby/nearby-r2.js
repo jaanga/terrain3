@@ -25,40 +25,88 @@
 	};
 
 
+
 	NEA.getNearby = function() {
 
-		var service;
+		var service, bounds;
+
+		COR.place.nearby = [];
+		COR.results = [];
 
 		NEA.infowindow = new google.maps.InfoWindow();
 		service = new google.maps.places.PlacesService( googleMap.map );
 
-		COR.center = { lat: COR.place.latitudeCenter, lng: COR.place.longitudeCenter };
+/*
+		bounds = new google.maps.LatLngBounds(
+
+			new google.maps.LatLng( TIL.tiles.ULlat, TIL.tiles.ULlon ),
+			new google.maps.LatLng( TIL.tiles.LRlat, TIL.tiles.LRlon )
+
+		);
+*/
+
+		bounds = new google.maps.LatLngBounds(
+
+			new google.maps.LatLng( TIL.tiles.LRlat, TIL.tiles.ULlon ),
+			new google.maps.LatLng( TIL.tiles.ULlat, TIL.tiles.LRlon )
+
+
+		);
 
 		service.nearbySearch( {
 
-			location: COR.center,
-			radius: ( 1.75 * 111111 * COR.place.latitudeDelta ),
+			bounds: bounds,
 
 // https://developers.google.com/places/supported_types
-
 //			type: [ 'colloquial_area' ]
 //			type: [ 'locality' ]
-//			type: [ 'natural_feature' ]
+			type: [ 'natural_feature' ]
 //			type: [ 'point_of_interest']
+//			type: [ '(regions)' ]
+//			type: [ 'political' ]
 //			type: [ 'postal_code' ]
-			type: [ 'postal_town' ]
+//			type: [ 'postal_town' ]
 //			type: [ 'route' ]
 //			type: [ 'sublocality' ]
+
+//			type: [ 'administrative_area_level_5' ]
+//			type: [ 'sublocality_level_5' ]
+//			type: [ '(regions)' ]
 //			type: [ '' ]
 
 //			types: [ 'administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3', 'administrative_area_level_4', 'administrative_area_level_5', ]
+//			types: [ 'locality, sublocality, natural_feature, colloquial_area' ]
 
-//			types: [ 'locality', 'sublocality', 'natural_feature', 'colloquial_area' ]
-//			types: [ '(regions)', 'natural_feature', 'colloquial_area' ]
+//			types: [ '(regions), colloquial_area, locality, natural_feature, route, sublocality'  ]
+//			types: [ '(cities)' ]
 
 //			types: [  ]
 
 		}, NEA.callback );
+
+
+		service.nearbySearch( {
+
+			bounds: bounds,
+			type: [ 'locality' ]
+
+		}, NEA.callback );
+
+
+
+		var rectangle = new google.maps.Rectangle({
+
+			strokeColor: '#FF0000',
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: '#FF0000',
+			fillOpacity: 0.25,
+			map: googleMap.map,
+			bounds: bounds
+
+		});
+
+		googleMap.markings.push( rectangle );
 
 	}
 
@@ -68,8 +116,6 @@
 
 		if ( status === google.maps.places.PlacesServiceStatus.OK ) {
 
-			COR.place.nearby = [];
-
 			for ( var i = 0, result; i < results.length; i++ ) {
 
 				result = results [ i ];
@@ -78,23 +124,16 @@
 
 				COR.place.nearby.push( { name: result.name, lat: loc.lat(), lon: loc.lng(), types: result.types } );
 
+				COR.results.push( result );
+
 			}
-
-			circle = new google.maps.Circle({
-				strokeColor: '#FF0000',
-				strokeOpacity: 0.8,
-				strokeWeight: 2,
-				fillColor: '#FF0000',
-				fillOpacity: 0.35,
-				map: googleMap.map,
-				center: COR.center,
-				radius: ( 1.75 * 111111 * COR.place.latitudeDelta ),
-			});
-
-			googleMap.markings.push( circle );
 
 console.log( 'place', COR.place );
 console.log( 'results', results );
+
+		} else {
+
+console.log( 'error status', status )
 
 		}
 
@@ -104,13 +143,14 @@ console.log( 'results', results );
 
 	NEA.createMarker = function( place ) {
 
-
 		var placeLoc = place.geometry.location;
 
 		var marker = new google.maps.Marker( {
 
 			map: googleMap.map,
-			position: place.geometry.location
+			position: place.geometry.location,
+			label: place.types[ 0 ][ 0 ].toUpperCase(),
+			title: place.types[ 0 ]
 
 		} );
 

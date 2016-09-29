@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Google Maps API3 Nearby R1</title>
+<title>Google Maps API3 Nearby R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
 ' >
@@ -15,10 +15,25 @@
 <script src=../c-geo-geocoder/geocoder-r1.js ></script>
 <script src=../d-par-parameters/parameters-r1.js ></script>
 <script src=../e-til-tiles/tiles-r1.js ></script>
-<script src=../nea-nearby/nearby-r1.js ></script>
+<script src=../nea-nearby/nearby-r2.js ></script>
 <script>
 
 // 
+/*
+
+	COR.defaults.latitude = 37;
+	COR.defaults.longitude = -122;
+	COR.defaults.origin = 'Santa Cruz';
+
+	COR.defaults.latitude = 37.79679;
+	COR.defaults.longitude = -122.39812;
+	COR.defaults.origin = 'San Francisco CA 94111';
+
+*/
+	COR.defaults.latitude = 37.441;
+	COR.defaults.longitude = 25.367;
+	COR.defaults.origin = 'Mykonos';
+
 	init();
 
 	function init() {
