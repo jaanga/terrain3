@@ -4,8 +4,8 @@
 //	not: var urlViewElevations3D = '../elevations-view/index.html';
 
 //	ELV.urlViewElevations3D = '../elevations/elevations-view/index.html';
-	ELV.urlViewElevations3D = '../elevations/elevations-view/elevations-view-r6.html';
-
+//	ELV.urlViewElevations3D = '../elevations/elevations-view/elevations-view-r6.html';
+	ELV.urlViewElevations3D = '../elevations-core3/elevations-core3-r1.html';
 
 	ELV.getMenuDetailsElevations = function() {
 
@@ -342,7 +342,7 @@ console.log( 'complete count', count, elevations.length );
 
 			if ( window.focus ) { newWindow.focus() }
 
-			newWindow.window.COR.place = Object.create( place );
+			newWindow.window.COR.place = place; // Object.create( place );
 			newWindow.window.COR.onLoadJSONFile();
 			newWindow.window.THR.autoRotate = true;
 

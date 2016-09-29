@@ -121,12 +121,14 @@ console.time( 'timer0' );
 		xhr.open( 'GET', fName, true );
 		xhr.onload = function callbackXHR() {
 
-			SEL.fileJSON = JSON.parse( xhr.responseText );
-			SEL.fileName = fName.split( '/' ).pop();
+//			SEL.fileJSON = JSON.parse( xhr.responseText );
+			COR.place = JSON.parse( xhr.responseText );
+
+			COR.fileName = fName.split( '/' ).pop();
 
 			location.hash = 'file=' + fName;
 
-			SEL.onLoadJSONFile();
+			COR.onLoadJSONFile();
 
 		};
 
@@ -147,10 +149,12 @@ console.time( 'timer0' );
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
 
-			SEL.fileJSON = JSON.parse( reader.result );
-			SEL.fileName = files.files[ 0 ].name;
+//			SEL.fileJSON = JSON.parse( reader.result );
+			COR.place = JSON.parse( reader.result );
 
-			SEL.onLoadJSONFile();
+			COR.fileName = files.files[ 0 ].name;
+
+			COR.onLoadJSONFile();
 
 		};
 

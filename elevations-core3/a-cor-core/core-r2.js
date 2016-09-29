@@ -55,7 +55,7 @@
 	COR.defaults.ULtileX = 3033;
 	COR.defaults.ULtileY = 1718;
 
-	COR.defaults.verticalScale = 5;
+	COR.defaults.verticalScale = 2;
 
 	COR.defaults.zoom = 12;
 
