@@ -42,14 +42,14 @@
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/cynthiaarmour/cynthiaarmour.github.io/git/trees/master?recursive=1';
 
-	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
+	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
 //	SEL.defaultFile; // if no default, select a random file
 
 	SEL.searchInFolder = 'maps/';
 	SEL.extension = '.json';
 
 //	SEL.urlBase = '../../../../elevations-data/' + SEL.searchInFolder;
-	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016/' + SEL.searchInFolder;
+	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/' + SEL.searchInFolder;
 
 	CAS.marker = 'Rider';
 	CAS.actorScale = 0.005;
@@ -177,9 +177,9 @@
 	}
 
 
-	SEL.onLoadJSONFile = function() {
+	COR.onLoadJSONFile = function() {
 
-		COR.place = SEL.fileJSON;
+//		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
 

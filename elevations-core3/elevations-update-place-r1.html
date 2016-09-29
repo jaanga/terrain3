@@ -34,7 +34,8 @@
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
 <script src=../elevations-core3/sav-file-save-open/file-save-open-r1.js ></script>
 <script>
-
+// not very useful
+// allows you to save changes to settings without editing JSON file
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
@@ -116,9 +117,9 @@
 
 	}
 
-	SEL.onLoadJSONFile = function() {
+	COR.onLoadJSONFile = function() {
 
-		COR.place = SEL.fileJSON;
+//		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
 
@@ -126,7 +127,7 @@
 
 		MAP.initMapGeometry();
 
-console.log( 'file loaded', SEL.fileName );
+//console.log( 'file loaded', COR.fileName );
 
 	}
 

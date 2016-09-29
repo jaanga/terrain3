@@ -42,7 +42,7 @@
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.defaultFile = '../elevations/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
+	SEL.defaultFile = '../elevations-data/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
 
 	SEL.searchInFolder = 'elevations-data-path-json/';
 //	SEL.extension = '.txt';
@@ -107,9 +107,9 @@
 
 	}
 
-	SEL.onLoadJSONFile = function() {
+	COR.onLoadJSONFile = function() {
 
-		COR.place = SEL.fileJSON;
+//		COR.place = SEL.fileJSON;
 
 		COR.getPlaceDefaults();
 
