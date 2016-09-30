@@ -37,14 +37,14 @@
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	SEL.defaultFile = '../../elevations/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+//	SEL.defaultFile = '../../elevations-data/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
 	SEL.defaultFile; // if no default, select a random file
 
 	SEL.searchInFolder = 'elevations-data-path-json/';
-	SEL.extension = '.json';
+//	SEL.extension = '.json';
 
-//	SEL.urlBase = '../../../../elevations-data/' + SEL.searchInFolder;
-	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
+	SEL.urlBase = '../../elevations-data/' + SEL.searchInFolder;
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
 	init();
 
@@ -84,15 +84,15 @@
 
 		detailsOverlay.setAttribute('open', 'open');
 
-//		detailsOverlayParameters.setAttribute('open', 'open');
+		detailsOverlayParameters.setAttribute('open', 'open');
 
 		detailsTerrain.setAttribute('open', 'open');
 
-//		detailsTerrainParameters.setAttribute('open', 'open');
+		detailsTerrainParameters.setAttribute('open', 'open');
 
 		THR.moreThreejsInits = function() {
 
-			THR.renderer.setClearColor( COR.defaults.backgroundColor );
+//			THR.renderer.setClearColor( COR.defaults.backgroundColor );
 			THR.updateCamera = true;
 
 			THR.axisHelper = new THREE.AxisHelper( 50 );
@@ -108,9 +108,7 @@
 
 	COR.onLoadJSONFile = function() {
 
-//		COR.place = SEL.fileJSON;
-
-		COR.getPlaceDefaults();
+//		COR.getPlaceDefaults();
 
 		OVR.setMenuDetailsOverlay();
 

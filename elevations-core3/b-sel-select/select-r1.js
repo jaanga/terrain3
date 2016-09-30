@@ -31,7 +31,7 @@
 				'<small id=SELmenuSummaryTagline >Select or open a file to view in 3D</small>' +
 
 				'<p>' +
-					'<select id=SELselFiles onchange=console.log("ll",23);SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 style=width:100%; ></select>' +
+					'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+this.value); size=12 ></select>' +
 				'</p>' +
 
 				'<p><input type=file id=SELinpFile onchange=SEL.getJSONFileReader(this); /></p>' + b +
@@ -161,6 +161,7 @@ console.time( 'timer0' );
 		reader.readAsText( files.files[ 0 ] );
 
 	}
+
 
 
 /*

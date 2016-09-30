@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations Get R21</title>
+<title>Elevations Get KNL R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
 Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
@@ -80,7 +80,11 @@ Display results in 3D. Display useful info.
 
 		SELselFiles.onchange = function() { KML.getFile( SEL.urlBase + SELselFiles.value ); }
 
+		SELinpFile.onchange = function() { KML.readFile( this ); }
+
 	}
+
+
 
 </script>
 </body>

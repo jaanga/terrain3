@@ -11,6 +11,8 @@
 
 				'<summary id=menuSummaryKML ><h3>KML options</h3></summary>' +
 
+				'<p><input type=file id=KMLinpFile onchange=KML.readFile(this); /></p>' +
+
 				'<p>' +
 					'<button onclick=KML.getPathProperties(); > get path properties </button>' +
 					'<button onclick=KML.setVerticalScaleToOne(); > set vertical scale to 1.0 </button>' +
@@ -20,11 +22,11 @@
 
 				'<p id=pPathProperties ></p>' +
 
-			'</p>' +
+			'</p>' + b +
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsKML;
 
@@ -38,21 +40,21 @@
 
 		TER.TERinpVerticalOnChange();
 
-	}
+	};
 
 
 
 	KML.setPathProperties = function() {
 
-//		var place, vertices, vertex, points, raycaster, up, collisions, distance;
+		var place, vertices, vertex, points, raycaster, up, collisions, distance;
 
 		THR.scene.remove( THR.lineX );
 
 		place = COR.place;
 
 		if ( !place.points ) { return; }
- 
-		vertices = THR.line.geometry.vertices
+
+		vertices = THR.line.geometry.vertices;
 		points = [];
 
 		raycaster = new THREE.Raycaster();
@@ -69,7 +71,7 @@
 			vertex.y = collisions.length ? collisions[ 0 ].distance : 0 ;
 			points.push( vertex.x, -vertex.z, 111111 * vertex.y );
 
-			if ( i % 100 === 0 ) { 
+			if ( i % 100 === 0 ) {
 
 				if (window.console) { console.log( 'Completed ' + i + ' of ' + vertices.length );
 
@@ -87,21 +89,21 @@
 
 		place.points = points;
 
-	}
+	};
 
 
 	KML.getPathProperties = function() {
 
 		var pt;
 
-		if ( !THR.line ) { alert( 'No such geometry.' ); return }
+		if ( !THR.line ) { alert( 'No such geometry.' ); return; }
 
 		pt = THR.line.geometry;
 		pt.computeBoundingBox();
 
-		var m2f = function( vect ) { return vect.toArray().map( function( num ){ return num.toFixed( 3 ); } ) };
+		var m2f = function( vect ) { return vect.toArray().map( function( num ){ return num.toFixed( 3 ); } ); };
 
-		pPathProperties.innerHTML = 
+		pPathProperties.innerHTML =
 
 			'points: ' + pt.vertices.length + b +
 			'center: ' + m2f( pt.boundingSphere.center ) + b +
@@ -111,13 +113,15 @@
 
 		b;
 
-	}
+	};
 
 
 	KML.drawPath = function() {
 
 //		var geometry, material, pp, points;
-		var place = COR.place;
+//		var place;
+
+		place = COR.place;
 
 		THR.scene.remove( THR.line, THR.line2, THR.line3 );
 
@@ -132,10 +136,10 @@
 
 		for ( var i = 0; i < place.points.length; i +=3 ) {
 
-			points.push( v( pp[ i ], pp[ i + 2 ] / 111111, -pp[ i + 1 ] ) );
-//			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, pp[ i + 1 ] ) );
+			points.push( v( pp[ i ], pp[ i + 2 ] / 111111, - pp [ i + 1 ] ) );
+//			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, - pp[ i + 1 ] ) );
 
-		} 
+		}
 
 
 		geometry = new THREE.Geometry();
@@ -177,7 +181,7 @@
 
 		THR.line3.updateMatrixWorld();
 		THR.line3.scale.y = COR.place.verticalScale;
-		THR.line3.position.y += 0.001;
+//		THR.line3.position.y += 0.001;
 		THR.scene.add( THR.line3 );
 
 //		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
@@ -187,16 +191,16 @@
 
 		motion = true;
 
-	}
+	};
 
 
 // Called by Elevation Get
 
 	KML.getFile = function( url ) {
 
-//		var xhr, response, xmlParse, text, lines, coordinates;
+		var xhr, response, xmlParse, text, lines, coordinates;
 
-		KML.openKML( url ) 
+		KML.openKML( url );
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', url, true );
@@ -209,12 +213,14 @@
 
 			xmlParse = ( new window.DOMParser() ).parseFromString( response, "text/xml" );
 
+			KML.convertXMLtoPoints( xmlParse );
+/*
 			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
 			text = text.textContent;
 
 
-			text = text.replace( / /g, ',' ); 
-			text = text.replace( /\n/g, ',' ); 
+			text = text.replace( / /g, ',' );
+			text = text.replace( /\n/g, ',' );
 
 //			lines = text.split( '\n' ); //
 			lines = text.split( ',' ); //
@@ -231,7 +237,45 @@
 				if ( isNaN( coord ) ) { continue; }
 				coordinates.push( coord );
 
-			} 
+			}
+
+			COR.place.points = coordinates; //.slice( 0,  );
+
+			pp = COR.place.points;
+
+			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
+*/
+
+		}
+
+	};
+
+
+	KML.convertXMLtoPoints = function( xmlParse ) {
+
+			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
+			text = text.textContent;
+
+
+			text = text.replace( / /g, ',' );
+			text = text.replace( /\n/g, ',' );
+
+//			lines = text.split( '\n' ); //
+			lines = text.split( ',' ); //
+			coordinates = [];
+
+
+			for ( var i = 0; i < lines.length; i++ ) {
+
+				line = lines[ i ];
+//				point = line.split( ',' ).map( parseFloat );
+//				coordinates = coordinates.concat( point );
+
+				coord = parseFloat( line );
+				if ( isNaN( coord ) ) { continue; }
+				coordinates.push( coord );
+
+			}
 
 			COR.place.points = coordinates; //.slice( 0,  );
 
@@ -239,11 +283,37 @@
 
 			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
 
-		}
+		KML.drawPath();
 
-	}
+	};
 
 
+	KML.readFile = function( files ) {
+
+		var reader;
+
+		reader = new FileReader();
+		reader.onloadend = function( event ) {
+
+			xmlParse = ( new window.DOMParser() ).parseFromString( reader.result, "text/xml" );
+
+			KML.convertXMLtoPoints( xmlParse );
+
+console.log( 'xmlParse', xmlParse );
+
+
+//			SEL.fileJSON = JSON.parse( reader.result );
+//			COR.place = JSON.parse( reader.result );
+//			COR.fileName = files.files[ 0 ].name;
+//			COR.onLoadJSONFile();
+
+		};
+
+		reader.readAsText( files.files[ 0 ] );
+
+	};
+
+// Called by Elevation Get
 
 // https://developers.google.com/maps/documentation/javascript/examples/layer-kml
 
@@ -276,4 +346,4 @@
 
         } );
 
-	}
+	};

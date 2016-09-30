@@ -158,12 +158,15 @@ console.timeEnd( 'timer0' );
 
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
 		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
+
 		if ( CAS.center ) { 
 
 			CAS.center = MAP.mesh.position.clone(); 
 			CAS.cameraTrack();
 
 		}
+
+// could be called by HTML file ?
 
 		if ( place.placards && PLA.drawPlacePlacards ) {
 
@@ -189,5 +192,4 @@ console.timeEnd( 'timer0' );
 		place.max = MAP.max;
 
 	}
-
 
