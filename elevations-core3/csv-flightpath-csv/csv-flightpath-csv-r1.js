@@ -123,83 +123,6 @@
 	};
 
 
-	CSV.drawPathXXX = function() {
-
-		var geometry, material, pp, points;
-		var place;
-
-		place = COR.place;
-
-		THR.scene.remove( THR.line, THR.line2, THR.line3 );
-
-		if ( !place.points ) { return; }
-
-		TERinpVertical.value = place.verticalScale;
-
-		TER.TERinpVerticalOnChange();
-
-		pp = place.points;
-		points = [];
-
-		for ( var i = 0; i < place.points.length; i +=3 ) {
-
-			points.push( v( pp[ i ], pp[ i + 2 ] / 111111, - pp [ i + 1 ] ) );
-//			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, - pp[ i + 1 ] ) );
-
-		}
-
-
-		geometry = new THREE.Geometry();
-		geometry.vertices = points;
-
-		material = new THREE.LineBasicMaterial( { color: 0xff00ff } );
-		THR.line = new THREE.Line( geometry, material);
-		THR.line.scale.y = COR.place.verticalScale;
-		THR.line.name = 'path';
-
-//		THR.scene.add( THR.line );
-
-		THR.curve1 = new THREE.CatmullRomCurve3( THR.line.geometry.vertices );
-		THR.curve1.closed = false;
-
-		spacedPoints = THR.curve1.getSpacedPoints( 300 );
-
-		geometry = new THREE.Geometry();
-		geometry.vertices = spacedPoints;
-
-		material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-//		THR.line2 = new THREE.Line( geometry, material );
-		THR.line2 = MSH.getMeshLine( spacedPoints, 0x00ff00, 0.0005 );
-
-		THR.line2.updateMatrixWorld();
-		THR.line2.scale.y = COR.place.verticalScale;
-//		THR.scene.add( THR.line2 );
-
-		THR.curve2 = new THREE.CatmullRomCurve3( spacedPoints );
-
-		geometry = new THREE.Geometry();
-		geometry.vertices = THR.curve2.getSpacedPoints( 2000 );
-		material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
-
-//		THR.line3 = new THREE.Line( geometry, material );
-//		THR.line3 = MSH.getMeshLine( spacedPoints, 0xffff00, 0.0002 );
-		THR.line3 = MSH.getMeshLine( geometry.vertices, 0xffff00, 0.0003 );
-
-
-		THR.line3.updateMatrixWorld();
-		THR.line3.scale.y = COR.place.verticalScale;
-//		THR.line3.position.y += 0.001;
-		THR.scene.add( THR.line3 );
-
-//		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
-		THR.curve3 = new THREE.CatmullRomCurve3( geometry.vertices  );
-
-		CAS.curve = THR.curve3;
-
-		motion = true;
-
-	};
-
 
 // Called by Elevation Get
 
@@ -236,12 +159,23 @@
 
 			waypoints = waypoints.slice( 1, -1 );
 
+//console.log( 'waypoints', waypoints );
 
+			pts = [];
+			rts = [];
 
-console.log( 'waypoints', waypoints );
+			for ( var i = 0; i < waypoints.length; i++ ) {
 
-			COR.place.points = waypoints.map( function( p ) { return v( p[ 0 ], p[ 2 ] / ( 111111 * 3.28 ), - p[ 1 ] ); } );
-			COR.place.rotations = waypoints.map( function( p ) { return v( p[ 3 ] * - d2r, p[ 4 ], p[ 5 ] ); } );
+				p = waypoints[ i ];
+
+				pts.push( p[ 0 ], p[ 1 ], p[ 2 ] );
+				rts.push( p[ 3 ], p[ 4 ], p[ 5 ] );
+
+			}
+
+			COR.place.points = pts;
+
+			COR.place.rotations = rts;
 
 			CSV.drawPath();
 
@@ -256,26 +190,43 @@ console.log( 'waypoints', waypoints );
 	CSV.drawPath = function() {
 
 		var scale, geometry, material;
-		var place;
+//		var pp, points;
+//		var place;
 
 		place = COR.place;
 
 		if ( !place.points ) { return; }
 
-		pathColor = 0xff0000;
+		THR.scene.remove( CSV.path, CSV.box );
+
+		pathColor = 0xff00ff;
 		indexDefault = place.indexDefault[ 0 ];
+		index = indexDefault;
+
+		pp = place.points;
+
+		points = [];
+
+		for ( var i = 0; i < place.points.length; i +=3 ) {
+
+			points.push( v( pp[ i ], pp[ i + 2 ] / ( 111111 * 3.28 ), - pp [ i + 1 ] ) );
+
+		}
 
 		geometry = new THREE.Geometry();
-		geometry.vertices = place.points;
+		geometry.vertices = points;
 
 		material = new THREE.LineBasicMaterial( { color: pathColor } );
-		path = new THREE.Line( geometry, material);
-		path.name = 'flightpath';
+		CSV.path = new THREE.Line( geometry, material);
+		CSV.path.updateMatrixWorld();
+		CSV.path.name = 'flightpath';
 
-		path.box = new THREE.BoxHelper( path );
+		CSV.box = new THREE.BoxHelper( CSV.path );
 //		place.path.box.geometry.computeBoundingBox();
-		THR.scene.add( path, path.box );
-		index = indexDefault;
+
+		CSV.box.scale.y = CSV.path.scale.y = COR.place.verticalScale;
+		THR.scene.add( CSV.path, CSV.box );
+
 
 		geometry.computeBoundingSphere();
 //		center = geometry.boundingSphere.center;

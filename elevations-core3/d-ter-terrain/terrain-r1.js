@@ -16,7 +16,7 @@
 				'<p>' +
 
 					'Vertical scale: <output id=TERoutVertical >' + COR.defaults.verticalScale + '</output>' +
-//					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + ' oninput=updateTerrain() title="" style=width:100%; >' +
+//					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + ' oninput=updateTerrain(); title="" style=width:100%; >' +
 					'<input type=range id=TERinpVertical min=0 max=10 step=0.1 value=' + COR.defaults.verticalScale + 
 						' onchange=TER.TERinpVerticalOnChange(); title="" style=width:100%; >' +
 
@@ -69,11 +69,16 @@
 //		if ( MAP.initMapGeometry ) { MAP.initMapGeometry(); }
 		if ( MAP.drawMap ) { MAP.drawMap(); }
 
+
+// change to KML
+
 		if ( THR.lineX ) { THR.lineX.scale.y = COR.place.verticalScale; }
 
 		if ( THR.line ) { THR.line.scale.y = COR.place.verticalScale; }
 		if ( THR.line2 ) { THR.line2.scale.y = COR.place.verticalScale; }
 		if ( THR.line3 ) { THR.line3.scale.y = COR.place.verticalScale; }
+
+		if ( CSV.path ) { CSV.box.scale.y = CSV.path.scale.y = COR.place.verticalScale; }
 
 	}
 

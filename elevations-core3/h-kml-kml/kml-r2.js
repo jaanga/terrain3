@@ -118,8 +118,8 @@
 
 	KML.drawPath = function() {
 
-//		var geometry, material, pp, points;
-//		var place;
+		var geometry, material, pp, points;
+		var place;
 
 		place = COR.place;
 
