@@ -1,5 +1,5 @@
 {
-	"vicinity": "Tenzing-Hillary Airport, Lukla, Nepal",
+	"vicinity": "vnlk-tenzing-hillary-airport-lukla-nepal",
 	"latitude": 27.6878,
 	"longitude": 86.7314,
 	"zoom": 12,

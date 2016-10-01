@@ -152,7 +152,7 @@ console.time( 'timer0' );
 //			SEL.fileJSON = JSON.parse( reader.result );
 			COR.place = JSON.parse( reader.result );
 
-			TERoutVertical.value = TERinpVertical.value = COR.place .verticalScale;
+//			TERoutVertical.value = TERinpVertical.value = COR.place.verticalScale;
 
 			COR.fileName = files.files[ 0 ].name;
 

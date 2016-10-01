@@ -93,6 +93,7 @@
 		target = origin.clone();
 		THR.controls.target.copy( target.clone() );
 		follow = true;
+
 	}
 
 
@@ -227,6 +228,32 @@
 
 		CAS.actor.add( mesh );
 		CAS.actor.mesh = mesh;
+
+		THR.scene.add( CAS.actor );
+
+	}
+
+	CAS.getActorJSON = function( url ) {
+
+		var loader, geometry, material, mesh;
+
+		CAS.actor = new THREE.Object3D();
+		CAS.actor.file = url || 'https://fgx.github.io/fgx-aircraft/data/c172p/c172p.js';
+
+		var loader = new THREE.JSONLoader();
+		loader.crossOrigin = 'anonymous';
+		loader.load( CAS.actor.file, function ( geometry ) {
+
+//			geometry.applyMatrix( new THREE.Matrix4().makeRotationX( pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeRotationY( -pi05 ) );
+			geometry.applyMatrix( new THREE.Matrix4().makeScale( 0.001, 0.001, 0.001 ) );
+			material = new THREE.MeshNormalMaterial( { side: 2 } );
+			mesh = new THREE.Mesh( geometry, material );
+
+			CAS.actor.add( mesh );
+			CAS.actor.mesh = mesh;
+
+		} );
 
 		THR.scene.add( CAS.actor );
 

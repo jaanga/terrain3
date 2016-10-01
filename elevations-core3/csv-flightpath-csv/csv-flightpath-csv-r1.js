@@ -148,7 +148,7 @@
 
 	CSV.readFile = function( files ) {
 
-		var reader, text, waypoints;
+//		var reader, text, waypoints;
 
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
@@ -159,7 +159,7 @@
 
 			waypoints = waypoints.slice( 1, -1 );
 
-//console.log( 'waypoints', waypoints );
+console.log( 'waypoints', waypoints );
 
 			pts = [];
 			rts = [];
@@ -204,17 +204,20 @@
 		index = indexDefault;
 
 		pp = place.points;
-
-		points = [];
+		CSV.points = [];
+		pr = place.rotations;
+		CSV.rotations = [];
 
 		for ( var i = 0; i < place.points.length; i +=3 ) {
 
-			points.push( v( pp[ i ], pp[ i + 2 ] / ( 111111 * 3.28 ), - pp [ i + 1 ] ) );
+			CSV.points.push( v( pp[ i ], pp[ i + 2 ] / ( 111111 * 3.28 ), - pp [ i + 1 ] ) );
+
+			CSV.rotations.push( v( pr[ i ] * - d2r, pr[ i + 1 ], pr [ i + 2 ] ) );
 
 		}
 
 		geometry = new THREE.Geometry();
-		geometry.vertices = points;
+		geometry.vertices = CSV.points;
 
 		material = new THREE.LineBasicMaterial( { color: pathColor } );
 		CSV.path = new THREE.Line( geometry, material);
@@ -239,6 +242,10 @@
 		lonMin = geometry.boundingBox.min.x;
 		lonMax = geometry.boundingBox.max.x;
 
+		motion = true;
+/*
+		if ( null === menuFlightPathData ) { return; }
+
 		menuFlightPathData.innerHTML =
 			'UL Lat: ' + latMax.toFixed( 4 ) + '&deg;' + b +
 			'LR Lat: ' + latMin.toFixed( 4 ) + '&deg;' + b + b +
@@ -250,8 +257,9 @@
 //			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b +
 		b;
 
-		inpFly.checked = true;
 
+		inpFly.checked = true;
+*/
 //		setCameraWorld();
 //		setCameraChase();
 

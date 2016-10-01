@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View JSON R3</title>
+<title>Terrain3 Elevations View Flightpath R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -35,54 +35,56 @@
 <script src=../elevations-core3/e-thr-threejs/threejs-r1.js ></script>
 <script src=../elevations-core3/f-map-map/map-r2.js ></script>
 <script src=../elevations-core3/g-msh-mesh-lines/mesh-lines-r2.js ></script>
-<script src=../elevations-core3/h-kml-kml/kml-r2.js ></script>
+<script src=../elevations-core3/csv-flightpath-csv/csv-flightpath-csv-r1.js ></script>
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
 
 <script src=./i-cas-camera-action-select/camera-action-select-r1.js ></script>
+
 <script>
 
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.defaultFile = '../elevations-data/elevations-data-path-json/oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json';
+	SEL.defaultFile = '../elevations-data/elevations-airports-01/vnlk_12_3033_1718_3_4_510_680_.json';
 
-	SEL.searchInFolder = 'elevations-data-path-json/';
+	SEL.searchInFolder = 'elevations-airports-01/';
 //	SEL.extension = '.txt';
 
 	SEL.urlBase = '../elevations-data/' + SEL.searchInFolder;
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
-	CAS.marker = 'Rider';
+	CAS.marker = 'Aircraft';
 	CAS.actorScale = 0.005;
 
-	CAS.cameraTrack = function() {
 
-		CAS.offsetStart = 0;
-		CAS.offsetEnd = 1;
+	CAS.animateCSVLookAt = function() {
 
-		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
-		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
+		var point, dd;
 
-		THR.controls.autoRotate = false;
-		CHKoutSpeed.value = CAS.cameraPoints = 25;
-		THR.scene.add( THR.camera );
+		THR.stats.update();
 
-		if ( MAP.mesh ) {
+		THR.controls.update();
 
-			THR.viewObject( MAP.mesh );
+		THR.renderer.render( THR.scene, THR.camera );
 
-		} else {
+		requestAnimationFrame( CAS.animateCSVLookAt );
 
-			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+		if ( !motion ) { return; }
+
+		index = index++ >= CSV.points.length - 1 ? indexDefault : index;
+
+		CAS.actor.position.copy( CSV.points[ index ] );
+		CAS.actor.position.y = COR.place.verticalScale * CAS.actor.position.y;
+		CAS.actor.rotation.y = CSV.rotations[ index ].x;
+
+		if ( follow === true ) {
+
+			THR.controls.target.copy( CAS.actor.position );
 
 		}
 
-		THR.controls.target.copy( CAS.center.clone() );
-		target = CAS.actor.position;
-		THR.controls.target.copy( target );
-		follow = true;
-
 	}
+
 
 	init();
 
@@ -93,6 +95,11 @@
 	function init() {
 
 //		COR.taglineHeader = 'Howdy!' + b;
+
+		CAS.cameraOffsetChase = v( -0.02, 0.05, -0.02 );
+		CAS.cameraOffsetInside = v( -0.001, 0.005, -0.01 );
+		CAS.cameraOffsetTrack = v( -0.5, 0.2, 0 );
+		CAS.cameraOffsetWorld = v( 0, 0.35, 0.35 );
 
 		COR.initLeftMenu();
 
@@ -132,13 +139,13 @@
 		THR.moreThreejsInits = function() {
 
 //			THR.renderer.setClearColor( 0x7ec0ee );
-			THR.updateCamera = true;
+//			THR.updateCamera = true;
 
 			THR.axisHelper = new THREE.AxisHelper( 50 );
 			THR.scene.add( THR.axisHelper );
 
-			THR.toggleFog( true );
-			THR.toggleFog( false );
+//			THR.toggleFog( true );
+//			THR.toggleFog( false );
 
 			THR.updateCamera = true;
 
@@ -154,11 +161,11 @@
 
 			THR.radius = 40;
 			THR.controls.maxDistance = 3 * THR.radius;
-			THR.toggleFog( true );
+//			THR.toggleFog( true );
 
-			CAS.getActorBitmap( SEL.urlBase + 'logo-beb-main-site.png' );
+			CAS.getActorJSON();
 
-			CAS.animatePlusLookAt();
+			CAS.animateCSVLookAt();
 
 		};
 
@@ -172,7 +179,7 @@
 
 		MAP.initMapGeometry();
 
-		KML.drawPath();
+		CSV.drawPath();
 
 	}
 

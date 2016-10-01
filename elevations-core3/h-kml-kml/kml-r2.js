@@ -1,7 +1,7 @@
 // Copyright &copy; 2016 Jaanga authors. MIT License
 
 	var KML = KML || {};
-
+	KML.lift = 0.01;
 
 	KML.getMenuDetailsKML = function() {
 
@@ -137,7 +137,6 @@
 		for ( var i = 0; i < place.points.length; i +=3 ) {
 
 			points.push( v( pp[ i ], pp[ i + 2 ] / 111111, - pp [ i + 1 ] ) );
-//			points.push( v( pp[ i ], pp[ i + 2 ] * place.verticalScale, - pp[ i + 1 ] ) );
 
 		}
 
@@ -146,6 +145,9 @@
 		geometry.vertices = points;
 
 		material = new THREE.LineBasicMaterial( { color: 0xff00ff } );
+
+// change to KML.line here and everywhere else
+
 		THR.line = new THREE.Line( geometry, material);
 		THR.line.scale.y = COR.place.verticalScale;
 		THR.line.name = 'path';
@@ -178,14 +180,14 @@
 //		THR.line3 = MSH.getMeshLine( spacedPoints, 0xffff00, 0.0002 );
 		THR.line3 = MSH.getMeshLine( geometry.vertices, 0xffff00, 0.0003 );
 
-
 		THR.line3.updateMatrixWorld();
 		THR.line3.scale.y = COR.place.verticalScale;
-//		THR.line3.position.y += 0.001;
+
+
 		THR.scene.add( THR.line3 );
 
 //		THR.curve3 = new THREE.CatmullRomCurve3( THR.line3.geometry.vertices  );
-		THR.curve3 = new THREE.CatmullRomCurve3( geometry.vertices  );
+		THR.curve3 = new THREE.CatmullRomCurve3( geometry.vertices );
 
 		CAS.curve = THR.curve3;
 

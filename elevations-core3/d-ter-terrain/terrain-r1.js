@@ -66,11 +66,13 @@
 
 		TERoutVertical.value = COR.place.verticalScale;
 
+// change to https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 //		if ( MAP.initMapGeometry ) { MAP.initMapGeometry(); }
 		if ( MAP.drawMap ) { MAP.drawMap(); }
 
 
 // change to KML
+
 
 		if ( THR.lineX ) { THR.lineX.scale.y = COR.place.verticalScale; }
 

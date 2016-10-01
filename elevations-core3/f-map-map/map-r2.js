@@ -153,10 +153,12 @@ console.timeEnd( 'timer0' );
 		MAP.groundPlane = new THREE.Mesh( geometry, material );
 		MAP.groundPlane.name = 'groundPlane';
 		MAP.groundPlane.position.set( MAP.cenLon, - MAP.boxHelper.geometry.attributes.position.array[ 1 ], -MAP.cenLat ); // sea level
-		THR.scene.add( MAP.groundPlane );
 		MAP.groundPlane.visible = TERchkGroudPlane.checked;
 
+		THR.scene.add( MAP.groundPlane );
+
 		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
+
 		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
 
 		if ( CAS.center ) { 
@@ -186,8 +188,8 @@ console.timeEnd( 'timer0' );
 
 		}
 
-		place.latitude = MAP.cenLat;
-		place.longitude = MAP.cenLat;
+//		place.latitude = MAP.cenLat;
+//		place.longitude = MAP.cenLon;
 		place.min = MAP.min;
 		place.max = MAP.max;
 

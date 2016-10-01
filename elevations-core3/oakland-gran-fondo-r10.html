@@ -54,6 +54,8 @@
 	CAS.marker = 'Rider';
 	CAS.actorScale = 0.005;
 
+KML.lift = 0.01;
+
 	CAS.cameraTrack = function() {
 
 		CAS.offsetStart = 0;
@@ -174,8 +176,6 @@
 
 	COR.onLoadJSONFile = function() {
 
-//		COR.place = SEL.fileJSON;
-
 		COR.getPlaceDefaults();
 
 		OVR.setMenuDetailsOverlay();
@@ -183,6 +183,8 @@
 		MAP.initMapGeometry();
 
 		KML.drawPath();
+
+		THR.line3.position.y = 0.0003;
 
 	}
 
