@@ -1,26 +1,33 @@
 // Copyright &copy; 2016 Jaanga authors. MIT License
 
-	var KML = KML || {};
+	var CSV = CSV || {};
+
+	var index = 0;
+	var indexDefault;
+
+	var path = new THREE.Object3D();
+//	path.url = '../../data-path-csv/6-25-2016-1-cooked.csv';
 
 
-	KML.getMenuDetailsKML = function() {
+	CSV.getMenuDetailsCSV = function() {
 
-		var menuDetailsKML =
+		var menuDetailsCSV =
 
-			'<details id=detailsKML open >' +
+			'<details id=detailsCSV open >' +
 
-				'<summary id=menuSummaryKML ><h3>KML options</h3></summary>' +
+				'<summary id=menuSummaryCSV ><h3>CSV options</h3></summary>' +
 
-				'<p><input type=file id=KMLinpFile onchange=KML.readFile(this); /></p>' +
+				'<p><input type=file id=CSVinpFile onchange=CSV.readFile(this); /></p>' +
 
 				'<p>' +
-					'<button onclick=KML.getPathProperties(); > get path properties </button>' +
-					'<button onclick=KML.setVerticalScaleToOne(); > set vertical scale to 1.0 </button>' +
-					'<button onclick=KML.setPathProperties(); > set path elevations </button>' +
-					'<button onclick=ELV.saveFile(); > save to file </button>' + b +
+					'<button onclick=CSV.getPathProperties(); > get path properties </button>' +
+					'<button onclick=CSV.setVerticalScaleToOne(); > set vertical scale to 1.0 </button>' +
+					'<button onclick=CSV.setPathProperties(); > set path elevations </button>' +
+					'<button onclick=COR.saveFile(); > save to file </button>' + b +
 				'</p>' +
 
-				'<p id=pPathProperties ></p>' +
+				'<p id=menuFlightPathData ></p>' +
+				'<p><input id=inpFly type=checkbox > Flying</p>' +
 
 			'</p>' + b +
 
@@ -28,13 +35,13 @@
 
 		'';
 
-		return menuDetailsKML;
+		return menuDetailsCSV;
 
 	};
 
 
 
-	KML.setVerticalScaleToOne = function() {
+	CSV.setVerticalScaleToOne = function() {
 
 		TERinpVertical.value = 1;
 
@@ -44,7 +51,7 @@
 
 
 
-	KML.setPathProperties = function() {
+	CSV.setPathProperties = function() {
 
 		var place, vertices, vertex, points, raycaster, up, collisions, distance;
 
@@ -92,7 +99,7 @@
 	};
 
 
-	KML.getPathProperties = function() {
+	CSV.getPathProperties = function() {
 
 		var pt;
 
@@ -116,10 +123,10 @@
 	};
 
 
-	KML.drawPath = function() {
+	CSV.drawPathXXX = function() {
 
-//		var geometry, material, pp, points;
-//		var place;
+		var geometry, material, pp, points;
+		var place;
 
 		place = COR.place;
 
@@ -196,11 +203,11 @@
 
 // Called by Elevation Get
 
-	KML.getFile = function( url ) {
+	CSV.getFile = function( url ) {
 
 		var xhr, response, xmlParse, text, lines, coordinates;
 
-		KML.openKML( url );
+		CSV.openCSV( url );
 
 		xhr = new XMLHttpRequest();
 		xhr.open( 'GET', url, true );
@@ -211,101 +218,32 @@
 
 			response = xhr.responseText;
 
-			xmlParse = ( new window.DOMParser() ).parseFromString( response, "text/xml" );
-
-			KML.convertXMLtoPoints( xmlParse );
-/*
-			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
-			text = text.textContent;
-
-
-			text = text.replace( / /g, ',' );
-			text = text.replace( /\n/g, ',' );
-
-//			lines = text.split( '\n' ); //
-			lines = text.split( ',' ); //
-			coordinates = [];
-
-
-			for ( var i = 0; i < lines.length; i++ ) {
-
-				line = lines[ i ];
-//				point = line.split( ',' ).map( parseFloat );
-//				coordinates = coordinates.concat( point );
-
-				coord = parseFloat( line );
-				if ( isNaN( coord ) ) { continue; }
-				coordinates.push( coord );
-
-			}
-
-			COR.place.points = coordinates; //.slice( 0,  );
-
-			pp = COR.place.points;
-
-			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
-*/
-
 		}
 
 	};
 
 
-	KML.convertXMLtoPoints = function( xmlParse ) {
+	CSV.readFile = function( files ) {
 
-			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
-			text = text.textContent;
-
-
-			text = text.replace( / /g, ',' );
-			text = text.replace( /\n/g, ',' );
-
-//			lines = text.split( '\n' ); //
-			lines = text.split( ',' ); //
-			coordinates = [];
-
-
-			for ( var i = 0; i < lines.length; i++ ) {
-
-				line = lines[ i ];
-//				point = line.split( ',' ).map( parseFloat );
-//				coordinates = coordinates.concat( point );
-
-				coord = parseFloat( line );
-				if ( isNaN( coord ) ) { continue; }
-				coordinates.push( coord );
-
-			}
-
-			COR.place.points = coordinates; //.slice( 0,  );
-
-			pp = COR.place.points;
-
-			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
-
-		KML.drawPath();
-
-	};
-
-
-	KML.readFile = function( files ) {
-
-		var reader;
+		var reader, text, waypoints;
 
 		reader = new FileReader();
 		reader.onloadend = function( event ) {
 
-			xmlParse = ( new window.DOMParser() ).parseFromString( reader.result, "text/xml" );
+			text = reader.result;
 
-			KML.convertXMLtoPoints( xmlParse );
+			waypoints = text.split( '\n' ).map( function( point ) { return point.split( ',' ).map( parseFloat ); } );
 
-console.log( 'xmlParse', xmlParse );
+			waypoints = waypoints.slice( 1, -1 );
 
 
-//			SEL.fileJSON = JSON.parse( reader.result );
-//			COR.place = JSON.parse( reader.result );
-//			COR.fileName = files.files[ 0 ].name;
-//			COR.onLoadJSONFile();
+
+console.log( 'waypoints', waypoints );
+
+			COR.place.points = waypoints.map( function( p ) { return v( p[ 0 ], p[ 2 ] / ( 111111 * 3.28 ), - p[ 1 ] ); } );
+			COR.place.rotations = waypoints.map( function( p ) { return v( p[ 3 ] * - d2r, p[ 4 ], p[ 5 ] ); } );
+
+			CSV.drawPath();
 
 		};
 
@@ -313,37 +251,59 @@ console.log( 'xmlParse', xmlParse );
 
 	};
 
-// Called by Elevation Get
 
-// https://developers.google.com/maps/documentation/javascript/examples/layer-kml
 
-	KML.openKML = function( url ) {
+	CSV.drawPath = function() {
 
-		var kmlLayer;
-		var place = COR.place;
+		var scale, geometry, material;
+		var place;
 
-		place.kmlFile = url;
-		place.vicinity = place.origin = url.split( '/' ).pop().slice( 0, - SEL.extension.length );
+		place = COR.place;
 
-		kmlLayer = new google.maps.KmlLayer( {
+		if ( !place.points ) { return; }
 
-			url: url,
-			map: googleMap.map
+		pathColor = 0xff0000;
+		indexDefault = place.indexDefault[ 0 ];
 
-		} );
+		geometry = new THREE.Geometry();
+		geometry.vertices = place.points;
 
-		googleMap.map.addListener( 'center_changed', function(  ) {
+		material = new THREE.LineBasicMaterial( { color: pathColor } );
+		path = new THREE.Line( geometry, material);
+		path.name = 'flightpath';
 
-//console.log( '', googleMap.map.center.lat(), googleMap.map.center.lng() );
+		path.box = new THREE.BoxHelper( path );
+//		place.path.box.geometry.computeBoundingBox();
+		THR.scene.add( path, path.box );
+		index = indexDefault;
 
-			googleMap.clearAll();
+		geometry.computeBoundingSphere();
+//		center = geometry.boundingSphere.center;
+//		latitude = center.z;
+//		longitude = center.x;
 
-			place.latitude = googleMap.map.center.lat();
+		geometry.computeBoundingBox();
+		latMin = geometry.boundingBox.min.z;
+		latMax = geometry.boundingBox.max.z;
+		lonMin = geometry.boundingBox.min.x;
+		lonMax = geometry.boundingBox.max.x;
 
-			place.longitude = googleMap.map.center.lng();
+		menuFlightPathData.innerHTML =
+			'UL Lat: ' + latMax.toFixed( 4 ) + '&deg;' + b +
+			'LR Lat: ' + latMin.toFixed( 4 ) + '&deg;' + b + b +
 
-			CLK.onClickGoogleMap();
+			'UL Lon: ' + lonMin.toFixed( 4 ) + '&deg;' + b +
+			'LR Lon: ' + lonMax.toFixed( 4 ) + '&deg;' + b + b +
 
-        } );
+//			'Center Latitude : ' + center.y.toFixed( 4 ) + '&deg;' + b +
+//			'Center Longitude: ' + center.x.toFixed( 4 ) + '&deg;' + b +
+		b;
 
-	};
+		inpFly.checked = true;
+
+//		setCameraWorld();
+//		setCameraChase();
+
+//		THR.camera.add( pointer );
+
+	}

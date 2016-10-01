@@ -154,6 +154,8 @@ console.log( 'place ', place );
 
 	}
 
+
+
 // prevent default from happening
 	function setCamera(){};
 

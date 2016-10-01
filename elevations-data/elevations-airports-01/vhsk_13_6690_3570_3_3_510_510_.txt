@@ -10,7 +10,7 @@
 	"ULtileX": 6690,
 	"ULtileY": 3570,
 	"plainOpacity" : 0.5,
-	"verticalScale" : 0.00002,
+	"verticalScale" : 2,
 	"fogNear" : 0.3,
 	"fogFar" : 0.4,
 	"csvFiles": [ "https://jaanga.github.io/terrain3/data-path-csv/VHSK-22-01-cooked.csv" ],

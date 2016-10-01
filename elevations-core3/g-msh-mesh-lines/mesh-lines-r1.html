@@ -17,12 +17,14 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
 
-<script src=../../elevations-core/core/elevations-core-r1.js ></script>
-<script src=../../elevations-core/core-threejs/core-threejs-r1.js ></script>
 
-<script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>z
-<script src=../../elevations-core/mesh-lines/mesh-lines-r1.js ></script>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
+
+
+<script src=../g-msh-mesh-lines/mesh-lines-r1.js ></script>
 <script>
 
 	var container;
@@ -47,6 +49,63 @@
 
 	var points;
 
+	THR.cameraNear = 1;
+	THR.cameraFar = 2000;
+
+	THR.moreThreejsInits = function() {
+
+		var geometry, material
+
+
+		THR.updateCamera = true;
+
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+
+		THR.axisHelper = new THREE.AxisHelper( 90 );
+		THR.scene.add( THR.axisHelper );
+
+		THR.controls.autoRotate = true;
+
+	};
+
+	init();
+
+	THR.getThreeJS();
+
+	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
+
+	}
+
+
+/*
 	init();
 	animate();
 
@@ -86,9 +145,8 @@
 
 		getThreeJS();
 
-
-
 	}
+*/
 
 	function getNicePath( scale ) {
 

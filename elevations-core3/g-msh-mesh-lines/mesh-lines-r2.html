@@ -2,11 +2,11 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Mesh Lines R1</title>
+<title>Mesh Lines R2</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-08-28' >
+<meta name=date content='2016-09-30' >
 </head>
 <body>
 <!--
@@ -19,14 +19,14 @@
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 <script src=http://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
 
-<script src=../cor-core/core-r1.js ></script>
-<script src=../thr-threejs/threejs-r1.js ></script>
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
 
 
-<script src=../msh-mesh-lines/mesh-lines-r1.js ></script>
+<script src=../g-msh-mesh-lines/mesh-lines-r2.js ></script>
 <script>
 
-	var container;
+	var meshLine;
 
 	var colors = [
 		0xed6a5a,
@@ -48,7 +48,64 @@
 
 	var points;
 
-	COR.initLeftMenu();
+
+	THR.cameraNear = 1;
+	THR.cameraFar = 2000;
+
+	THR.moreThreejsInits = function() {
+
+		var geometry, material
+
+
+		THR.updateCamera = true;
+
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+
+		THR.axisHelper = new THREE.AxisHelper( 90 );
+		THR.scene.add( THR.axisHelper );
+
+		THR.controls.autoRotate = true;
+
+	};
+
+	init();
+
+	THR.getThreeJS();
+
+	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			MSH.getMenuDetailsMeshLine() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
+
+	}
+
 
 	function getNicePath( scale ) {
 
@@ -57,7 +114,7 @@
 		var vertices, spline;
 		var geometry, material, line;
 
-		scene.remove( meshLine );
+		THR.scene.remove( meshLine );
 
 		scale = scale || 30;
 		vertices = [];
@@ -76,14 +133,14 @@
 
 		meshLine = getMeshLine( vertices, 0xffffff * Math.random(), 5 );
 
-		scene.add( meshLine );
+		THR.scene.add( meshLine );
 
 	}
 
 
 	function getRandom() {
 
-		scene.remove( meshLine );
+		THR.scene.remove( meshLine );
 
 		points = [];
 
@@ -95,7 +152,7 @@
 
 		meshLine = getMeshLine( points, 0xffffff * Math.random(), 5 );
 
-		scene.add( meshLine );
+		THR.scene.add( meshLine );
 
 	}
 
@@ -103,7 +160,7 @@
 
 		var geometry = new THREE.Geometry();
 
-		scene.remove( meshLine );
+		THR.scene.remove( meshLine );
 
 		for( var j = 0; j < Math.PI; j += 2 * Math.PI / 100 ) {
 
@@ -118,7 +175,7 @@
 		var material = new THREE.MeshLineMaterial( { color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ), lineWidth: 8 });
 
 		meshLine = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
-		scene.add( meshLine );
+		THR.scene.add( meshLine );
 
 	}
 
@@ -126,7 +183,7 @@
 
 		var geometry = new THREE.Geometry();
 
-		scene.remove( meshLine );
+		THR.scene.remove( meshLine );
 
 		for ( var j = 0; j < 5000 * Math.PI; j += 2 * Math.PI / 100 ) {
 
@@ -136,6 +193,7 @@
 		}
 
 		var line = new THREE.MeshLine();
+
 		line.setGeometry( geometry, function( p ) { return 2 + Math.sin( 1 * p ); } );
 
 		var resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
@@ -148,15 +206,15 @@
 			resolution: resolution,
 			sizeAttenuation: false,
 			lineWidth: 80,
-			near: camera.near,
-			far: camera.far,
+			near: THR.camera.near,
+			far: THR.camera.far,
 			transparent: true
 
 		});
 
 		meshLine = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
 
-		scene.add( meshLine );
+		THR.scene.add( meshLine );
 
 	}
 

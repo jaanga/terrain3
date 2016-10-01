@@ -10,7 +10,7 @@
 	"ULtileX": 3033,
 	"ULtileY": 1718,
 	"plainOpacity" : 0.5,
-	"verticalScale" : 0.00001,
+	"verticalScale" : 1,
 	"fogNear" : 0.2,
 	"fogFar" : 0.5,
 	"csvFiles": [ "https://jaanga.github.io/terrain3/data-path-csv/6-25-2016-1-cooked.csv" ],

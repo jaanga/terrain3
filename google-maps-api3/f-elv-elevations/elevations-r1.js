@@ -384,6 +384,8 @@ console.log( 'complete count', count, elevations.length );
 
 	};
 
+
+
 	ELV.openFile = function( files, type ) {
 
 		var fileData, reader, data;

@@ -500,3 +500,39 @@
 	};
 
 
+	COR.saveFile = function() {
+
+// http://ausdemmaschinenraum.wordpress.com/2012/12/06/how-to-save-a-file-from-a-url-with-javascript/
+
+//		var place;
+//		var pl, blob, a;
+
+		place = COR.place;
+		place.fileName = '' +
+
+			place.origin.toLowerCase() + '_'  +
+			place.zoom + '_' +
+			place.ULtileX + '_' +
+			place.ULtileY + '_' +
+			place.tilesX + '_' +
+			place.tilesY + '_' +
+			place.samplesX + '_' + 
+			place.samplesY + '_' +
+			'.json';
+
+		pl = JSON.stringify( place );
+		pl = pl.replace ( /,\"/g, ',\n"' );
+		blob = new Blob( [ pl ] );
+
+		a = document.body.appendChild( document.createElement( 'a' ) );
+		a.href = window.URL.createObjectURL( blob );
+		a.download = place.fileName;
+		a.click();
+
+//		delete a;
+		a = null;
+
+	};
+
+
+

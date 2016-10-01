@@ -26,7 +26,7 @@
 <script src=../e-thr-threejs/threejs-r1.js ></script>
 <script src=../f-map-map/map-r2.js ></script>
 <script src=../g-msh-mesh-lines/mesh-lines-r2.js ></script>
-<script src=../h-kml-kml/kml-r2.js ></script>
+<script src=../csv-flightpath-csv/csv-flightpath-csv-r1.js ></script>
 
 <!--
 <script src=../../google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
@@ -36,11 +36,11 @@
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-//	SEL.defaultFile = '../../elevations-data/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
-	SEL.defaultFile; // if no default, select a random file
+	SEL.defaultFile = '../../elevations-data/elevations-airports-01/ygil_12_3738_2427_3_3_510_510_.txt';
+//	SEL.defaultFile; // if no default, select a random file
 
-	SEL.searchInFolder = 'elevations-data-path-json/';
-//	SEL.extension = '.json';
+	SEL.searchInFolder = 'elevations-airports-01/';
+	SEL.extension = '.txt';
 
 	SEL.urlBase = '../../elevations-data/' + SEL.searchInFolder;
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
@@ -63,7 +63,7 @@
 
 			SEL.getMenuDetailsSelectFile() +
 
-			KML.getMenuDetailsKML() +
+			CSV.getMenuDetailsCSV() +
 
 			OVR.getMenuDetailsOverlay() + b +
 
@@ -113,7 +113,7 @@
 
 		MAP.initMapGeometry();
 
-		KML.drawPath();
+		CSV.drawPath();
 
 	}
 
