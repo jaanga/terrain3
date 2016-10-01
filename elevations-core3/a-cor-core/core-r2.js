@@ -16,6 +16,8 @@
 
 	var PLA = {};
 	var SAV = {};
+	var MSH = {};
+	var CSV = {};
 
 
 // !!!
