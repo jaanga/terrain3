@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Terrain3 Elevations View JSON R2</title>
+<title>Terrain3 Elevations View JSON R3</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -37,6 +37,8 @@
 <script src=../elevations-core3/g-msh-mesh-lines/mesh-lines-r2.js ></script>
 <script src=../elevations-core3/h-kml-kml/kml-r2.js ></script>
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
+
+<script src=./i-cas-camera-action-select/camera-action-select-r1.js ></script>
 <script>
 
 
@@ -47,8 +49,40 @@
 	SEL.searchInFolder = 'elevations-data-path-json/';
 //	SEL.extension = '.txt';
 
-	SEL.urlBase = '../../elevations-data/' + SEL.searchInFolder;
+	SEL.urlBase = '../elevations-data/' + SEL.searchInFolder;
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
+
+	CAS.marker = 'Rider';
+	CAS.actorScale = 0.005;
+
+	CAS.cameraTrack = function() {
+
+		CAS.offsetStart = 0;
+		CAS.offsetEnd = 1;
+
+		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
+		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
+
+		THR.controls.autoRotate = false;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
+		THR.scene.add( THR.camera );
+
+		if ( MAP.mesh ) {
+
+			THR.viewObject( MAP.mesh );
+
+		} else {
+
+			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+
+		}
+
+		THR.controls.target.copy( CAS.center.clone() );
+		target = CAS.actor.position;
+		THR.controls.target.copy( target );
+		follow = true;
+
+	}
 
 	init();
 
@@ -67,6 +101,8 @@
 			COR.getMenuDetailsHeader() +
 
 			SEL.getMenuDetailsSelectFile() +
+
+			CAS.getMenuDetailsCameraActions() +
 
 			OVR.getMenuDetailsOverlay() +
 
@@ -103,6 +139,26 @@
 
 			THR.toggleFog( true );
 			THR.toggleFog( false );
+
+			THR.updateCamera = true;
+
+			THR.axisHelper = new THREE.AxisHelper( 50 );
+			THR.scene.add( THR.axisHelper );
+			THR.axisHelper.visible = false;
+
+			TERchkAxisHelper.checked  = false;
+			TERchkBoxHelper.checked = false;
+
+//			detailsOverlay.removeAttribute( 'open' );
+//			detailsTerrain.removeAttribute( 'open' );
+
+			THR.radius = 40;
+			THR.controls.maxDistance = 3 * THR.radius;
+			THR.toggleFog( true );
+
+			CAS.getActorBitmap( SEL.urlBase + 'logo-beb-main-site.png' );
+
+			CAS.animatePlusLookAt();
 
 		};
 
