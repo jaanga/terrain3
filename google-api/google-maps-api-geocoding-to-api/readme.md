@@ -12,7 +12,7 @@
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16568705/49fbe668-41e2-11e6-8f22-4b2c2f71c7f0.png" style=display:none; width=800 >
 
-<iframe src=https://jaanga.github.io/terrain3/google-api/google-maps-api-geocoding/index.html width=100% height=600px ></iframe>
+<iframe src=https://jaanga.github.io/terrain3/google-api/google-maps-api-geocoding-to-api/index.html width=100% height=600px ></iframe>
 
 _Google API Geocoding Service_
 
