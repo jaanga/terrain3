@@ -14,7 +14,7 @@
 				'<small>If small request, no need for API key</small>' +
 
 				'<p>api key: <input id=CLKinpAPI onclick=this.select(); title="Obtain API key from Google Maps" ></p>' +
-				'<p><button onclick=CLK.onEventAPIKeyUpdate(); >Set API key</button></p>' +
+				'<p><button onclick=CLK.onEventAPIKeyUpdate(); >Set API key</button></p>' + b +
 
 //				'<p><button onclick=CLK.setCookie(); >set cookie</button></p>' +
 //				'<p><button onclick=alert(document.cookie); >get cookie</button></p>' +
@@ -23,7 +23,7 @@
 
 			'</details>' + 
 
-		b;
+		'';
 
 		return menuDetailsAPIKey;
 
@@ -50,15 +50,15 @@ console.log( 'dc', document.cookie );
 
 		var menuDetailsMapClick =
 
-			'<details id=CLKclickDetails open >' +
+			'<details id=CLKclickDetails>' +
 
 				'<summary><h3>Click details</h3></summary>' +
 
-				'<div id=menuClickDetails ></div>' +
+				'<div id=menuClickDetails ></div>' + b +
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsMapClick;
 
