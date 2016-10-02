@@ -202,9 +202,7 @@ console.time( 'timer0' );
 
 // more visible and editable when it's in the HTML file
 
-	SEL.onLoadJSONFile = function() {
-
-		COR.place = SEL.fileJSON;
+	COR.onLoadJSONFile = function() {
 
 		COR.getPlaceDefaults();
 

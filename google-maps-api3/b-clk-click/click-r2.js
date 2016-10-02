@@ -29,6 +29,9 @@
 
 	}
 
+
+/*
+
 	CLK.setCookie = function() {
 
 		document.cookie = "apiKey=23"; // + CLKinpAPI.value + ", ";
@@ -44,6 +47,7 @@ console.log( 'dc', document.cookie );
 
 	}
 
+*/
 
 
 	CLK.getMenuDetailsMapClick = function() {
@@ -173,9 +177,11 @@ console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 	}
 
 
-	CLK.setCenter = function( lat, lon ) {
+	CLK.setCenter = function( lat, lon, goDistance ) {
 
 		var place, marker;
+
+		goDistance = goDistance || false;
 
 		place = COR.place;
 
@@ -189,7 +195,7 @@ console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 
 		CLK.placeLocation = { lat: place.latitude, lng: place.longitude };
 
-		if ( bounds.contains( CLK.placeLocation ) === true ) {
+		if ( bounds.contains( CLK.placeLocation ) === true || goDistance === true ) {
 
 			googleMap.map.setCenter( CLK.placeLocation );
 
