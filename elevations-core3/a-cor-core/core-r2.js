@@ -192,7 +192,7 @@
 
 			'iframe { width: 100%; }' +
 
-			'select { width: 100%; }' +
+//			'select { width: 100%; }' +
 			'summary h2, summary h3, summary h4 { display: inline; }' +
 			'summary { outline: none; }' +
 
@@ -272,7 +272,7 @@
 			'input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; background-color: #888; height: 20px; width: 10px; }' +
 
 			'p { margin: 0 0 5px 0; }' +
-			'select { width: 100%; }' +
+//			'select { width: 100%; }' +
 			'summary h3, summary h4 { display:inline; }' +
 			'summary { outline: none; }' +
 

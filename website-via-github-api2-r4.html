@@ -31,7 +31,7 @@ Menu has breadcrumbs and other useful links.
 
 <script>
 
-//	DEF.readmeURL = '../../../terrain3' + DEF.searchInFolder;
+//	DEF.readmeURL = '../../../terrain3';
 
 	IFR.sites = [
 
@@ -90,6 +90,8 @@ Menu has breadcrumbs and other useful links.
 
 		item = location.hash ? location.hash.slice( 1 ) : DEF.searchInFolder;
 
+//item = '../../../../terrain3/elevations-core3/elevations-core3-r1.html';
+
 		if ( item.endsWith( '.md' ) === true ) {
 
 			COR.setMenuBreadCrumbs( DEF.searchInFolder );
@@ -106,8 +108,6 @@ Menu has breadcrumbs and other useful links.
 
 
 		} else if ( item.endsWith( '.html' ) === true ) {
-
-
 
 			COR.setMenuBreadCrumbs( item );
 
