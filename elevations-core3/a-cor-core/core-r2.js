@@ -46,6 +46,8 @@
 
 	COR.defaults.mapTypeId = 'hybrid';
 
+	COR.defaults.nearby = '';
+
 	COR.defaults.objectName = 'defaults';
 	COR.defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
 	COR.defaults.pixelsPerTile = 256;
@@ -457,6 +459,11 @@
 		var keys;
 
 		if ( !COR.place ) { COR.place = {}; }
+
+// reset what needs resetting
+
+		COR.nearby = [];
+		COR.placards = [];
 
 		keys = Object.keys( COR.defaults ); 
 

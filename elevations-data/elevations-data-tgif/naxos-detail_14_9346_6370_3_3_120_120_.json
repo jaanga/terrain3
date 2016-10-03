@@ -1,4 +1,5 @@
 {"backgroundColor":8306926,
+"plaHeight": 0.00001,
 "deltaOverlay":1,
 "fogNear":0.5,
 "fogFar":1,
@@ -24,8 +25,9 @@
 "resolutions":["611"],
 "samplesX":120,
 "samplesY":120,
+"nearby": [],
 "placards" : [ 
-["Naxos Resort Beach Hotel", 0.00005, 120, 0, 0.01, 0, 25.3762063, 0, 37.098296 ],
-["Naxos Island", 0.00005, 120, 0, 0.01, 0, 25.40390625, 0, 37.09020737405244 ]
+["Naxos Resort Beach Hotel", 0.00001, 120, 0, 0.01, 0, 25.3762063, 0, 37.098296 ],
+["Naxos Island", 0.00001, 120, 0, 0.01, 0, 25.40390625, 0, 37.09020737405244 ]
  ],
 "fileName":"naxos_14_9346_6370_3_3_120_120_.json"}

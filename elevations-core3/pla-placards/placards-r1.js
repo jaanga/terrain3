@@ -2,7 +2,9 @@
 
 	var PLA = PLA || {};
 
-	
+// "plaHeight": 0.00001,
+
+
 	PLA.drawPlacePlacards = function() {
 
 		var cpp, p;
@@ -39,24 +41,26 @@
 
 		PLA.nearby = new THREE.Object3D();
 
+		if ( !COR.place.nearby ) { return; }
+
 		cpn = COR.place.nearby;
 
 		MAP.boxHelper.updateMatrixWorld()
 		MAP.boxHelper.geometry.computeBoundingBox()
 
 		delta = MAP.boxHelper.geometry.boundingBox.max.y - MAP.boxHelper.geometry.boundingBox.min.y;
+
 //		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
 //		height = 0.00005;
-
 //console.log( 'height', height );
-
+console.log( 'PLA.nearby', cpn );
 		for ( var i = 0; i < cpn.length; i++ ) {
 
 			n = cpn[ i ];
 
 			nearby = PLA.drawPlacard( n.name, height, 120, 0, delta, 0 );
-
 			nearby.position.set( n.lon, MAP.boxHelper.geometry.boundingBox.min.y, - n.lat );
+			nearby.name = n.name;
 
 			PLA.nearby.add( nearby );
 

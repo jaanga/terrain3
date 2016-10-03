@@ -12,7 +12,7 @@
 ## Full Screen - stable: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/index.html )
 -->
 
-## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/elevations-get-r21.html )
+## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/index.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >

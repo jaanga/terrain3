@@ -16,7 +16,7 @@
 	var THR = THR || {};
 
 	THR.cameraNear = 0.001;
-	THR.cameraFar = 2;
+	THR.cameraFar = COR.zoom < 9 ? 2 : 3;
 
 	THR.getThreeJS = function() {
 
@@ -112,6 +112,8 @@
 		}
 
 	}
+
+
 
 	THR.onWindowResize = function() {
 

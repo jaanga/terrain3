@@ -52,11 +52,13 @@
 	SEL.getFolders = function() {
 
 		var folders = [
+			'elevations-airports-01',
 			'elevations-data-04',
 			'elevations-data-family+friends',
 			'elevations-data-oakland-gran-fondo',
 			'elevations-data-path-json',
-			'elevations-data-tgif'
+			'elevations-data-tgif',
+			'test'
 		];
 
 		for ( var i = 0; i < folders.length; i++ ) {
@@ -65,7 +67,7 @@
 
 		}
 
-		SELselFolder.selectedIndex = 0;
+		SELselFolder.selectedIndex = 1;
 
 	}
 
