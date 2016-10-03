@@ -6,7 +6,9 @@ Dev Notes
 
 * Ask: do you know anybody who is interested in 3D cartography
 
-* Oakland Gran Fondo
+* David Ellis
+
+* Xue
 * Abe Megahed
 * Callum Prentice
 * Jaume Sanchez
@@ -41,6 +43,7 @@ Dev Notes
 
 ## Ongoing contact
 
+* Oakland Gran Fondo
 * Tim Child << on jaanga < wellington nz
 * Jim Michler < will send bike path
 * Ladies

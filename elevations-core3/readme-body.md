@@ -36,17 +36,11 @@ This project is an attempt to remedy the situation.
 ## To Do / Wish List
 
 * Codebase
-	* 2016-08-11 ~ Add overall name space
-	* 2016-08-11 ~ Add separate init file
+	* Create DEF file
 * Plugins
 	* 2016-08-22 ~ Add OBJ files
 	* 2016-08-22 ~ Analemmas
-	* 2016-08-11 ~ Add easy to make animated GIF
-	* 2016-08-05 ~ Save changes to data file
 	* Add pokemons?
-	* Add placards/signs
-	* Link to escape iframe
-	* 2016-08-13 ~ Google nearby places
 	* 2016-08-11 ~ Add physics
 	* Add accurate elevation measurement
 		* Clock to read altitude
@@ -55,20 +49,16 @@ This project is an attempt to remedy the situation.
 	* geoJSON
 	* CodePen Maps
 	* Fiddle maps
+* Paths ~ KML * CSV
+	* 2016-10-02 Add current frame slider
+	* Editing splines
 * View settings
-	* 2016-08-19 ~ Add view settings menu item
-	* 2016-08-15 ~ Add autoRotate checkbox
-	* 2016-08-19 ~ for camera controllers everywhere
-		* Smooth Fly controls parameters
-	* 2016-08-05 ~ Add skybox, background
+	* 2016-08-05 ~ Add skybox
+	* 2016-08-11 ~ Add fog controls
 *Overlay settings
 	* Add more overlays?
 * Terrain settings
-	* 2016-08-11 ~ Add fog controls
 	* 2016-08-15 ~ Add resolution details
-* Path Settings
-	* Headings, pitch and roll everywhere
-	* Editing splines
 
 
 ## Issues
@@ -105,6 +95,29 @@ Intended for generating flightpaths
 
 ## Change Log
 
+
+### 2016-10-02 ~ core3
+
+Done
+
+* Codebase
+	* 2016-08-11 ~ Add overall name space
+	* 2016-08-11 ~ Add separate init file
+* Plugins
+	* Add placards/signs
+	* Link to escape iframe
+	* 2016-08-13 ~ Google nearby places
+	* 2016-08-11 ~ Add easy to make animated GIF
+	* 2016-08-05 ~ Save changes to data file
+* View settings
+	* 2016-08-19 ~ for camera controllers everywhere
+		* Smooth Fly controls parameters
+	* 2016-08-05 ~ Add skybox, background
+* Path Settings
+	* Headings, pitch and roll everywhere
+* View settings
+	* 2016-08-19 ~ Add view settings menu item
+	* 2016-08-15 ~ Add autoRotate checkbox
 
 ### 2016-08-15 ~ R1.1
 

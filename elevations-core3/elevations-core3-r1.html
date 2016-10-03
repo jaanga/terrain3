@@ -4,9 +4,10 @@
 <meta charset=utf-8 >
 <title>Elevations Core3 R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
-<meta name=description content='Core three.js' >
-<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-09-07' >
+<meta name=description content='Elevations Core3, load and display interactive 3D maps. 2D maps applied as overlays o 3D meshes.
+Select source and resolution of overlays.Toggle or control display of various viewing and debugging aids.' >
+<meta name=keywords content='cartography,maps,animated,WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-10-02' >
 </head>
 <body>
 <!--
@@ -26,7 +27,6 @@
 <script src=../../elevations-core2/map-map/map-r1.js ></script>
 -->
 
-
 <script src=../elevations-core3/a-cor-core/core-r2.js ></script>
 <script src=../elevations-core3/b-sel-select/select-r2.js ></script>
 <script src=../elevations-core3/c-ovr-overlay/overlay-r1.js ></script>
@@ -40,7 +40,6 @@
 
 	SEL.searchInFolder = 'elevations-data-04/';
 
-//	SEL.urlBase = '../elevations-data/' + SEL.searchInFolder;
 	SEL.urlBase = '../elevations-data/';
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
@@ -90,6 +89,7 @@
  		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
 		SELdetailsSelectFile.setAttribute('open', 'open');
+
 
 			THR.moreThreejsInits = function() {
 

@@ -53,7 +53,7 @@
 //		height = 1 / ( COR.place.verticalScale * COR.place.verticalScale * COR.place.zoom * COR.place.zoom * 10 )
 //		height = 0.00005;
 //console.log( 'height', height );
-console.log( 'PLA.nearby', cpn );
+
 		for ( var i = 0; i < cpn.length; i++ ) {
 
 			n = cpn[ i ];
