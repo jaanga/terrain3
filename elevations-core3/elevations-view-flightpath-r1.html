@@ -29,7 +29,7 @@
 -->
 
 <script src=../elevations-core3/a-cor-core/core-r2.js ></script>
-<script src=../elevations-core3/b-sel-select/select-r1.js ></script>
+<script src=../elevations-core3/b-sel-select/select-r2.js ></script>
 <script src=../elevations-core3/c-ovr-overlay/overlay-r1.js ></script>
 <script src=../elevations-core3/d-ter-terrain/terrain-r1.js ></script>
 <script src=../elevations-core3/e-thr-threejs/threejs-r1.js ></script>
@@ -38,10 +38,9 @@
 <script src=../elevations-core3/csv-flightpath-csv/csv-flightpath-csv-r1.js ></script>
 <script src=../elevations-core3/pla-placards/placards-r1.js ></script>
 
-<script src=./i-cas-camera-action-select/camera-action-select-r1.js ></script>
+<script src=./i-cas-camera-action-select/camera-action-select-r2.js ></script>
 
 <script>
-
 
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
@@ -50,7 +49,7 @@
 	SEL.searchInFolder = 'elevations-airports-01/';
 //	SEL.extension = '.txt';
 
-	SEL.urlBase = '../elevations-data/' + SEL.searchInFolder;
+	SEL.urlBase = '../elevations-data/';
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
 	CAS.marker = 'Aircraft';
@@ -75,7 +74,8 @@
 
 		CAS.actor.position.copy( CSV.points[ index ] );
 		CAS.actor.position.y = COR.place.verticalScale * CAS.actor.position.y;
-		CAS.actor.rotation.y = CSV.rotations[ index ].x;
+
+		CAS.actor.mesh.rotation.y = CSV.rotations[ index ].x;
 
 		if ( follow === true ) {
 
@@ -90,7 +90,7 @@
 
 	THR.getThreeJS();
 
-	THR.animate();
+//	THR.animate();
 
 	function init() {
 
@@ -126,6 +126,8 @@
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
 		SEL.getGitHubAPITreeContents();
+
+		SELdetailsSelectFile.setAttribute('open', 'open');
 
 //		detailsOverlay.setAttribute('open', 'open');
 

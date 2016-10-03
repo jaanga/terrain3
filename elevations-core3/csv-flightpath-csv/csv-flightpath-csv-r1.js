@@ -200,7 +200,7 @@ console.log( 'waypoints', waypoints );
 		THR.scene.remove( CSV.path, CSV.box );
 
 		pathColor = 0xff00ff;
-		indexDefault = place.indexDefault[ 0 ];
+		indexDefault = place.indexDefault ? place.indexDefault[ 0 ] : 0;
 		index = indexDefault;
 
 		pp = place.points;
