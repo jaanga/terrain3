@@ -169,6 +169,7 @@ console.timeEnd( 'timer0' );
 		}
 
 // could be called by HTML file ?
+// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 
 		if ( place.placards && PLA.drawPlacePlacards ) {
 

@@ -85,10 +85,11 @@
 
 	COR.taglineHeader = 
 
-		'<p><small>' +
+		'<div><small>' +
 			'Rotate|Zoom|Pan => 1|2|3 finger/button' + b +
-			'Rotation => spacebar' +
-		'</small></p>';
+			'Rotation => spacebar' + b +
+			'Slide menu => \'hamburger\' icon' +
+		'</small></div>';
 
 	COR.linkReadMe = 'https://jaanga.github.io/terrain3/index.html#elevations-core3';
 

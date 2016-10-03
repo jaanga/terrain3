@@ -20,13 +20,21 @@ This project is an attempt to remedy the situation.
 * Get data via iframe parent, file open dialog or location.hash
 * Work well in an iframe
 
+
 ### Vision
 
-* TBD
+* Help people build innovative and highly specialist cartography interactions
+
 
 ## Features
 
-* TBD
+* Load and display interactive 3D maps
+* 2D maps applied as overlays on 3D meshes
+* Select source and resolution of overlays
+* Toggle or control display of various viewing and debugging aids
+* Display messages as 3D placards
+* Display place names as 3D placards
+* Load and display path data from KML files as lines with width
 * Click three bars( "hamburger" ) icon to slide menu in or out
 * Direct link to this read me file
 * Click on title to reload 
@@ -36,8 +44,10 @@ This project is an attempt to remedy the situation.
 ## To Do / Wish List
 
 * Codebase
-	* Create DEF file
+	* 2016-10-03 ~ Create DEF file
+	* 2016-10-03 ~ Clean up menu IDs
 * Plugins
+	* 2016-10-03 ~ Add ads
 	* 2016-08-22 ~ Add OBJ files
 	* 2016-08-22 ~ Analemmas
 	* Add pokemons?
@@ -59,7 +69,8 @@ This project is an attempt to remedy the situation.
 	* Add more overlays?
 * Terrain settings
 	* 2016-08-15 ~ Add resolution details
-
+* Docs
+	* 2016-10-03 ~ Embellish readme.md
 
 ## Issues
 

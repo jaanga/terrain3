@@ -84,7 +84,7 @@ value='Source code listing' >
 ## To Do / Wish List
 
 * Google Places
-	* 2016-10-03 ~ Get 'next' places
+	* 2016-10-03 ~ Get 'next' places / all 60
 * Add input tag to edit place name
 * Add better height scaling system
 * Drag map updates location
