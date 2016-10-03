@@ -83,13 +83,14 @@ value='Source code listing' >
 
 ## To Do / Wish List
 
-
+* Google Places
+	* 2016-10-03 ~ Get 'next' places
 * Add input tag to edit place name
 * Add better height scaling system
 * Drag map updates location
 * Update 3D Display while drawing 
 * Able to do 1000x1000 maps reliably and quickly
-* Add ability to send directly to View Elevations 3D Display script in new tab
+
 
 ### Code
 
@@ -146,6 +147,11 @@ Intended for general use
 
 
 ## Change Log
+
+### 2016-10-03 ~ R23
+
+* Add placards and nearby
+* Add ability to send directly to View Elevations 3D Display script in new tab
 
 ### 2016-08-27 ~ R17
 

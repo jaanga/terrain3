@@ -30,12 +30,12 @@
 
 				'<small id=SELmenuSummaryTagline >Select or open a file to view in 3D</small>' +
 
-				'<p>' +
+				'<p id=SELpFolder >' +
 					'<select id=SELselFolder onchange=SEL.searchInFolder=this.value;SEL.getFiles(); ></select>' +
 				'</p>' +
 
 				'<p>' +
-					'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+SEL.searchInFolder+"/"+this.value); size=12 ></select>' +
+					'<select id=SELselFiles onchange=SEL.getJSONFileXHR(SEL.urlBase+SEL.searchInFolder+"/"+this.value); size=12 style=width:100% ></select>' +
 				'</p>' +
 
 				'<p><input type=file id=SELinpFile onchange=SEL.getJSONFileReader(this); /></p>' + b +
