@@ -25,7 +25,7 @@
 	CAS.center = origin;
 	var target = origin;
 
-//	CAS.cameraOffsetChase = v( 50 * CAS.zoomScale, 50 * CAS.zoomScale, 50 * CAS.zoomScale );
+	CAS.cameraOffsetChase = v( 50 * CAS.zoomScale, 50 * CAS.zoomScale, 50 * CAS.zoomScale );
 	CAS.cameraOffsetInside = v( 0 * CAS.zoomScale, 20 * CAS.zoomScale, 0 * CAS.zoomScale );
 	CAS.cameraOffsetTrack = v( -80 * CAS.zoomScale, 10 * CAS.zoomScale, 10 * CAS.zoomScale );
 	CAS.cameraOffsetWorld = v( 80 * CAS.zoomScale, 80 * CAS.zoomScale, 80 * CAS.zoomScale );
@@ -51,6 +51,13 @@
 					'<input type=range id=CASinpSpeed min=0 max=100 step=1 value=' + CAS.cameraPoints + 
 						' oninput=CHKoutSpeed.value=CAS.cameraPoints=this.valueAsNumber title="0 to 10: OK" >' +
 				'</p>' +
+
+				'<p>' +
+					CAS.marker + ' location: <output id=CHKoutLocation >' + index + '</output><br>' +
+					'<input type=range id=CASinpLocation min=0 max=100 value=' + ( 100 * index ) + 
+						' oninput=CHKoutLocation.value=index=this.valueAsNumber/100 title="0 to 10: OK" >' +
+				'</p>' +
+
 
 			'</details>' +
 
@@ -98,7 +105,6 @@
 		target = origin.clone();
 		THR.controls.target.copy( target.clone() );
 		follow = true;
-
 
 	}
 
@@ -317,6 +323,10 @@
 		dd = CAS.cameraPoints / 250000;
 
 		index += dd;
+
+		CHKoutLocation.value = (100 * index ).toFixed( 1 ) + '%';
+
+		CASinpLocation.value  = 100 * index;
 
 		index = index <= CAS.offsetEnd ? index : dd + CAS.offsetStart;
 

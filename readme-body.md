@@ -25,7 +25,7 @@ So, let's get going!
 ### Vision
 
 * To go where nobody has gone before
-
+* To be 3D everywhere
 
 ## Features
 
@@ -81,6 +81,10 @@ The fun bits of cartography are the ones that map what can't be seen.
 
 
 ## Change Log
+
+### 2016-10-03 ~  website-via-github-api2-r4
+
+* Terraon3 home page finally reached a reasonably good stage
 
 
 ### 2016-08-12

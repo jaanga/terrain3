@@ -1,4 +1,9 @@
 
+
+## [Elevations View Core3]( https://jaanga.github.io/terrain3/website-via-github-api2-r4.html#elevations-core3 )
+
+
+
 ## Concept
 
 
@@ -16,9 +21,9 @@ This project is an attempt to remedy the situation.
 
 ### Mission
 
-* Read elevation files and create 3D display
-* Get data via iframe parent, file open dialog or location.hash
-* Work well in an iframe
+* Read elevation files and create interactive 3D display
+* Receive data via iframe parent, file open dialog or location.hash
+* Work well inside an iframe
 
 
 ### Vision

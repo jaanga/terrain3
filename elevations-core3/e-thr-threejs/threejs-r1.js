@@ -65,7 +65,6 @@
 		THR.radius = mesh.geometry.boundingSphere.radius;
 		THR.center = mesh.position.clone().add( mesh.geometry.boundingSphere.center );
 
-
 		THR.controls.target.copy( THR.center );
 		THR.controls.maxDistance = 3 * THR.radius;
 

@@ -5,6 +5,28 @@
 // "plaHeight": 0.00001,
 
 
+	PLA.drawBitMap = function( url ) {
+
+		var loader, geometry, material, mesh;
+
+		loader = new THREE.TextureLoader();
+		loader.crossOrigin = '';
+		texture = loader.load( url || '../bitmaps/j.gif' );
+
+		texture.minFilter = texture.magFilter = THREE.NearestFilter;
+//		texture.needsUpdate = true;
+//		geometry = new THREE.BoxGeometry( 1 * CAS.actorScale, 3 * CAS.actorScale, 1 * CAS.actorScale );
+		geometry = new THREE.PlaneBufferGeometry( 1, 1 );
+
+		material = new THREE.MeshBasicMaterial( {  map: texture, side: THREE.DoubleSide, transparent: true } );
+//		material = new THREE.MeshNormalMaterial();
+
+		mesh = new THREE.Mesh( geometry, material );
+//console.log( 'mesh', mesh );
+		return mesh;
+
+	}
+
 	PLA.drawPlacePlacards = function() {
 
 		var cpp, p;

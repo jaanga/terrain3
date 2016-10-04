@@ -59,14 +59,15 @@ console.timeEnd( 'timer0' );
 
 			MAP.material = new THREE.MeshNormalMaterial( { side: 2 } );
 
-		MAP.geometry.computeFaceNormals();
-		MAP.geometry.computeVertexNormals();
+			MAP.geometry.computeFaceNormals();
+			MAP.geometry.computeVertexNormals();
 
 			MAP.drawMap( updateCamera );
 
 			return;
 
 		}
+
 
 		OVR.getMapOverlayParameters();
 
