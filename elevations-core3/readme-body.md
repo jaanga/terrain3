@@ -49,8 +49,11 @@ This project is an attempt to remedy the situation.
 ## To Do / Wish List
 
 * Codebase
+	* For Core4:
 	* 2016-10-03 ~ Create DEF file
+	* 2016-10-04 ~ all scripts to use three letter prefix
 	* 2016-10-03 ~ Clean up menu IDs
+	2016-10-04 ~ CAS: move mesh creation to own script
 * Plugins
 	* 2016-10-03 ~ Add ads
 	* 2016-08-22 ~ Add OBJ files
@@ -85,7 +88,6 @@ This project is an attempt to remedy the situation.
 Intended for generating flightpaths
 
 * [FGx Sandbox]( http://fgx.github.io/sandbox/index.html )
-
 
 
 

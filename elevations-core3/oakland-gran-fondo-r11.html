@@ -40,7 +40,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 <script src=./pla-placards/placards-r1.js ></script>
 <script src=./g-msh-mesh-lines/mesh-lines-r2.js ></script>
 <script src=./h-kml-kml/kml-r2.js ></script>
-<script src=./i-cas-camera-action-select/camera-action-select-r2.js ></script>
+<script src=./i-cas-camera-action-select/camera-action-select-r3.js ></script>
 
 <script>
 
@@ -50,10 +50,8 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 //	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/' + SEL.searchInFolder;
 
 	SEL.searchInFolder = 'elevations-data-oakland-gran-fondo/';
-//	SEL.extension = '.json';
 
 //	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
-
 	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + 'oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
 //	SEL.defaultFile; // if no default, select a random file
 
@@ -61,11 +59,76 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	CAS.marker = 'Rider';
 	CAS.actorScale = 0.005;
 
-
 	CAS.cameraOffsetChase = v( -0.02, 0.05, -0.02 );
-	CAS.cameraOffsetInside = v( -0.001, 0.005, -0.01 );
-	CAS.cameraOffsetTrack = v( 0.01, 0.1, 0 );
-	CAS.cameraOffsetWorld = v( 0.2, 0.3, 0.3 );
+	CAS.cameraOffsetInside = v( -0.003, 0.02, -0.01 );
+	CAS.cameraOffsetTrack = v( 0, 0.03, 0.05 );
+	CAS.cameraOffsetWorld = v( 0, 0.05, 0.12 );
+
+
+// load all customized methods first
+
+	COR.getMenuFooter = function() {
+
+		var footer =
+
+			'<hr>' +
+
+			'<center>' +
+				'<a href=https://bikeeastbay.org/ style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; >' +
+				'<img src="https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/logo-beb-main-site.png" width=150px ></a>' +
+			'</center>' +
+
+			'<div class=popUp id=pop2 style= display:none;bottom:100px; >' +
+				'We’ve been working for safe, convenient and enjoyable bicycling for all people in the East Bay since 1972' +
+			'</div>' +
+
+		b;
+
+		return footer;
+
+	};
+
+
+
+	COR.onLoadJSONFile = function() {
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+		MAP.initMapGeometry();
+
+		KML.drawPath();
+
+		THR.line3.position.y = 0.0005;
+
+		sponsors = PLA.drawBitMap( SEL.urlBase + SEL.searchInFolder + '/GFO-Sponsor-Bar-2016.jpg' );
+		sponsors.scale.set( 0.14, 0.02, 1 );
+		sponsors.rotation.x = pi05;
+		sponsors.position.set( COR.place.longitude, -0.0001, - COR.place.latitude );
+		THR.scene.add( sponsors );
+
+/*
+	}
+
+
+	THR.moreThreejsInits = function() {
+*/
+
+
+		SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
+		SELselFiles.size = 5;
+
+		THR.axisHelper = new THREE.AxisHelper( 50 );
+		THR.scene.add( THR.axisHelper );
+		THR.axisHelper.visible = false;
+
+		TERchkAxisHelper.checked  = false;
+		TERchkBoxHelper.checked = false;
+
+		CAS.getActorBitmap( SEL.urlBase + SEL.searchInFolder + 'logo-beb-main-site.png' );
+
+	};
 
 
 	THR.viewObject = function( mesh ) {
@@ -78,12 +141,8 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		THR.radius = mesh.geometry.boundingSphere.radius;
 		THR.center = mesh.position.clone().add( mesh.geometry.boundingSphere.center );
 
-
 		THR.controls.target.copy( THR.center );
 		THR.controls.maxDistance = 3 * THR.radius;
-
-		cameraPosition = 0.5 * THR.radius;
-		THR.camera.position.copy( THR.center.clone() ).add( v( 0, 0.8 * cameraPosition, cameraPosition ) );
 
 	}
 
@@ -100,11 +159,14 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
 
-//console.log( 'got map', 23 );
+console.log( 'got track', 23 );
 
 		if ( MAP.mesh ) {
 
 			THR.viewObject( MAP.mesh );
+
+//			cameraPosition = 0.5 * THR.radius;
+			THR.camera.position.copy( THR.center.clone() ).add( CAS.cameraOffsetTrack );
 
 		} else {
 
@@ -119,32 +181,36 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 	}
 
-	COR.getMenuFooter = function() {
+	CAS.cameraWorld = function() {
 
-		var footer =
+		THR.controls.autoRotate = false;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
+		THR.scene.add( THR.camera );
+		target = THR.center.clone();
+		THR.controls.target.copy( target );
+console.log( 'got world', 23 );
+		if ( MAP.mesh !== undefined ) {
 
-			'<hr>' +
+			THR.viewObject( MAP.mesh );
+			THR.camera.position.copy( THR.center.clone() ).add( CAS.cameraOffsetWorld );
 
-			'<center>' +
-				'<a href=javascript:menu.scrollTop=0; style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; ><img src="https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/logo-beb-main-site.png" width=150px ></a>' +
-			'</center>' +
+		} else {
 
-			'<div class=popUp id=pop2 style= display:none;bottom:100px; >' +
-				'Jaanga - your 3D happy place.<br>Click here to return to the top of the page' +
-			'</div>' +
+			THR.camera.position.copy( CAS.cameraOffsetWorld );
 
-		b;
+		}
 
-		return footer;
 
-	};
+
+		follow = false;
+
+	}
+
 
 
 	init();
 
-	THR.getThreeJS();
-
-//	THR.animate();
+	CAS.animatePlusLookAt();
 
 	function init() {
 
@@ -183,8 +249,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		}
 
-		SEL.getGitHubAPITreeContents();
-
 //		SELdetailsSelectFile.setAttribute('open', 'open');
 
 //		detailsOverlay.setAttribute('open', 'open');
@@ -197,55 +261,11 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		index = Math.random();
 
-		THR.moreThreejsInits = function() {
+		SEL.getGitHubAPITreeContents();
 
-			SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
-			SELselFiles.size = 5;
-
-//			THR.updateCamera = true;
-
-			THR.axisHelper = new THREE.AxisHelper( 50 );
-			THR.scene.add( THR.axisHelper );
-			THR.axisHelper.visible = false;
-
-			TERchkAxisHelper.checked  = false;
-			TERchkBoxHelper.checked = false;
-
-//			THR.radius = 40;
-//			THR.controls.maxDistance = 3 * THR.radius;
-//			THR.toggleFog( true );
-
-			CAS.getActorBitmap( SEL.urlBase + SEL.searchInFolder + 'logo-beb-main-site.png' );
-
-			sponsors = PLA.drawBitMap( SEL.urlBase + SEL.searchInFolder + '/GFO-Sponsor-Bar-2016.jpg' );
-
-			THR.scene.add( sponsors );
-
-			CAS.animatePlusLookAt();
-
-		};
+		THR.getThreeJS();
 
 	}
-
-
-	COR.onLoadJSONFile = function() {
-
-		COR.getPlaceDefaults();
-
-		OVR.setMenuDetailsOverlay();
-
-		MAP.initMapGeometry();
-
-		KML.drawPath();
-
-		THR.line3.position.y = 0.0005;
-
-		sponsors.scale.set( 0.14, 0.02, 1 );
-		sponsors.rotation.x = pi05;
-		sponsors.position.set( COR.place.longitude, -0.0001, - COR.place.latitude );
-
-	}
-
 
 </script>
 </body>

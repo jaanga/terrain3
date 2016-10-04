@@ -117,7 +117,7 @@ console.timeEnd( 'timer0' );
 						MAP.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2 } );
 
 						MAP.drawMap()
-
+console.log( 'count', count );
 					}
 
 				};
@@ -158,16 +158,22 @@ console.timeEnd( 'timer0' );
 
 		THR.scene.add( MAP.groundPlane );
 
-		if ( THR.updateCamera === true ) { THR.viewObject( MAP.mesh ); }
+		if ( THR.updateCamera === true && !CAS.center ) { THR.viewObject( MAP.mesh ); }
 
-		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
 
 		if ( CAS.center ) { 
 
-			CAS.center = MAP.mesh.position.clone(); 
+//			CAS.center = MAP.mesh.position.clone(); 
 			CAS.cameraTrack();
 
+		} else {
+
+console.log( 'no cas', 23 );
+
 		}
+
+		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
+
 
 // could be called by HTML file ?
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener

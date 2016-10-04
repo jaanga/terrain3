@@ -127,9 +127,9 @@
 
 		if ( !place.points ) { return; }
 
-		TERinpVertical.value = place.verticalScale;
+//		TERinpVertical.value = place.verticalScale;
 
-		TER.TERinpVerticalOnChange();
+//		TER.TERinpVerticalOnChange();
 
 		pp = place.points;
 		points = [];

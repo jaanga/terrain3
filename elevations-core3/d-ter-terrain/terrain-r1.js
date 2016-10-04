@@ -69,7 +69,7 @@
 // change to https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 
 //		if ( MAP.initMapGeometry ) { MAP.initMapGeometry(); }
-		if ( MAP.drawMap ) { MAP.drawMap(); }
+		if ( MAP.drawMap ) { console.log( 'terrain', 456 );MAP.drawMap(); }
 
 // change to KML
 
