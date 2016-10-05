@@ -14,8 +14,8 @@
 	SEL.searchInFolder = 'elevations-data-04/';
 	SEL.extension = '.json';
 
-//	SEL.urlBase = '../../../../elevations/' + SEL.searchInFolder;
-	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/' + SEL.searchInFolder;
+//	SEL.urlBase = '../../../../elevations/';
+	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations/';
 
 */
 
@@ -71,6 +71,7 @@
 
 	}
 
+
 	SEL.getGitHubAPITreeContents = function() {
 
 		var xhr, response, files, file;
@@ -95,7 +96,7 @@
 
 	SEL.getFiles = function() {
 
-			files = [];
+			SEL.files = [];
 			SELselFiles.innerHTML = ''
 
 			for ( var i = 0; i < SEL.response.tree.length; i++ ) {
@@ -107,7 +108,7 @@
 
 				file = file.split( '\/' ).pop();
 
-				files.push( file );
+				SEL.files.push( file );
 
 				SELselFiles[ SELselFiles.length ] = new Option( file, file );
 

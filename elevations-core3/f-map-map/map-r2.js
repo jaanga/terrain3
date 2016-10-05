@@ -117,7 +117,7 @@ console.timeEnd( 'timer0' );
 						MAP.material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture, side: 2 } );
 
 						MAP.drawMap()
-console.log( 'count', count );
+
 					}
 
 				};
@@ -163,12 +163,10 @@ console.log( 'count', count );
 
 		if ( CAS.center ) { 
 
-//			CAS.center = MAP.mesh.position.clone(); 
+			CAS.center = MAP.mesh.position.clone(); 
 			CAS.cameraTrack();
 
 		} else {
-
-console.log( 'no cas', 23 );
 
 		}
 

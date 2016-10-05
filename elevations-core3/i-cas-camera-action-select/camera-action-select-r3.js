@@ -9,7 +9,7 @@
 //		if ( SELselFiles.selectedIndex === 1 ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
 //		if ( SELselFiles.selectedIndex === 3 ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
 
-	CAS.actor = new THREE.Object3D();
+	CAS.actor = '';
 	CAS.cameraPoints = 25;
 	CAS.zoomScale = 1;
 	CAS.actorScale = 1;
