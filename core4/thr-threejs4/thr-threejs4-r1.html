@@ -66,6 +66,8 @@
 
 			COR.getMenuDetailsHeader() +
 
+			THR.getMenuDetailsThreejs() +
+
 			COR.getMenuDetailsAbout() +
 
 			COR.getMenuFooter() +
@@ -73,6 +75,8 @@
 		b;
 
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		detailsThreejs.setAttribute('open', 'open');
 
 		window.addEventListener( 'keyup', THR.onKeyUp, false );
 

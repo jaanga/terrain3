@@ -15,12 +15,46 @@
 
 	THR.defaults = {};
 	THR.defaults.backgroundColor = 0xf0f0f0;
-	THR.defaults.backgroundColor = 0x7ec0ee ;
+	THR.defaults.backgroundColor = 0x7ec0ee;
+
 	THR.defaults.cameraNear = 0.1;
 	THR.defaults.cameraFar = 1000;
 
 	THR.cameraNear = 0.1;
 	THR.cameraFar = 1000;
+
+
+//			THR.getMenuDetailsThreejs() +
+
+//		detailsThreejs.setAttribute('open', 'open');
+
+	THR.getMenuDetailsThreejs = function() {
+
+		var menuDetailsThreejs =
+
+			'<details id=detailsThreejs >' +
+
+				'<summary><h3>Three.js</h3></summary>' +
+
+				'<p id=pThreejs >' +
+
+				'<p><input type=checkbox id=chkWireframe onchange=tube.material.wireframe=!tube.material.wireframe; > Wireframe</p>' +
+				'<p><input type=checkbox onchange=THR.axisHelper.visible=!THR.axisHelper.visible; checked > Axes</p>' +
+				'<p><input type=checkbox onchange=THR.gridHelper.visible=!THR.gridHelper.visible; checked > Grid</p>' +
+				'<p><input type=checkbox onchange=THR.controls.autoRotate=!THR.controls.autoRotate; > Auto-Rotate</p>' +
+
+				'<p><button onclick=THR.toggleBackgroundGradient(); >toggleBackgroundGradient</button></p>' +
+
+			'</p>' +
+
+			'</details>' +
+
+		b;
+
+		return menuDetailsThreejs;
+
+	};
+
 
 
 	THR.getThreeJS = function() {
@@ -34,7 +68,7 @@
 		THR.stats.domElement.style.display = window.innerWidth < 500 ? 'none' : '';
 
 		THR.renderer = new THREE.WebGLRenderer( { alpha: 1, antialias: true }  );
-		THR.renderer.setClearColor( THR.defaults.backgroundColor );
+//		THR.renderer.setClearColor( THR.defaults.backgroundColor );
 //		THR.renderer.setPixelRatio( window.devicePixelRatio );
 		THR.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( THR.renderer.domElement );
@@ -51,6 +85,7 @@
 		window.addEventListener( 'resize', THR.onWindowResize, false );
 
 	}
+
 
 
 	THR.viewObject = function( mesh ) {
@@ -89,6 +124,19 @@
 
 	}
 
+
+	THR.toggleBackgroundGradient = function() {
+
+// 2016-07-18
+console.log( '', 23 );
+		var col = function() { return ( 0.5 + 0.5 * Math.random() ).toString( 16 ).slice( 2, 8 ); };
+		var pt = function() { return ( Math.random() * window.innerWidth ).toFixed( 0 ); }
+		var image = document.body.style.backgroundImage;
+
+		document.body.style.backgroundImage = image ? '' : 'radial-gradient( circle farthest-corner at ' +
+				pt() + 'px ' + pt() + 'px, #' + col() + ' 0%, #' + col() + ' 50%, #' + col() + ' 100% ) ';
+
+	}
 
 
 
