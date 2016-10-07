@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Core4 GIF Generate Animated GIF R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-10-06' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=https://rawgit.com/deanm/omggif/master/omggif.js ></script>
+
+<script src=../../core4/0-def-defaults4/def-defaults4-r1.js ></script>
+<script src=../../core4/0-cor-core4/cor-core4-r1.js ></script>
+<script src=../../core4/thr-threejs4/thr-threejs4-r1.js ></script>
+<script src=../../core4/pla-placard4/pla-placard4-r1.js ></script>
+<script src=../../core4/gif-generate-animated-gif4/gif-generate-animated-gif4-r1.js ></script>
+
+<script>
+
+	THR.moreThreejsInits = function() {
+
+		var geometry, material
+
+		THR.stats.domElement.style.display = 'none';
+
+//		THR.renderer.setClearColor( 0x000000 );
+		THR.renderer.setSize( GIF.width, GIF.height );
+		THR.renderer.domElement.style.cssText = 'margin-left: 30%; ';
+
+		obj = new THREE.Object3D();
+
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
+		material = new THREE.MeshNormalMaterial();
+
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		obj.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		obj.add( THR.gridHelper );
+
+		THR.axisHelper = new THREE.AxisHelper( 90 );
+		obj.add( THR.axisHelper );
+
+//		THR.controls.autoRotate = true;
+
+//		pt = PLA.convertPosition( 22.3964, 114.1095, 9000  );
+
+		placard = PLA.drawPlacard( 'Howdy, world!', 0.1 , 120, 0, 20, 0 ) 
+		obj.add( placard );
+
+		THR.scene.add( obj );
+
+	};
+
+
+//
+
+	init();
+
+	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			GIF.getMenuDetailsGenerateAnimatedGIF() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
+
+
+		THR.getThreeJS();
+
+		THR.renderer.domElement.addEventListener( 'onload', THR.moreThreejsInits(), false );
+
+	}
+
+
+</script>
+</body>
+</html>

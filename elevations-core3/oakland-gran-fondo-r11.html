@@ -56,8 +56,8 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	SEL.searchInFolder = SEL.folders[ 3 ];
 
 //	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
-//	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + '/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
-	SEL.defaultFile; // if no default, select a random file
+	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + '/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
+//	SEL.defaultFile; // if no default, select a random file
 
 	CAS.marker = 'Rider';
 	CAS.actorScale = 0.005;
@@ -166,6 +166,16 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		if ( !CAS.actor ) { CAS.getActorBitmap( SEL.urlBase + SEL.searchInFolder + '/logo-beb-main-site.png' ); }
 
+		for ( var i = 0; i < SEL.files.length; i++ ) {
+
+			if ( SEL.files[ i ] === COR.fileName ) { 
+
+				SELselFiles.selectedIndex = i;
+				break;
+
+			}
+
+		}
 
 	};
 
@@ -218,6 +228,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 	}
 
+
 	CAS.cameraWorld = function() {
 
 		THR.controls.autoRotate = false;
@@ -248,7 +259,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	CAS.animatePlusLookAt();
 
 	function init() {
-
 
 		COR.initLeftMenu();
 
@@ -284,12 +294,12 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		}
 
-//		SELpFolder.style.display = 'none';
+		SELpFolder.style.display = 'none';
 
 		SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
 		SELselFiles.size = 5;
 
-		SELdetailsSelectFile.setAttribute('open', 'open');
+//		SELdetailsSelectFile.setAttribute('open', 'open');
 
 		TERchkAxisHelper.checked  = false;
 		TERchkBoxHelper.checked = false;

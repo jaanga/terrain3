@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Terrain3 Earth Globe Displacement Placard R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-10-06' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+
+<script src=../../core4/0-def-defaults4/def-defaults4-r1.js ></script>
+<script src=../../core4/0-cor-core4/cor-core4-r1.js ></script>
+<script src=../../core4/thr-threejs4/thr-threejs4-r1.js ></script>
+<script src=../../core4/pla-placard4/pla-placard4-r1.js ></script>
+<script src=../../globes/earth-globe-displacement/earth-globe-displacement-r3.js ></script>
+
+<script>
+
+
+	var messages = [
+		{ text: [ 'hello ', 'Null Island', 'line3' ], lat: 0, lon: 0 },
+		{ text: [ 'San Francisco', 'line2', 'line3' ], lat: 37, lon: -122 },
+		{ text: [ 'Hong Kong', 'line2', 'line3' ], lat: 22.3964, lon: 114.1095 }
+
+	]
+//	THR.cameraNear = 1;
+//	THR.cameraFar = 2000;
+
+	THR.moreThreejsInits = function() {
+
+		var geometry, material
+
+		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 40000 );
+		THR.camera.position.set( 20000, 5000, 0 );
+
+		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
+		THR.controls.maxDistance = 30000;
+		THR.controls.autoRotate = true;
+
+/*
+		geometry = new THREE.BoxGeometry( 360, 2, 180 );
+		material = new THREE.MeshNormalMaterial();
+		THR.groundPlane = new THREE.Mesh( geometry, material );
+		THR.groundPlane.position.set( 0, -31, 0 );
+		THR.scene.add( THR.groundPlane );
+
+		THR.gridHelper = new THREE.GridHelper( 90, 10 );
+		THR.gridHelper.position.set( 0, -30, 0 );
+		THR.scene.add( THR.gridHelper );
+*/
+		THR.axisHelper = new THREE.AxisHelper( 9000 );
+		THR.scene.add( THR.axisHelper );
+
+
+		ambientLight = new THREE.AmbientLight( 0xffffff );
+		THR.scene.add( ambientLight );
+
+		directionalLight = new THREE.DirectionalLight( 0x888888, 1 );
+		directionalLight.position.set( 1, 1, 1.6 ); // points to US
+		THR.scene.add( directionalLight );
+
+		drawGlobe();
+
+
+
+
+		for ( var i = 0; i < messages.length; i++ ) {
+
+			message = messages[ i ];
+			pt = PLA.convertPosition( message.lat, message.lon, 9000  );
+			placard = PLA.drawPlacard( message.text, 15 , Math.floor( Math.random() * 255 ), pt.x, pt.y, pt.z ) 
+			THR.scene.add( placard );
+
+		} 
+	};
+
+
+
+	init();
+
+	THR.animate();
+
+	function init() {
+
+		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
+
+		THR.getThreeJS();
+
+		THR.renderer.domElement.addEventListener( 'onload', THR.moreThreejsInits(), false );
+
+	}
+
+
+</script>
+</body>
+</html>

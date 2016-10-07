@@ -36,6 +36,8 @@
 
 	CAS.getMenuDetailsCameraActions = function() {
 
+		var actor = CAS.marker.toLowerCase();
+
 		var menuDetailsCameraActions =
 
 			'<details id=detailsMarkerActions open>' +
@@ -66,15 +68,15 @@
 				'<summary id=summaryCameraActions ><h3>Camera settings</h3></summary>' +
 
 				'<p><button onclick=CAS.cameraChase(); >camera chase</button><br>' +
-					'<small>Camera fixed a distance from actor, follows actor position and rotation</small>' +
+					'<small>Camera at a fixed distance from ' + actor + ', follows ' + actor + ' position</small>' +
 				'</p>' +
 
 				'<p><button onclick=CAS.cameraInside(); >camera inside</button><br>' +
-					'<small>Camera fixed inside actor, follows a point just ahead of the actor</small>' +
+					'<small>Camera fixed close to ' + actor + ', follows a point just ahead of the ' + actor + '</small>' +
 				'</p>' +
 
 				'<p><button onclick=CAS.cameraTrack(); >camera track</button><br>' +
-					'<small>Camera fixed at position on ground, follows actor</small>' +
+					'<small>Camera fixed at position on ground, follows ' + actor + '</small>' +
 				'</p>' +
 
 				'<p><button onclick=CAS.cameraWorld(); >camera world</button><br>' +
