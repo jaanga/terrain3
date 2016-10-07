@@ -25,6 +25,14 @@
 <script src=../../core4/tub-tube4/tub-tube4-r1.js ></script>
 <script>
 
+	COR.menuHeaderTagline = '<small>' +
+		'Black lines: straight lines between vertices' + b +
+		'- Check \'Wireframe\' to view black lines' + b +
+		'Set tension to zero to have tube approximate black line' + b +
+		'Click any button to create a fresh tube' + b +
+	'</small>';
+
+
 	THR.cameraNear = 1;
 	THR.cameraFar = 2000;
 
@@ -57,7 +65,7 @@
 
 	function init() {
 
-		COR.menuHeaderTagline += ' tub4.js says howdy! &rarr;' + b;
+
 
 		COR.initLeftMenu();
 
