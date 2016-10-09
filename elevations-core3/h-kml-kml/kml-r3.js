@@ -123,9 +123,9 @@
 
 		place = COR.place;
 
-		THR.scene.remove( THR.line, THR.line2, THR.line3 );
+		if ( !place.points || !THR.scene ) { return; }
 
-		if ( !place.points ) { return; }
+		THR.scene.remove( THR.line, THR.line2, THR.line3 );
 
 //		TERinpVertical.value = place.verticalScale;
 
@@ -216,79 +216,10 @@
 			xmlParse = ( new window.DOMParser() ).parseFromString( response, "text/xml" );
 
 			KML.convertXMLtoPoints( xmlParse );
-/*
-			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
-			text = text.textContent;
-
-
-			text = text.replace( / /g, ',' );
-			text = text.replace( /\n/g, ',' );
-
-//			lines = text.split( '\n' ); //
-			lines = text.split( ',' ); //
-			coordinates = [];
-
-
-			for ( var i = 0; i < lines.length; i++ ) {
-
-				line = lines[ i ];
-//				point = line.split( ',' ).map( parseFloat );
-//				coordinates = coordinates.concat( point );
-
-				coord = parseFloat( line );
-				if ( isNaN( coord ) ) { continue; }
-				coordinates.push( coord );
-
-			}
-
-			COR.place.points = coordinates; //.slice( 0,  );
-
-			pp = COR.place.points;
-
-			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
-*/
 
 		}
 
 	};
-
-
-	KML.convertXMLtoPoints = function( xmlParse ) {
-
-			text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
-			text = text.textContent;
-
-
-			text = text.replace( / /g, ',' );
-			text = text.replace( /\n/g, ',' );
-
-//			lines = text.split( '\n' ); //
-			lines = text.split( ',' ); //
-			coordinates = [];
-
-
-			for ( var i = 0; i < lines.length; i++ ) {
-
-				line = lines[ i ];
-//				point = line.split( ',' ).map( parseFloat );
-//				coordinates = coordinates.concat( point );
-
-				coord = parseFloat( line );
-				if ( isNaN( coord ) ) { continue; }
-				coordinates.push( coord );
-
-			}
-
-			COR.place.points = coordinates; //.slice( 0,  );
-
-			pp = COR.place.points;
-
-			if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
-
-		KML.drawPath();
-
-	};
-
 
 	KML.readFile = function( files ) {
 
@@ -315,7 +246,47 @@ console.log( 'xmlParse', xmlParse );
 
 	};
 
-// Called by Elevation Get
+
+
+	KML.convertXMLtoPoints = function( xmlParse ) {
+
+		text = xmlParse.getElementsByTagName( "coordinates" )[ 0 ];
+		text = text.textContent;
+
+		text = text.replace( / /g, ',' );
+		text = text.replace( /\n/g, ',' );
+
+//			lines = text.split( '\n' ); //
+		lines = text.split( ',' ); //
+		coordinates = [];
+
+
+		for ( var i = 0; i < lines.length; i++ ) {
+
+			line = lines[ i ];
+//				point = line.split( ',' ).map( parseFloat );
+//				coordinates = coordinates.concat( point );
+
+			coord = parseFloat( line );
+			if ( isNaN( coord ) ) { continue; }
+			coordinates.push( coord );
+
+		}
+
+		COR.place.points = coordinates; //.slice( 0,  );
+
+//		pp = COR.place.points;
+
+//		if ( window.console ) { console.log( pp.slice( 0, 10 ) ); }
+
+		if ( THR.scene ) { KML.drawPath(); }
+
+	};
+
+
+
+
+// Called by Elevation Get KML
 
 // https://developers.google.com/maps/documentation/javascript/examples/layer-kml
 
@@ -344,7 +315,9 @@ console.log( 'xmlParse', xmlParse );
 
 			place.longitude = googleMap.map.center.lng();
 
-			CLK.onClickGoogleMap();
+//			CLK.onClickGoogleMap();
+
+//			CLK.setCenter( place.latitude, place.longitude );
 
         } );
 

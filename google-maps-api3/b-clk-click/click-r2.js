@@ -58,7 +58,18 @@ console.log( 'dc', document.cookie );
 
 				'<summary><h3>Click details</h3></summary>' +
 
-				'<div id=menuClickDetails ></div>' + b +
+				'<div id=menuClickDetails >' +
+
+
+			'Latitude: ' + COR.defaults.latitude.toFixed( 4 ) + '&deg;' + b +
+			'Longitude: ' + COR.defaults.longitude.toFixed( 4 ) + '&deg;' + b + b +
+
+//			'Pixel X: ' + event.pixel.x + 'px' + b +
+//			'Pixel Y: ' + event.pixel.y + 'px' + b + b +
+
+			'<p><button onclick=CLK.setCenter(); >Set location as map center</button></p>' +
+
+			'</div>' + b +
 
 			'</details>' +
 
@@ -92,7 +103,7 @@ console.log( 'dc', document.cookie );
 
 		}
 
-console.log( 'CLKinpAPI.value', CLKinpAPI.value );
+//console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 
 	}
 
@@ -103,6 +114,7 @@ console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 		var place, marker;
 
 		place = COR.place;
+		place.zoom = place.zoom || 12;
 
 		mapDiv = document.body.appendChild( document.createElement( 'div' ) );
 		mapDiv.id = 'mapDiv';
@@ -179,13 +191,17 @@ console.log( 'CLKinpAPI.value', CLKinpAPI.value );
 
 	CLK.setCenter = function( lat, lon, goDistance ) {
 
-		var place, marker;
+		var lat, lon, place, bounds;
+
+		lat = lat || COR.defaults.latitude;
+
+		lon = lon || COR.defaults.longitude;
 
 		goDistance = goDistance || false;
 
 		place = COR.place;
 
-		var bounds = googleMap.map.getBounds();
+		bounds = googleMap.map.getBounds();
 
 		googleMap.clearAll();
 

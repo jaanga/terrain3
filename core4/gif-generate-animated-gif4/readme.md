@@ -1,4 +1,4 @@
 
 
-core4 read me
+Generate Animated GIF read me
 ===

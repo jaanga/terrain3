@@ -5,21 +5,33 @@
 
 	NEA.getMenuDetailsNearby = function() {
 
+
+
 		var menuDetailsNearby =
 
 			'<details id=NEAdetailsNearby open >' +
 
-				'<summary id=NEAmenuSummaryNearby ><h3>Nearby</h3></summary>' +
+				'<summary id=NEAmenuSummaryNearby ><h3>Get Places Nearby</h3></summary>' +
 
-				'<p id=NEApTemplate >' +
+				'<small>Use Google Maps API to find places nearby</small>' + b +
 
-					'<button onclick=NEA.getNearby(); > get Nearby </button>' + b +
+				'<div id=NEAdivNearby >' +
 
-			'</p>' +
+					'<p>' +
+						'<input type=radio name=radPlaceType id=but1 onclick=butMore.disabled=false;NEA.type="natural_feature"; checked />Natural feature' + b +
+						'<input type=radio name=radPlaceType id=but2 onclick=butMore.disabled=false;NEA.type="locality"; />Locality' + b +
+						'<input type=radio name=radPlaceType id=but3 onclick=butMore.disabled=false;NEA.type="point_of_interest"; />point_of_interest' +
+					'</p>' +
+
+					'<button id=butMore onclick=NEA.getNearby(); > get Nearby </button>  ' +
+
+			'</div>' + b +
+
+			'<div id=NEAdivResults ></div>' +
 
 			'</details>' +
 
-		b;
+		'';
 
 		return menuDetailsNearby;
 
@@ -31,8 +43,14 @@
 
 		var service, bounds;
 
-		COR.place.nearby = [];
+		NEA.type = NEA.type || 'natural_feature';
+
+		COR.place[ NEA.type ] = [];
 		COR.results = [];
+
+		if ( !COR.place.types ) {  COR.place.types = []; }
+
+		if ( !COR.place.types.includes( NEA.type ) ) { COR.place.types.push( NEA.type ); }
 
 		NEA.infowindow = new google.maps.InfoWindow();
 		service = new google.maps.places.PlacesService( googleMap.map );
@@ -46,6 +64,12 @@
 		);
 */
 
+		if ( !TIL.tiles.LRlat ) {
+
+			PAR.onEventMapParameters();
+
+		}
+
 		bounds = new google.maps.LatLngBounds(
 
 			new google.maps.LatLng( TIL.tiles.LRlat, TIL.tiles.ULlon ),
@@ -54,14 +78,26 @@
 
 		);
 
+/*
+		service.nearbySearch( {
+
+			bounds: bounds,
+			type: [ 'locality' ]
+
+		}, NEA.callback );
+*/
+
+
 		service.nearbySearch( {
 
 			bounds: bounds,
 
+			type: [ NEA.type ]
+
 // https://developers.google.com/places/supported_types
 //			type: [ 'colloquial_area' ]
 //			type: [ 'locality' ]
-			type: [ 'natural_feature' ]
+//			type: [ 'natural_feature' ]
 //			type: [ 'point_of_interest']
 //			type: [ '(regions)' ]
 //			type: [ 'political' ]
@@ -86,13 +122,6 @@
 		}, NEA.callback );
 
 
-		service.nearbySearch( {
-
-			bounds: bounds,
-			type: [ 'locality' ]
-
-		}, NEA.callback );
-
 
 
 		var rectangle = new google.maps.Rectangle({
@@ -113,9 +142,11 @@
 
 
 
-	NEA.callback = function( results, status ) {
+	NEA.callback = function( results, status, pagination ) {
 
 		if ( status === google.maps.places.PlacesServiceStatus.OK ) {
+
+//			var res = results;
 
 			for ( var i = 0, result; i < results.length; i++ ) {
 
@@ -123,18 +154,43 @@
 				loc = result.geometry.location;
 				NEA.createMarker( result );
 
-				COR.place.nearby.push( { name: result.name, lat: loc.lat(), lon: loc.lng(), types: result.types } );
+				COR.place[ NEA.type ].push( { name: result.name, lat: loc.lat(), lon: loc.lng(), types: result.types, id: result.place_id } );
 
 				COR.results.push( result );
 
 			}
 
-console.log( 'place', COR.place );
-console.log( 'results', results );
+//console.log( 'place', COR.place );
+//console.log( 'results', results );
+//console.log( 'pagination.hasNextPage', pagination.hasNextPage );
+
+			NEAdivResults.innerHTML = COR.results.length + ' results found';
+
+			if ( pagination.hasNextPage ) {
+
+				butMore.disabled = false;
+
+				butMore.addEventListener( 'click', function() {
+
+					butMore.disabled = true;
+
+					pagination.nextPage();
+
+				});
+
+				NEAdivResults.innerHTML = COR.results.length + ' results found. More available,';
+
+			} else {
+
+				butMore.disabled = true;
+
+				NEAdivResults.innerHTML = COR.results.length + ' results found. No more places.';
+
+			}
 
 		} else {
 
-console.log( 'error status', status )
+			NEAdivResults.innerHTML  = 'error status: ' + status;
 
 		}
 
@@ -158,7 +214,7 @@ console.log( 'error status', status )
 		google.maps.event.addListener(marker, 'click', function() {
 
 			address = place.address ? 'address: ' + place.addreess + b : '';
-			vicinity = place.vicinity ? 'viciity: ' + place.vicinity + b : '';
+			vicinity = place.vicinity ? 'vicinity: ' + place.vicinity + b : '';
 			NEA.infowindow.setContent( 
 
 			'<div>' +

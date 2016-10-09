@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Google Maps API3 Nearby R3</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=../b-clk-click/click-r1.js ></script>
+<script src=../c-geo-geocoder/geocoder-r1.js ></script>
+<script src=../d-par-parameters/parameters-r1.js ></script>
+<script src=../e-til-tiles/tiles-r1.js ></script>
+<script src=../nea-nearby/nearby-r3.js ></script>
+<script>
+
+// 
+/*
+
+	COR.defaults.latitude = 37;
+	COR.defaults.longitude = -122;
+	COR.defaults.origin = 'Santa Cruz';
+
+	COR.defaults.latitude = 37.79679;
+	COR.defaults.longitude = -122.39812;
+	COR.defaults.origin = 'San Francisco CA 94111';
+
+*/
+
+	COR.defaults.latitude = 37.441;
+	COR.defaults.longitude = 25.367;
+	COR.defaults.origin = 'Mykonos';
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'til howdy' + b;
+
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			CLK.getMenuDetailsAPIKey() +
+
+			CLK.getMenuDetailsMapClick() +
+
+			GEO.getMenuDetailsGeocoder() +
+
+			PAR.getMenuDetailsMapParameters() +
+
+			NEA.getMenuDetailsNearby() +
+
+			TIL.getMenuDetailsTilesData() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		CLK.onEventAPIKeyUpdate();
+
+	}
+
+</script>
+</body>
+</html>
