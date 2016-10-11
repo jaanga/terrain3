@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevation Get2 Core R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Jaanga Templates Core4 R1. The essential HTML, CSS and JavaScript to get started
+' >
+<meta name=keywords content='Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-25' >
+</head>
+<body>
+
+<script src=../../elevations-get2/0-def-defaults2/def-defaults2-r1.js ></script>
+<script src=../../elevations-get2/1-cor-core2/cor-core2-r1.js ></script>
+<script>
+// Copyright &copy; 2016 Jaanga authors. MIT License
+// https://github.com/showdownjs/showdown
+//
+
+
+	init();
+
+	function init() {
+
+		DEF.menuHeaderTagline = 'A hard core howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+//			COR.getMenuBreadCrumbs() +
+
+			COR.getMenuDetailsTemplate() +
+
+			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		detailsTemplate.setAttribute('open', 'open');
+
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Get2 Map API R1 Click R2</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='
+
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-get2/0-def-defaults2/def-defaults2-r1.js ></script>
+<script src=../../elevations-get2/1-cor-core2/cor-core2-r1.js ></script>
+<script src=../../elevations-get2/3-api-map-api2/api-map-api2-r1.js ></script>
+<script>
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'click says howdy' + b;
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			API.getMenuDetailsAPIKey() +
+
+			API.getMenuDetailsMapClick() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		APIapiKey.setAttribute('open', 'open');
+
+		APIclickDetails.setAttribute('open', 'open');
+
+		API.onEventAPIKeyUpdate();
+
+		COR.getPlaceDefaults();
+
+	}
+
+</script>
+</body>
+</html>

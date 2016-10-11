@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevation Get2 Nearby R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Basic slide in and slide out menu with three bar icon that adjusts for small screen size.
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-09-10' >
+</head>
+<body>
+<script src=../../elevations-get2/0-def-defaults2/def-defaults2-r1.js ></script>
+<script src=../../elevations-get2/1-cor-core2/cor-core2-r1.js ></script>
+<script src=../../elevations-get2/3-api-map-api2/api-map-api2-r1.js ></script>
+<script src=../../elevations-get2/4-geo-geocoder2/geo-geocoder2-r1.js ></script>
+<script src=../../elevations-get2/5-par-parameter2/par-parameter2-r1.js ></script>
+<script src=../../elevations-get2/6-til-tile2/til-tile2-r1.js ></script>
+<script src=../../elevations-get2/7-elv-elevation2/elv-elevation2-r1.js ></script>
+<script src=../../elevations-get2/8-nea-nearby2/nea-nearby2-r1.js ></script>
+<script>
+
+// 
+/*
+
+	COR.defaults.latitude = 37;
+	COR.defaults.longitude = -122;
+	COR.defaults.origin = 'Santa Cruz';
+
+	COR.defaults.latitude = 37.79679;
+	COR.defaults.longitude = -122.39812;
+	COR.defaults.origin = 'San Francisco CA 94111';
+
+*/
+
+	COR.defaults.latitude = 37.441;
+	COR.defaults.longitude = 25.367;
+	COR.defaults.origin = 'Mykonos';
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'til howdy' + b;
+
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			API.getMenuDetailsAPIKey() +
+
+			API.getMenuDetailsMapClick() +
+
+			GEO.getMenuDetailsGeocoder() +
+
+			PAR.getMenuDetailsMapParameters() +
+
+			NEA.getMenuDetailsNearby() +
+
+			TIL.getMenuDetailsTilesData() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		'';
+
+		APIapiKey.setAttribute('open', 'open');
+
+		APIclickDetails.setAttribute('open', 'open');
+
+ 		GEOlocationDetails.setAttribute('open', 'open');
+
+		PARparametersDetails.setAttribute('open', 'open');
+
+		NEAdetailsNearby.setAttribute('open', 'open');
+
+		COR.getPlaceDefaults();
+
+		API.onEventAPIKeyUpdate();
+
+	}
+
+
+	API.onInitGoogleMap = function() {
+
+		GEO.initGoogleGeocoder();
+
+		PAR.setMapParameters();
+
+	};
+
+
+	API.onSetCenter = function(){
+
+		TIL.getTilesData();
+
+		COR.results = [];
+
+		butMore.disabled = false;
+
+		NEAdivResults.innerHTML = '';
+
+	};
+
+
+</script>
+</body>
+</html>

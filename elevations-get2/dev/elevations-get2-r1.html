@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Get2 R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Obtains elevation data via the Google Maps API Elevation service.
+Set latitude, longitude, zoom level, number of tiles and samples. Save data to text file.
+Display results in 3D. Display useful info.
+' >
+<meta name=keywords content='Google Maps API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-10-08' >
+</head>
+<body>
+<!--
+<script src=../elevations-core3/h-kml-kml/kml-r3.js ></script>
+-->
+
+<script src=../../elevations-get2/0-def-defaults2/def-defaults2-r1.js ></script>
+<script src=../../elevations-get2/1-cor-core2/cor-core2-r1.js ></script>
+<script src=../../elevations-get2/2-sel-select2/sel-select2-r1.js ></script>
+<script src=../../elevations-get2/3-api-map-api2/api-map-api2-r1.js ></script>
+<script src=../../elevations-get2/4-geo-geocoder2/geo-geocoder2-r1.js ></script>
+<script src=../../elevations-get2/5-par-parameter2/par-parameter2-r1.js ></script>
+<script src=../../elevations-get2/6-til-tile2/til-tile2-r1.js ></script>
+<script src=../../elevations-get2/7-elv-elevation2/elv-elevation2-r1.js ></script>
+<script src=../../elevations-get2/8-nea-nearby2/nea-nearby2-r1.js ></script>
+
+<script>
+
+	SEL.folders = [
+		'elevations-airports-01',
+		'elevations-data-04',
+		'elevations-data-family+friends',
+		'elevations-data-oakland-gran-fondo',
+		'elevations-data-path-json',
+		'elevations-data-tgif',
+		'test'
+	];
+
+	SEL.defaultFolder = 1;
+
+
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+	SEL.searchInFolder = 'elevations-data-04/';
+
+//	SEL.extension = '.kml';
+
+	SEL.urlBase = '../../elevations-data/';
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/';
+
+//	COR.defaults.latitude = 37.441;
+//	COR.defaults.longitude = 25.367;
+//	COR.defaults.origin = 'Mykonos';
+
+
+//	SEL.getJSONFileXHR = function(){};
+
+	ELV.urlViewElevations3D = '../../elevations-core3/index.html';
+
+	init();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.taglineHeader = 'howdy' + b;
+		COR.aboutCredits = '<p>Thank you <a href=https://developers.google.com/maps/documentation/javascript/ > Google Maps JavaScript API </a> ';
+
+		menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			API.getMenuDetailsAPIKey() +
+
+			GEO.getMenuDetailsGeocoder() +
+
+			API.getMenuDetailsMapClick() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+			COR.getMenuDetailsObjectProperties( COR.defaults ) +
+
+			PAR.getMenuDetailsMapParameters() +
+
+			ELV.getMenuDetailsElevations() +
+
+			NEA.getMenuDetailsNearby() +
+
+			TIL.getMenuDetailsTilesData() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		APIapiKey.setAttribute('open', 'open');
+
+ 		GEOlocationDetails.setAttribute('open', 'open');
+
+		APIclickDetails.setAttribute('open', 'open');
+
+		SELdetailsSelectFile.setAttribute('open', 'open');
+
+		PARparametersDetails.setAttribute('open', 'open');
+
+		ELVelevationsDetails.setAttribute('open', 'open');
+
+		NEAdetailsNearby.setAttribute('open', 'open');
+
+
+//		SELmenuSummary.innerHTML = '<h3>Select a KML file</h3>';
+
+//		SELinpFile.style.display = 'none';
+
+//		SELselFiles.onchange = function() { KML.getFile( SEL.urlBase + SELselFiles.value ); }
+
+
+		COR.getPlaceDefaults();
+
+		API.onEventAPIKeyUpdate();
+
+		SEL.getGitHubAPITreeContents();
+
+	}
+
+	API.onInitGoogleMap = function() {
+
+		GEO.initGoogleGeocoder();
+
+		PAR.setMapParameters();
+
+	};
+
+
+	API.onSetCenter = function(){
+
+		TIL.getTilesData();
+
+	};
+
+
+	SEL.onLoadJSONFile = function() {
+
+		COR.getPlaceDefaults();
+
+console.log( 'file loaded', COR.fileName );
+
+		API.map.setZoom( COR.place.zoom );
+		API.setCenter( COR.place.latitude, COR.place.longitude, true );
+
+	}
+
+</script>
+</body>
+</html>

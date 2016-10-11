@@ -50,13 +50,12 @@
 
 	};
 
+
 	init();
 
 	THR.animate();
 
 	function init() {
-
-
 
 		COR.taglineHeader += 'Three.js Howdy! &rarr;' + b;
 
@@ -74,9 +73,9 @@
 
 		b;
 
-		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
-
 		detailsThreejs.setAttribute('open', 'open');
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
 		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
