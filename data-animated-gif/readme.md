@@ -45,7 +45,7 @@ _San Francisco Bay ~ 4.756 MB ~ 512 x 256 ~ 10 fps ~ 120 frames_
 
 * https://github.com/spite/ccapture.js
 
-// Thank you Jaume
+Thank you Jaume
 
 
 
