@@ -1,20 +1,20 @@
 ﻿<span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/#xxxxxx/ "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/xxxxxx/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+( https://jaanga.github.io/terrain3/#data-animated-gif/ "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/data-animated-gif/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo;
 
-[Animated GIF Read Me]( https://jaanga.github.io/terrain3/#xxxxxx/ )
+[Data Animated GIF Read Me]( https://jaanga.github.io/terrain3/#data-animated-gif/ )
 ===
 
 
-![Mount Everest]( mount-everest-01.gif )
+![Mount Everest]( https://jaanga.github.io/terrain3/data-animated-gif/mount-everest-01.gif )
 
 
 _Mount Everest ~ 8.907 MB ~ 512 x 256 ~ 15 fps ~ 120 frames_
 
 
-![San Francisco Bay]( san-francisco-01.gif )
+![San Francisco Bay]( https://jaanga.github.io/terrain3/data-animated-gif/san-francisco-01.gif )
 
 _San Francisco Bay ~ 4.756 MB ~ 512 x 256 ~ 10 fps ~ 120 frames_
 
