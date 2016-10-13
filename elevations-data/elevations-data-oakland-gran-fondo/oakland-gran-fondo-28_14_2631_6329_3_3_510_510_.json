@@ -1,4 +1,5 @@
 {"name":"Place",
+"stations": [ 1, 2 ],
 "backgroundColor":8306926,
 "deltaOverlay":3,
 "fogNear":0.5,

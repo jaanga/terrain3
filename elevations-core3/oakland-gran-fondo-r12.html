@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Oakland Gran Fondo 2016 3D Viewer R12</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Elevations Core3, load and display interactive 3D maps. 2D maps applied as overlays on 3D meshes.
+Select source and resolution of overlays. Toggle or control display of various viewing and debugging aids. Display messages as 3D placards.
+Load and display aircraft flightpath data from CSV files as lines with width.
+Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
+<meta name=keywords content='cycling,gran fondo,gps,cartography,maps,geology,geography,vr,interactive,WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-10-03' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
+<!--
+<script src=https://jaanga.github.io/terrain3/elevations-core3/a-cor-core/core-r2.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3//b-sel-select/select-r2.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3//c-ovr-overlay/overlay-r1.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3//d-ter-terrain/terrain-r1.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3//e-thr-threejs/threejs-r1.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3/f-map-map/map-r2.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3/g-msh-mesh-lines/mesh-lines-r1.js ></script>
+<script src=https://jaanga.github.io/terrain3/elevations-core3/h-kml-kml/kml-r2.js ></script>
+-->
+<script src=./a-cor-core/core-r2.js ></script>
+<script src=./b-sel-select/select-r3.js ></script>
+<script src=./c-ovr-overlay/overlay-r1.js ></script>
+<script src=./d-ter-terrain/terrain-r1.js ></script>
+<script src=./e-thr-threejs/threejs-r1.js ></script>
+<script src=./f-map-map/map-r2.js ></script>
+<script src=./pla-placards/placards-r2.js ></script>
+<script src=./g-msh-mesh-lines/mesh-lines-r2.js ></script>
+<script src=./h-kml-kml/kml-r3.js ></script>
+<script src=./i-cas-camera-action-select/camera-action-select-r3.js ></script>
+<script src=../elevations-data/elevations-data-oakland-gran-fondo/ogf-aid-stations.js ></script>
+<script>
+
+	var sponsors;
+
+//	SEL.urlAPITreeContents = 'https://api.github.com/repos/cynthiaarmour/cynthiaarmour.github.io/git/trees/master?recursive=1';
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+	SEL.urlBase = '../elevations-data/';
+//	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/' + SEL.searchInFolder;
+
+//	SEL.searchInFolder = 'elevations-data-oakland-gran-fondo';
+	SEL.searchInFolder = SEL.folders[ 3 ];
+
+//	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
+	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + '/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
+//	SEL.defaultFile; // if no default, select a random file
+
+	CAS.marker = 'Rider';
+	CAS.actorScale = 0.005;
+
+	CAS.cameraOffsetChase = v( -0.02, 0.05, -0.02 );
+	CAS.cameraOffsetInside = v( -0.003, 0.02, -0.01 );
+	CAS.cameraOffsetTrack = v( 0, 0.03, 0.05 );
+	CAS.cameraOffsetWorld = v( 0, 0.05, 0.12 );
+
+	COR.taglineHeader = 
+
+		'<div><small>' +
+			'Rotate|Zoom|Pan => 1|2|3 finger/button' + b +
+			'Slide menu => \'hamburger\' icon' +
+		'</small></div>';
+
+
+
+// load all custom methods first
+
+	COR.getMenuDetailsHeader = function() {
+
+		var menuDetailsHeader =
+
+//			'<h3>' +
+//				'<a href=http://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo; ' +
+//				'<a href=http://jaanga.github.io/terrain3/ title="your happy mappy place" > Terrain3 </a> &raquo; ' + 
+//			'</h3>' +
+			'<h2>' +
+				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
+//				'<a href=index.html#readme.md title="Click here for help and information" > &#x24D8; </a>' +
+				'<a href=https://cynthiaarmour.github.io/oakland-gran-fondo-2016/#readme.md onmouseover=popHelp.style.display=""; onmouseout=popHelp.style.display="none"; > &#x24D8; </a>' +
+
+			'</h2>' +
+
+			COR.taglineHeader +
+
+			'<div class=popUp id=popHelp style=display:none; ><p>Hi there!</p>Click the i-in-circle, info icon for latest updates.</div>' +
+
+		b;
+
+		return menuDetailsHeader;
+
+	};
+
+
+	COR.getMenuFooter = function() {
+
+		var footer =
+
+			'<hr>' +
+
+			'<center>' +
+				'<a href=https://bikeeastbay.org/ style=text-decoration:none; onmouseover=pop2.style.display=""; onmouseout=pop2.style.display="none"; >' +
+				'<img src="https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/logo-beb-main-site.png" width=150px ></a>' + b + b +
+
+				'<a href=http://www.oaklandgranfondo.com/ ><img src="https://cynthiaarmour.github.io/oakland-gran-fondo-2016/elevations-data/elevations-data-oakland-gran-fondo/OGF-HOR-245.png" width=150px ></a>' + b +
+
+			'</center>' +
+
+			'<div class=popUp id=pop2 style= display:none;bottom:100px; >' +
+				'We’ve been working for safe, convenient and enjoyable bicycling for all people in the East Bay since 1972' +
+			'</div>' +
+
+		b;
+
+		return footer;
+
+	};
+
+
+	COR.onLoadJSONFile = function() {
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+		MAP.initMapGeometry();
+
+		KML.drawPath();
+
+		THR.line3.position.y = 0.0005;
+
+		if ( !THR.axisHelper ) {
+
+			sponsors = PLA.drawBitMap( SEL.urlBase + SEL.searchInFolder + '/GFO-Sponsor-Bar-2016.jpg' );
+			sponsors.scale.set( 0.14, 0.02, 1 );
+			sponsors.rotation.x = pi05;
+			THR.scene.add( sponsors );
+
+			THR.axisHelper = new THREE.AxisHelper( 50 );
+			THR.scene.add( THR.axisHelper );
+			THR.axisHelper.visible = false;
+		}
+
+		sponsors.position.set( COR.place.longitude, -0.0001, - COR.place.latitude );
+
+		fNames = [
+
+			'oakland-gran-fondo-100-r1_11_328_791_3_3_510_510_.json',
+			'oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json'
+
+		]
+
+		sponsors.visible = fNames.indexOf(COR.fileName ) > -1 ? true : false;
+
+		if ( !CAS.actor ) { CAS.getActorBitmap( SEL.urlBase + SEL.searchInFolder + '/logo-beb-main-site.png' ); }
+
+		for ( var i = 0; i < SEL.files.length; i++ ) {
+
+			if ( SEL.files[ i ] === COR.fileName ) { 
+
+				SELselFiles.selectedIndex = i;
+				break;
+
+			}
+
+		}
+
+		if ( COR.place.stations ) { drawAidStations(); }
+
+	};
+
+
+	THR.viewObject = function( mesh ) {
+
+		var cameraPosition;
+
+		mesh.updateMatrixWorld();
+		mesh.geometry.computeBoundingSphere();
+
+		THR.radius = mesh.geometry.boundingSphere.radius;
+		THR.center = mesh.position.clone().add( mesh.geometry.boundingSphere.center );
+
+		THR.controls.target.copy( THR.center );
+		THR.controls.maxDistance = 3 * THR.radius;
+
+	}
+
+
+	CAS.cameraTrack = function() {
+
+		CAS.offsetStart = 0;
+		CAS.offsetEnd = 1;
+
+		if ( COR.fileName === "oakland-gran-fondo-100-r1_14_2642_6341_3_3_510_510_.json" ) { index = CAS.offsetStart = 0.32; CAS.offsetEnd = 0.39; }
+		if ( COR.fileName === "oakland-gran-fondo-28_14_2631_6329_3_3_510_510_.json" ) { index = CAS.offsetStart = 0.25; CAS.offsetEnd = 0.76; }
+
+		THR.controls.autoRotate = false;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
+		THR.scene.add( THR.camera );
+
+//console.log( 'got track', 23 );
+
+		if ( MAP.mesh ) {
+
+			THR.viewObject( MAP.mesh );
+			THR.camera.position.copy( THR.center.clone() ).add( CAS.cameraOffsetTrack );
+
+		} else {
+
+			THR.camera.position.copy( origin.clone().add( CAS.cameraOffsetTrack ) );
+
+		}
+
+		THR.controls.target.copy( CAS.center.clone() );
+		target = CAS.actor.position;
+		THR.controls.target.copy( target );
+		follow = true;
+
+	}
+
+
+	CAS.cameraWorld = function() {
+
+		THR.controls.autoRotate = false;
+		CHKoutSpeed.value = CAS.cameraPoints = 25;
+		THR.scene.add( THR.camera );
+		target = THR.center.clone();
+		THR.controls.target.copy( target );
+
+		if ( MAP.mesh !== undefined ) {
+
+			THR.viewObject( MAP.mesh );
+			THR.camera.position.copy( THR.center.clone() ).add( CAS.cameraOffsetWorld );
+
+		} else {
+
+			THR.camera.position.copy( CAS.cameraOffsetWorld );
+
+		}
+
+		follow = false;
+
+	}
+
+
+
+	init();
+
+	CAS.animatePlusLookAt();
+
+	function init() {
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+			CAS.getMenuDetailsCameraActions() +
+
+//			KML.getMenuDetailsKML() +
+
+			OVR.getMenuDetailsOverlay() +
+
+			TER.getMenuDetailsTerrain() +
+
+//			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { 
+
+			hamburger.style.left = '0px';
+
+		} else {
+
+			if ( location.hash.length ) { SEL.defaultFile = location.hash.slice( 6 ); }
+
+		}
+
+		SELpFolder.style.display = 'none';
+
+		SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
+		SELselFiles.size = 5;
+
+//		SELdetailsSelectFile.setAttribute('open', 'open');
+
+//		detailsOverlay.setAttribute('open', 'open');
+
+//		detailsOverlayParameters.setAttribute('open', 'open');
+
+//		detailsTerrain.setAttribute('open', 'open');
+
+//		detailsTerrainParameters.setAttribute('open', 'open');
+
+		TERchkAxisHelper.checked  = false;
+		TERchkBoxHelper.checked = false;
+		TERchkNearby.checked = false;
+
+
+// start somewhere in the first half of the ride
+
+		index = 0.4 * Math.random();
+
+		SEL.getGitHubAPITreeContents();
+
+		THR.getThreeJS();
+
+	}
+
+
+	function drawAidStations() {
+
+		var cpp, p;
+		var stationMesh;
+
+		height = COR.place.plaHeight || 0.00005;
+
+		THR.scene.remove( PLA.aidStations );
+
+		PLA.aidStations = new THREE.Object3D();
+
+		for ( var i = 0; i < COR.place.stations.length; i++ ) {
+
+			station = aidStations[ 'station' + COR.place.stations[ i ] ];
+			stationMesh = PLA.drawPlacard(  [station.name, station.location, station.volunteers ], 0.00003, 120, 0, 0.02, 0 );
+			stationMesh.position.set( station.directions[ 1 ], 0 , - station.directions[ 0 ] );
+
+			PLA.aidStations.add( stationMesh );
+
+		}
+
+		THR.scene.add( PLA.aidStations );
+
+	}
+
+
+</script>
+</body>
+</html>

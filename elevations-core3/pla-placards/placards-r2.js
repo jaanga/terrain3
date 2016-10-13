@@ -27,6 +27,8 @@
 
 	}
 
+
+
 	PLA.drawPlacePlacards = function() {
 
 		var cpp, p;
@@ -89,6 +91,8 @@
 		}
 
 		THR.scene.add( PLA.nearby );
+
+		PLA.nearby.visible = TERchkNearby.checked;
 
 	};
 

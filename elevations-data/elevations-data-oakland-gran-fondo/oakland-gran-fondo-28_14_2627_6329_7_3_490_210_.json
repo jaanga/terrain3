@@ -1,5 +1,6 @@
 {"name":"Place",
 "plaHeight": 0.00003,
+"stations": [ 1, 2 ],
 "backgroundColor":8306926,
 "deltaOverlay":2,
 "fogNear":0.5,
