@@ -127,7 +127,7 @@
 
 			GIF.step += 2 * Math.PI / GIF.frameLimit;
 
-			MAP.mesh.rotation.y = GIF.step;
+			globe.meshEarth.rotation.y = GIF.step;
 
 		}
 
