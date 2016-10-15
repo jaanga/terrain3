@@ -42,6 +42,19 @@
 //	SEL.urlBase = '../../../../elevations-data/' + SEL.searchInFolder;
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
+	THR.onWindowResize = function() {
+
+		THR.camera.aspect = GIF.width / GIF.height;
+		THR.camera.updateProjectionMatrix();
+
+		THR.renderer.setSize( GIF.width, GIF.height );
+
+		THR.stats.domElement.style.display = 'none';
+
+	}
+
+
+
 	init();
 
 	THR.getThreeJS();
@@ -158,6 +171,7 @@
 		};
 
 	}
+
 
 
 	COR.onLoadJSONFile = function() {

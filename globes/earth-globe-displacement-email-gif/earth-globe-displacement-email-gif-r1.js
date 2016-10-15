@@ -37,7 +37,8 @@
 		heightmap = globe.loader.load( globe.sourceHeight );
 
 //		texture = globe.loader.load( globe.sourceFolder + globe.overlays[ selOverlay.selectedIndex ][0] )
-		texture = globe.loader.load( globe.sourceFolder + 'Elevation.jpg' )
+//		texture = globe.loader.load( globe.sourceFolder + 'Elevation.jpg' )
+		texture = globe.loader.load( globe.sourceFolder + 'bathymetry_bw_composite_2k.png' )
 
 		geometry = new THREE.SphereBufferGeometry( 6371, globe.verticesX - 1, globe.verticesY - 1 );
 
@@ -164,11 +165,11 @@ console.timeEnd( 'timer 0' );
 	GIF.rotate = false;
 	GIF.capture = false;
 	GIF.width = 512;
-	GIF.height = 256;
+	GIF.height = 350;
 
-	GIF.step = 0;
-	GIF.framerate = 10;
-	GIF.frameLimit = 120;
+	GIF.step = 2.5;
+	GIF.framerate = 5;
+	GIF.frameLimit = 150;
 	GIF.generating = false;
 
 	GIF.time = 0;
@@ -231,7 +232,7 @@ console.timeEnd( 'timer 0' );
 		THR.controls.autoRotate = false;
 //		THR.renderer.setClearColor( 0xf0f0f0 );
 
-		GIF.step = 0;
+		GIF.step = 2.5;
 
 		GIF.rotate = true;
 
@@ -268,7 +269,7 @@ console.timeEnd( 'timer 0' );
 
 		if ( GIF.rotate === true ) {
 
-			GIF.step += 2 * Math.PI / GIF.frameLimit;
+			GIF.step += -2 * Math.PI / GIF.frameLimit;
 
 			obj.rotation.y = GIF.step;
 

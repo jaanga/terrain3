@@ -24,11 +24,10 @@
 <script src=../../core4/0-def-defaults4/def-defaults4-r1.js ></script>
 <script src=../../core4/0-cor-core4/cor-core4-r1.js ></script>
 <script src=../../core4/thr-threejs4/thr-threejs4-r1.js ></script>
-<script src=../../core4/pla-placard4/pla-placard4-r1.js ></script>
+<script src=../../core4/pla-placard4/pla-placard4-r3.js ></script>
 <script src=../../globes/earth-globe-displacement-email-gif/earth-globe-displacement-email-gif-r1.js ></script>
-<!--
-<script src=../../core4/gif-generate-animated-gif4/gif-generate-animated-gif4-r1.js ></script>
--->
+
+
 <script>
 
 	DEF.menuHeaderTagline = 
@@ -37,6 +36,86 @@
 			'Generate animated GIFs' + b +
 			'with messages that go around the world' + b +
 		'</small></div>';
+
+	function derek() {
+
+		draw3DMessage( ' Hello Derek :-' );
+
+		draw3DMessage( ' You raised my interest. So you get R2 of my eMail 3D app, ;-) ', 250, 120, 7800, 3.2, 1 );
+
+		draw3DMessage( ' This release adds color and bendy 3D text. ', 200, 100, 7500, 3.3, 1.2 );
+
+		draw3DMessage( 'And much, much bigger file sizes. ', 2, 100, 7500, 3.5, 1.4 );
+
+		draw3DMessage( ' My animated GIFs suck at 3D messaging. ', 220, 170, 7500, 3.5, 1.6 );
+
+		draw3DMessage( 'Does Orange propose a better way? ', 80, 30, 7500, 3.5, 1.8 );
+
+
+		draw3DMessage( ' Sorry to bother you.' , 150, 20, 7800, 0, 1.1 );
+
+		draw3DMessage( ' Let me know if VR PowerPoint is the way to go  ', 30, 170, 7800, 0.3, 1.3 );
+
+		draw3DMessage( ' warm regards  ', 40, 100, 7800, 0.5, 1.5 );
+
+		draw3DMessage( ' Theo  ', 70, 140, 7800, 0.7, 1.75 );
+
+	}
+
+
+
+	function aceit() {
+
+		draw3DMessage( ' Hello Everbody :-' );
+
+		draw3DMessage( ' Here\'s Realease 2 of a 3D eMail app, ;-) ', 250, 120, 7800, 3.2, 1 );
+
+		draw3DMessage( ' This release adds color and bendy 3D text. ', 200, 100, 7500, 3.3, 1.2 );
+
+		draw3DMessage( 'And much, much bigger file sizes. ', 2, 100, 7500, 3.5, 1.4 );
+
+		draw3DMessage( ' My animated GIFs suck at 3D messaging. ', 220, 170, 7500, 3.5, 1.6 );
+
+		draw3DMessage( ' It\'s a work-in-progess ', 80, 30, 7500, 3.5, 1.8 );
+
+
+		draw3DMessage( ' The question is: ' , 150, 20, 7800, 0, 1.1 );
+
+		draw3DMessage( ' How will we message in 3D in the future? ', 30, 170, 7800, 0.3, 1.3 );
+
+		draw3DMessage( ' ox ox  ', 40, 100, 7800, 0.5, 1.5 );
+
+		draw3DMessage( ' Daddy /Theo  ', 70, 140, 7800, 0.7, 1.75 );
+
+	}
+
+
+	function jaanga() {
+
+		draw3DMessage( ' Hello Jaanga peeps' );
+
+		draw3DMessage( ' Here\'s Realease 2 of a 3D eMail app, ;-) ', 250, 120, 7800, 3.2, 1 );
+
+		draw3DMessage( ' This release adds color and bendy 3D text. ', 200, 100, 7500, 3.3, 1.2 );
+
+		draw3DMessage( 'And much, much bigger file sizes. ', 2, 100, 7500, 3.5, 1.4 );
+
+		draw3DMessage( ' My animated GIFs fail at 3D messaging. ', 220, 170, 7500, 3.5, 1.6 );
+
+		draw3DMessage( ' It\'s a work-in-progess ', 80, 30, 7500, 3.5, 1.8 );
+
+
+		draw3DMessage( ' The question is: ' , 150, 20, 7800, 0, 1.1 );
+
+		draw3DMessage( ' How will we message in 3D in the future? ', 30, 170, 7800, 0.3, 1.3 );
+
+		draw3DMessage( ' Any thoughts', 40, 100, 7800, 0.5, 1.5 );
+
+		draw3DMessage( ' Theo  ', 70, 140, 7800, 0.7, 1.75 );
+
+	}
+
+
 
 	var messages = {
 
@@ -100,6 +179,20 @@
 	}
 
 
+
+	THR.onWindowResize = function() {
+
+		THR.camera.aspect = GIF.width / GIF.height;
+		THR.camera.updateProjectionMatrix();
+
+		THR.renderer.setSize( GIF.width, GIF.height );
+
+		THR.stats.domElement.style.display = 'none';
+
+	}
+
+
+
 	var obj;
 
 	THR.moreThreejsInits = function() {
@@ -107,7 +200,7 @@
 		var geometry, material;
 
 
-		THR.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 40000 );
+		THR.camera = new THREE.PerspectiveCamera( 40, GIF.width / GIF.height, 1, 40000 );
 		THR.camera.position.set( 20000, 5000, 0 );
 
 		THR.controls = new THREE.OrbitControls( THR.camera, THR.renderer.domElement );
@@ -149,9 +242,14 @@
 
 		THR.scene.add( obj );
 
+//		derek();
+//		aceit();
+		jaanga();
 
 	};
 
+
+	var placards;
 
 	init();
 
@@ -190,6 +288,42 @@
 
 	}
 
+
+	function draw3DMessage( text = 'Hello, World!', strokeColor = 60, fillColor = 200, radius = 8000, left = 3, top = 0.8 ) {
+
+		THR.scene.remove( placards );
+
+		placards = new THREE.Object3D();
+
+		texture = PLA.canvasMultilineTextRounded( text, { strokeColor: strokeColor, fillColor: fillColor } );
+		heightmap = texture;
+
+		geometry = new THREE.SphereGeometry( radius, Math.floor( 0.5 * texture.image.width ), 128, left, texture.image.width / 1000, top, 0.2 );
+
+// TorusGeometry( radius, tube, radialSegments, tubularSegments, arc )
+//		geometry = new THREE.TorusGeometry( 200, 50, 12, 100, 2 );
+
+
+		material = new THREE.MeshPhongMaterial( {
+
+			color: 0xffffff,
+			map: texture,
+			opacity: 0.85,
+			displacementMap: texture,
+			displacementScale: 500,
+			side: 2,
+			transparent: true
+
+		} );
+
+		message = new THREE.Mesh( geometry, material );
+//		message.position.set( 50, 40, 0 );
+
+		obj.add( message );
+
+//		THR.scene.add( placards );
+
+	}
 
 </script>
 </body>
