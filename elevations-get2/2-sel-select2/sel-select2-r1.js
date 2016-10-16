@@ -37,6 +37,11 @@
 
 // Menus
 
+
+//			SEL.getMenuDetailsSelectFile() +
+
+//		SELdetailsSelectFile.setAttribute('open', 'open');
+
 	SEL.getMenuDetailsSelectFile = function() {
 
 		var menuDetailsSelectFile =

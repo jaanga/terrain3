@@ -25,7 +25,7 @@ Display results in 3D. Display useful info.
 <script src=../../elevations-get2/6-til-tile2/til-tile2-r1.js ></script>
 <script src=../../elevations-get2/7-elv-elevation2/elv-elevation2-r1.js ></script>
 <script src=../../elevations-get2/8-nea-nearby2/nea-nearby2-r1.js ></script>
-
+<script src=../../elevations-get2/9-kml-kml2/kml-kml2-r1.js ></script>
 <script>
 
 	SEL.folders = [
@@ -54,10 +54,35 @@ Display results in 3D. Display useful info.
 //	COR.defaults.longitude = 25.367;
 //	COR.defaults.origin = 'Mykonos';
 
-
 //	SEL.getJSONFileXHR = function(){};
 
+
 	ELV.urlViewElevations3D = '../../elevations-core3/index.html';
+
+	KML.folders = [
+		'data-path-csv',
+		'data-path-kml',
+		'data-path-tcx',
+		'test'
+	];
+
+	KML.defaultFolder = 1;
+
+	KML.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	KML.defaultFile = '../../elevations-data/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	KML.defaultFile; // if no default, select a random file
+
+//	KML.extension = '.json';
+	KML.extension = '.kml';
+
+//	KML.searchInFolder = 'elevations-data-04/';
+	KML.searchInFolder = KML.folders[ KML.defaultFolder ];
+
+//	KML.urlBase = '../../';
+	KML.urlBase = 'https://jaanga.github.io/terrain3/';
+
+
 
 	init();
 
@@ -88,6 +113,8 @@ Display results in 3D. Display useful info.
 
 			NEA.getMenuDetailsNearby() +
 
+			KML.getMenuDetailsSelectFile() +
+
 			TIL.getMenuDetailsTilesData() +
 
 			COR.getMenuDetailsAbout() +
@@ -110,6 +137,8 @@ Display results in 3D. Display useful info.
 
 		NEAdetailsNearby.setAttribute('open', 'open');
 
+		KMLdetailsSelectFile.setAttribute('open', 'open');
+
 
 //		SELmenuSummary.innerHTML = '<h3>Select a KML file</h3>';
 
@@ -124,6 +153,10 @@ Display results in 3D. Display useful info.
 
 		SEL.getGitHubAPITreeContents();
 
+		KML.getGitHubAPITreeContents();
+
+
+
 	}
 
 	API.onInitGoogleMap = function() {
@@ -132,12 +165,15 @@ Display results in 3D. Display useful info.
 
 		PAR.setMapParameters();
 
+		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
+		NEA.listener = API.map.addListener( 'center_changed', NEA.clearAll );
+
 	};
 
 
 	API.onSetCenter = function(){
 
-		TIL.getTilesData();
+//		TIL.getTilesData();
 
 	};
 
@@ -146,7 +182,7 @@ Display results in 3D. Display useful info.
 
 		COR.getPlaceDefaults();
 
-console.log( 'file loaded', COR.fileName );
+//console.log( 'file loaded', COR.place.fileName );
 
 		API.map.setZoom( COR.place.zoom );
 		API.setCenter( COR.place.latitude, COR.place.longitude, true );

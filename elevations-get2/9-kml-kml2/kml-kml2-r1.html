@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Get2 Select R1</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core use GitHuB API to get file names and folders from GitHub Server. A remote LS or DIR service.' >
+<meta name=keywords content='cartography,maps,Jaanga,GitHub API,CSS,HTML,JavaScript,GitHub,FOSS' >
+<meta name=date content='2016-10-02' >
+</head>
+<body>
+<!--
+<script src=https://cdnjs.cloudflare.com/ajax/libs/showdown/1.4.3/showdown.min.js ></script>
+-->
+<script src=../../elevations-get2/0-def-defaults2/def-defaults2-r1.js ></script>
+<script src=../../elevations-get2/1-cor-core2/cor-core2-r1.js ></script>
+<script src=../../elevations-get2/3-api-map-api2/api-map-api2-r1.js ></script>
+<script src=../../elevations-get2/9-kml-kml2/kml-kml2-r1.js ></script>
+<script>
+
+// add user and branch
+
+	KML.folders = [
+		'data-path-csv',
+		'data-path-kml',
+		'data-path-tcx',
+		'test'
+	];
+
+	KML.defaultFolder = 1;
+
+	KML.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	KML.defaultFile = '../../elevations-data/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	KML.defaultFile; // if no default, select a random file
+
+//	KML.extension = '.json';
+	KML.extension = '.kml';
+
+//	KML.searchInFolder = 'elevations-data-04/';
+	KML.searchInFolder = KML.folders[ KML.defaultFolder ];
+
+//	KML.urlBase = '../../';
+	KML.urlBase = 'https://jaanga.github.io/terrain3/';
+
+
+	init();
+
+	function init() {
+
+		COR.taglineHeader = 'Select a file!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			API.getMenuDetailsAPIKey() +
+
+			KML.getMenuDetailsSelectFile() +
+
+			API.getMenuDetailsMapClick() +
+
+			COR.getMenuDetailsObjectProperties( COR.defaults ) +
+
+			COR.getMenuDetailsTemplate() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		KMLdetailsSelectFile.setAttribute('open', 'open');
+
+		APIclickDetails.setAttribute('open', 'open');
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		KML.getGitHubAPITreeContents();
+
+		COR.getPlaceDefaults();
+
+		API.onEventAPIKeyUpdate();
+
+	}
+
+
+	KML.onLoadJSONFile = function( xhr ) {
+
+		COR.getPlaceDefaults();
+
+console.log( 'file loaded', KML.fileName );
+
+		API.setCenter( COR.place.latitude, COR.place.longitude, true )
+
+	}
+
+
+</script>
+</body>
+</html>

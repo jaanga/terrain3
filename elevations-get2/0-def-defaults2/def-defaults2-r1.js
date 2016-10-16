@@ -90,7 +90,7 @@
 
 	COR.defaults.mapTypeId = 'hybrid';
 
-	COR.defaults.nearby = '';
+//	COR.defaults.nearby = '';
 
 	COR.defaults.objectName = 'defaults';
 	COR.defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';

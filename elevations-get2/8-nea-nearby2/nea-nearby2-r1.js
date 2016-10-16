@@ -31,12 +31,13 @@
 				'<div id=NEAdivNearby >' +
 
 					'<p>' +
-						'<input type=radio name=radPlaceType id=but1 onclick=butMore.disabled=false;NEA.type=NEA.types.naturalFeature; checked />Natural feature' + b +
-						'<input type=radio name=radPlaceType id=but2 onclick=butMore.disabled=false;NEA.type=NEA.types.locality; />Locality' + b +
-						'<input type=radio name=radPlaceType id=but3 onclick=butMore.disabled=false;NEA.type=NEA.types.pointOfInterest; />point_of_interest' +
+						'<input type=radio name=radPlaceType id=but1 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.naturalFeature; checked />Natural feature' + b +
+						'<input type=radio name=radPlaceType id=but2 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.locality; />Locality' + b +
+						'<input type=radio name=radPlaceType id=but3 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.pointOfInterest; />point_of_interest' +
 					'</p>' +
 
-					'<button id=butMore onclick=NEA.getNearby(); > get Nearby </button>  ' +
+					'<button id=NEAbutMore onclick=NEA.getNearby(); > get nearby </button>  ' +
+					'<button id=NEAbutClearAll onclick=NEA.clearAll(); > clear all </button>  ' +
 
 			'</div>' + b +
 
@@ -56,13 +57,13 @@
 
 		var service, bounds;
 
+// may no longer be needed with center changed listener
 		if ( NEA.latitude !== COR.place.latitude && NEA.longitude !== COR.place.longitude ) {
-
-			butMore.disabled=false;
-			NEAdivResults.innerHTML = '';
 
 			NEA.latitude = COR.place.latitude;
 			NEA.longitude = COR.place.longitude;
+
+			NEA.clearAll();
 
 		}
 
@@ -71,7 +72,7 @@
 		COR.place[ NEA.type.type ] = [];
 		COR.results = [];
 
-		if ( !COR.place.types ) {  COR.place.types = []; }
+		if ( !COR.place.types ) { COR.place.types = []; }
 
 		if ( !COR.place.types.includes( NEA.type.type ) ) { COR.place.types.push( NEA.type.type ); }
 
@@ -89,7 +90,6 @@
 
 			new google.maps.LatLng( TIL.tiles.LRlat, TIL.tiles.ULlon ),
 			new google.maps.LatLng( TIL.tiles.ULlat, TIL.tiles.LRlon )
-
 
 		);
 
@@ -167,27 +167,27 @@
 //console.log( 'results', results );
 //console.log( 'pagination.hasNextPage', pagination.hasNextPage );
 
-			NEAdivResults.innerHTML = COR.results.length + ' results found';
+			NEAdivResults.innerHTML = updateResults();
 
 			if ( pagination.hasNextPage ) {
 
-				butMore.disabled = false;
+				NEAbutMore.disabled = false;
 
-				butMore.addEventListener( 'click', function() {
+				NEAbutMore.addEventListener( 'click', function() {
 
-					butMore.disabled = true;
+					NEAbutMore.disabled = true;
 
 					pagination.nextPage();
 
 				});
 
-				NEAdivResults.innerHTML = COR.results.length + ' results found. More available,';
+				NEAdivResults.innerHTML = updateResults() + ' More available,';
 
 			} else {
 
-				butMore.disabled = true;
+				NEAbutMore.disabled = true;
 
-				NEAdivResults.innerHTML = COR.results.length + ' results found. No more places.';
+				NEAdivResults.innerHTML = updateResults() + ' No more places.';
 
 			}
 
@@ -197,8 +197,38 @@
 
 		}
 
+		function updateResults() {
+
+			var txt;
+
+			txt = COR.place.natural_feature.length + ' natural features' + b +
+				COR.place.locality.length + ' localities' + b + 
+				COR.place.point_of_interest.length + ' points of interest' + b + 
+			'';
+
+			return txt;
+
+		}
+
 	}
 
+
+	NEA.clearAll = function() {
+
+		if ( !COR.results ) { return; }
+ console.log( 'NEA clear'  );
+		COR.results = [];
+
+		COR.place.types = [];
+		COR.place.natural_feature = [];
+		COR.place.locality = [];
+		COR.place.point_of_interest = [];
+
+		NEAbutMore.disabled = false;
+
+		NEAdivResults.innerHTML = '';
+
+	}
 
 /*
 

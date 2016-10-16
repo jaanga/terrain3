@@ -216,7 +216,7 @@
 
 		API.placeLocation = { lat: place.latitude, lng: place.longitude };
 
-//console.log( '',  );
+
 		if ( bounds.contains( API.placeLocation ) === true || goDistance === true ) {
 
 			API.map.setCenter( API.placeLocation );
@@ -224,6 +224,8 @@
 			API.createMarker( API.map.center );
 
 			API.onSetCenter();
+
+			API.setClickMenuDetails( API.map.center.lat(), API.map.center.lng() );
 
 		} else {
 
@@ -315,9 +317,8 @@
 
 		API.markings = [];
 
-		COR.results = [];
 
-		butMore.disabled = false;
+//		NEAbutMore.disabled = false;
 
 	};
 

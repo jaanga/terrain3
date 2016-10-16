@@ -67,7 +67,7 @@
 
 		'';
 
-		APIapiKey.setAttribute('open', 'open');
+//		APIapiKey.setAttribute('open', 'open');
 
 		APIclickDetails.setAttribute('open', 'open');
 
@@ -90,18 +90,22 @@
 
 		PAR.setMapParameters();
 
+		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
+
+		NEA.listener = API.map.addListener( 'center_changed', NEA.clearAll );
+
 	};
 
 
 	API.onSetCenter = function(){
 
-		TIL.getTilesData();
+//		TIL.getTilesData();
 
-		COR.results = [];
+//		COR.results = [];
 
-		butMore.disabled = false;
+//		NEAbutMore.disabled = false;
 
-		NEAdivResults.innerHTML = '';
+//		NEAdivResults.innerHTML = '';
 
 	};
 

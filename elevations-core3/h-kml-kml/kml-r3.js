@@ -221,6 +221,8 @@
 
 	};
 
+
+
 	KML.readFile = function( files ) {
 
 		var reader;
