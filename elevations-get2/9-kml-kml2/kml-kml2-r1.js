@@ -64,7 +64,6 @@
 
 //				'<p><input type=file id=KMLinpFile onchange=KML.getJSONFileReader(this); /></p>' + b +
 
-				'<p><button onclick=KML.openKML("file:///C:/Users/Theo/Dropbox/Public/git-repos/jaanga.github.io/terrain3/data-path-kml/snow-mountain-wilderness.kml"); >test</button></p>' +
 			'</details>' +
 
 		'';

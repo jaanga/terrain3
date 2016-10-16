@@ -172,6 +172,11 @@ Menu and contents in HTML.
 			'<Placemark>\n' +
 			'<name>test</name>\n' +
 			'<description>test description</description>\n' +
+
+			'<LineStyle>\n' +
+			'<color>ff0000FF</color>\n' +
+			'<width>2.0</width>\n' +
+			 '</LineStyle>\n' +
 			'<LineString>\n' +
 			'<coordinates>\n' +
 		'';
@@ -192,7 +197,7 @@ Menu and contents in HTML.
 
 			result = reader.result;
 
-			textArea.innerHTML = result;
+//			textArea.innerHTML = result;
 
 			parser = new window.DOMParser();
 			xmlParse = parser.parseFromString( result, "text/xml" );
@@ -236,8 +241,10 @@ console.log( '', xmlParse );
 
 	function saveFile() {
 
-		var blob = new Blob( [ textArea.innerHTML ] );
-		var a = document.body.appendChild( document.createElement( 'a' ) );
+		var blob, a;
+
+		blob = new Blob( [ textArea.value ] );
+		a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
 		a.download = fileName;
 		a.click();
