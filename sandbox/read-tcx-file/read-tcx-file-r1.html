@@ -170,13 +170,6 @@ Menu and contents in HTML.
 			'<kml xmlns="http://www.opengis.net/kml/2.2">\n' +
 			'<Document>\n' +
 			'<Placemark>\n' +
-			'<name>test</name>\n' +
-			'<description>test description</description>\n' +
-
-			'<LineStyle>\n' +
-			'<color>ff0000FF</color>\n' +
-			'<width>2.0</width>\n' +
-			 '</LineStyle>\n' +
 			'<LineString>\n' +
 			'<coordinates>\n' +
 		'';
@@ -190,7 +183,7 @@ Menu and contents in HTML.
 			'</kml>' +
 		'';
 
-		elevations = [];
+		coordinates = '';
 
 		reader = new FileReader();
 		reader.onload = function( event ) {
@@ -208,15 +201,15 @@ Menu and contents in HTML.
 
 			for ( var i = 0; i < pathLatitudes.length; i++ ) {
 
-				lat = parseFloat( pathLatitudes[ i ].innerHTML );
-				lon = parseFloat( pathLongitudes[ i ].innerHTML );
-				alt = parseFloat( pathAltitudes[ i ].innerHTML );
+				lat = pathLatitudes[ i ].innerHTML;
+				lon = pathLongitudes[ i ].innerHTML;
+				alt = pathAltitudes[ i ].innerHTML;
 
-				elevations.push( lat, lon, alt );
+				coordinates += lon + ',' + lat + ',' +  alt + '\n';
 
 			}
 
-			textArea.value = prefix + elevations + suffix;
+			textArea.value = prefix + coordinates + suffix;
 
 			fileName = files.files[0].name.slice( 0, -4 ).toLowerCase().replace( /- /g, '' ).replace( / /g, '-' ) + '.kml';
   
