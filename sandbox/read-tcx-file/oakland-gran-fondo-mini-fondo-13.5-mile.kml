@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document>
+<name>Oakland Gran Fondo 13.5</name>
 <Placemark>
 <LineString>
+<altitudeMode>absolute</altitudeMode>
 <coordinates>
 -122.2762200,37.7938800,3.73
 -122.2760600,37.7941700,3.0
