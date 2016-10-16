@@ -27,14 +27,17 @@
 				'<p>' +
 					'<button onclick=ELV.initElevations(); >Get elevations</button> &nbsp; ' +
 					'<button onclick=ELV.saveFile(); >Save path to file</button>' +
-
 				'</p>' +
 
 				'<textarea id=txtElevations >Elevation data appears here as it arrives. When complete a 3D model is generated and displayed.</textarea>' +
+/*
+				'<details >' +
 
+					'<summary><h4>open elevations file</h4></summary>' +
 
-//				'<small>title</small>' +
-//				'<p><input id=ELVinpFileTitle size=35 ></p>' +
+					'<input type=file id=ELVinpFile onchange=ELV.openFile(this,"elevations"); >' +
+					'<div id=menuOpenFileElevations >When you open an elevations file, details will appear here</div>' +
+*/
 
 				'</details>' +
 
@@ -221,9 +224,6 @@ console.log( 'complete count', ELV.count, elevations.length );
 
 				ELV.onSuccessSetIframe();
 
-//				ELVinpFileTitle.value = place.origin;
-
-
 			}
 
 		} );
@@ -362,17 +362,12 @@ console.log( 'complete count', ELV.count, elevations.length );
 			place.samplesY + '_' +
 			'.json';
 
-//		place.fileTitle = ELVinpFileTitle;
-
 		pl = JSON.stringify( place );
 		pl = pl.replace ( /,\"/g, ',\n"' );
-
 		blob = new Blob( [ pl ] );
 
 		a = document.body.appendChild( document.createElement( 'a' ) );
 		a.href = window.URL.createObjectURL( blob );
-
-
 		a.download = place.fileName;
 		a.click();
 

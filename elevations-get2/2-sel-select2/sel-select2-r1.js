@@ -121,10 +121,11 @@
 			if ( !file.includes( SEL.extension ) ) { continue; }
 
 			file = file.split( '\/' ).pop();
+			title = file.slice( 0, file.indexOf( '_' ) ).replace( /-/g, ' ' );
 
 			SEL.files.push( file );
 
-			SELselFiles[ SELselFiles.length ] = new Option( file, file );
+			SELselFiles[ SELselFiles.length ] = new Option( title, file );
 
 		}
 

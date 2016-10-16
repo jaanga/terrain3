@@ -2,6 +2,8 @@
 
 	var KML = {};
 
+// 		a.href = window.URL.createObjectURL( blob );
+
 
 /*
 

@@ -167,10 +167,11 @@ There seem to be a variety of speed bumps.
 
 ### 2016-10-16
 
-Many undocumented changes
+Many undocumented changes since previous update
 
 * Clean NEA issues
-
+	* Still have many issues with past results not being deleted
+* SEL Simplified file names
 
 ### 2016-10-11
 
