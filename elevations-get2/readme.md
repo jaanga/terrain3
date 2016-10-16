@@ -1,23 +1,22 @@
 <span style=display:none; >[You are now in GitHub source code view - click this link to view Read Me file as a web page]
-( https://jaanga.github.io/terrain3/#elevations/elevations-get/ "View file as a web page." ) </span>
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
+( https://jaanga.github.io/terrain3/#elevations-get2/ "View file as a web page." ) </span>
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations-get2/'; value='You are now in GitHub web page view - Click this button to view Read Me file as source code' >
 
 [Jaanga]( http://jaanga.github.io ) &raquo; [terrain3]( https://jaanga.github.io/terrain3/ ) &raquo; 
-[elevations]( https://jaanga.github.io/terrain3/#elevations/ ) &raquo;
 
-[Elevations Get Read Me]( https://jaanga.github.io/terrain3/#google-maps-api3/readme.md )
+[Elevations Get Read Me]( https://jaanga.github.io/terrain3/#elevations-get2/readme.md )
 ===
 
 <!--
 ## Full Screen - stable: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/index.html )
 -->
 
-## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/google-maps-api3/index.html )
+## Full Screen - latest: [Elevations Get]( https://jaanga.github.io/terrain3/elevations-get2/index.html )
 
 
 <img src="https://cloud.githubusercontent.com/assets/547626/16904516/d98fa098-4c4c-11e6-88f0-e668d12da07c.png" style=display:none; width=800 >
 
-<iframe sandbox='allow-same-origin allow-scripts' src=https://jaanga.github.io/terrain3/google-maps-api3/index.html width=800px height=600px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false}); ></iframe>
+<iframe sandbox='allow-same-origin allow-scripts' src=https://jaanga.github.io/terrain3/elevations-get2/index.html width=800px height=600px onload=this.contentWindow.googleMap.setOptions({scrollwheel:false}); ></iframe>
 
 _Elevations Get_
 
@@ -64,14 +63,14 @@ This is part of an investigation into writing very simple code that can access t
 * Press Control-U/Command-Option-U to view the source code
 * Press Control-Shift-J/Command-Option-J to see if the JavaScript console reports any errors
 
-
+<!--
 
 ## Things you can do by editing the code
 
 <iframe src='https://jaanga.github.io/cookbook-html/examples/libraries/ace-editor/ace-view-r1.html#
-	https://jaanga.github.io/terrain3/elevations/elevations-get/elevations-get-r9.js' width=800px height=600 ></iframe>
+	https://jaanga.github.io/terrain3/elevations/elevations-get2/elevations-get-r9.js' width=800px height=600 ></iframe>
 
-<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get/elevations-get-r9.js';
+<input type=button onclick=window.location.href='https://github.com/jaanga/terrain3/tree/gh-pages/elevations/elevations-get2/elevations-get-r9.js';
 value='Source code listing' >
 
 
@@ -80,6 +79,7 @@ value='Source code listing' >
 * Once you've downloaded the file, you can click it to run it.
 * Open the file with a text editor
 
+-->
 
 ## Interesting sites
 
