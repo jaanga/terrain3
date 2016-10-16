@@ -57,7 +57,7 @@
 
 		NEAbutMore.disabled = false;
 		NEA.type = NEA.types[ type ];
-		COR.place[ NEA.type.type ] = [];
+		COR.place[ type ] = [];
 
 	}
 
@@ -164,6 +164,7 @@
 
 			res = results;
 
+			COR.results = [];
 			for ( var i = 0, result; i < results.length; i++ ) {
 
 				result = results [ i ];
@@ -232,9 +233,6 @@
 //		if ( !COR.results ) { return; }
 
 // console.log( 'NEA clear'  );
-
-		COR.results = [];
-		COR.place.types = [];
 
 		COR.place.natural_feature = [];
 		COR.place.locality = [];
