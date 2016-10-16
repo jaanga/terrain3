@@ -165,6 +165,13 @@ There seem to be a variety of speed bumps.
 
 ## Change Log
 
+### 2016-10-16
+
+Many undocumented changes
+
+* Clean NEA issues
+
+
 ### 2016-10-11
 
 * GEO ~ update lat, lon or address updates place center and click details

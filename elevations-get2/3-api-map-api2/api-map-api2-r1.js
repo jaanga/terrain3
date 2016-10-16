@@ -317,8 +317,5 @@
 
 		API.markings = [];
 
-
-//		NEAbutMore.disabled = false;
-
 	};
 

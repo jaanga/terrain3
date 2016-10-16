@@ -1,14 +1,16 @@
 
 // https://developers.google.com/maps/documentation/javascript/places#place_search_requests
+// https://developers.google.com/places/supported_types
 
 	var NEA = NEA || {};
+
+// types could be in COR.places and hold the data
 
 	NEA.types = {
 
 		naturalFeature: { type: 'natural_feature', color: 'green' },
 		locality: { type: 'locality', color: 'blue' },
 		pointOfInterest: { type: 'point_of_interest', color: 'red' }
-
 
 	}
 
@@ -37,7 +39,7 @@
 					'</p>' +
 
 					'<button id=NEAbutMore onclick=NEA.getNearby(); > get nearby </button>  ' +
-					'<button id=NEAbutClearAll onclick=NEA.clearAll(); > clear all </button>  ' +
+					'<button id=NEAbutClearAll onclick=NEA.clearAll();API.clearAll(); > clear all </button>  ' +
 
 			'</div>' + b +
 
@@ -57,7 +59,8 @@
 
 		var service, bounds;
 
-// may no longer be needed with center changed listener
+/*
+
 		if ( NEA.latitude !== COR.place.latitude && NEA.longitude !== COR.place.longitude ) {
 
 			NEA.latitude = COR.place.latitude;
@@ -66,6 +69,7 @@
 			NEA.clearAll();
 
 		}
+*/
 
 		NEA.type = NEA.type || NEA.types.naturalFeature;
 
@@ -79,6 +83,8 @@
 //		NEA.infowindow = new google.maps.InfoWindow();
 
 		service = new google.maps.places.PlacesService( API.map );
+
+// add event handler in TIL...
 
 		if ( !TIL.tiles.LRlat ) {
 
@@ -97,7 +103,7 @@
 
 			bounds: bounds,
 
-			type: [ NEA.type.type ]
+			type: NEA.type.type
 
 // https://developers.google.com/places/supported_types
 //			type: [ 'colloquial_area' ]
@@ -149,7 +155,7 @@
 
 		if ( status === google.maps.places.PlacesServiceStatus.OK ) {
 
-//			var res = results;
+			res = results;
 
 			for ( var i = 0, result; i < results.length; i++ ) {
 
@@ -181,7 +187,7 @@
 
 				});
 
-				NEAdivResults.innerHTML = updateResults() + ' More available,';
+				NEAdivResults.innerHTML = updateResults() + ' More places available...';
 
 			} else {
 
@@ -201,7 +207,8 @@
 
 			var txt;
 
-			txt = COR.place.natural_feature.length + ' natural features' + b +
+			txt = 
+				COR.place.natural_feature.length + ' natural features' + b +
 				COR.place.locality.length + ' localities' + b + 
 				COR.place.point_of_interest.length + ' points of interest' + b + 
 			'';
@@ -215,10 +222,11 @@
 
 	NEA.clearAll = function() {
 
-		if ( !COR.results ) { return; }
- console.log( 'NEA clear'  );
-		COR.results = [];
+//		if ( !COR.results ) { return; }
 
+// console.log( 'NEA clear'  );
+
+		COR.results = [];
 		COR.place.types = [];
 		COR.place.natural_feature = [];
 		COR.place.locality = [];

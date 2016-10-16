@@ -315,7 +315,7 @@
 
 // reset what needs resetting
 
-		COR.nearby = [];
+//		COR.nearby = [];
 		COR.placards = [];
 
 		keys = Object.keys( COR.defaults ); 

@@ -20,9 +20,9 @@
 <script src=../../elevations-get2/8-nea-nearby2/nea-nearby2-r1.js ></script>
 <script>
 
-// 
+//
+ 
 /*
-
 	COR.defaults.latitude = 37;
 	COR.defaults.longitude = -122;
 	COR.defaults.origin = 'Santa Cruz';
@@ -30,9 +30,7 @@
 	COR.defaults.latitude = 37.79679;
 	COR.defaults.longitude = -122.39812;
 	COR.defaults.origin = 'San Francisco CA 94111';
-
 */
-
 	COR.defaults.latitude = 37.441;
 	COR.defaults.longitude = 25.367;
 	COR.defaults.origin = 'Mykonos';
@@ -43,7 +41,7 @@
 
 		COR.initLeftMenu();
 
-		COR.taglineHeader = 'til howdy' + b;
+		COR.menuHeaderTagline += '+ a nearby howdy' + b;
 
 		menu.innerHTML =
 
@@ -90,25 +88,13 @@
 
 		PAR.setMapParameters();
 
-		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
+
+// need a less expensive event
 
 		NEA.listener = API.map.addListener( 'center_changed', NEA.clearAll );
+		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
 
 	};
-
-
-	API.onSetCenter = function(){
-
-//		TIL.getTilesData();
-
-//		COR.results = [];
-
-//		NEAbutMore.disabled = false;
-
-//		NEAdivResults.innerHTML = '';
-
-	};
-
 
 </script>
 </body>
