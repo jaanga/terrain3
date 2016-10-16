@@ -33,8 +33,8 @@
 				'<div id=NEAdivNearby >' +
 
 					'<p>' +
-						'<input type=radio name=radPlaceType id=but1 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.naturalFeature; checked />Natural feature' + b +
-						'<input type=radio name=radPlaceType id=but2 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.locality; />Locality' + b +
+						'<input type=radio name=radPlaceType id=but1 onclick=NEA.updateType("natural_feature"); checked />Natural feature' + b +
+						'<input type=radio name=radPlaceType id=but2 onclick=NEA.updateType("locality"); />Locality' + b +
 						'<input type=radio name=radPlaceType id=but3 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.pointOfInterest; />point_of_interest' +
 					'</p>' +
 
@@ -53,6 +53,13 @@
 
 	};
 
+	NEA.updateType = function( type ) {
+
+		NEAbutMore.disabled = false;
+		NEA.type = NEA.types[ type ];
+		COR.place[ NEA.type.type ] = [];
+
+	}
 
 
 	NEA.getNearby = function() {
@@ -228,6 +235,7 @@
 
 		COR.results = [];
 		COR.place.types = [];
+
 		COR.place.natural_feature = [];
 		COR.place.locality = [];
 		COR.place.point_of_interest = [];

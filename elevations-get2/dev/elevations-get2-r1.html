@@ -155,8 +155,6 @@ Display results in 3D. Display useful info.
 
 		KML.getGitHubAPITreeContents();
 
-
-
 	}
 
 	API.onInitGoogleMap = function() {
@@ -165,18 +163,10 @@ Display results in 3D. Display useful info.
 
 		PAR.setMapParameters();
 
-		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
 		NEA.listener = API.map.addListener( 'center_changed', NEA.clearAll );
+		TIL.listener = API.map.addListener( 'center_changed', TIL.getTilesData );
 
 	};
-
-
-	API.onSetCenter = function(){
-
-//		TIL.getTilesData();
-
-	};
-
 
 	SEL.onLoadJSONFile = function() {
 
