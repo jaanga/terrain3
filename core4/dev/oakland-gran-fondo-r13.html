@@ -2,55 +2,42 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Oakland Gran Fondo 2016 3D Viewer R12.1</title>
+<title>Oakland Gran Fondo 2016 3D Viewer R13</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Elevations Core3, load and display interactive 3D maps. 2D maps applied as overlays on 3D meshes.
 Select source and resolution of overlays. Toggle or control display of various viewing and debugging aids. Display messages as 3D placards.
 Load and display aircraft flightpath data from CSV files as lines with width.
 Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 <meta name=keywords content='cycling,gran fondo,gps,cartography,maps,geology,geography,vr,interactive,WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
-<meta name=date content='2016-10-03' >
+<meta name=date content='2016-10-17' >
 </head>
 <body>
-<!--
-<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
-<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
-<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
--->
+
 <script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
 <script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
 <script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
-<!--
-<script src=https://jaanga.github.io/terrain3/elevations-core3/a-cor-core/core-r2.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3//b-sel-select/select-r2.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3//c-ovr-overlay/overlay-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3//d-ter-terrain/terrain-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3//e-thr-threejs/threejs-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3/f-map-map/map-r2.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3/g-msh-mesh-lines/mesh-lines-r1.js ></script>
-<script src=https://jaanga.github.io/terrain3/elevations-core3/h-kml-kml/kml-r2.js ></script>
--->
-<script src=./a-cor-core/core-r2.js ></script>
-<script src=./b-sel-select/select-r3.js ></script>
-<script src=./c-ovr-overlay/overlay-r1.js ></script>
-<script src=./d-ter-terrain/terrain-r1.js ></script>
-<script src=./e-thr-threejs/threejs-r1.js ></script>
-<script src=./f-map-map/map-r2.js ></script>
-<script src=./pla-placards/placards-r2.js ></script>
-<script src=./g-msh-mesh-lines/mesh-lines-r2.js ></script>
-<script src=./h-kml-kml/kml-r3.js ></script>
-<script src=./i-cas-camera-action-select/camera-action-select-r3.js ></script>
-<script src=../elevations-data/elevations-data-oakland-gran-fondo/ogf-aid-stations.js ></script>
-<script>
 
+<script src=../../core4/0-def-defaults4/def-defaults4-r1.js ></script>
+<script src=../../core4/0-cor-core4/cor-core4-r1.js ></script>
+<script src=../../core4/0-sel-select4/sel-select4-r1.js ></script>
+<script src=../../core4/ovr-overlay4/ovr-overlay4-r1.js ></script>
+<script src=../../core4/ter-terrain4/ter-terrain4-r1.js ></script>
+<script src=../../core4/thr-threejs4/thr-threejs4-r1.js ></script>
+<script src=../../core4/map-map4/map-map4-r1.js ></script>
+<script src=../../core4/pla-placard4/pla-placard4-r1.js ></script>
+<script src=../../core4/msh-mesh-lines4/msh-mesh-lines4-r1.js ></script>
+<script src=../../core4/kml-kml4/kml-kml4-r1.js ></script>
+<script src=../../core4/cas-camera-action-select4/cas-camera-action-select4-r1.js ></script>
+<script src=../../elevations-data/elevations-data-oakland-gran-fondo/ogf-aid-stations.js ></script>
+<script>
 
 	var sponsors;
 
 //	SEL.urlAPITreeContents = 'https://api.github.com/repos/cynthiaarmour/cynthiaarmour.github.io/git/trees/master?recursive=1';
 	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
 
-	SEL.urlBase = '../elevations-data/';
+	SEL.urlBase = '../../elevations-data/';
 //	SEL.urlBase = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/' + SEL.searchInFolder;
 
 //	SEL.searchInFolder = 'elevations-data-oakland-gran-fondo';
@@ -130,7 +117,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	};
 
 
-	COR.onLoadJSONFile = function() {
+	SEL.onLoadJSONFile = function() {
 
 		COR.getPlaceDefaults();
 
@@ -140,6 +127,8 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		KML.drawPath();
 
+
+/*
 		THR.line3.position.y = 0.0005;
 
 		if ( !THR.axisHelper ) {
@@ -164,6 +153,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		]
 
 		sponsors.visible = fNames.indexOf(COR.fileName ) > -1 ? true : false;
+*/
 
 		if ( !CAS.actor ) { CAS.getActorBitmap( SEL.urlBase + SEL.searchInFolder + '/logo-beb-main-site.png' ); }
 
@@ -179,6 +169,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		}
 
 		if ( COR.place.stations ) { drawAidStations(); }
+
 
 	};
 
@@ -237,13 +228,13 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		THR.controls.autoRotate = false;
 		CHKoutSpeed.value = CAS.cameraPoints = 25;
 		THR.scene.add( THR.camera );
-		target = THR.center.clone();
+		target = CAS.center.clone();
 		THR.controls.target.copy( target );
 
 		if ( MAP.mesh !== undefined ) {
 
 			THR.viewObject( MAP.mesh );
-			THR.camera.position.copy( THR.center.clone() ).add( CAS.cameraOffsetWorld );
+			THR.camera.position.copy( CAS.center.clone() ).add( CAS.cameraOffsetWorld );
 
 		} else {
 
@@ -254,8 +245,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		follow = false;
 
 	}
-
-
 
 	init();
 
@@ -287,8 +276,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		b;
 
-		SELdetailsSelectFile.setAttribute( 'open', 'open' );
-
 		if ( window.self !== window.top ) { 
 
 			hamburger.style.left = '0px';
@@ -302,7 +289,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		SELpFolder.style.display = 'none';
 
 		SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
-		SELselFiles.size = 6;
+		SELselFiles.size = 5;
 
 //		SELdetailsSelectFile.setAttribute('open', 'open');
 
@@ -326,6 +313,8 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		SEL.getGitHubAPITreeContents();
 
 		THR.getThreeJS();
+
+//		THR.renderer.domElement.addEventListener( 'onload', THR.moreThreejsInits(), false );
 
 	}
 

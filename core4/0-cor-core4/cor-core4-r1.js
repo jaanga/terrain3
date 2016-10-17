@@ -398,7 +398,7 @@
 
 // reset what needs resetting
 
-		COR.nearby = [];
+//		COR.nearby = [];
 		COR.placards = [];
 
 		keys = Object.keys( COR.defaults ); 
@@ -423,3 +423,35 @@
 		xhr.send( null );
 
 	}
+
+// http://stackoverflow.com/questions/1669190/javascript-min-max-array-values
+
+	COR.arrayMin = function( arr ) {
+
+		var len = arr.length, min = Infinity;
+
+		while ( len-- ) {
+
+			if ( arr[ len ] < min) { min = arr[ len ]; }
+
+		}
+
+		return min;
+
+	};
+
+
+	COR.arrayMax = function( arr ) {
+
+		var len = arr.length, max = -Infinity;
+
+		while ( len-- ) {
+
+			if (arr[len] > max) { max = arr[len]; }
+
+		}
+
+		return max;
+
+	};
+

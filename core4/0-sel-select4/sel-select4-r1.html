@@ -66,19 +66,18 @@
 
 		b;
 
+		SELdetailsSelectFile.setAttribute( 'open', 'open' );
+
 		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
 
 		SEL.getGitHubAPITreeContents();
-
-		SELdetailsSelectFile.setAttribute('open', 'open');
-
 
 	}
 
 
 // 
 
-	COR.onLoadJSONFile = function() {
+	SEL.onLoadJSONFile = function() {
 
 		COR.getPlaceDefaults();
 

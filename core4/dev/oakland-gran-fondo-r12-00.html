@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Oakland Gran Fondo 2016 3D Viewer R12.1</title>
+<title>Oakland Gran Fondo 2016 3D Viewer R12</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Elevations Core3, load and display interactive 3D maps. 2D maps applied as overlays on 3D meshes.
 Select source and resolution of overlays. Toggle or control display of various viewing and debugging aids. Display messages as 3D placards.
@@ -43,7 +43,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 <script src=./i-cas-camera-action-select/camera-action-select-r3.js ></script>
 <script src=../elevations-data/elevations-data-oakland-gran-fondo/ogf-aid-stations.js ></script>
 <script>
-
 
 	var sponsors;
 
@@ -287,8 +286,6 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		b;
 
-		SELdetailsSelectFile.setAttribute( 'open', 'open' );
-
 		if ( window.self !== window.top ) { 
 
 			hamburger.style.left = '0px';
@@ -302,7 +299,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 		SELpFolder.style.display = 'none';
 
 		SELdetailsSelectFile.children[0].innerHTML = '<h3>Select your route</h3>';
-		SELselFiles.size = 6;
+		SELselFiles.size = 5;
 
 //		SELdetailsSelectFile.setAttribute('open', 'open');
 

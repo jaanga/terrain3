@@ -3,7 +3,7 @@
 	var SEL = {};
 
 
-/*
+
 
 	SEL.folders = [
 		'elevations-airports-01',
@@ -35,8 +35,15 @@
 //	SEL.urlBase = '../../elevations-data/';
 	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/';
 
-*/
 
+
+
+// Menus
+
+
+//			SEL.getMenuDetailsSelectFile() +
+
+//		SELdetailsSelectFile.setAttribute('open', 'open');
 
 	SEL.getMenuDetailsSelectFile = function() {
 
@@ -67,7 +74,9 @@
 	}
 
 
-	SEL.getFolders = function() {
+//
+
+	SEL.getFolders = function() { // used below
 
 		for ( var i = 0; i < SEL.folders.length; i++ ) {
 
@@ -86,14 +95,11 @@
 
 		SEL.getFolders();
 
-		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', SEL.urlAPITreeContents, true );
-		xhr.onload = onLoadGitHubTreeContents;
-		xhr.send( null );
+		COR.requestFile( SEL.urlAPITreeContents, callback );
 
-		function onLoadGitHubTreeContents() {
+		function callback( xhr ) {
 
-			SEL.response = JSON.parse( xhr.response );
+			SEL.response = JSON.parse( xhr.target.response );
 			SEL.extension = SEL.extension || '.json';
 			SEL.getFiles();
 
@@ -104,25 +110,26 @@
 
 	SEL.getFiles = function() {
 
-			SEL.files = [];
-			SELselFiles.innerHTML = ''
+		SEL.files = [];
+		SELselFiles.innerHTML = ''
 
-			for ( var i = 0; i < SEL.response.tree.length; i++ ) {
+		for ( var i = 0; i < SEL.response.tree.length; i++ ) {
 
-				file = SEL.response.tree[ i ].path;
+			file = SEL.response.tree[ i ].path;
 
-				if ( !file.includes( SEL.searchInFolder ) ) { continue; }
-				if ( !file.includes( SEL.extension ) ) { continue; }
+			if ( !file.includes( SEL.searchInFolder ) ) { continue; }
+			if ( !file.includes( SEL.extension ) ) { continue; }
 
-				file = file.split( '\/' ).pop();
+			file = file.split( '\/' ).pop();
+			title = file.slice( 0, file.indexOf( '_' ) ).replace( /-/g, ' ' );
 
-				SEL.files.push( file );
+			SEL.files.push( file );
 
-				SELselFiles[ SELselFiles.length ] = new Option( file, file );
+			SELselFiles[ SELselFiles.length ] = new Option( title, file );
 
-			}
+		}
 
-			SEL.onGitHubTreeLoad();
+		SEL.onGitHubTreeLoad();
 
 	}
 
@@ -154,28 +161,23 @@
 
 // Gather data when using the default
 
-	SEL.getJSONFileXHR = function( fName ) {
+	SEL.getJSONFileXHR = function( url ) {
 
 console.time( 'timer0' );
 
-		var xhr;
+		COR.requestFile( url, callback );
 
-		xhr = new XMLHttpRequest();
-		xhr.open( 'GET', fName, true );
-		xhr.onload = function callbackXHR() {
+		function callback( xhr ) {
 
-//			SEL.fileJSON = JSON.parse( xhr.responseText );
-			COR.place = JSON.parse( xhr.responseText );
+			COR.place = JSON.parse( xhr.target.responseText );
 
-			COR.fileName = fName.split( '/' ).pop();
+			SEL.fileName = url.split( '/' ).pop();
 
-			location.hash = 'file=' + fName;
+			location.hash = 'file=' + url;
 
-			COR.onLoadJSONFile();
+			SEL.onLoadJSONFile( xhr );
 
 		};
-
-		xhr.send( null );
 
 	}
 
@@ -187,19 +189,21 @@ console.time( 'timer0' );
 
 console.time( 'timer0' );
 
-		var reader;
-
+//		var reader;
 		reader = new FileReader();
+
 		reader.onload = function( event ) {
 
-//			SEL.fileJSON = JSON.parse( reader.result );
 			COR.place = JSON.parse( reader.result );
 
-//			TERoutVertical.value = TERinpVertical.value = COR.place.verticalScale;
+			SEL.fileName = files.files[ 0 ].name;
 
-			COR.fileName = files.files[ 0 ].name;
+//			location.hash = '';
 
-			COR.onLoadJSONFile();
+			history.replaceState('', document.title, window.location.pathname);
+
+
+			SEL.onLoadJSONFile( event );
 
 		};
 
@@ -208,12 +212,14 @@ console.time( 'timer0' );
 	}
 
 
+SEL.onLoadJSONFile = function(){};
+
 
 /*
 
 // more visible and editable when it's in the HTML file
 
-	COR.onLoadJSONFile = function() {
+	SEL.onLoadJSONFile = function() {
 
 		COR.getPlaceDefaults();
 

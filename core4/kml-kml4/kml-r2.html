@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang=en >
+<head>
+<meta charset=utf-8 >
+<title>Elevations Core3 KML R2</title>
+<meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
+<meta name=description content='Core three.js' >
+<meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
+<meta name=date content='2016-09-07' >
+</head>
+<body>
+<!--
+<script src=https://mrdoob.github.io/three.js/build/three.min.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/controls/OrbitControls.js ></script>
+<script src=https://mrdoob.github.io/three.js/examples/js/libs/stats.min.js ></script>
+-->
+<script src=https://rawgit.com/mrdoob/three.js/dev/build/three.min.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/controls/OrbitControls.js ></script>
+<script src=https://rawgit.com/mrdoob/three.js/dev/examples/js/libs/stats.min.js ></script>
+<script src=https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js ></script>
+
+<script src=../a-cor-core/core-r2.js ></script>
+<script src=../b-sel-select/select-r1.js ></script>
+<script src=../c-ovr-overlay/overlay-r1.js ></script>
+<script src=../d-ter-terrain/terrain-r1.js ></script>
+<script src=../e-thr-threejs/threejs-r1.js ></script>
+<script src=../f-map-map/map-r2.js ></script>
+<script src=../g-msh-mesh-lines/mesh-lines-r2.js ></script>
+<script src=../h-kml-kml/kml-r2.js ></script>
+
+<!--
+<script src=../../google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
+<script src=http://jaanga.github.io/terrain3/google-maps-api3/f-elv-elevations/elevations-r1.js ></script>
+-->
+<script>
+
+	SEL.urlAPITreeContents = 'https://api.github.com/repos/jaanga/terrain3/git/trees/gh-pages?recursive=1';
+
+//	SEL.defaultFile = '../../elevations-data/elevations-data-04/san-francisco_10_163_394_3_3_450_450_.json';
+	SEL.defaultFile; // if no default, select a random file
+
+	SEL.searchInFolder = 'elevations-data-path-json/';
+//	SEL.extension = '.json';
+
+	SEL.urlBase = '../../elevations-data/' + SEL.searchInFolder;
+//	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
+
+	init();
+
+	THR.getThreeJS();
+
+	THR.animate();
+
+	function init() {
+
+//		COR.taglineHeader = 'Howdy!' + b;
+
+		COR.initLeftMenu();
+
+		COR.menu.innerHTML =
+
+			COR.getMenuDetailsHeader() +
+
+			SEL.getMenuDetailsSelectFile() +
+
+			KML.getMenuDetailsKML() +
+
+			OVR.getMenuDetailsOverlay() + b +
+
+			TER.getMenuDetailsTerrain() + b +
+
+			COR.getMenuDetailsObjectProperties() +
+
+			COR.getMenuDetailsAbout() +
+
+			COR.getMenuFooter() +
+
+		b;
+
+		if ( window.self !== window.top ) { hamburger.style.left = '0px'; }
+
+		SEL.getGitHubAPITreeContents();
+
+		detailsOverlay.setAttribute('open', 'open');
+
+		detailsOverlayParameters.setAttribute('open', 'open');
+
+		detailsTerrain.setAttribute('open', 'open');
+
+		detailsTerrainParameters.setAttribute('open', 'open');
+
+		THR.moreThreejsInits = function() {
+
+//			THR.renderer.setClearColor( COR.defaults.backgroundColor );
+			THR.updateCamera = true;
+
+			THR.axisHelper = new THREE.AxisHelper( 50 );
+			THR.scene.add( THR.axisHelper );
+
+			THR.controls.maxDistance = 10 * THR.radius;
+
+		};
+
+	}
+
+
+
+	COR.onLoadJSONFile = function() {
+
+		COR.getPlaceDefaults();
+
+		OVR.setMenuDetailsOverlay();
+
+		MAP.initMapGeometry();
+
+		KML.drawPath();
+
+	}
+
+</script>
+</body>
+</html>

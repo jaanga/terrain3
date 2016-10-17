@@ -17,6 +17,9 @@
 
 	SEL.defaultFolder = 1;
 
+
+
+
 // more visible in HTML
  
 // add user and branch
@@ -34,13 +37,6 @@
 
 */
 
-
-// Menus
-
-
-//			SEL.getMenuDetailsSelectFile() +
-
-//		SELdetailsSelectFile.setAttribute('open', 'open');
 
 	SEL.getMenuDetailsSelectFile = function() {
 
@@ -71,11 +67,7 @@
 	}
 
 
-
-//
-
-	SEL.getFolders = function() { // used below
-
+	SEL.getFolders = function() {
 
 		for ( var i = 0; i < SEL.folders.length; i++ ) {
 
@@ -94,11 +86,14 @@
 
 		SEL.getFolders();
 
-		COR.requestFile( SEL.urlAPITreeContents, callback );
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', SEL.urlAPITreeContents, true );
+		xhr.onload = onLoadGitHubTreeContents;
+		xhr.send( null );
 
-		function callback( xhr ) {
+		function onLoadGitHubTreeContents() {
 
-			SEL.response = JSON.parse( xhr.target.response );
+			SEL.response = JSON.parse( xhr.response );
 			SEL.extension = SEL.extension || '.json';
 			SEL.getFiles();
 
@@ -107,29 +102,27 @@
 	}
 
 
-
 	SEL.getFiles = function() {
 
-		SEL.files = [];
-		SELselFiles.innerHTML = ''
+			SEL.files = [];
+			SELselFiles.innerHTML = ''
 
-		for ( var i = 0; i < SEL.response.tree.length; i++ ) {
+			for ( var i = 0; i < SEL.response.tree.length; i++ ) {
 
-			file = SEL.response.tree[ i ].path;
+				file = SEL.response.tree[ i ].path;
 
-			if ( !file.includes( SEL.searchInFolder ) ) { continue; }
-			if ( !file.includes( SEL.extension ) ) { continue; }
+				if ( !file.includes( SEL.searchInFolder ) ) { continue; }
+				if ( !file.includes( SEL.extension ) ) { continue; }
 
-			file = file.split( '\/' ).pop();
-			title = file.slice( 0, file.indexOf( '_' ) ).replace( /-/g, ' ' );
+				file = file.split( '\/' ).pop();
 
-			SEL.files.push( file );
+				SEL.files.push( file );
 
-			SELselFiles[ SELselFiles.length ] = new Option( title, file );
+				SELselFiles[ SELselFiles.length ] = new Option( file, file );
 
-		}
+			}
 
-		SEL.onGitHubTreeLoad();
+			SEL.onGitHubTreeLoad();
 
 	}
 
@@ -161,23 +154,28 @@
 
 // Gather data when using the default
 
-	SEL.getJSONFileXHR = function( url ) {
+	SEL.getJSONFileXHR = function( fName ) {
 
 console.time( 'timer0' );
 
-		COR.requestFile( url, callback );
+		var xhr;
 
-		function callback( xhr ) {
+		xhr = new XMLHttpRequest();
+		xhr.open( 'GET', fName, true );
+		xhr.onload = function callbackXHR() {
 
-			COR.place = JSON.parse( xhr.target.responseText );
+//			SEL.fileJSON = JSON.parse( xhr.responseText );
+			COR.place = JSON.parse( xhr.responseText );
 
-			SEL.fileName = url.split( '/' ).pop();
+			COR.fileName = fName.split( '/' ).pop();
 
-			location.hash = 'file=' + url;
+			location.hash = 'file=' + fName;
 
-			SEL.onLoadJSONFile( xhr );
+			COR.onLoadJSONFile();
 
 		};
+
+		xhr.send( null );
 
 	}
 
@@ -190,17 +188,18 @@ console.time( 'timer0' );
 console.time( 'timer0' );
 
 		var reader;
-		reader = new FileReader();
 
+		reader = new FileReader();
 		reader.onload = function( event ) {
 
+//			SEL.fileJSON = JSON.parse( reader.result );
 			COR.place = JSON.parse( reader.result );
+
+//			TERoutVertical.value = TERinpVertical.value = COR.place.verticalScale;
 
 			COR.fileName = files.files[ 0 ].name;
 
-			location.hash = '';
-
-			SEL.onLoadJSONFile( event );
+			COR.onLoadJSONFile();
 
 		};
 
@@ -208,8 +207,6 @@ console.time( 'timer0' );
 
 	}
 
-
-SEL.onLoadJSONFile = function(){};
 
 
 /*

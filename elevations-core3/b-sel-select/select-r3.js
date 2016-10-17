@@ -100,25 +100,26 @@
 
 	SEL.getFiles = function() {
 
-			SEL.files = [];
-			SELselFiles.innerHTML = ''
+		SEL.files = [];
+		SELselFiles.innerHTML = ''
 
-			for ( var i = 0; i < SEL.response.tree.length; i++ ) {
+		for ( var i = 0; i < SEL.response.tree.length; i++ ) {
 
-				file = SEL.response.tree[ i ].path;
+			file = SEL.response.tree[ i ].path;
 
-				if ( !file.includes( SEL.searchInFolder ) ) { continue; }
-				if ( !file.includes( SEL.extension ) ) { continue; }
+			if ( !file.includes( SEL.searchInFolder ) ) { continue; }
+			if ( !file.includes( SEL.extension ) ) { continue; }
 
-				file = file.split( '\/' ).pop();
+			file = file.split( '\/' ).pop();
+			title = file.slice( 0, file.indexOf( '_' ) ).replace( /-/g, ' ' );
 
-				SEL.files.push( file );
+			SEL.files.push( file );
 
-				SELselFiles[ SELselFiles.length ] = new Option( file, file );
+			SELselFiles[ SELselFiles.length ] = new Option( title, file );
 
-			}
+		}
 
-			SEL.onGitHubTreeLoad();
+		SEL.onGitHubTreeLoad();
 
 	}
 
