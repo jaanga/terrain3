@@ -1,7 +1,7 @@
 // Copyright &copy; 2016 Jaanga authors. MIT License
 
 	var TER = TER || {};
-
+	var CSV = CSV || {};
 
 //			TER.getMenuDetailsTerrain() +
 

@@ -202,7 +202,6 @@ console.time( 'timer0' );
 
 			history.replaceState('', document.title, window.location.pathname);
 
-
 			SEL.onLoadJSONFile( event );
 
 		};

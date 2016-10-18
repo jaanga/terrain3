@@ -29,7 +29,10 @@
 <script src=../../core4/pla-placard4/pla-placard4-r1.js ></script>
 <script src=../../core4/msh-mesh-lines4/msh-mesh-lines4-r1.js ></script>
 <script src=../../core4/kml-kml4/kml-kml4-r1.js ></script>
+<!--
 <script src=../../core4/cas-camera-action-select4/cas-camera-action-select4-r1.js ></script>
+-->
+
 <script>
 
 /*
@@ -92,7 +95,7 @@
 
 	function init() {
 
-//		COR.taglineHeader = 'Howdy!' + b;
+		COR.menuHeaderTagline += 'COR Howdy!' + b;
 
 		COR.initLeftMenu();
 
@@ -104,7 +107,7 @@
 
 			KML.getMenuDetailsKML() +
 
-			CAS.getMenuDetailsCameraActions() +
+//			CAS.getMenuDetailsCameraActions() +
 
 			OVR.getMenuDetailsOverlay() +
 
@@ -123,7 +126,7 @@
 
 		KMLdetailsKML.setAttribute( 'open', 'open' );
 
-		CASdetailsMarkerActions.setAttribute( 'open', 'open' );
+//		CASdetailsMarkerActions.setAttribute( 'open', 'open' );
 
 		OVRdetailsOverlay.setAttribute( 'open', 'open' );
 

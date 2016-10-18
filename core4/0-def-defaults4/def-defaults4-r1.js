@@ -97,8 +97,11 @@
 
 	COR.defaults.objectName = 'defaults';
 	COR.defaults.origin = 'Tenzing-Hillary Airport, Lukla, Nepal';
+
+
 	COR.defaults.pixelsPerTile = 256;
 	COR.defaults.plainOpacity = 0.5;
+	COR.defaults.points = '';
 
 	COR.defaults.tilesX = 3;
 	COR.defaults.tilesY = 3;

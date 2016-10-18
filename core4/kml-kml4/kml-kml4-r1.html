@@ -2,7 +2,7 @@
 <html lang=en >
 <head>
 <meta charset=utf-8 >
-<title>Elevations Core3 KML R3</title>
+<title>Elevations View4 KML R1</title>
 <meta name=viewport content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' >
 <meta name=description content='Core three.js' >
 <meta name=keywords content='WebGL,Three.js,JavaScript,GitHub,FOSS,3D,STEM' >
@@ -47,15 +47,14 @@
 	SEL.urlBase = '../../elevations-data/';
 //	SEL.urlBase = 'https://jaanga.github.io/terrain3/elevations-data/' + SEL.searchInFolder;
 
+
 	init();
-
-
 
 	THR.animate();
 
 	function init() {
 
-//		COR.taglineHeader = 'Howdy!' + b;
+		COR.menuHeaderTagline += 'KML Howdy!' + b;
 
 		COR.initLeftMenu();
 
@@ -94,7 +93,6 @@
 		TERdetailsTerrainParameters.setAttribute( 'open', 'open' );
 
 
-		SEL.getGitHubAPITreeContents();
 
 		THR.moreThreejsInits = function() {
 
@@ -107,6 +105,10 @@
 			THR.controls.maxDistance = 10 * THR.radius;
 
 		};
+
+		SEL.getGitHubAPITreeContents();
+
+		window.addEventListener( 'keyup', THR.onKeyUp, false );
 
 		THR.getThreeJS();
 

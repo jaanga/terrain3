@@ -23,7 +23,7 @@
 					'<button onclick=KML.getPathProperties(); > get path properties </button>' +
 					'<button onclick=KML.setVerticalScaleToOne(); > set vertical scale to 1.0 </button>' +
 					'<button onclick=KML.setPathProperties(); > set path elevations </button>' +
-					'<button onclick=ELV.saveFile(); > save to file </button>' + b +
+					'<button onclick=COR.saveFile(); > save to file </button>' + b +
 				'</p>' +
 
 				'<p id=pPathProperties ></p>' +
@@ -88,7 +88,7 @@
 
 //console.log( '', points.slice( 998, 1016 ) );
 
-		THR.lineX = getMeshLine( vertices, 0xffff00, 0.0005 );
+		THR.lineX = MSH.getMeshLine( vertices, 0xffff00, 0.0005 );
 		THR.lineX.updateMatrixWorld();
 		THR.lineX.scale.y = COR.place.verticalScale;
 		THR.scene.add( THR.lineX );
@@ -106,6 +106,7 @@
 
 		pt = THR.line.geometry;
 		pt.computeBoundingBox();
+		pt.computeBoundingSphere();
 
 		var m2f = function( vect ) { return vect.toArray().map( function( num ){ return num.toFixed( 3 ); } ); };
 
