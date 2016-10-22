@@ -8,11 +8,12 @@
 
 	NEA.types = {
 
-		natural_feature: { type: 'natural_feature', color: 'green' },
+		naturalFeature: { type: 'natural_feature', color: 'green' },
 		locality: { type: 'locality', color: 'blue' },
-		point_of_interest: { type: 'point_of_interest', color: 'red' }
+		pointOfInterest: { type: 'point_of_interest', color: 'red' }
 
 	}
+
 
 //		NEA.getMenuDetailsNearby() +
 
@@ -32,9 +33,9 @@
 				'<div id=NEAdivNearby >' +
 
 					'<p>' +
-						'<input type=radio name=radPlaceType id=but1 onclick=NEA.updateType("natural_feature"); checked />Natural feature (green)' + b +
-						'<input type=radio name=radPlaceType id=but2 onclick=NEA.updateType("locality"); />Locality (blue)' + b +
-						'<input type=radio name=radPlaceType id=but3 onclick=NEA.updateType("point_of_interest"); />point_of_interest (red)' +
+						'<input type=radio name=radPlaceType id=but1 onclick=NEA.updateType("natural_feature"); checked />Natural feature' + b +
+						'<input type=radio name=radPlaceType id=but2 onclick=NEA.updateType("locality"); />Locality' + b +
+						'<input type=radio name=radPlaceType id=but3 onclick=NEAbutMore.disabled=false;NEA.type=NEA.types.pointOfInterest; />point_of_interest' +
 					'</p>' +
 
 					'<button id=NEAbutMore onclick=NEA.getNearby(); > get nearby </button>  ' +
@@ -54,37 +55,37 @@
 
 	NEA.updateType = function( type ) {
 
-console.log( '\n\ntype', type );
-
 		NEAbutMore.disabled = false;
 		NEA.type = NEA.types[ type ];
 		COR.place[ type ] = [];
 
-console.log( 'NEA.type', NEA.type.type );
-console.log( 'COR.place[ type ]', COR.place[ type ] );
-
-		NEAdivResults.innerHTML = updateResults()
-
-		finished = false;
 	}
 
 
 	NEA.getNearby = function() {
 
-count = 0;
-
 		var service, bounds;
 
-		NEA.type = NEA.type || NEA.types.natural_feature;
+/*
 
-//console.log( '\n NEA.type', NEA.type.type );
+		if ( NEA.latitude !== COR.place.latitude && NEA.longitude !== COR.place.longitude ) {
+
+			NEA.latitude = COR.place.latitude;
+			NEA.longitude = COR.place.longitude;
+
+			NEA.clearAll();
+
+		}
+*/
+
+		NEA.type = NEA.type || NEA.types.naturalFeature;
 
 		COR.place[ NEA.type.type ] = [];
 		COR.results = [];
 
-//		if ( !COR.place.types ) { COR.place.types = []; }
+		if ( !COR.place.types ) { COR.place.types = []; }
 
-//		if ( !COR.place.types.includes( NEA.type.type ) ) { COR.place.types.push( NEA.type.type ); }
+		if ( !COR.place.types.includes( NEA.type.type ) ) { COR.place.types.push( NEA.type.type ); }
 
 //		NEA.infowindow = new google.maps.InfoWindow();
 
@@ -141,11 +142,11 @@ count = 0;
 
 		var rectangle = new google.maps.Rectangle({
 
-			strokeColor: NEA.type.color,
+			strokeColor: '#FF0000',
 			strokeOpacity: 0.8,
 			strokeWeight: 2,
-			fillColor: '#00ff00',
-			fillOpacity: 0,
+			fillColor: '#FF0000',
+			fillOpacity: 0.01,
 			map: API.map,
 			bounds: bounds
 
@@ -163,41 +164,28 @@ count = 0;
 
 			res = results;
 
-console.log( NEA.type.type, COR.place[ NEA.type.type ].length, pagination.hasNextPage, count++ );
-
 			COR.results = [];
-
 			for ( var i = 0, result; i < results.length; i++ ) {
 
 				result = results [ i ];
+				loc = result.geometry.location;
+				API.createMarker( result, NEA.type.color, result.types[ 0 ][ 0 ].toUpperCase() );
 
-//console.log( 'result.types[ 0 ][ 0 ] ', result.types  );
+				COR.place[ NEA.type.type ].push( { name: result.name, lat: loc.lat(), lon: loc.lng(), types: result.types, id: result.place_id } );
 
-				if ( result.types.includes( NEA.type.type ) === true ) {
+				COR.results.push( result );
 
-					loc = result.geometry.location;
-					API.createMarker( result, NEA.type.color, result.types[ 0 ][ 0 ].toUpperCase() );
-
-					COR.place[ NEA.type.type ].push( { name: result.name, lat: loc.lat(), lon: loc.lng(), types: result.types, id: result.place_id } );
-
-					COR.results.push( result );
-
-				}
 			}
 
 //console.log( 'place', COR.place );
 //console.log( 'results', results );
 //console.log( 'pagination.hasNextPage', pagination.hasNextPage );
 
-//			NEAdivResults.innerHTML = updateResults();
+			NEAdivResults.innerHTML = updateResults();
 
-			if ( pagination.hasNextPage === true ) {
-
-// console.log( 'pagination', pagination );
+			if ( pagination.hasNextPage ) {
 
 				NEAbutMore.disabled = false;
-
-				NEAdivResults.innerHTML = updateResults() + ' More places available...';
 
 				NEAbutMore.addEventListener( 'click', function() {
 
@@ -207,9 +195,9 @@ console.log( NEA.type.type, COR.place[ NEA.type.type ].length, pagination.hasNex
 
 				});
 
-			} else {
+				NEAdivResults.innerHTML = updateResults() + ' More places available...';
 
-console.log( 'haspage false', pagination.hasNextPage );
+			} else {
 
 				NEAbutMore.disabled = true;
 
@@ -222,17 +210,6 @@ console.log( 'haspage false', pagination.hasNextPage );
 			NEAdivResults.innerHTML  = 'error status: ' + status;
 
 		}
-
-
-
-
-
-
-//console.log( 'COR.place.natural_feature', COR.place.natural_feature.length );
-//console.log( 'COR.place.locality', COR.place.locality.length );
-//console.log( 'COR.place.point_of_interest', COR.place.point_of_interest.length );
-
-	}
 
 		function updateResults() {
 
@@ -247,6 +224,9 @@ console.log( 'haspage false', pagination.hasNextPage );
 			return txt;
 
 		}
+
+	}
+
 
 	NEA.clearAll = function() {
 
@@ -263,3 +243,61 @@ console.log( 'haspage false', pagination.hasNextPage );
 		NEAdivResults.innerHTML = '';
 
 	}
+
+
+
+
+/*
+
+	NEA.createMarker = function( place ) {
+
+		var placeLoc = place.geometry.location;
+
+		var marker = new google.maps.Marker( {
+
+			map: API.map,
+			position: place.geometry.location,
+			label: place.types[ 0 ][ 0 ].toUpperCase(),
+			title: place.types[ 0 ]
+
+		} );
+
+		google.maps.event.addListener(marker, 'click', function() {
+
+			address = place.address ? 'address: ' + place.addreess + b : '';
+			vicinity = place.vicinity ? 'vicinity: ' + place.vicinity + b : '';
+			NEA.infowindow.setContent( 
+
+			'<div>' +
+				'<strong>' + place.name + '</strong>' + b +
+                'Place ID: ' + place.place_id + b +
+					address +
+					vicinity + 
+					'types: ' + place.types + b +
+					'lat: ' + placeLoc.lat().toFixed( 3 ) + ' lon: ' + placeLoc.lng().toFixed( 3 ) +
+			'</div>'
+
+			);
+
+			NEA.infowindow.open( API.map, this );
+
+		} );
+
+		API.markings.push( marker );
+
+	}
+
+
+	NEA.clearAll = function() {
+
+		for ( var i = 0; i < API.markings.length; i++ ) {
+
+			API.markings[ i ].setMap( null );
+
+		}
+
+		API.markings = [];
+
+	};
+
+*/

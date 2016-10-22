@@ -50,9 +50,10 @@ This project is an attempt to remedy the situation.
 
 * Codebase
 	* For Core4:
+	* 2016-10-18 ~ SEL: add custom event 
 	* 2016-10-03 ~ Create DEF file
-	* 2016-10-04 ~ all scripts to use three letter prefix
-	* 2016-10-03 ~ Clean up menu IDs
+	* 2016-10-18 ~ Create assets file
+	* 2016-10-04 ~ All scripts to use three letter prefix
 	2016-10-04 ~ CAS: move mesh creation to own script
 * Plugins
 	* 2016-10-03 ~ Add ads
@@ -67,9 +68,7 @@ This project is an attempt to remedy the situation.
 	* geoJSON
 	* CodePen Maps
 	* Fiddle maps
-* THR ~ Three.js
-	* Needs mene with toggles and background
-* Paths ~ KML * CSV
+* Paths ~ KML & CSV
 	* 2016-10-02 Add current frame slider
 	* Editing splines
 * View settings
@@ -142,6 +141,12 @@ Intended for generating flightpaths
 ### 2016-10-06 ~ core4
 
 * How to enhance the naming convention?
+
+Completed
+
+* THR ~ Three.js
+	* Needs menu with toggles and background
+* 2016-10-03 ~ Clean up menu IDs
 
 ### 2016-10-02 ~ core3
 
@@ -257,6 +262,5 @@ But it can use a streamline / cleanup effort
 
 * First commit
 * Add Read Me
-
 
 

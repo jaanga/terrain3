@@ -3,7 +3,7 @@
 	var PLA = PLA || {};
 
 // "plaHeight": 0.00001,
-
+	PLA.aidStations = '';
 
 	PLA.drawBitMap = function( url ) {
 

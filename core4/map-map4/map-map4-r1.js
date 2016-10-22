@@ -1,6 +1,8 @@
 
 	var MAP = MAP || {};
 
+	var PLA = PLA || {};
+	var CAS = CAS || {};
 
 	MAP.initMapGeometry = function() {
 
@@ -160,7 +162,7 @@ console.timeEnd( 'timer0' );
 
 		if ( THR.updateCamera === true /* && !CAS.center */ ) { THR.viewObject( MAP.mesh ); }
 
-/*
+
 		if ( CAS.center ) { 
 
 			CAS.center = MAP.mesh.position.clone(); 
@@ -169,7 +171,7 @@ console.timeEnd( 'timer0' );
 		} else {
 
 		}
-*/
+
 
 		if ( TERchkFog.checked === true ) { THR.toggleFog( true ) }
 

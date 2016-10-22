@@ -122,19 +122,16 @@ Fun possibilities for making new maps
 
 ## To Do / Wish List
 
-* 2016-10-11 ~ SEL ~ Load JSON file
-	* replicate tiling
-	* All adding nearby places
-	* Get fresh set of elevations
-* 2016-10-10 ~ Add authorization token by cookie 
+* 2016-10-18 ~ Read TCX files
+* 2016-10-18 ~ Read GPS files
+* 2016-10-10 ~ API: Add authorization token by cookie 
 	* Setup hash working method
-* 2016-10-10 ~ Better handling of time delay
+* 2016-10-10 ~ ELV: Better handling of time delay
 * 2016-10-10 ~ save to Gist
 	* Anonymous
 	* Personal
 * Add input tag to edit place name
 * Add better height scaling system
-
 * Update 3D Display while drawing 
 * Able to do 1000x1000 maps reliably and quickly
 
@@ -165,6 +162,16 @@ There seem to be a variety of speed bumps.
 
 ## Change Log
 
+### 2016-10-18
+
+* Many hours on NEA issues - still not perfected
+
+Completed
+
+* 2016-10-11 ~ SEL ~ Load JSON file
+	* replicate tiling
+	* All adding nearby places
+	* Get fresh set of elevations
 ### 2016-10-16
 
 Many undocumented changes since previous update
