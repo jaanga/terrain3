@@ -56,7 +56,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	SEL.searchInFolder = SEL.folders[ 3 ];
 
 //	SEL.defaultFile = 'https://cynthiaarmour.github.io/oakland-gran-fondo-2016-assets/maps/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
-	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + '/oakland-gran-fondo-28_14_2627_6329_7_3_490_210_.json';
+	SEL.defaultFile = SEL.urlBase + SEL.searchInFolder + '/oakland-gran-fondo-28_2627_6329_7_3_490_210_.json';
 //	SEL.defaultFile; // if no default, select a random file
 
 	CAS.marker = 'Rider';
@@ -67,7 +67,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 	CAS.cameraOffsetTrack = v( 0, 0.03, 0.05 );
 	CAS.cameraOffsetWorld = v( 0, 0.05, 0.12 );
 
-	COR.taglineHeader = 
+	COR.taglineHeader =
 
 		'<div><small>' +
 			'Rotate|Zoom|Pan => 1|2|3 finger/button' + b +
@@ -84,7 +84,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 //			'<h3>' +
 //				'<a href=http://jaanga.github.io/ title="Jaanga - your 3D happy place" > &#x2766 </a> &raquo; ' +
-//				'<a href=http://jaanga.github.io/terrain3/ title="your happy mappy place" > Terrain3 </a> &raquo; ' + 
+//				'<a href=http://jaanga.github.io/terrain3/ title="your happy mappy place" > Terrain3 </a> &raquo; ' +
 //			'</h3>' +
 			'<h2>' +
 				'<a href="" title="Click here to refresh this page" >' + document.title + '</a> ~ ' +
@@ -168,7 +168,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		for ( var i = 0; i < SEL.files.length; i++ ) {
 
-			if ( SEL.files[ i ] === COR.fileName ) { 
+			if ( SEL.files[ i ] === COR.fileName ) {
 
 				SELselFiles.selectedIndex = i;
 				break;
@@ -284,7 +284,7 @@ Load and display 2D bitmaps as riders. Display riders cycling along the path.' >
 
 		b;
 
-		if ( window.self !== window.top ) { 
+		if ( window.self !== window.top ) {
 
 			hamburger.style.left = '0px';
 

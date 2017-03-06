@@ -130,7 +130,7 @@
 		geometry = new THREE.Geometry();
 		vertices = spline.getPoints( points );
 
-		meshLine = getMeshLine( vertices, 0xffffff * Math.random(), 5 );
+		meshLine = MSH.getMeshLine( vertices, 0xffffff * Math.random(), 5 );
 
 		THR.scene.add( meshLine );
 
@@ -149,7 +149,7 @@
 
 		}
 
-		meshLine = getMeshLine( points, 0xffffff * Math.random(), 5 );
+		meshLine = MSH.getMeshLine( points, 0xffffff * Math.random(), 5 );
 
 		THR.scene.add( meshLine );
 
@@ -168,10 +168,10 @@
 			geometry.vertices.push( v );
 		}
 
-		var line = new THREE.MeshLine();
+		var line = new MeshLine();
 		line.setGeometry( geometry );
 
-		var material = new THREE.MeshLineMaterial( { color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ), lineWidth: 8 });
+		var material = new MeshLineMaterial( { color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ), lineWidth: 8 });
 
 		meshLine = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
 		THR.scene.add( meshLine );
@@ -191,13 +191,13 @@
 
 		}
 
-		var line = new THREE.MeshLine();
+		var line = new MeshLine();
 
 		line.setGeometry( geometry, function( p ) { return 2 + Math.sin( 1 * p ); } );
 
 		var resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
 
-		var material = new THREE.MeshLineMaterial( {
+		var material = new MeshLineMaterial( {
 
 			useMap: false,
 			color: new THREE.Color( colors[ Math.floor( Math.random() * 15 ) ] ),
