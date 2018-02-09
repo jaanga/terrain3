@@ -1,4 +1,4 @@
-
+## Apps: [Elevation View R3]( https://jaanga.github.io/terrain3/elevations-core3/elevations-core3-r1.html ) ~ [Elevations Get R2]( https://jaanga.github.io/terrain3/elevations-get2/dev/elevations-get2-r1.html )
 
 ## Concept: 3D maps on your home page
 
@@ -70,9 +70,9 @@ So, let's get going!
 
 ### The map is not the territory
 
-When you show a 3D map to many peeps, they say they want it to look 'realistic'. 'Realism' is but one of many aspects of cartography. 
+When you show a 3D map to many peeps, they say they want it to look 'realistic'. 'Realism' is but one of many aspects of cartography.
 Of couse, it's one of the most difficult aspects. And one of the most boring. Hello, if you want realism, just go out the door.
-The fun bits of cartography are the ones that map what can't be seen. 
+The fun bits of cartography are the ones that map what can't be seen.
 
 * [On Exactitude in Science]( https://www.sccs.swarthmore.edu/users/08/bblonder/phys120/docs/borges.pdf )
 * [Map–territory relation]( https://en.wikipedia.org/wiki/Map%E2%80%93territory_relation )
@@ -84,7 +84,7 @@ The fun bits of cartography are the ones that map what can't be seen.
 
 ### 2016-10-03 ~  website-via-github-api2-r4
 
-* Terraon3 home page finally reached a reasonably good stage
+* Terrain3 home page finally reached a reasonably good stage
 
 
 ### 2016-08-12
